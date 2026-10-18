@@ -9,6 +9,8 @@ import { montarTejedora } from './tejedora.js';
 import { despertar, dibujarObjeto } from './despertar.js';
 import { crearContador } from './contador.js';
 import { el, escapar } from './svg.js';
+import { bordeLuz, miniFigura, tonoObjeto } from './adornos.js';
+import { montarFondo } from './fondo.js';
 
 const RUTA_DATOS = 'contenido/datos';
 const app = document.getElementById('app');
@@ -51,10 +53,13 @@ function pantallaInicio() {
     <nav class="acciones"><a class="boton" href="#/atlas">Atlas · ${atlas.length} de ${juego.niveles.length}</a></nav>
     <ul class="rejilla">${juego.niveles.map(n => {
       const e = guardado.estado(n.id);
-      return h`<li class="tarjeta-const ${e.tejedora ? 'despierta' : ''}">
+      const fase = e.tejedora ? 'despierta' : e.aprendiz ? 'aprendiz' : 'pendiente';
+      return h`<li class="tarjeta-const ${fase}" data-id="${n.id}" style="--tono:${tonoObjeto(n.tejedora.objeto)}">
+        <div class="ventana"></div>
+        ${e.tejedora ? `<span class="sello">✦ Despierta</span>` : ''}
         <h2>${escapar(n.nombre)}</h2>
         <p class="sub">${escapar(n.temporada)}</p>
-        <p class="estado">${e.tejedora ? `✦ ${escapar(n.tejedora.objeto.nombre)}` : e.aprendiz ? 'Lista para tejer' : 'Por descubrir'}</p>
+        <p class="estado">${e.tejedora ? `${escapar(n.tejedora.objeto.nombre)} brilla en tu atlas` : e.aprendiz ? 'Algo duerme entre sus estrellas' : 'Por descubrir'}</p>
         <div class="niveles">
           <a class="boton ${e.aprendiz ? 'hecho' : ''}" href="#/aprendiz/${n.id}">Aprendiz${e.aprendiz ? ' ✓' : ''}</a>
           ${e.aprendiz
@@ -67,6 +72,11 @@ function pantallaInicio() {
       <button class="enlace" id="borrar">Borrar el progreso</button>
       <p>Datos de estrellas: HYG Database v3.8 (CC BY-SA 4.0). Figuras: Stellarium (cultura «modern»). Prototipo v0.2, gráficos provisionales.</p>
     </footer>`;
+  app.querySelectorAll('.tarjeta-const').forEach(t => {
+    const fase = ['despierta', 'aprendiz', 'pendiente'].find(c => t.classList.contains(c));
+    miniFigura(t.querySelector('.ventana'), nivelPorId(t.dataset.id), fase);
+    if (fase === 'despierta') bordeLuz(t);
+  });
   // Confirmación dentro de la página (algunos visores bloquean confirm()).
   const pie = app.querySelector('.pie');
   app.querySelector('#borrar').addEventListener('click', () => {
@@ -153,11 +163,23 @@ function miniObjeto(contenedor, nivel, lado = 300) {
 
 function pantallaAtlas() {
   const atlas = new Set(guardado.atlas());
-  app.innerHTML = cabecera('Atlas', `${atlas.size} de ${juego.niveles.length} objetos despiertos`) +
-    `<ul class="rejilla atlas">${juego.niveles.map(n => atlas.has(n.id)
-      ? `<li><a class="tarjeta-objeto" href="#/atlas/${n.id}"><div class="hueco-mini" data-id="${n.id}"></div><h2>${escapar(n.tejedora.objeto.nombre)}</h2><p class="sub">en ${escapar(n.nombre)}</p></a></li>`
-      : `<li class="tarjeta-objeto dormido"><div class="hueco-mini vacio">?</div><h2>Por despertar</h2><p class="sub">en ${escapar(n.nombre)}</p></li>`).join('')}</ul>`;
-  app.querySelectorAll('.hueco-mini[data-id]').forEach(c => miniObjeto(c, nivelPorId(c.dataset.id), 220));
+  const total = juego.niveles.length;
+  app.innerHTML = cabecera('Atlas', `${atlas.size} de ${total} objetos despiertos`) +
+    `<div class="atlas-progreso" aria-hidden="true">${juego.niveles.map(n => `<span class="${atlas.has(n.id) ? 'viva' : ''}" style="--tono:${tonoObjeto(n.tejedora.objeto)}"></span>`).join('')}</div>
+    <ul class="rejilla atlas">${juego.niveles.map((n, i) => {
+      const o = n.tejedora.objeto, tono = tonoObjeto(o), e = guardado.estado(n.id);
+      return atlas.has(n.id)
+        ? `<li style="--i:${i};--tono:${tono}"><a class="tarjeta-objeto" href="#/atlas/${n.id}">
+            <div class="portal" data-id="${n.id}"></div>
+            <div class="pie-objeto"><p class="eyebrow">${escapar(o.tipo)}</p><h2>${escapar(o.nombre)}</h2>
+            <p class="sub">${escapar(o.id)} · en ${escapar(n.nombre)}</p></div></a></li>`
+        : `<li style="--i:${i}"><a class="tarjeta-objeto dormido" href="#/${e.aprendiz ? 'tejedora' : 'aprendiz'}/${n.id}">
+            <div class="portal" data-fig="${n.id}"></div>
+            <div class="pie-objeto"><p class="eyebrow">Dormido</p><h2>Algo duerme aquí</h2>
+            <p class="sub">${e.aprendiz ? `Teje ${escapar(n.nombre)} para despertarlo` : `Empieza por ${escapar(n.nombre)}`}</p></div></a></li>`;
+    }).join('')}</ul>`;
+  app.querySelectorAll('.portal[data-id]').forEach(c => { miniObjeto(c, nivelPorId(c.dataset.id), 220); bordeLuz(c.closest('.tarjeta-objeto')); });
+  app.querySelectorAll('.portal[data-fig]').forEach(c => miniFigura(c, nivelPorId(c.dataset.fig), 'pendiente'));
 }
 
 function pantallaObjeto(nivel) {
@@ -210,4 +232,5 @@ async function iniciar() {
   navegar();
 }
 
+montarFondo();
 iniciar();

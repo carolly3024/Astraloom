@@ -50,8 +50,6 @@ a { color: var(--azul); }
 .portada { display: flex; align-items: center; gap: 1rem; margin: 1rem 0 .5rem; }
 .marca { font-size: 2.6rem; letter-spacing: .02em; }
 .rejilla { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-.tarjeta-const { background: #1e2a5a66; border: 1px solid #dce3f01f; border-radius: 16px; padding: 16px; }
-.tarjeta-const.despierta { border-color: #7fa8f066; }
 .tarjeta-const .estado { font-size: .9rem; min-height: 1.4em; }
 .niveles { display: flex; gap: .5rem; margin-top: .75rem; flex-wrap: wrap; }
 .pie { margin-top: 2rem; font-size: .8rem; color: var(--bruma-suave); }
@@ -125,12 +123,6 @@ a { color: var(--azul); }
 .colores { list-style: none; padding: 0; margin: .5rem 0 0; display: grid; gap: .4rem; font-size: .92rem; }
 .colores li { display: flex; gap: .6rem; align-items: center; }
 .muestra { width: 18px; height: 18px; border-radius: 50%; flex: none; border: 1px solid #ffffff33; }
-.tarjeta-objeto { display: block; text-decoration: none; color: inherit; background: #1e2a5a66; border: 1px solid #dce3f01f; border-radius: 16px; padding: 14px; text-align: center; }
-a.tarjeta-objeto:hover { border-color: #7fa8f088; }
-.tarjeta-objeto h2 { font-size: 1.2rem; margin-top: .4rem; }
-.tarjeta-objeto.dormido { opacity: .5; }
-.hueco-mini { aspect-ratio: 1; border-radius: 12px; background: #0b1027; display: grid; place-items: center; overflow: hidden; }
-.hueco-mini.vacio { font-family: var(--titulo); font-size: 2rem; color: #dce3f044; }
 
 @media (prefers-reduced-motion: reduce) {
   .late, .estrella.late > circle, .encaja, .completa .celebra, .llamada-aro { animation: none; }
@@ -140,7 +132,7 @@ a.tarjeta-objeto:hover { border-color: #7fa8f088; }
 /* Contador de progreso: píldora a todo el ancho con una línea de luz que recorre su borde */
 .tarjeta { display: flex; flex-direction: column; }
 .contador {
-  position: relative; flex: none; min-height: 52px; border-radius: 999px; margin-bottom: 14px;
+  position: relative; isolation: isolate; flex: none; min-height: 52px; border-radius: 999px; margin-bottom: 14px;
   display: grid; place-items: center; padding: 8px 26px;
   background: #0b102799; transition: box-shadow .6s;
 }
@@ -152,13 +144,96 @@ a.tarjeta-objeto:hover { border-color: #7fa8f088; }
 .contador-detalle { font-size: .85rem; color: var(--bruma-suave); }
 .contador-detalle:empty { display: none; }
 .contador-texto { font-family: var(--titulo); font-size: 1.3rem; letter-spacing: .03em; font-variant-numeric: tabular-nums; }
-.contador-borde { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.contador-base { fill: none; stroke: #dce3f022; stroke-width: 1; }
-.contador-luz { fill: none; stroke: #cfe0ff; stroke-width: 1.4; stroke-linecap: butt; opacity: .17; filter: drop-shadow(0 0 1.5px #7fa8f0); }
 .contador.lleno { box-shadow: 0 0 22px #7fa8f033; }
-.contador.lleno .contador-base { stroke: #7fa8f088; }
 .contador.lleno .contador-relleno { background: linear-gradient(90deg, #7fa8f033, #7fa8f066); }
 
 /* Invitación a Tejedora al terminar Aprendiz */
 .misterio-texto { margin: 1rem 0 .25rem; padding: 12px 16px; border-radius: 14px; border: 1px solid #7fa8f04d; background: #7fa8f014; }
 .misterio-texto p { margin: .25rem 0; }
+
+/* Borde de luz: un degradado frío que gira por el borde, con un halo suave detrás
+   (como el campo de texto de Stitch). Se añade con bordeLuz() en adornos.js. */
+@property --giro { syntax: '<angle>'; inherits: true; initial-value: 0deg; }
+@keyframes giro { to { --giro: 360deg; } }
+.con-luz { position: relative; }
+.borde-luz { position: absolute; inset: -1px; border-radius: inherit; pointer-events: none; animation: giro var(--vuelta, 6s) linear infinite; }
+.aro-luz {
+  position: absolute; inset: 0; border-radius: inherit; padding: var(--grosor, 1.5px);
+  background: conic-gradient(from var(--giro), transparent 0deg 150deg, #5b7cfa55 200deg, #9b8cff 260deg, #7fd6ff 310deg, #ffffff 345deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.halo-luz { position: absolute; inset: 0; border-radius: inherit; filter: blur(7px); opacity: .75; }
+.halo-luz .aro-luz { --grosor: 3px; }
+@media (prefers-reduced-motion: reduce) { .borde-luz { animation: none; --giro: 120deg; } }
+
+/* Inicio: cada tarjeta muestra su figura. Las terminadas se tiñen del color de su
+   objeto, que brilla detrás de la figura, y llevan el borde de luz. */
+.tarjeta-const {
+  --tono: #7fa8f0; position: relative; border-radius: 20px; padding: 14px 16px 16px;
+  background: linear-gradient(160deg, #1e2a5a80, #121a3d80); border: 1px solid #dce3f01f;
+}
+.ventana { aspect-ratio: 16 / 10; margin: -2px -4px 10px; border-radius: 14px; overflow: hidden;
+  background: radial-gradient(circle at 50% 45%, #16204a, #0b1027 80%); }
+.mini-figura { width: 100%; height: 100%; display: block; }
+.mini-hilos line { stroke: var(--plata); stroke-width: .5; stroke-linecap: round; stroke-opacity: .55; }
+.mini-estrellas circle { opacity: .9; }
+.pendiente .mini-estrellas circle { opacity: .35; }
+.despierta .mini-hilos line { stroke: #fff; stroke-opacity: .95; stroke-width: .6; filter: drop-shadow(0 0 1px var(--tono)); }
+.tarjeta-const.despierta {
+  --vuelta: 9s; border-color: transparent;
+  background: radial-gradient(120% 80% at 50% 0%, color-mix(in srgb, var(--tono) 22%, transparent), transparent 70%), linear-gradient(160deg, #1e2a5acc, #121a3dcc);
+  box-shadow: 0 10px 40px -12px color-mix(in srgb, var(--tono) 45%, transparent);
+}
+.tarjeta-const.despierta .estado { color: color-mix(in srgb, var(--tono) 55%, white); }
+.sello {
+  position: absolute; top: 22px; right: 24px; padding: .15rem .6rem; border-radius: 999px; font-size: .75rem; letter-spacing: .06em;
+  background: #0b1027b3; border: 1px solid color-mix(in srgb, var(--tono) 60%, transparent); color: #fff;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--tono) 50%, transparent); backdrop-filter: blur(4px);
+}
+
+/* Atlas: tarjetas de cristal con un portal redondo donde flota cada objeto. */
+.atlas-progreso { display: flex; flex-wrap: wrap; gap: 8px; margin: -.25rem 0 1.25rem; }
+.atlas-progreso span { width: 9px; height: 9px; border-radius: 50%; background: #dce3f022; }
+.atlas-progreso span.viva { background: var(--tono); box-shadow: 0 0 10px var(--tono); }
+.rejilla.atlas { --tono: #7fa8f0; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.rejilla.atlas li { animation: aparece .7s ease-out both; animation-delay: calc(var(--i) * 60ms); }
+@keyframes aparece { from { opacity: 0; transform: translateY(12px); } }
+.tarjeta-objeto {
+  display: block; height: 100%; text-decoration: none; color: inherit; border-radius: 22px; padding: 14px;
+  background: radial-gradient(90% 60% at 50% 25%, color-mix(in srgb, var(--tono) 18%, transparent), transparent 75%), linear-gradient(170deg, #ffffff0d, #ffffff03);
+  border: 1px solid #ffffff14; backdrop-filter: blur(6px);
+  transition: transform .5s cubic-bezier(.2, .8, .2, 1), box-shadow .5s;
+}
+.tarjeta-objeto .borde-luz { opacity: .35; transition: opacity .5s; --vuelta: 10s; }
+a.tarjeta-objeto:hover { transform: translateY(-4px); box-shadow: 0 18px 44px -14px color-mix(in srgb, var(--tono) 60%, transparent); }
+a.tarjeta-objeto:hover .borde-luz { opacity: 1; }
+.portal {
+  aspect-ratio: 1; border-radius: 50%; overflow: hidden; margin: 4px auto 12px; width: 86%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--tono) 14%, #0b1027) 0%, #070b1f 70%);
+  box-shadow: inset 0 0 0 1px #ffffff12, 0 0 30px -6px color-mix(in srgb, var(--tono) 55%, transparent);
+}
+.portal .mini { transition: transform 1.2s cubic-bezier(.2, .8, .2, 1); }
+a.tarjeta-objeto:hover .portal .mini { transform: scale(1.08) rotate(4deg); }
+.pie-objeto { text-align: center; }
+.pie-objeto h2 { font-size: 1.25rem; }
+.pie-objeto .eyebrow { color: color-mix(in srgb, var(--tono) 60%, white); }
+.tarjeta-objeto.dormido { background: #ffffff05; border-style: dashed; border-color: #dce3f022; }
+.tarjeta-objeto.dormido .portal { background: radial-gradient(circle, #10173a, #070b1f 70%); animation: respira 4s ease-in-out infinite; }
+.tarjeta-objeto.dormido .eyebrow { color: var(--bruma-suave); }
+.tarjeta-objeto.dormido h2, .tarjeta-objeto.dormido .sub { opacity: .7; }
+a.tarjeta-objeto.dormido:hover { box-shadow: none; border-color: #7fa8f066; }
+@keyframes respira { 0%, 100% { box-shadow: inset 0 0 0 1px #ffffff0d; } 50% { box-shadow: inset 0 0 0 1px #ffffff1a, 0 0 26px -6px #7fa8f066; } }
+@media (prefers-reduced-motion: reduce) { .rejilla.atlas li, .tarjeta-objeto.dormido .portal { animation: none; } }
+
+/* Fondo vivo: nebulosa fría que se mueve despacio y puntitos que reaccionan al puntero */
+#app { position: relative; z-index: 1; }
+.fondo { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.fondo canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fondo-nebulosa { position: absolute; inset: -10%; filter: blur(70px); opacity: .55; }
+.fondo-nebulosa span { position: absolute; border-radius: 50%; animation: deriva 46s ease-in-out infinite alternate; }
+.fondo-nebulosa span:nth-child(1) { width: 55vw; height: 45vw; left: 52%; top: -8%; background: radial-gradient(closest-side, #4b5fd6aa, transparent); }
+.fondo-nebulosa span:nth-child(2) { width: 45vw; height: 40vw; left: -6%; top: 35%; background: radial-gradient(closest-side, #7a5cd099, transparent); animation-duration: 58s; animation-direction: alternate-reverse; }
+.fondo-nebulosa span:nth-child(3) { width: 40vw; height: 32vw; left: 40%; top: 60%; background: radial-gradient(closest-side, #3fa3d677, transparent); animation-duration: 52s; }
+@keyframes deriva { from { transform: translate(0, 0) scale(1); } to { transform: translate(-6vw, 4vw) scale(1.15); } }
+@media (prefers-reduced-motion: reduce) { .fondo-nebulosa span { animation: none; } }
