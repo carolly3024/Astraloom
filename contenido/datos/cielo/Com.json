@@ -1,0 +1,154 @@
+{
+ "id": "Com",
+ "nombre_latin": "Coma Berenices",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 194.0717,
+  "dec": 24.5587
+ },
+ "recuadro": {
+  "ar_semiancho": 11.735,
+  "dec_min": 13.529,
+  "dec_max": 32.268
+ },
+ "estrellas": [
+  {
+   "hip": 60742,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": 15,
+   "ar": 186.73449,
+   "dec": 28.26842,
+   "mag": 4.35,
+   "bv": 1.128,
+   "temperatura_k": 4460,
+   "color": "#ffd9ba",
+   "espectro": "K2IIICN+...",
+   "distancia_al": 167.3
+  },
+  {
+   "hip": 64241,
+   "nombre": "Diadem",
+   "bayer": "Alp",
+   "flamsteed": 42,
+   "ar": 197.49703,
+   "dec": 17.52943,
+   "mag": 4.32,
+   "bv": 0.455,
+   "temperatura_k": 6600,
+   "color": "#fffcff",
+   "espectro": "F5V",
+   "distancia_al": 58.1
+  },
+  {
+   "hip": 64394,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": 43,
+   "ar": 197.96856,
+   "dec": 27.87818,
+   "mag": 4.23,
+   "bv": 0.572,
+   "temperatura_k": 6080,
+   "color": "#fff7ef",
+   "espectro": "G0V",
+   "distancia_al": 29.8
+  }
+ ],
+ "lineas": [
+  [
+   64241,
+   64394
+  ],
+  [
+   64394,
+   60742
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 59847,
+   "ar": 184.08558,
+   "dec": 23.94541,
+   "mag": 4.93,
+   "color": "#ffe1c9"
+  },
+  {
+   "hip": 60202,
+   "ar": 185.17929,
+   "dec": 17.79287,
+   "mag": 4.72,
+   "color": "#ffdec4"
+  },
+  {
+   "hip": 60351,
+   "ar": 185.62631,
+   "dec": 25.84616,
+   "mag": 4.78,
+   "color": "#fffbf5"
+  },
+  {
+   "hip": 60697,
+   "ar": 186.60027,
+   "dec": 27.26824,
+   "mag": 4.92,
+   "color": "#e4eaff"
+  },
+  {
+   "hip": 60746,
+   "ar": 186.74707,
+   "dec": 26.8257,
+   "mag": 4.98,
+   "color": "#d0deff"
+  },
+  {
+   "hip": 61394,
+   "ar": 188.71285,
+   "dec": 22.62926,
+   "mag": 4.8,
+   "color": "#cadaff"
+  },
+  {
+   "hip": 62763,
+   "ar": 192.92467,
+   "dec": 27.54071,
+   "mag": 4.93,
+   "color": "#fff0e3"
+  },
+  {
+   "hip": 62886,
+   "ar": 193.32395,
+   "dec": 21.24494,
+   "mag": 4.89,
+   "color": "#ffe4cd"
+  },
+  {
+   "hip": 63355,
+   "ar": 194.73102,
+   "dec": 17.40945,
+   "mag": 4.76,
+   "color": "#ffc697"
+  },
+  {
+   "hip": 63462,
+   "ar": 195.06864,
+   "dec": 30.78502,
+   "mag": 4.88,
+   "color": "#ffd7b7"
+  },
+  {
+   "hip": 64022,
+   "ar": 196.79469,
+   "dec": 27.62474,
+   "mag": 4.8,
+   "color": "#ffc99e"
+  },
+  {
+   "hip": 65721,
+   "ar": 202.10755,
+   "dec": 13.77879,
+   "mag": 4.97,
+   "color": "#ffeee0"
+  }
+ ]
+}

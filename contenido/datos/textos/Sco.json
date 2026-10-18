@@ -1,0 +1,46 @@
+{
+  "id": "Sco",
+  "nombre": "Escorpio",
+  "orden": 8,
+  "temporada": "verano del hemisferio norte (bajo en el horizonte desde España)",
+  "nombres_es": {},
+  "aprendiz": {
+    "dato": "Antares significa «rival de Marte»: su color rojo se parece al del planeta, que a veces pasa cerca de ella."
+  },
+  "objeto": {
+    "id": "M4",
+    "nombre": "Cúmulo de Escorpio (M4)",
+    "tipo": "cúmulo globular",
+    "forma": "globular",
+    "ar": 245.9,
+    "dec": -26.53,
+    "distancia": "unos 6.000 años luz",
+    "tamano": "unos 60 años luz",
+    "texto": "Junto a Antares hay una bola de decenas de miles de estrellas unidas por su gravedad. Es el cúmulo globular más cercano al Sistema Solar, y sus estrellas tienen unos 12.000 millones de años: casi tantos como el universo.",
+    "por_que_color": "Es amarillo dorado porque sus estrellas son muy viejas. Las más calientes y azules se apagaron hace mucho, y quedan sobre todo estrellas más frías y gigantes rojas.",
+    "colores": [
+      {
+        "hex": "#ffd9a0",
+        "nombre": "amarillo dorado",
+        "origen": "estrellas viejas y más frías",
+        "peso": 0.7
+      },
+      {
+        "hex": "#ff9a5c",
+        "nombre": "naranja rojizo",
+        "origen": "supergigante roja",
+        "peso": 0.2
+      },
+      {
+        "hex": "#a9c4ff",
+        "nombre": "azul blanco",
+        "origen": "estrellas jóvenes y calientes",
+        "peso": 0.1
+      }
+    ],
+    "fuentes": [
+      "https://en.wikipedia.org/wiki/Messier_4"
+    ]
+  },
+  "estado": "verificado"
+}

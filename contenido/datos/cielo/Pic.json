@@ -1,0 +1,154 @@
+{
+ "id": "Pic",
+ "nombre_latin": "Pictor",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 92.0961,
+  "dec": -56.3915
+ },
+ "recuadro": {
+  "ar_semiancho": 17.178,
+  "dec_min": -65.941,
+  "dec_max": -47.067
+ },
+ "estrellas": [
+  {
+   "hip": 27321,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 86.82118,
+   "dec": -51.06651,
+   "mag": 3.85,
+   "bv": 0.171,
+   "temperatura_k": 8390,
+   "color": "#d8e3ff",
+   "espectro": "A3V",
+   "distancia_al": 63.4
+  },
+  {
+   "hip": 27530,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 87.45677,
+   "dec": -56.16666,
+   "mag": 4.5,
+   "bv": 1.075,
+   "temperatura_k": 4570,
+   "color": "#ffdbbe",
+   "espectro": "K1III",
+   "distancia_al": 176.8
+  },
+  {
+   "hip": 32607,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 102.04791,
+   "dec": -61.94139,
+   "mag": 3.24,
+   "bv": 0.225,
+   "temperatura_k": 7970,
+   "color": "#dee6ff",
+   "espectro": "A7IV",
+   "distancia_al": 96.6
+  }
+ ],
+ "lineas": [
+  [
+   32607,
+   27530
+  ],
+  [
+   27530,
+   27321
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 23693,
+   "ar": 76.3778,
+   "dec": -57.4727,
+   "mag": 4.71,
+   "color": "#fffbf4"
+  },
+  {
+   "hip": 26069,
+   "ar": 83.40631,
+   "dec": -62.48983,
+   "mag": 3.76,
+   "color": "#fff3e8"
+  },
+  {
+   "hip": 27100,
+   "ar": 86.19334,
+   "dec": -65.73553,
+   "mag": 4.34,
+   "color": "#dde5ff"
+  },
+  {
+   "hip": 27890,
+   "ar": 88.52487,
+   "dec": -63.08963,
+   "mag": 4.65,
+   "color": "#ffdec3"
+  },
+  {
+   "hip": 29276,
+   "ar": 92.57463,
+   "dec": -54.96865,
+   "mag": 4.72,
+   "color": "#b7ceff"
+  },
+  {
+   "hip": 30438,
+   "ar": 95.98792,
+   "dec": -52.69566,
+   "mag": -0.62,
+   "color": "#d7e2ff"
+  },
+  {
+   "hip": 31407,
+   "ar": 98.7441,
+   "dec": -52.97561,
+   "mag": 4.35,
+   "color": "#c7d9ff"
+  },
+  {
+   "hip": 32761,
+   "ar": 102.46381,
+   "dec": -53.62245,
+   "mag": 4.41,
+   "color": "#ffe4ce"
+  },
+  {
+   "hip": 32768,
+   "ar": 102.48399,
+   "dec": -50.61456,
+   "mag": 2.94,
+   "color": "#ffd5b3"
+  },
+  {
+   "hip": 33357,
+   "ar": 104.06663,
+   "dec": -48.72114,
+   "mag": 4.94,
+   "color": "#ffc290"
+  },
+  {
+   "hip": 34059,
+   "ar": 105.97344,
+   "dec": -49.58392,
+   "mag": 4.92,
+   "color": "#d5e1ff"
+  },
+  {
+   "hip": 35020,
+   "ar": 108.65892,
+   "dec": -48.27193,
+   "mag": 4.75,
+   "color": "#c2d5ff"
+  }
+ ]
+}

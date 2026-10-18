@@ -1,0 +1,189 @@
+{
+ "id": "Crt",
+ "nombre_latin": "Crater",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 171.8034,
+  "dec": -16.2188
+ },
+ "recuadro": {
+  "ar_semiancho": 11.366,
+  "dec_min": -26.826,
+  "dec_max": -5.802
+ },
+ "estrellas": [
+  {
+   "hip": 53740,
+   "nombre": "Alkes",
+   "bayer": "Alp",
+   "flamsteed": 7,
+   "ar": 164.94366,
+   "dec": -18.29878,
+   "mag": 4.08,
+   "bv": 1.079,
+   "temperatura_k": 4560,
+   "color": "#ffdbbe",
+   "espectro": "K1III",
+   "distancia_al": 159.2
+  },
+  {
+   "hip": 54682,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": 11,
+   "ar": 167.91453,
+   "dec": -22.82585,
+   "mag": 4.46,
+   "bv": 0.025,
+   "temperatura_k": 9820,
+   "color": "#cbdbff",
+   "espectro": "A1V",
+   "distancia_al": 340.1
+  },
+  {
+   "hip": 55282,
+   "nombre": null,
+   "bayer": "Del",
+   "flamsteed": 12,
+   "ar": 169.83521,
+   "dec": -14.77854,
+   "mag": 3.56,
+   "bv": 1.112,
+   "temperatura_k": 4490,
+   "color": "#ffd9bb",
+   "espectro": "K0III",
+   "distancia_al": 185.7
+  },
+  {
+   "hip": 55687,
+   "nombre": null,
+   "bayer": "Eps",
+   "flamsteed": 14,
+   "ar": 171.15246,
+   "dec": -10.85932,
+   "mag": 4.81,
+   "bv": 1.556,
+   "temperatura_k": 3710,
+   "color": "#ffc698",
+   "espectro": "K5III",
+   "distancia_al": 376.2
+  },
+  {
+   "hip": 55705,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": 15,
+   "ar": 171.22053,
+   "dec": -17.68401,
+   "mag": 4.06,
+   "bv": 0.216,
+   "temperatura_k": 8040,
+   "color": "#dde5ff",
+   "espectro": "A9V",
+   "distancia_al": 82.3
+  },
+  {
+   "hip": 56633,
+   "nombre": null,
+   "bayer": "The",
+   "flamsteed": 21,
+   "ar": 174.17047,
+   "dec": -9.80225,
+   "mag": 4.7,
+   "bv": -0.073,
+   "temperatura_k": 11140,
+   "color": "#c3d6ff",
+   "espectro": "B9.5Vn",
+   "distancia_al": 280.4
+  },
+  {
+   "hip": 57283,
+   "nombre": null,
+   "bayer": "Zet",
+   "flamsteed": 27,
+   "ar": 176.19073,
+   "dec": -18.35067,
+   "mag": 4.71,
+   "bv": 0.958,
+   "temperatura_k": 4850,
+   "color": "#ffe1c8",
+   "espectro": "G8III",
+   "distancia_al": 353.0
+  },
+  {
+   "hip": 58188,
+   "nombre": null,
+   "bayer": "Eta",
+   "flamsteed": 30,
+   "ar": 179.00399,
+   "dec": -17.15083,
+   "mag": 5.17,
+   "bv": -0.022,
+   "temperatura_k": 10410,
+   "color": "#c7d8ff",
+   "espectro": "A0V",
+   "distancia_al": 251.5
+  }
+ ],
+ "lineas": [
+  [
+   53740,
+   54682
+  ],
+  [
+   54682,
+   55705
+  ],
+  [
+   55705,
+   55282
+  ],
+  [
+   55282,
+   53740
+  ],
+  [
+   55282,
+   55687
+  ],
+  [
+   55687,
+   56633
+  ],
+  [
+   56633,
+   58188
+  ],
+  [
+   58188,
+   57283
+  ],
+  [
+   57283,
+   55705
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 52943,
+   "ar": 162.40618,
+   "dec": -16.19365,
+   "mag": 3.11,
+   "color": "#ffd4b1"
+  },
+  {
+   "hip": 59199,
+   "ar": 182.10337,
+   "dec": -24.72887,
+   "mag": 4.02,
+   "color": "#ebeeff"
+  },
+  {
+   "hip": 59316,
+   "ar": 182.53119,
+   "dec": -22.61977,
+   "mag": 3.02,
+   "color": "#ffd0aa"
+  }
+ ]
+}

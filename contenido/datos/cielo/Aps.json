@@ -1,0 +1,84 @@
+{
+ "id": "Aps",
+ "nombre_latin": "Apus",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 240.4465,
+  "dec": -78.4864
+ },
+ "recuadro": {
+  "ar_semiancho": 38.481,
+  "dec_min": -83.045,
+  "dec_max": -73.517
+ },
+ "estrellas": [
+  {
+   "hip": 72370,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 221.96552,
+   "dec": -79.04475,
+   "mag": 3.83,
+   "bv": 1.433,
+   "temperatura_k": 3900,
+   "color": "#ffcba1",
+   "espectro": "K5III",
+   "distancia_al": 446.8
+  },
+  {
+   "hip": 81065,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 248.36413,
+   "dec": -78.89715,
+   "mag": 3.86,
+   "bv": 0.923,
+   "temperatura_k": 4940,
+   "color": "#ffe3cc",
+   "espectro": "K0IV SB",
+   "distancia_al": 156.3
+  },
+  {
+   "hip": 81852,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 250.77189,
+   "dec": -77.51744,
+   "mag": 4.23,
+   "bv": 1.06,
+   "temperatura_k": 4600,
+   "color": "#ffdcbf",
+   "espectro": "K0III",
+   "distancia_al": 157.0
+  }
+ ],
+ "lineas": [
+  [
+   72370,
+   81065
+  ],
+  [
+   81065,
+   81852
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 69896,
+   "ar": 214.55815,
+   "dec": -81.00776,
+   "mag": 4.89,
+   "color": "#e0e7ff"
+  },
+  {
+   "hip": 80047,
+   "ar": 245.08678,
+   "dec": -78.69575,
+   "mag": 4.68,
+   "color": "#ffc28f"
+  }
+ ]
+}

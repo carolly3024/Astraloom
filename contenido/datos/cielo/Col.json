@@ -1,0 +1,191 @@
+{
+ "id": "Col",
+ "nombre_latin": "Columba",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 89.1844,
+  "dec": -35.9983
+ },
+ "recuadro": {
+  "ar_semiancho": 11.325,
+  "dec_min": -46.815,
+  "dec_max": -29.436
+ },
+ "estrellas": [
+  {
+   "hip": 25859,
+   "nombre": null,
+   "bayer": "Eps",
+   "flamsteed": null,
+   "ar": 82.80314,
+   "dec": -35.47052,
+   "mag": 3.86,
+   "bv": 1.13,
+   "temperatura_k": 4450,
+   "color": "#ffd8b9",
+   "espectro": "K1II/III",
+   "distancia_al": 263.2
+  },
+  {
+   "hip": 26634,
+   "nombre": "Phact",
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 84.91226,
+   "dec": -34.07411,
+   "mag": 2.65,
+   "bv": -0.12,
+   "temperatura_k": 11920,
+   "color": "#bfd4ff",
+   "espectro": "B7IV",
+   "distancia_al": 261.3
+  },
+  {
+   "hip": 27628,
+   "nombre": "Wazn",
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 87.73994,
+   "dec": -35.76831,
+   "mag": 3.12,
+   "bv": 1.146,
+   "temperatura_k": 4420,
+   "color": "#ffd8b8",
+   "espectro": "K1.5III",
+   "distancia_al": 87.2
+  },
+  {
+   "hip": 28199,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 89.38421,
+   "dec": -35.28328,
+   "mag": 4.36,
+   "bv": -0.165,
+   "temperatura_k": 12800,
+   "color": "#bcd2ff",
+   "espectro": "B2.5IV",
+   "distancia_al": 869.7
+  },
+  {
+   "hip": 28328,
+   "nombre": null,
+   "bayer": "Eta",
+   "flamsteed": null,
+   "ar": 89.78667,
+   "dec": -42.81513,
+   "mag": 3.96,
+   "bv": 1.146,
+   "temperatura_k": 4420,
+   "color": "#ffd8b8",
+   "espectro": "K0III",
+   "distancia_al": 472.0
+  },
+  {
+   "hip": 29807,
+   "nombre": null,
+   "bayer": "Kap",
+   "flamsteed": null,
+   "ar": 94.13807,
+   "dec": -35.14052,
+   "mag": 4.37,
+   "bv": 0.978,
+   "temperatura_k": 4800,
+   "color": "#ffe0c7",
+   "espectro": "G8II",
+   "distancia_al": 182.5
+  },
+  {
+   "hip": 30277,
+   "nombre": null,
+   "bayer": "Del",
+   "flamsteed": null,
+   "ar": 95.52846,
+   "dec": -33.4364,
+   "mag": 3.85,
+   "bv": 0.858,
+   "temperatura_k": 5110,
+   "color": "#ffe6d2",
+   "espectro": "G7II",
+   "distancia_al": 234.0
+  }
+ ],
+ "lineas": [
+  [
+   30277,
+   29807
+  ],
+  [
+   29807,
+   28199
+  ],
+  [
+   28199,
+   27628
+  ],
+  [
+   27628,
+   28328
+  ],
+  [
+   27628,
+   26634
+  ],
+  [
+   26634,
+   25859
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 24659,
+   "ar": 79.37117,
+   "dec": -34.89521,
+   "mag": 4.81,
+   "color": "#ffdfc6"
+  },
+  {
+   "hip": 27810,
+   "ar": 88.27868,
+   "dec": -33.80136,
+   "mag": 4.88,
+   "color": "#bdd2ff"
+  },
+  {
+   "hip": 28010,
+   "ar": 88.87462,
+   "dec": -37.12067,
+   "mag": 4.97,
+   "color": "#ffdabc"
+  },
+  {
+   "hip": 29034,
+   "ar": 91.8818,
+   "dec": -37.25292,
+   "mag": 5.0,
+   "color": "#c1d5ff"
+  },
+  {
+   "hip": 30122,
+   "ar": 95.07829,
+   "dec": -30.06337,
+   "mag": 3.02,
+   "color": "#bcd2ff"
+  },
+  {
+   "hip": 30788,
+   "ar": 97.04254,
+   "dec": -32.58007,
+   "mag": 4.47,
+   "color": "#bcd1ff"
+  },
+  {
+   "hip": 31685,
+   "ar": 99.4403,
+   "dec": -43.19593,
+   "mag": 3.17,
+   "color": "#c1d5ff"
+  }
+ ]
+}

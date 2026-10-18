@@ -1,0 +1,254 @@
+{
+ "id": "Cep",
+ "nombre_latin": "Cepheus",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 334.3137,
+  "dec": 67.036
+ },
+ "recuadro": {
+  "ar_semiancho": 30.776,
+  "dec_min": 54.201,
+  "dec_max": 81.632
+ },
+ "estrellas": [
+  {
+   "hip": 105199,
+   "nombre": "Alderamin",
+   "bayer": "Alp",
+   "flamsteed": 5,
+   "ar": 319.64445,
+   "dec": 62.58557,
+   "mag": 2.45,
+   "bv": 0.257,
+   "temperatura_k": 7750,
+   "color": "#e1e8ff",
+   "espectro": "A7IV-V",
+   "distancia_al": 49.0
+  },
+  {
+   "hip": 106032,
+   "nombre": "Alfirk",
+   "bayer": "Bet",
+   "flamsteed": 8,
+   "ar": 322.16493,
+   "dec": 70.56072,
+   "mag": 3.23,
+   "bv": -0.201,
+   "temperatura_k": 13610,
+   "color": "#b9d0ff",
+   "espectro": "B2IIIv SB",
+   "distancia_al": 685.2
+  },
+  {
+   "hip": 109492,
+   "nombre": null,
+   "bayer": "Zet",
+   "flamsteed": 21,
+   "ar": 332.71362,
+   "dec": 58.20126,
+   "mag": 3.39,
+   "bv": 1.558,
+   "temperatura_k": 3710,
+   "color": "#ffc698",
+   "espectro": "K1Ibv SB",
+   "distancia_al": 836.3
+  },
+  {
+   "hip": 112724,
+   "nombre": null,
+   "bayer": "Iot",
+   "flamsteed": 32,
+   "ar": 342.4203,
+   "dec": 66.20041,
+   "mag": 3.5,
+   "bv": 1.053,
+   "temperatura_k": 4620,
+   "color": "#ffdcc0",
+   "espectro": "K0III",
+   "distancia_al": 115.3
+  },
+  {
+   "hip": 116727,
+   "nombre": "Errai",
+   "bayer": "Gam",
+   "flamsteed": 35,
+   "ar": 354.8373,
+   "dec": 77.63228,
+   "mag": 3.21,
+   "bv": 1.031,
+   "temperatura_k": 4670,
+   "color": "#ffddc2",
+   "espectro": "K1IV",
+   "distancia_al": 46.0
+  }
+ ],
+ "lineas": [
+  [
+   109492,
+   112724
+  ],
+  [
+   112724,
+   106032
+  ],
+  [
+   106032,
+   105199
+  ],
+  [
+   105199,
+   109492
+  ],
+  [
+   112724,
+   116727
+  ],
+  [
+   116727,
+   106032
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 746,
+   "ar": 2.29331,
+   "dec": 59.14978,
+   "mag": 2.28,
+   "color": "#f3f2ff"
+  },
+  {
+   "hip": 101093,
+   "ar": 307.39522,
+   "dec": 62.9941,
+   "mag": 4.21,
+   "color": "#dbe4ff"
+  },
+  {
+   "hip": 102422,
+   "ar": 311.32216,
+   "dec": 61.83878,
+   "mag": 3.41,
+   "color": "#ffe3cd"
+  },
+  {
+   "hip": 102431,
+   "ar": 311.33817,
+   "dec": 57.57973,
+   "mag": 4.52,
+   "color": "#fffaf3"
+  },
+  {
+   "hip": 106801,
+   "ar": 324.48011,
+   "dec": 62.08194,
+   "mag": 4.76,
+   "color": "#e0e7ff"
+  },
+  {
+   "hip": 107119,
+   "ar": 325.47978,
+   "dec": 71.31142,
+   "mag": 4.55,
+   "color": "#ffd9bb"
+  },
+  {
+   "hip": 107259,
+   "ar": 325.87691,
+   "dec": 58.78005,
+   "mag": 4.23,
+   "color": "#ffb779"
+  },
+  {
+   "hip": 107418,
+   "ar": 326.3622,
+   "dec": 61.12081,
+   "mag": 4.25,
+   "color": "#fffefa"
+  },
+  {
+   "hip": 108917,
+   "ar": 330.94702,
+   "dec": 64.62797,
+   "mag": 4.26,
+   "color": "#f3f2ff"
+  },
+  {
+   "hip": 109400,
+   "ar": 332.45162,
+   "dec": 72.34121,
+   "mag": 4.79,
+   "color": "#ffe3cc"
+  },
+  {
+   "hip": 109857,
+   "ar": 333.75816,
+   "dec": 57.04359,
+   "mag": 4.18,
+   "color": "#e4eaff"
+  },
+  {
+   "hip": 110991,
+   "ar": 337.29275,
+   "dec": 58.4152,
+   "mag": 4.07,
+   "color": "#ffebd9"
+  },
+  {
+   "hip": 114104,
+   "ar": 346.65339,
+   "dec": 59.41976,
+   "mag": 4.84,
+   "color": "#c4d7ff"
+  },
+  {
+   "hip": 114222,
+   "ar": 346.97435,
+   "dec": 75.3875,
+   "mag": 4.41,
+   "color": "#ffe9d7"
+  },
+  {
+   "hip": 115088,
+   "ar": 349.656,
+   "dec": 68.11145,
+   "mag": 4.75,
+   "color": "#ffe7d4"
+  },
+  {
+   "hip": 115590,
+   "ar": 351.20938,
+   "dec": 62.28281,
+   "mag": 4.96,
+   "color": "#ffc28f"
+  },
+  {
+   "hip": 115990,
+   "ar": 352.50804,
+   "dec": 58.54892,
+   "mag": 4.89,
+   "color": "#bfd4ff"
+  },
+  {
+   "hip": 117301,
+   "ar": 356.76426,
+   "dec": 58.65199,
+   "mag": 4.88,
+   "color": "#ffd9ba"
+  },
+  {
+   "hip": 117863,
+   "ar": 358.59597,
+   "dec": 57.49938,
+   "mag": 4.51,
+   "color": "#ffd6b4"
+  },
+  {
+   "hip": 118243,
+   "ar": 359.75223,
+   "dec": 55.75493,
+   "mag": 4.88,
+   "color": "#c3d6ff"
+  }
+ ]
+}

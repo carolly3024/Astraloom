@@ -1,0 +1,251 @@
+{
+ "id": "Ara",
+ "nombre_latin": "Ara",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 261.0216,
+  "dec": -55.3701
+ },
+ "recuadro": {
+  "ar_semiancho": 17.675,
+  "dec_min": -64.684,
+  "dec_max": -45.876
+ },
+ "estrellas": [
+  {
+   "hip": 82363,
+   "nombre": null,
+   "bayer": "Eta",
+   "flamsteed": null,
+   "ar": 252.4464,
+   "dec": -59.04138,
+   "mag": 3.77,
+   "bv": 1.562,
+   "temperatura_k": 3700,
+   "color": "#ffc698",
+   "espectro": "K5III",
+   "distancia_al": 299.2
+  },
+  {
+   "hip": 83081,
+   "nombre": null,
+   "bayer": "Zet",
+   "flamsteed": null,
+   "ar": 254.65509,
+   "dec": -55.99014,
+   "mag": 3.12,
+   "bv": 1.552,
+   "temperatura_k": 3720,
+   "color": "#ffc798",
+   "espectro": "K5III",
+   "distancia_al": 486.1
+  },
+  {
+   "hip": 85258,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 261.32497,
+   "dec": -55.52988,
+   "mag": 2.84,
+   "bv": 1.479,
+   "temperatura_k": 3830,
+   "color": "#ffc99e",
+   "espectro": "K3Ib-II",
+   "distancia_al": 645.9
+  },
+  {
+   "hip": 85267,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 261.34858,
+   "dec": -56.37773,
+   "mag": 3.31,
+   "bv": -0.15,
+   "temperatura_k": 12490,
+   "color": "#bdd2ff",
+   "espectro": "B1Ib",
+   "distancia_al": 1113.2
+  },
+  {
+   "hip": 85727,
+   "nombre": null,
+   "bayer": "Del",
+   "flamsteed": null,
+   "ar": 262.77477,
+   "dec": -60.68385,
+   "mag": 3.6,
+   "bv": -0.104,
+   "temperatura_k": 11640,
+   "color": "#c1d4ff",
+   "espectro": "B8V",
+   "distancia_al": 197.9
+  },
+  {
+   "hip": 85792,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 262.96043,
+   "dec": -49.87615,
+   "mag": 2.84,
+   "bv": -0.136,
+   "temperatura_k": 12220,
+   "color": "#bed3ff",
+   "espectro": "B2Vne",
+   "distancia_al": 267.3
+  },
+  {
+   "hip": 88714,
+   "nombre": null,
+   "bayer": "The",
+   "flamsteed": null,
+   "ar": 271.6578,
+   "dec": -50.09148,
+   "mag": 3.65,
+   "bv": -0.101,
+   "temperatura_k": 11590,
+   "color": "#c1d5ff",
+   "espectro": "B2Ib",
+   "distancia_al": 813.4
+  }
+ ],
+ "lineas": [
+  [
+   88714,
+   85792
+  ],
+  [
+   85792,
+   83081
+  ],
+  [
+   83081,
+   82363
+  ],
+  [
+   82363,
+   85727
+  ],
+  [
+   85727,
+   85267
+  ],
+  [
+   85267,
+   85258
+  ],
+  [
+   85258,
+   88714
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 79509,
+   "ar": 243.36972,
+   "dec": -54.63047,
+   "mag": 4.95,
+   "color": "#ffdec3"
+  },
+  {
+   "hip": 79664,
+   "ar": 243.85946,
+   "dec": -63.68568,
+   "mag": 3.86,
+   "color": "#ffdabc"
+  },
+  {
+   "hip": 79790,
+   "ar": 244.25389,
+   "dec": -50.06812,
+   "mag": 4.97,
+   "color": "#ffead8"
+  },
+  {
+   "hip": 80000,
+   "ar": 244.96031,
+   "dec": -50.15551,
+   "mag": 4.01,
+   "color": "#ffdbbe"
+  },
+  {
+   "hip": 80582,
+   "ar": 246.79601,
+   "dec": -47.55479,
+   "mag": 4.46,
+   "color": "#c3d6ff"
+  },
+  {
+   "hip": 83153,
+   "ar": 254.89603,
+   "dec": -53.16044,
+   "mag": 4.06,
+   "color": "#ffcaa0"
+  },
+  {
+   "hip": 86092,
+   "ar": 263.91498,
+   "dec": -46.50568,
+   "mag": 4.56,
+   "color": "#c7d9ff"
+  },
+  {
+   "hip": 86486,
+   "ar": 265.09914,
+   "dec": -49.41559,
+   "mag": 4.76,
+   "color": "#faf6ff"
+  },
+  {
+   "hip": 88866,
+   "ar": 272.145,
+   "dec": -63.66855,
+   "mag": 4.33,
+   "color": "#dee6ff"
+  },
+  {
+   "hip": 89112,
+   "ar": 272.80735,
+   "dec": -45.95442,
+   "mag": 4.52,
+   "color": "#ffdec4"
+  },
+  {
+   "hip": 90098,
+   "ar": 275.80676,
+   "dec": -61.4939,
+   "mag": 4.35,
+   "color": "#ffca9f"
+  },
+  {
+   "hip": 90422,
+   "ar": 276.74341,
+   "dec": -45.96846,
+   "mag": 3.49,
+   "color": "#bbd1ff"
+  },
+  {
+   "hip": 90568,
+   "ar": 277.20758,
+   "dec": -49.07059,
+   "mag": 4.1,
+   "color": "#ffdfc5"
+  },
+  {
+   "hip": 90797,
+   "ar": 277.84344,
+   "dec": -62.2783,
+   "mag": 4.63,
+   "color": "#c0d4ff"
+  },
+  {
+   "hip": 90830,
+   "ar": 277.9393,
+   "dec": -45.91481,
+   "mag": 4.92,
+   "color": "#c1d5ff"
+  }
+ ]
+}

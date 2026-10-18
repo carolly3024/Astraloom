@@ -1,0 +1,245 @@
+{
+ "id": "Gru",
+ "nombre_latin": "Grus",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 339.0838,
+  "dec": -45.2319
+ },
+ "recuadro": {
+  "ar_semiancho": 16.282,
+  "dec_min": -56.754,
+  "dec_max": -33.365
+ },
+ "estrellas": [
+  {
+   "hip": 108085,
+   "nombre": "Aldhanab",
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 328.48212,
+   "dec": -37.36485,
+   "mag": 3.0,
+   "bv": -0.084,
+   "temperatura_k": 11310,
+   "color": "#c2d5ff",
+   "espectro": "B8III",
+   "distancia_al": 211.1
+  },
+  {
+   "hip": 109111,
+   "nombre": null,
+   "bayer": "Lam",
+   "flamsteed": null,
+   "ar": 331.52871,
+   "dec": -39.54335,
+   "mag": 4.47,
+   "bv": 1.349,
+   "temperatura_k": 4040,
+   "color": "#ffcfa8",
+   "espectro": "M0III",
+   "distancia_al": 242.1
+  },
+  {
+   "hip": 109268,
+   "nombre": "Alnair",
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 332.05813,
+   "dec": -46.96097,
+   "mag": 1.73,
+   "bv": -0.07,
+   "temperatura_k": 11090,
+   "color": "#c3d6ff",
+   "espectro": "B7IV",
+   "distancia_al": 101.0
+  },
+  {
+   "hip": 110997,
+   "nombre": null,
+   "bayer": "Del-1",
+   "flamsteed": null,
+   "ar": 337.31738,
+   "dec": -43.49556,
+   "mag": 3.97,
+   "bv": 1.022,
+   "temperatura_k": 4690,
+   "color": "#ffdec3",
+   "espectro": "G6/G8III",
+   "distancia_al": 309.4
+  },
+  {
+   "hip": 112122,
+   "nombre": "Tiaki",
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 340.66672,
+   "dec": -46.88458,
+   "mag": 2.07,
+   "bv": 1.61,
+   "temperatura_k": 3640,
+   "color": "#ffc494",
+   "espectro": "M5III",
+   "distancia_al": 177.0
+  },
+  {
+   "hip": 112623,
+   "nombre": null,
+   "bayer": "Eps",
+   "flamsteed": null,
+   "ar": 342.13859,
+   "dec": -51.31686,
+   "mag": 3.49,
+   "bv": 0.083,
+   "temperatura_k": 9200,
+   "color": "#d0deff",
+   "espectro": "A3V",
+   "distancia_al": 128.9
+  },
+  {
+   "hip": 113638,
+   "nombre": null,
+   "bayer": "Zet",
+   "flamsteed": null,
+   "ar": 345.22015,
+   "dec": -52.75414,
+   "mag": 4.11,
+   "bv": 0.96,
+   "temperatura_k": 4840,
+   "color": "#ffe1c8",
+   "espectro": "G8III",
+   "distancia_al": 108.9
+  },
+  {
+   "hip": 114131,
+   "nombre": null,
+   "bayer": "The",
+   "flamsteed": null,
+   "ar": 346.71975,
+   "dec": -43.52036,
+   "mag": 4.28,
+   "bv": 0.423,
+   "temperatura_k": 6760,
+   "color": "#fcf7ff",
+   "espectro": "F5me...",
+   "distancia_al": 131.9
+  },
+  {
+   "hip": 114421,
+   "nombre": null,
+   "bayer": "Iot",
+   "flamsteed": null,
+   "ar": 347.5896,
+   "dec": -45.24671,
+   "mag": 3.88,
+   "bv": 0.998,
+   "temperatura_k": 4750,
+   "color": "#ffdfc5",
+   "espectro": "K0III SB",
+   "distancia_al": 183.2
+  }
+ ],
+ "lineas": [
+  [
+   114131,
+   110997
+  ],
+  [
+   110997,
+   109268
+  ],
+  [
+   109268,
+   112122
+  ],
+  [
+   112122,
+   114421
+  ],
+  [
+   114421,
+   114131
+  ],
+  [
+   112122,
+   113638
+  ],
+  [
+   112122,
+   112623
+  ],
+  [
+   109268,
+   109111
+  ],
+  [
+   109111,
+   108085
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 108431,
+   "ar": 329.4794,
+   "dec": -54.99258,
+   "mag": 4.4,
+   "color": "#e6ebff"
+  },
+  {
+   "hip": 109289,
+   "ar": 332.10805,
+   "dec": -34.04384,
+   "mag": 4.99,
+   "color": "#ffc99c"
+  },
+  {
+   "hip": 109908,
+   "ar": 333.9038,
+   "dec": -41.3467,
+   "mag": 4.79,
+   "color": "#ffead8"
+  },
+  {
+   "hip": 111043,
+   "ar": 337.43932,
+   "dec": -43.74922,
+   "mag": 4.12,
+   "color": "#ffc697"
+  },
+  {
+   "hip": 112203,
+   "ar": 340.8749,
+   "dec": -41.41435,
+   "mag": 4.84,
+   "color": "#ffddc2"
+  },
+  {
+   "hip": 112374,
+   "ar": 341.40778,
+   "dec": -53.50012,
+   "mag": 4.84,
+   "color": "#ffd6b5"
+  },
+  {
+   "hip": 116231,
+   "ar": 353.24268,
+   "dec": -37.81827,
+   "mag": 4.38,
+   "color": "#c1d5ff"
+  },
+  {
+   "hip": 116389,
+   "ar": 353.76898,
+   "dec": -42.61507,
+   "mag": 4.69,
+   "color": "#cfdeff"
+  },
+  {
+   "hip": 116602,
+   "ar": 354.4624,
+   "dec": -45.49235,
+   "mag": 4.74,
+   "color": "#d0deff"
+  }
+ ]
+}

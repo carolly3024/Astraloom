@@ -1,0 +1,113 @@
+{
+ "id": "Ret",
+ "nombre_latin": "Reticulum",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 60.8664,
+  "dec": -61.9958
+ },
+ "recuadro": {
+  "ar_semiancho": 13.336,
+  "dec_min": -68.807,
+  "dec_max": -55.302
+ },
+ "estrellas": [
+  {
+   "hip": 17440,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 56.0489,
+   "dec": -64.8069,
+   "mag": 3.84,
+   "bv": 1.133,
+   "temperatura_k": 4440,
+   "color": "#ffd8b9",
+   "espectro": "K0IV SB",
+   "distancia_al": 97.4
+  },
+  {
+   "hip": 18597,
+   "nombre": null,
+   "bayer": "Del",
+   "flamsteed": null,
+   "ar": 59.68642,
+   "dec": -61.40019,
+   "mag": 4.56,
+   "bv": 1.59,
+   "temperatura_k": 3660,
+   "color": "#ffc596",
+   "espectro": "M2III",
+   "distancia_al": 526.1
+  },
+  {
+   "hip": 19780,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 63.60606,
+   "dec": -62.47386,
+   "mag": 3.33,
+   "bv": 0.915,
+   "temperatura_k": 4960,
+   "color": "#ffe3cc",
+   "espectro": "G7III",
+   "distancia_al": 161.6
+  },
+  {
+   "hip": 19921,
+   "nombre": null,
+   "bayer": "Eps",
+   "flamsteed": null,
+   "ar": 64.12107,
+   "dec": -59.30216,
+   "mag": 4.44,
+   "bv": 1.078,
+   "temperatura_k": 4560,
+   "color": "#ffdbbe",
+   "espectro": "K2IV",
+   "distancia_al": 59.5
+  }
+ ],
+ "lineas": [
+  [
+   19780,
+   19921
+  ],
+  [
+   19921,
+   18597
+  ],
+  [
+   18597,
+   17440
+  ],
+  [
+   17440,
+   19780
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 16245,
+   "ar": 52.34337,
+   "dec": -62.93753,
+   "mag": 4.71,
+   "color": "#f9f6ff"
+  },
+  {
+   "hip": 18744,
+   "ar": 60.22419,
+   "dec": -62.15928,
+   "mag": 4.48,
+   "color": "#ffc99c"
+  },
+  {
+   "hip": 18772,
+   "ar": 60.32545,
+   "dec": -61.07882,
+   "mag": 4.97,
+   "color": "#ffcda5"
+  }
+ ]
+}

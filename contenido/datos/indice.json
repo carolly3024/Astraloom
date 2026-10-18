@@ -1,0 +1,69 @@
+{
+  "version": "0.1",
+  "juego_base": [
+    "Ori",
+    "UMa",
+    "Cas",
+    "Lyr",
+    "Cyg",
+    "And",
+    "Tau",
+    "Sco",
+    "Sgr",
+    "Her",
+    "Cru",
+    "Leo"
+  ],
+  "colores_de_referencia": {
+    "ha": {
+      "hex": "#e0476a",
+      "nombre": "rosa rojizo",
+      "origen": "hidrógeno (línea H-alfa, 656 nm)"
+    },
+    "oiii": {
+      "hex": "#3fd0c0",
+      "nombre": "verde azulado",
+      "origen": "oxígeno doblemente ionizado ([O III], 501 nm)"
+    },
+    "nii": {
+      "hex": "#c43a44",
+      "nombre": "rojo intenso",
+      "origen": "nitrógeno ionizado ([N II], 658 nm)"
+    },
+    "sii": {
+      "hex": "#a3263a",
+      "nombre": "rojo oscuro",
+      "origen": "azufre ionizado ([S II], 672 nm)"
+    },
+    "refl": {
+      "hex": "#6f8fe8",
+      "nombre": "azul",
+      "origen": "luz de estrellas reflejada por el polvo"
+    },
+    "sinc": {
+      "hex": "#7aa8ff",
+      "nombre": "azul pálido",
+      "origen": "radiación sincrotrón (electrones girando en un campo magnético)"
+    },
+    "jov": {
+      "hex": "#a9c4ff",
+      "nombre": "azul blanco",
+      "origen": "estrellas jóvenes y calientes"
+    },
+    "vie": {
+      "hex": "#ffd9a0",
+      "nombre": "amarillo dorado",
+      "origen": "estrellas viejas y más frías"
+    },
+    "rsg": {
+      "hex": "#ff9a5c",
+      "nombre": "naranja rojizo",
+      "origen": "supergigante roja"
+    },
+    "polvo": {
+      "hex": "#2a1c22",
+      "nombre": "marrón oscuro",
+      "origen": "polvo que tapa la luz de detrás"
+    }
+  }
+}

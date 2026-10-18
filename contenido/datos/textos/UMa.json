@@ -1,0 +1,53 @@
+{
+  "id": "UMa",
+  "nombre": "Osa Mayor",
+  "orden": 2,
+  "temporada": "todo el año desde el hemisferio norte (mejor en primavera)",
+  "nombres_es": {},
+  "aprendiz": {
+    "dato": "Sus siete estrellas más brillantes forman el Carro, que es solo una parte de la Osa Mayor. Si prolongas unas cinco veces la línea que une Merak con Dubhe, llegas a la Estrella Polar."
+  },
+  "objeto": {
+    "id": "M101",
+    "nombre": "Galaxia del Molinete",
+    "tipo": "galaxia espiral",
+    "forma": "espiral_de_frente",
+    "ar": 210.8,
+    "dec": 54.35,
+    "distancia": "unos 21 millones de años luz",
+    "tamano": "unos 170.000 años luz, bastante más que la Vía Láctea",
+    "texto": "La vemos completamente de frente, como un molinete de papel. En 2011 estalló en ella una supernova que se pudo ver con prismáticos, una de las más cercanas de su tipo en décadas.",
+    "por_que_color": "El centro es amarillento porque allí abundan las estrellas viejas, más frías. Los brazos son azules porque en ellos nacen estrellas jóvenes y muy calientes, y los puntos rosas son nubes de hidrógeno encendidas por esas estrellas recién nacidas.",
+    "colores": [
+      {
+        "hex": "#ffd9a0",
+        "nombre": "amarillo dorado",
+        "origen": "estrellas viejas y más frías",
+        "peso": 0.35
+      },
+      {
+        "hex": "#a9c4ff",
+        "nombre": "azul blanco",
+        "origen": "estrellas jóvenes y calientes",
+        "peso": 0.4
+      },
+      {
+        "hex": "#e0476a",
+        "nombre": "rosa rojizo",
+        "origen": "hidrógeno (línea H-alfa, 656 nm)",
+        "peso": 0.15
+      },
+      {
+        "hex": "#2a1c22",
+        "nombre": "marrón oscuro",
+        "origen": "polvo que tapa la luz de detrás",
+        "peso": 0.1
+      }
+    ],
+    "fuentes": [
+      "https://en.wikipedia.org/wiki/Pinwheel_Galaxy",
+      "https://en.wikipedia.org/wiki/SN_2011fe"
+    ]
+  },
+  "estado": "verificado"
+}

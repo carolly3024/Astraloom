@@ -1,0 +1,53 @@
+{
+  "id": "And",
+  "nombre": "Andrómeda",
+  "orden": 6,
+  "temporada": "otoño del hemisferio norte",
+  "nombres_es": {},
+  "aprendiz": {
+    "dato": "Alpheratz, su estrella más brillante, pertenece a Andrómeda, pero también cierra una esquina del Gran Cuadrado de Pegaso."
+  },
+  "objeto": {
+    "id": "M31",
+    "nombre": "Galaxia de Andrómeda",
+    "tipo": "galaxia espiral",
+    "forma": "espiral_inclinada",
+    "ar": 10.68,
+    "dec": 41.27,
+    "distancia": "unos 2,5 millones de años luz",
+    "tamano": "unos 150.000 años luz",
+    "texto": "Es la galaxia grande más cercana a la nuestra y uno de los objetos más lejanos que se ven a simple vista: su luz salió hace 2,5 millones de años. Se acerca a la Vía Láctea, y un estudio de 2025 calcula que hay alrededor de un 50 % de probabilidad de que las dos se fusionen en los próximos 10.000 millones de años.",
+    "por_que_color": "El centro es dorado porque está lleno de estrellas viejas. Los brazos tienen un tono azulado por las estrellas jóvenes, y las franjas oscuras son polvo que tapa su luz.",
+    "colores": [
+      {
+        "hex": "#ffd9a0",
+        "nombre": "amarillo dorado",
+        "origen": "estrellas viejas y más frías",
+        "peso": 0.5
+      },
+      {
+        "hex": "#a9c4ff",
+        "nombre": "azul blanco",
+        "origen": "estrellas jóvenes y calientes",
+        "peso": 0.3
+      },
+      {
+        "hex": "#e0476a",
+        "nombre": "rosa rojizo",
+        "origen": "hidrógeno (línea H-alfa, 656 nm)",
+        "peso": 0.05
+      },
+      {
+        "hex": "#2a1c22",
+        "nombre": "marrón oscuro",
+        "origen": "polvo que tapa la luz de detrás",
+        "peso": 0.15
+      }
+    ],
+    "fuentes": [
+      "https://en.wikipedia.org/wiki/Andromeda_Galaxy",
+      "https://esahubble.org/news/heic2508/"
+    ]
+  },
+  "estado": "verificado"
+}

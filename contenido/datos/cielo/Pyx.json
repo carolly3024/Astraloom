@@ -1,0 +1,98 @@
+{
+ "id": "Pyx",
+ "nombre_latin": "Pyxis",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 131.1856,
+  "dec": -32.0682
+ },
+ "recuadro": {
+  "ar_semiancho": 6.168,
+  "dec_min": -39.308,
+  "dec_max": -23.71
+ },
+ "estrellas": [
+  {
+   "hip": 42515,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 130.0256,
+   "dec": -35.30835,
+   "mag": 3.97,
+   "bv": 0.936,
+   "temperatura_k": 4900,
+   "color": "#ffe2ca",
+   "espectro": "G5II/III",
+   "distancia_al": 416.0
+  },
+  {
+   "hip": 42828,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 130.89809,
+   "dec": -33.18639,
+   "mag": 3.68,
+   "bv": -0.18,
+   "temperatura_k": 13120,
+   "color": "#bbd1ff",
+   "espectro": "B1.5III",
+   "distancia_al": 879.1
+  },
+  {
+   "hip": 43409,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 132.63306,
+   "dec": -27.70984,
+   "mag": 4.02,
+   "bv": 1.272,
+   "temperatura_k": 4170,
+   "color": "#ffd2ae",
+   "espectro": "K3III",
+   "distancia_al": 207.3
+  }
+ ],
+ "lineas": [
+  [
+   42515,
+   42828
+  ],
+  [
+   42828,
+   43409
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 40945,
+   "ar": 125.34595,
+   "dec": -33.05437,
+   "mag": 4.83,
+   "color": "#ffcca2"
+  },
+  {
+   "hip": 42483,
+   "ar": 129.92699,
+   "dec": -29.56108,
+   "mag": 4.86,
+   "color": "#ffe4ce"
+  },
+  {
+   "hip": 43825,
+   "ar": 133.88151,
+   "dec": -27.68187,
+   "mag": 4.87,
+   "color": "#d5e1ff"
+  },
+  {
+   "hip": 44824,
+   "ar": 137.012,
+   "dec": -25.85854,
+   "mag": 4.62,
+   "color": "#ffc595"
+  }
+ ]
+}

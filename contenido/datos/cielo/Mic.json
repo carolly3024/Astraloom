@@ -1,0 +1,69 @@
+{
+ "id": "Mic",
+ "nombre_latin": "Microscopium",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 315.7661,
+  "dec": -32.7367
+ },
+ "recuadro": {
+  "ar_semiancho": 8.474,
+  "dec_min": -37.78,
+  "dec_max": -28.173
+ },
+ "estrellas": [
+  {
+   "hip": 102831,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 312.492,
+   "dec": -33.77972,
+   "mag": 4.89,
+   "bv": 1.004,
+   "temperatura_k": 4730,
+   "color": "#ffdfc4",
+   "espectro": "G8III",
+   "distancia_al": 378.4
+  },
+  {
+   "hip": 103738,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 315.32275,
+   "dec": -32.25777,
+   "mag": 4.67,
+   "bv": 0.89,
+   "temperatura_k": 5020,
+   "color": "#ffe4cf",
+   "espectro": "G8III",
+   "distancia_al": 229.0
+  },
+  {
+   "hip": 105140,
+   "nombre": null,
+   "bayer": "Eps",
+   "flamsteed": null,
+   "ar": 319.48449,
+   "dec": -32.17254,
+   "mag": 4.71,
+   "bv": 0.07,
+   "temperatura_k": 9330,
+   "color": "#cfddff",
+   "espectro": "A0V",
+   "distancia_al": 182.2
+  }
+ ],
+ "lineas": [
+  [
+   105140,
+   103738
+  ],
+  [
+   103738,
+   102831
+  ]
+ ],
+ "fondo": []
+}

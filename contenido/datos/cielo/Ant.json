@@ -1,0 +1,66 @@
+{
+ "id": "Ant",
+ "nombre_latin": "Antlia",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 153.2529,
+  "dec": -33.4794
+ },
+ "recuadro": {
+  "ar_semiancho": 8.331,
+  "dec_min": -39.891,
+  "dec_max": -27.068
+ },
+ "estrellas": [
+  {
+   "hip": 48926,
+   "nombre": null,
+   "bayer": "Eta",
+   "flamsteed": null,
+   "ar": 149.71787,
+   "dec": -35.89097,
+   "mag": 5.23,
+   "bv": 0.3,
+   "temperatura_k": 7460,
+   "color": "#e7ebff",
+   "espectro": "A8IV",
+   "distancia_al": 108.6
+  },
+  {
+   "hip": 51172,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 156.78795,
+   "dec": -31.06778,
+   "mag": 4.28,
+   "bv": 1.429,
+   "temperatura_k": 3900,
+   "color": "#ffcba2",
+   "espectro": "K4III",
+   "distancia_al": 366.1
+  }
+ ],
+ "lineas": [
+  [
+   51172,
+   48926
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 47758,
+   "ar": 146.05041,
+   "dec": -27.76947,
+   "mag": 4.78,
+   "color": "#fffbf5"
+  },
+  {
+   "hip": 51979,
+   "ar": 159.30721,
+   "dec": -27.41263,
+   "mag": 4.87,
+   "color": "#ffc493"
+  }
+ ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "Ori",
+  "nombre": "Orión",
+  "orden": 1,
+  "temporada": "invierno del hemisferio norte",
+  "nombres_es": {},
+  "aprendiz": {
+    "dato": "Betelgeuse es una supergigante roja tan grande que, puesta en el lugar del Sol, llegaría más allá de la órbita de Marte. En el otro extremo de Orión brilla Rigel, una supergigante azul."
+  },
+  "objeto": {
+    "id": "M42",
+    "nombre": "Nebulosa de Orión",
+    "tipo": "nebulosa de emisión",
+    "forma": "nebulosa_difusa",
+    "ar": 83.82,
+    "dec": -5.39,
+    "distancia": "unos 1.340 años luz",
+    "tamano": "unos 24 años luz",
+    "texto": "Bajo el cinturón de Orión cuelga su espada, y en ella hay una mancha que se ve a simple vista: es una nube enorme de gas donde están naciendo estrellas ahora mismo. En su centro, un grupo de estrellas jóvenes llamado el Trapecio ilumina la nube.",
+    "por_que_color": "Las estrellas más grandes del Trapecio son tan calientes que arrancan electrones a los átomos del gas. Cuando el hidrógeno los recupera emite luz rosa rojiza, y el oxígeno, más cerca de las estrellas, brilla en verde azulado. En los bordes, el polvo refleja la luz azul de las estrellas.",
+    "colores": [
+      {
+        "hex": "#e0476a",
+        "nombre": "rosa rojizo",
+        "origen": "hidrógeno (línea H-alfa, 656 nm)",
+        "peso": 0.55
+      },
+      {
+        "hex": "#3fd0c0",
+        "nombre": "verde azulado",
+        "origen": "oxígeno doblemente ionizado ([O III], 501 nm)",
+        "peso": 0.25
+      },
+      {
+        "hex": "#6f8fe8",
+        "nombre": "azul",
+        "origen": "luz de estrellas reflejada por el polvo",
+        "peso": 0.15
+      },
+      {
+        "hex": "#2a1c22",
+        "nombre": "marrón oscuro",
+        "origen": "polvo que tapa la luz de detrás",
+        "peso": 0.05
+      }
+    ],
+    "fuentes": [
+      "https://en.wikipedia.org/wiki/Orion_Nebula"
+    ]
+  },
+  "estado": "verificado"
+}

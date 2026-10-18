@@ -1,0 +1,123 @@
+{
+ "id": "Scl",
+ "nombre_latin": "Sculptor",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 359.1551,
+  "dec": -33.2359
+ },
+ "recuadro": {
+  "ar_semiancho": 20.279,
+  "dec_min": -41.818,
+  "dec_max": -25.357
+ },
+ "estrellas": [
+  {
+   "hip": 4577,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 14.65149,
+   "dec": -29.35745,
+   "mag": 4.3,
+   "bv": -0.154,
+   "temperatura_k": 12570,
+   "color": "#bdd2ff",
+   "espectro": "B7IIIp",
+   "distancia_al": 776.6
+  },
+  {
+   "hip": 115102,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 349.70599,
+   "dec": -32.53203,
+   "mag": 4.41,
+   "bv": 1.109,
+   "temperatura_k": 4500,
+   "color": "#ffd9bb",
+   "espectro": "K1III",
+   "distancia_al": 182.2
+  },
+  {
+   "hip": 116231,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 353.24268,
+   "dec": -37.81827,
+   "mag": 4.38,
+   "bv": -0.095,
+   "temperatura_k": 11490,
+   "color": "#c1d5ff",
+   "espectro": "B9.5IVMNpe.",
+   "distancia_al": 174.0
+  }
+ ],
+ "lineas": [
+  [
+   116231,
+   4577
+  ],
+  [
+   4577,
+   115102
+  ],
+  [
+   115102,
+   116231
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 2210,
+   "ar": 6.98208,
+   "dec": -33.00717,
+   "mag": 4.86,
+   "color": "#ffc392"
+  },
+  {
+   "hip": 111954,
+   "ar": 340.16391,
+   "dec": -27.04362,
+   "mag": 4.18,
+   "color": "#c1d4ff"
+  },
+  {
+   "hip": 112203,
+   "ar": 340.8749,
+   "dec": -41.41435,
+   "mag": 4.84,
+   "color": "#ffddc2"
+  },
+  {
+   "hip": 112948,
+   "ar": 343.1314,
+   "dec": -32.8755,
+   "mag": 4.46,
+   "color": "#c6d8ff"
+  },
+  {
+   "hip": 113246,
+   "ar": 343.98708,
+   "dec": -32.53963,
+   "mag": 4.2,
+   "color": "#ffe1c9"
+  },
+  {
+   "hip": 113368,
+   "ar": 344.41257,
+   "dec": -29.62224,
+   "mag": 1.17,
+   "color": "#d5e1ff"
+  },
+  {
+   "hip": 117452,
+   "ar": 357.2314,
+   "dec": -28.13027,
+   "mag": 4.59,
+   "color": "#c9daff"
+  }
+ ]
+}

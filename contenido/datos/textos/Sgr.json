@@ -1,0 +1,52 @@
+{
+  "id": "Sgr",
+  "nombre": "Sagitario",
+  "orden": 9,
+  "temporada": "verano del hemisferio norte (bajo en el horizonte desde España)",
+  "nombres_es": {},
+  "aprendiz": {
+    "dato": "Sus estrellas forman una tetera. Al mirarla miras hacia el centro de la Vía Láctea, donde hay un agujero negro llamado Sagitario A*, a unos 26.000 años luz."
+  },
+  "objeto": {
+    "id": "M8",
+    "nombre": "Nebulosa de la Laguna",
+    "tipo": "nebulosa de emisión",
+    "forma": "nebulosa_difusa",
+    "ar": 270.9,
+    "dec": -24.39,
+    "distancia": "unos 4.100 años luz",
+    "tamano": "unos 110 por 50 años luz",
+    "texto": "Junto con la de Orión, es una de las dos nebulosas donde nacen estrellas que se ven débilmente a simple vista desde latitudes medias del norte. Un canal oscuro de polvo la cruza como una laguna, y en su interior hay un cúmulo de estrellas jóvenes.",
+    "por_que_color": "Las estrellas jóvenes y muy calientes de su interior encienden el hidrógeno, que brilla en rosa rojizo. Cerca de las estrellas más calientes asoma el verde azulado del oxígeno, y el polvo dibuja las zonas oscuras.",
+    "colores": [
+      {
+        "hex": "#e0476a",
+        "nombre": "rosa rojizo",
+        "origen": "hidrógeno (línea H-alfa, 656 nm)",
+        "peso": 0.6
+      },
+      {
+        "hex": "#3fd0c0",
+        "nombre": "verde azulado",
+        "origen": "oxígeno doblemente ionizado ([O III], 501 nm)",
+        "peso": 0.15
+      },
+      {
+        "hex": "#a9c4ff",
+        "nombre": "azul blanco",
+        "origen": "estrellas jóvenes y calientes",
+        "peso": 0.1
+      },
+      {
+        "hex": "#2a1c22",
+        "nombre": "marrón oscuro",
+        "origen": "polvo que tapa la luz de detrás",
+        "peso": 0.15
+      }
+    ],
+    "fuentes": [
+      "https://en.wikipedia.org/wiki/Lagoon_Nebula"
+    ]
+  },
+  "estado": "verificado"
+}

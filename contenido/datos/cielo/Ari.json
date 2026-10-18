@@ -1,0 +1,151 @@
+{
+ "id": "Ari",
+ "nombre_latin": "Aries",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 32.8235,
+  "dec": 22.7062
+ },
+ "recuadro": {
+  "ar_semiancho": 14.008,
+  "dec_min": 15.294,
+  "dec_max": 31.261
+ },
+ "estrellas": [
+  {
+   "hip": 8832,
+   "nombre": "Mesarthim",
+   "bayer": "Gam-2",
+   "flamsteed": 5,
+   "ar": 28.38255,
+   "dec": 19.29385,
+   "mag": 3.88,
+   "bv": -0.047,
+   "temperatura_k": 10750,
+   "color": "#c5d7ff",
+   "espectro": "A1p Si",
+   "distancia_al": 164.1
+  },
+  {
+   "hip": 8903,
+   "nombre": "Sheratan",
+   "bayer": "Bet",
+   "flamsteed": 6,
+   "ar": 28.66002,
+   "dec": 20.80804,
+   "mag": 2.64,
+   "bv": 0.165,
+   "temperatura_k": 8440,
+   "color": "#d7e2ff",
+   "espectro": "A5V...",
+   "distancia_al": 58.7
+  },
+  {
+   "hip": 9884,
+   "nombre": "Hamal",
+   "bayer": "Alp",
+   "flamsteed": 13,
+   "ar": 31.79333,
+   "dec": 23.46242,
+   "mag": 2.01,
+   "bv": 1.151,
+   "temperatura_k": 4410,
+   "color": "#ffd7b8",
+   "espectro": "K2III",
+   "distancia_al": 65.8
+  },
+  {
+   "hip": 13209,
+   "nombre": "Bharani",
+   "bayer": null,
+   "flamsteed": 41,
+   "ar": 42.49594,
+   "dec": 27.26051,
+   "mag": 3.61,
+   "bv": -0.1,
+   "temperatura_k": 11570,
+   "color": "#c1d5ff",
+   "espectro": "B8Vn",
+   "distancia_al": 165.6
+  }
+ ],
+ "lineas": [
+  [
+   13209,
+   9884
+  ],
+  [
+   9884,
+   8903
+  ],
+  [
+   8903,
+   8832
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 6193,
+   "ar": 19.86665,
+   "dec": 27.26406,
+   "mag": 4.74,
+   "color": "#cbdbff"
+  },
+  {
+   "hip": 7097,
+   "ar": 22.87088,
+   "dec": 15.34582,
+   "mag": 3.62,
+   "color": "#ffe0c7"
+  },
+  {
+   "hip": 8796,
+   "ar": 28.27044,
+   "dec": 29.57883,
+   "mag": 3.42,
+   "color": "#fffdf9"
+  },
+  {
+   "hip": 9153,
+   "ar": 29.48217,
+   "dec": 23.59606,
+   "mag": 4.79,
+   "color": "#e5ebff"
+  },
+  {
+   "hip": 10053,
+   "ar": 32.35554,
+   "dec": 25.93989,
+   "mag": 4.98,
+   "color": "#eceeff"
+  },
+  {
+   "hip": 10280,
+   "ar": 33.09287,
+   "dec": 30.30307,
+   "mag": 4.94,
+   "color": "#ffebda"
+  },
+  {
+   "hip": 12719,
+   "ar": 40.86297,
+   "dec": 27.70715,
+   "mag": 4.65,
+   "color": "#bfd4ff"
+  },
+  {
+   "hip": 13061,
+   "ar": 41.9772,
+   "dec": 29.24712,
+   "mag": 4.52,
+   "color": "#ffd9bb"
+  },
+  {
+   "hip": 13914,
+   "ar": 44.80302,
+   "dec": 21.34043,
+   "mag": 4.63,
+   "color": "#cddcff"
+  }
+ ]
+}

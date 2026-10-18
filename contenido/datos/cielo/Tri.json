@@ -1,0 +1,102 @@
+{
+ "id": "Tri",
+ "nombre_latin": "Triangulum",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 31.662,
+  "dec": 32.8044
+ },
+ "recuadro": {
+  "ar_semiancho": 8.15,
+  "dec_min": 25.579,
+  "dec_max": 38.987
+ },
+ "estrellas": [
+  {
+   "hip": 8796,
+   "nombre": "Mothallah",
+   "bayer": "Alp",
+   "flamsteed": 2,
+   "ar": 28.27044,
+   "dec": 29.57883,
+   "mag": 3.42,
+   "bv": 0.488,
+   "temperatura_k": 6440,
+   "color": "#fffdf9",
+   "espectro": "F6IV",
+   "distancia_al": 63.3
+  },
+  {
+   "hip": 10064,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": 4,
+   "ar": 32.38587,
+   "dec": 34.9873,
+   "mag": 3.0,
+   "bv": 0.14,
+   "temperatura_k": 8660,
+   "color": "#d5e1ff",
+   "espectro": "A5III",
+   "distancia_al": 126.9
+  },
+  {
+   "hip": 10670,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": 9,
+   "ar": 34.32859,
+   "dec": 33.84719,
+   "mag": 4.03,
+   "bv": 0.019,
+   "temperatura_k": 9890,
+   "color": "#cadbff",
+   "espectro": "A1Vnn",
+   "distancia_al": 112.3
+  }
+ ],
+ "lineas": [
+  [
+   10670,
+   10064
+  ],
+  [
+   10064,
+   8796
+  ],
+  [
+   8796,
+   10670
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 9977,
+   "ar": 32.12181,
+   "dec": 37.85908,
+   "mag": 4.78,
+   "color": "#d3e0ff"
+  },
+  {
+   "hip": 10053,
+   "ar": 32.35554,
+   "dec": 25.93989,
+   "mag": 4.98,
+   "color": "#eceeff"
+  },
+  {
+   "hip": 10280,
+   "ar": 33.09287,
+   "dec": 30.30307,
+   "mag": 4.94,
+   "color": "#ffebda"
+  },
+  {
+   "hip": 10644,
+   "ar": 34.26286,
+   "dec": 34.22423,
+   "mag": 4.84,
+   "color": "#fff5eb"
+  }
+ ]
+}

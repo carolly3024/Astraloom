@@ -1,0 +1,152 @@
+{
+ "id": "Lyr",
+ "nombre_latin": "Lyra",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 282.2621,
+  "dec": 35.8679
+ },
+ "recuadro": {
+  "ar_semiancho": 7.963,
+  "dec_min": 28.69,
+  "dec_max": 42.784
+ },
+ "estrellas": [
+  {
+   "hip": 91262,
+   "nombre": "Vega",
+   "bayer": "Alp",
+   "flamsteed": 3,
+   "ar": 279.2346,
+   "dec": 38.78369,
+   "mag": 0.03,
+   "bv": -0.001,
+   "temperatura_k": 10140,
+   "color": "#c9daff",
+   "espectro": "A0Vvar",
+   "distancia_al": 25.0
+  },
+  {
+   "hip": 91971,
+   "nombre": null,
+   "bayer": "Zet-1",
+   "flamsteed": 6,
+   "ar": 281.19313,
+   "dec": 37.60511,
+   "mag": 4.34,
+   "bv": 0.192,
+   "temperatura_k": 8230,
+   "color": "#dae4ff",
+   "espectro": "Am",
+   "distancia_al": 156.1
+  },
+  {
+   "hip": 92420,
+   "nombre": "Sheliak",
+   "bayer": "Bet",
+   "flamsteed": 10,
+   "ar": 282.51998,
+   "dec": 33.36267,
+   "mag": 3.52,
+   "bv": 0.003,
+   "temperatura_k": 10090,
+   "color": "#c9daff",
+   "espectro": "A8:V comp SB",
+   "distancia_al": 962.1
+  },
+  {
+   "hip": 92791,
+   "nombre": null,
+   "bayer": "Del-2",
+   "flamsteed": 12,
+   "ar": 283.62618,
+   "dec": 36.89861,
+   "mag": 4.22,
+   "bv": 1.575,
+   "temperatura_k": 3680,
+   "color": "#ffc697",
+   "espectro": "M4IIvar",
+   "distancia_al": 736.2
+  },
+  {
+   "hip": 93194,
+   "nombre": "Sulafat",
+   "bayer": "Gam",
+   "flamsteed": 14,
+   "ar": 284.73593,
+   "dec": 32.68956,
+   "mag": 3.25,
+   "bv": -0.049,
+   "temperatura_k": 10780,
+   "color": "#c5d7ff",
+   "espectro": "B9III",
+   "distancia_al": 620.1
+  }
+ ],
+ "lineas": [
+  [
+   91262,
+   91971
+  ],
+  [
+   91971,
+   92420
+  ],
+  [
+   92420,
+   93194
+  ],
+  [
+   93194,
+   92791
+  ],
+  [
+   92791,
+   91971
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 89826,
+   "ar": 274.96546,
+   "dec": 36.06455,
+   "mag": 4.33,
+   "color": "#ffd7b7"
+  },
+  {
+   "hip": 91919,
+   "ar": 281.08476,
+   "dec": 39.67012,
+   "mag": 4.67,
+   "color": "#d8e3ff"
+  },
+  {
+   "hip": 91926,
+   "ar": 281.09492,
+   "dec": 39.61272,
+   "mag": 4.59,
+   "color": "#d9e3ff"
+  },
+  {
+   "hip": 93279,
+   "ar": 285.00344,
+   "dec": 32.14551,
+   "mag": 4.94,
+   "color": "#ffca9f"
+  },
+  {
+   "hip": 94481,
+   "ar": 288.43953,
+   "dec": 39.14597,
+   "mag": 4.43,
+   "color": "#bdd2ff"
+  },
+  {
+   "hip": 94713,
+   "ar": 289.09206,
+   "dec": 38.13373,
+   "mag": 4.35,
+   "color": "#ffd3af"
+  }
+ ]
+}

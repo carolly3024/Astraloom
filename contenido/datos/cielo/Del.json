@@ -1,0 +1,117 @@
+{
+ "id": "Del",
+ "nombre_latin": "Delphinus",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 310.0259,
+  "dec": 14.6019
+ },
+ "recuadro": {
+  "ar_semiancho": 5.856,
+  "dec_min": 7.303,
+  "dec_max": 20.124
+ },
+ "estrellas": [
+  {
+   "hip": 101421,
+   "nombre": "Aldulfin",
+   "bayer": "Eps",
+   "flamsteed": 2,
+   "ar": 308.3032,
+   "dec": 11.30326,
+   "mag": 4.03,
+   "bv": -0.123,
+   "temperatura_k": 11970,
+   "color": "#bfd4ff",
+   "espectro": "B6III",
+   "distancia_al": 330.5
+  },
+  {
+   "hip": 101769,
+   "nombre": "Rotanev",
+   "bayer": "Bet",
+   "flamsteed": 6,
+   "ar": 309.38724,
+   "dec": 14.59509,
+   "mag": 3.64,
+   "bv": 0.425,
+   "temperatura_k": 6750,
+   "color": "#fcf7ff",
+   "espectro": "F5IV",
+   "distancia_al": 100.9
+  },
+  {
+   "hip": 101958,
+   "nombre": "Sualocin",
+   "bayer": "Alp",
+   "flamsteed": 9,
+   "ar": 309.90952,
+   "dec": 15.91207,
+   "mag": 3.77,
+   "bv": -0.057,
+   "temperatura_k": 10900,
+   "color": "#c4d7ff",
+   "espectro": "B9V",
+   "distancia_al": 253.8
+  },
+  {
+   "hip": 102281,
+   "nombre": null,
+   "bayer": "Del",
+   "flamsteed": 11,
+   "ar": 310.86473,
+   "dec": 15.07458,
+   "mag": 4.43,
+   "bv": 0.302,
+   "temperatura_k": 7450,
+   "color": "#e7ebff",
+   "espectro": "A7IIIp d Del",
+   "distancia_al": 223.2
+  },
+  {
+   "hip": 102532,
+   "nombre": null,
+   "bayer": "Gam-2",
+   "flamsteed": 12,
+   "ar": 311.6646,
+   "dec": 16.1243,
+   "mag": 4.27,
+   "bv": 1.042,
+   "temperatura_k": 4640,
+   "color": "#ffddc1",
+   "espectro": "K1IV",
+   "distancia_al": 126.3
+  }
+ ],
+ "lineas": [
+  [
+   101421,
+   101769
+  ],
+  [
+   101769,
+   101958
+  ],
+  [
+   101958,
+   102532
+  ],
+  [
+   102532,
+   102281
+  ],
+  [
+   102281,
+   101769
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 101589,
+   "ar": 308.82723,
+   "dec": 14.67421,
+   "mag": 4.64,
+   "color": "#d3e0ff"
+  }
+ ]
+}

@@ -1,0 +1,109 @@
+{
+ "id": "Ind",
+ "nombre_latin": "Indus",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 314.3526,
+  "dec": -53.065
+ },
+ "recuadro": {
+  "ar_semiancho": 12.27,
+  "dec_min": -62.454,
+  "dec_max": -43.291
+ },
+ "estrellas": [
+  {
+   "hip": 101772,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 309.39174,
+   "dec": -47.2915,
+   "mag": 3.11,
+   "bv": 0.998,
+   "temperatura_k": 4750,
+   "color": "#ffdfc5",
+   "espectro": "K0III",
+   "distancia_al": 98.3
+  },
+  {
+   "hip": 103227,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 313.70247,
+   "dec": -58.45416,
+   "mag": 3.67,
+   "bv": 1.25,
+   "temperatura_k": 4210,
+   "color": "#ffd3b0",
+   "espectro": "K0III",
+   "distancia_al": 611.9
+  },
+  {
+   "hip": 105319,
+   "nombre": null,
+   "bayer": "The",
+   "flamsteed": null,
+   "ar": 319.96644,
+   "dec": -53.44943,
+   "mag": 4.39,
+   "bv": 0.191,
+   "temperatura_k": 8230,
+   "color": "#dae4ff",
+   "espectro": "A5V",
+   "distancia_al": 98.8
+  }
+ ],
+ "lineas": [
+  [
+   105319,
+   101772
+  ],
+  [
+   101772,
+   103227
+  ],
+  [
+   103227,
+   105319
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 100751,
+   "ar": 306.41188,
+   "dec": -56.73509,
+   "mag": 1.94,
+   "color": "#c0d4ff"
+  },
+  {
+   "hip": 101612,
+   "ar": 308.89504,
+   "dec": -60.58175,
+   "mag": 4.75,
+   "color": "#e5ebff"
+  },
+  {
+   "hip": 101773,
+   "ar": 309.39697,
+   "dec": -61.52992,
+   "mag": 4.86,
+   "color": "#fffaff"
+  },
+  {
+   "hip": 102333,
+   "ar": 311.00949,
+   "dec": -51.92097,
+   "mag": 4.51,
+   "color": "#e4eaff"
+  },
+  {
+   "hip": 102790,
+   "ar": 312.37063,
+   "dec": -46.22683,
+   "mag": 4.9,
+   "color": "#ffc99d"
+  }
+ ]
+}

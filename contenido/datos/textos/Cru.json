@@ -1,0 +1,46 @@
+{
+  "id": "Cru",
+  "nombre": "Cruz del Sur",
+  "orden": 11,
+  "temporada": "otoño del hemisferio sur (no se ve desde España)",
+  "nombres_es": {},
+  "aprendiz": {
+    "dato": "Es la más pequeña de las 88 constelaciones. Su eje largo apunta aproximadamente hacia el polo sur celeste, y aparece en las banderas de Australia, Nueva Zelanda, Brasil, Papúa Nueva Guinea y Samoa."
+  },
+  "objeto": {
+    "id": "NGC 4755",
+    "nombre": "El Joyero",
+    "tipo": "cúmulo abierto",
+    "forma": "cumulo_abierto",
+    "ar": 193.41,
+    "dec": -60.36,
+    "distancia": "unos 6.500 años luz",
+    "tamano": "unos 20 años luz",
+    "texto": "Algo más de cien estrellas nacidas juntas hace solo unos 15 millones de años, muy poco para una estrella. John Herschel lo comparó con «una magnífica pieza de joyería», y de ahí su nombre.",
+    "por_que_color": "Aquí no brilla gas: el color es el de las propias estrellas. Casi todas son jóvenes, enormes y calientes, de un blanco azulado, y entre ellas destaca una supergigante roja, DU Crucis, de color naranja.",
+    "colores": [
+      {
+        "hex": "#a9c4ff",
+        "nombre": "azul blanco",
+        "origen": "estrellas jóvenes y calientes",
+        "peso": 0.75
+      },
+      {
+        "hex": "#ff9a5c",
+        "nombre": "naranja rojizo",
+        "origen": "supergigante roja",
+        "peso": 0.15
+      },
+      {
+        "hex": "#ffd9a0",
+        "nombre": "amarillo dorado",
+        "origen": "estrellas viejas y más frías",
+        "peso": 0.1
+      }
+    ],
+    "fuentes": [
+      "https://en.wikipedia.org/wiki/Jewel_Box_(star_cluster)"
+    ]
+  },
+  "estado": "verificado"
+}

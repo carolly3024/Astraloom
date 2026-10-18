@@ -1,0 +1,184 @@
+{
+ "id": "PsA",
+ "nombre_latin": "Piscis Austrinus",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 336.5906,
+  "dec": -30.4931
+ },
+ "recuadro": {
+  "ar_semiancho": 14.299,
+  "dec_min": -36.548,
+  "dec_max": -23.044
+ },
+ "estrellas": [
+  {
+   "hip": 107608,
+   "nombre": null,
+   "bayer": "The",
+   "flamsteed": 10,
+   "ar": 326.93397,
+   "dec": -30.8983,
+   "mag": 5.02,
+   "bv": 0.042,
+   "temperatura_k": 9630,
+   "color": "#ccdcff",
+   "espectro": "A1V",
+   "distancia_al": 321.0
+  },
+  {
+   "hip": 108661,
+   "nombre": null,
+   "bayer": "Eta",
+   "flamsteed": 12,
+   "ar": 330.20926,
+   "dec": -28.45374,
+   "mag": 5.43,
+   "bv": -0.095,
+   "temperatura_k": 11490,
+   "color": "#c1d5ff",
+   "espectro": "B8/B9V+...",
+   "distancia_al": 817.4
+  },
+  {
+   "hip": 109422,
+   "nombre": null,
+   "bayer": "Tau",
+   "flamsteed": 15,
+   "ar": 332.5364,
+   "dec": -32.54841,
+   "mag": 4.94,
+   "bv": 0.489,
+   "temperatura_k": 6440,
+   "color": "#fffdf9",
+   "espectro": "F6V",
+   "distancia_al": 59.6
+  },
+  {
+   "hip": 111188,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": 17,
+   "ar": 337.87635,
+   "dec": -32.34607,
+   "mag": 4.29,
+   "bv": 0.011,
+   "temperatura_k": 9990,
+   "color": "#cadaff",
+   "espectro": "A1V",
+   "distancia_al": 142.8
+  },
+  {
+   "hip": 111954,
+   "nombre": null,
+   "bayer": "Eps",
+   "flamsteed": 18,
+   "ar": 340.16391,
+   "dec": -27.04362,
+   "mag": 4.18,
+   "bv": -0.105,
+   "temperatura_k": 11660,
+   "color": "#c1d4ff",
+   "espectro": "B8V",
+   "distancia_al": 486.8
+  },
+  {
+   "hip": 113246,
+   "nombre": null,
+   "bayer": "Del",
+   "flamsteed": 23,
+   "ar": 343.98708,
+   "dec": -32.53963,
+   "mag": 4.2,
+   "bv": 0.952,
+   "temperatura_k": 4860,
+   "color": "#ffe1c9",
+   "espectro": "G8III",
+   "distancia_al": 154.1
+  },
+  {
+   "hip": 113368,
+   "nombre": "Fomalhaut",
+   "bayer": "Alp",
+   "flamsteed": 24,
+   "ar": 344.41257,
+   "dec": -29.62224,
+   "mag": 1.17,
+   "bv": 0.145,
+   "temperatura_k": 8610,
+   "color": "#d5e1ff",
+   "espectro": "A3V",
+   "distancia_al": 25.1
+  }
+ ],
+ "lineas": [
+  [
+   113368,
+   111954
+  ],
+  [
+   111954,
+   108661
+  ],
+  [
+   108661,
+   107608
+  ],
+  [
+   107608,
+   109422
+  ],
+  [
+   109422,
+   111188
+  ],
+  [
+   111188,
+   113246
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 107380,
+   "ar": 326.23669,
+   "dec": -33.02578,
+   "mag": 4.35,
+   "color": "#c5d7ff"
+  },
+  {
+   "hip": 109285,
+   "ar": 332.09583,
+   "dec": -32.98847,
+   "mag": 4.5,
+   "color": "#cddcff"
+  },
+  {
+   "hip": 109289,
+   "ar": 332.10805,
+   "dec": -34.04384,
+   "mag": 4.99,
+   "color": "#ffc99c"
+  },
+  {
+   "hip": 112948,
+   "ar": 343.1314,
+   "dec": -32.8755,
+   "mag": 4.46,
+   "color": "#c6d8ff"
+  },
+  {
+   "hip": 114119,
+   "ar": 346.67017,
+   "dec": -23.74311,
+   "mag": 4.48,
+   "color": "#ffe4cf"
+  },
+  {
+   "hip": 115102,
+   "ar": 349.70599,
+   "dec": -32.53203,
+   "mag": 4.41,
+   "color": "#ffd9bb"
+  }
+ ]
+}

@@ -1,0 +1,130 @@
+{
+ "id": "Oct",
+ "nombre_latin": "Octans",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 303.175,
+  "dec": -80.8132
+ },
+ "recuadro": {
+  "ar_semiancho": 106.443,
+  "dec_min": -87.668,
+  "dec_max": -73.39
+ },
+ "estrellas": [
+  {
+   "hip": 70638,
+   "nombre": null,
+   "bayer": "Del",
+   "flamsteed": null,
+   "ar": 216.73201,
+   "dec": -83.66788,
+   "mag": 4.31,
+   "bv": 1.3,
+   "temperatura_k": 4120,
+   "color": "#ffd1ac",
+   "espectro": "K2III",
+   "distancia_al": 299.0
+  },
+  {
+   "hip": 107089,
+   "nombre": null,
+   "bayer": "Nu",
+   "flamsteed": null,
+   "ar": 325.36879,
+   "dec": -77.39005,
+   "mag": 3.73,
+   "bv": 1.008,
+   "temperatura_k": 4720,
+   "color": "#ffdec4",
+   "espectro": "K0III",
+   "distancia_al": 69.1
+  },
+  {
+   "hip": 112405,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 341.51538,
+   "dec": -81.38161,
+   "mag": 4.13,
+   "bv": 0.208,
+   "temperatura_k": 8100,
+   "color": "#dce5ff",
+   "espectro": "A9IV/V",
+   "distancia_al": 149.3
+  }
+ ],
+ "lineas": [
+  [
+   107089,
+   112405
+  ],
+  [
+   112405,
+   70638
+  ],
+  [
+   70638,
+   107089
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 122,
+   "ar": 0.39924,
+   "dec": -77.06572,
+   "mag": 4.78,
+   "color": "#ffd3af"
+  },
+  {
+   "hip": 2021,
+   "ar": 6.41874,
+   "dec": -77.25425,
+   "mag": 2.82,
+   "color": "#fff4ea"
+  },
+  {
+   "hip": 13244,
+   "ar": 42.61883,
+   "dec": -75.06695,
+   "mag": 4.76,
+   "color": "#ffcfa9"
+  },
+  {
+   "hip": 69896,
+   "ar": 214.55815,
+   "dec": -81.00776,
+   "mag": 4.89,
+   "color": "#e0e7ff"
+  },
+  {
+   "hip": 72370,
+   "ar": 221.96552,
+   "dec": -79.04475,
+   "mag": 3.83,
+   "color": "#ffcba1"
+  },
+  {
+   "hip": 80047,
+   "ar": 245.08678,
+   "dec": -78.69575,
+   "mag": 4.68,
+   "color": "#ffc28f"
+  },
+  {
+   "hip": 81065,
+   "ar": 248.36413,
+   "dec": -78.89715,
+   "mag": 3.86,
+   "color": "#ffe3cc"
+  },
+  {
+   "hip": 81852,
+   "ar": 250.77189,
+   "dec": -77.51744,
+   "mag": 4.23,
+   "color": "#ffdcbf"
+  }
+ ]
+}

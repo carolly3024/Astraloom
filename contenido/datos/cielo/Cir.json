@@ -1,0 +1,133 @@
+{
+ "id": "Cir",
+ "nombre_latin": "Circinus",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 226.9532,
+  "dec": -61.0324
+ },
+ "recuadro": {
+  "ar_semiancho": 14.585,
+  "dec_min": -68.975,
+  "dec_max": -54.801
+ },
+ "estrellas": [
+  {
+   "hip": 71908,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 220.62738,
+   "dec": -64.97514,
+   "mag": 3.18,
+   "bv": 0.256,
+   "temperatura_k": 7750,
+   "color": "#e1e8ff",
+   "espectro": "F1Vp",
+   "distancia_al": 54.0
+  },
+  {
+   "hip": 74824,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 229.37875,
+   "dec": -58.80121,
+   "mag": 4.07,
+   "bv": 0.088,
+   "temperatura_k": 9150,
+   "color": "#d0deff",
+   "espectro": "A3V",
+   "distancia_al": 99.7
+  },
+  {
+   "hip": 75323,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 230.84438,
+   "dec": -59.32079,
+   "mag": 4.48,
+   "bv": 0.169,
+   "temperatura_k": 8410,
+   "color": "#d8e3ff",
+   "espectro": "B5III + F8",
+   "distancia_al": 448.6
+  }
+ ],
+ "lineas": [
+  [
+   71908,
+   75323
+  ],
+  [
+   71908,
+   74824
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 70069,
+   "ar": 215.08145,
+   "dec": -56.3865,
+   "mag": 4.3,
+   "color": "#d0deff"
+  },
+  {
+   "hip": 70264,
+   "ar": 215.65456,
+   "dec": -58.45912,
+   "mag": 4.76,
+   "color": "#ffead8"
+  },
+  {
+   "hip": 71681,
+   "ar": 219.90519,
+   "dec": -60.8383,
+   "mag": 1.35,
+   "color": "#ffe4ce"
+  },
+  {
+   "hip": 71683,
+   "ar": 219.91147,
+   "dec": -60.83398,
+   "mag": -0.01,
+   "color": "#ffefe0"
+  },
+  {
+   "hip": 74837,
+   "ar": 229.41204,
+   "dec": -63.61046,
+   "mag": 4.85,
+   "color": "#ffd3af"
+  },
+  {
+   "hip": 74946,
+   "ar": 229.72772,
+   "dec": -68.67955,
+   "mag": 2.87,
+   "color": "#cadaff"
+  },
+  {
+   "hip": 76440,
+   "ar": 234.18,
+   "dec": -66.31704,
+   "mag": 4.11,
+   "color": "#ffd7b7"
+  },
+  {
+   "hip": 77952,
+   "ar": 238.78625,
+   "dec": -63.43073,
+   "mag": 2.83,
+   "color": "#e9ecff"
+  },
+  {
+   "hip": 78662,
+   "ar": 240.88397,
+   "dec": -57.77506,
+   "mag": 4.63,
+   "color": "#e1e8ff"
+  }
+ ]
+}

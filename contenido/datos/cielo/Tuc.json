@@ -1,0 +1,151 @@
+{
+ "id": "Tuc",
+ "nombre_latin": "Tucana",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 354.2698,
+  "dec": -61.5821
+ },
+ "recuadro": {
+  "ar_semiancho": 28.049,
+  "dec_min": -68.875,
+  "dec_max": -54.236
+ },
+ "estrellas": [
+  {
+   "hip": 1599,
+   "nombre": null,
+   "bayer": "Zet",
+   "flamsteed": null,
+   "ar": 5.01213,
+   "dec": -64.87479,
+   "mag": 4.23,
+   "bv": 0.576,
+   "temperatura_k": 6060,
+   "color": "#fff7ef",
+   "espectro": "F9V",
+   "distancia_al": 28.0
+  },
+  {
+   "hip": 2484,
+   "nombre": null,
+   "bayer": "Bet-1",
+   "flamsteed": null,
+   "ar": 7.88588,
+   "dec": -62.95822,
+   "mag": 4.36,
+   "bv": -0.064,
+   "temperatura_k": 11000,
+   "color": "#c4d6ff",
+   "espectro": "B9V",
+   "distancia_al": 135.1
+  },
+  {
+   "hip": 110130,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 334.62556,
+   "dec": -60.25959,
+   "mag": 2.87,
+   "bv": 1.39,
+   "temperatura_k": 3970,
+   "color": "#ffcda5",
+   "espectro": "K3III",
+   "distancia_al": 199.7
+  },
+  {
+   "hip": 114996,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 349.35747,
+   "dec": -58.23573,
+   "mag": 3.99,
+   "bv": 0.41,
+   "temperatura_k": 6830,
+   "color": "#f9f6ff",
+   "espectro": "F1III",
+   "distancia_al": 75.2
+  }
+ ],
+ "lineas": [
+  [
+   110130,
+   114996
+  ],
+  [
+   114996,
+   1599
+  ],
+  [
+   114996,
+   2484
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 2487,
+   "ar": 7.88919,
+   "dec": -62.96556,
+   "mag": 4.53,
+   "color": "#d6e1ff"
+  },
+  {
+   "hip": 3405,
+   "ar": 10.8385,
+   "dec": -57.46306,
+   "mag": 4.36,
+   "color": "#cbdbff"
+  },
+  {
+   "hip": 5348,
+   "ar": 17.09613,
+   "dec": -55.24576,
+   "mag": 3.94,
+   "color": "#bfd4ff"
+  },
+  {
+   "hip": 108431,
+   "ar": 329.4794,
+   "dec": -54.99258,
+   "mag": 4.4,
+   "color": "#e6ebff"
+  },
+  {
+   "hip": 108870,
+   "ar": 330.83229,
+   "dec": -56.78598,
+   "mag": 4.69,
+   "color": "#ffdcc0"
+  },
+  {
+   "hip": 110838,
+   "ar": 336.83297,
+   "dec": -64.96635,
+   "mag": 4.51,
+   "color": "#c7d8ff"
+  },
+  {
+   "hip": 111310,
+   "ar": 338.25015,
+   "dec": -61.98212,
+   "mag": 4.91,
+   "color": "#ffc494"
+  },
+  {
+   "hip": 118121,
+   "ar": 359.39591,
+   "dec": -64.29823,
+   "mag": 5.0,
+   "color": "#ceddff"
+  },
+  {
+   "hip": 118322,
+   "ar": 359.97891,
+   "dec": -65.57713,
+   "mag": 4.49,
+   "color": "#c3d6ff"
+  }
+ ]
+}

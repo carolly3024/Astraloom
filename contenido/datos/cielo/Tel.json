@@ -1,0 +1,87 @@
+{
+ "id": "Tel",
+ "nombre_latin": "Telescopium",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 276.9755,
+  "dec": -47.5195
+ },
+ "recuadro": {
+  "ar_semiancho": 6.155,
+  "dec_min": -53.071,
+  "dec_max": -41.968
+ },
+ "estrellas": [
+  {
+   "hip": 90422,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 276.74341,
+   "dec": -45.96846,
+   "mag": 3.49,
+   "bv": -0.179,
+   "temperatura_k": 13100,
+   "color": "#bbd1ff",
+   "espectro": "B3IV",
+   "distancia_al": 277.8
+  },
+  {
+   "hip": 90568,
+   "nombre": null,
+   "bayer": "Zet",
+   "flamsteed": null,
+   "ar": 277.20758,
+   "dec": -49.07059,
+   "mag": 4.1,
+   "bv": 0.995,
+   "temperatura_k": 4750,
+   "color": "#ffdfc5",
+   "espectro": "G8/K0III",
+   "distancia_al": 126.2
+  }
+ ],
+ "lineas": [
+  [
+   90568,
+   90422
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 88714,
+   "ar": 271.6578,
+   "dec": -50.09148,
+   "mag": 3.65,
+   "color": "#c1d5ff"
+  },
+  {
+   "hip": 88726,
+   "ar": 271.70787,
+   "dec": -43.42522,
+   "mag": 4.92,
+   "color": "#e1e8ff"
+  },
+  {
+   "hip": 89112,
+   "ar": 272.80735,
+   "dec": -45.95442,
+   "mag": 4.52,
+   "color": "#ffdec4"
+  },
+  {
+   "hip": 90830,
+   "ar": 277.9393,
+   "dec": -45.91481,
+   "mag": 4.92,
+   "color": "#c1d5ff"
+  },
+  {
+   "hip": 90982,
+   "ar": 278.37574,
+   "dec": -42.31251,
+   "mag": 4.62,
+   "color": "#ffdfc5"
+  }
+ ]
+}

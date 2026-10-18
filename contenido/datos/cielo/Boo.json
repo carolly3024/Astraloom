@@ -1,0 +1,329 @@
+{
+ "id": "Boo",
+ "nombre_latin": "Boötes",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 217.9828,
+  "dec": 26.2851
+ },
+ "recuadro": {
+  "ar_semiancho": 15.354,
+  "dec_min": 9.728,
+  "dec_max": 44.391
+ },
+ "estrellas": [
+  {
+   "hip": 67459,
+   "nombre": null,
+   "bayer": "Ups",
+   "flamsteed": 5,
+   "ar": 207.36935,
+   "dec": 15.79791,
+   "mag": 4.05,
+   "bv": 1.52,
+   "temperatura_k": 3760,
+   "color": "#ffc89b",
+   "espectro": "K5IIIvar",
+   "distancia_al": 263.5
+  },
+  {
+   "hip": 67927,
+   "nombre": "Muphrid",
+   "bayer": "Eta",
+   "flamsteed": 8,
+   "ar": 208.67117,
+   "dec": 18.39772,
+   "mag": 2.68,
+   "bv": 0.58,
+   "temperatura_k": 6050,
+   "color": "#fff7ee",
+   "espectro": "G0IV",
+   "distancia_al": 37.2
+  },
+  {
+   "hip": 69673,
+   "nombre": "Arcturus",
+   "bayer": "Alp",
+   "flamsteed": 16,
+   "ar": 213.91545,
+   "dec": 19.18241,
+   "mag": -0.05,
+   "bv": 1.239,
+   "temperatura_k": 4230,
+   "color": "#ffd3b0",
+   "espectro": "K2IIIp",
+   "distancia_al": 36.7
+  },
+  {
+   "hip": 71053,
+   "nombre": null,
+   "bayer": "Rho",
+   "flamsteed": 25,
+   "ar": 217.9575,
+   "dec": 30.37144,
+   "mag": 3.57,
+   "bv": 1.298,
+   "temperatura_k": 4130,
+   "color": "#ffd1ac",
+   "espectro": "K3III",
+   "distancia_al": 160.1
+  },
+  {
+   "hip": 71075,
+   "nombre": "Seginus",
+   "bayer": "Gam",
+   "flamsteed": 27,
+   "ar": 218.01954,
+   "dec": 38.30825,
+   "mag": 3.04,
+   "bv": 0.191,
+   "temperatura_k": 8230,
+   "color": "#dae4ff",
+   "espectro": "A7IIIvar",
+   "distancia_al": 86.8
+  },
+  {
+   "hip": 71795,
+   "nombre": null,
+   "bayer": "Zet",
+   "flamsteed": 30,
+   "ar": 220.2873,
+   "dec": 13.7283,
+   "mag": 3.78,
+   "bv": 0.044,
+   "temperatura_k": 9610,
+   "color": "#ccdcff",
+   "espectro": "A3IVn",
+   "distancia_al": 175.7
+  },
+  {
+   "hip": 72105,
+   "nombre": "Izar",
+   "bayer": "Eps",
+   "flamsteed": 36,
+   "ar": 221.24676,
+   "dec": 27.07422,
+   "mag": 2.35,
+   "bv": 0.966,
+   "temperatura_k": 4830,
+   "color": "#ffe0c8",
+   "espectro": "A0",
+   "distancia_al": 202.6
+  },
+  {
+   "hip": 73555,
+   "nombre": "Nekkar",
+   "bayer": "Bet",
+   "flamsteed": 42,
+   "ar": 225.48654,
+   "dec": 40.39057,
+   "mag": 3.49,
+   "bv": 0.956,
+   "temperatura_k": 4850,
+   "color": "#ffe1c9",
+   "espectro": "G8III",
+   "distancia_al": 225.2
+  },
+  {
+   "hip": 74666,
+   "nombre": null,
+   "bayer": "Del",
+   "flamsteed": 49,
+   "ar": 228.87564,
+   "dec": 33.31483,
+   "mag": 3.46,
+   "bv": 0.961,
+   "temperatura_k": 4840,
+   "color": "#ffe1c8",
+   "espectro": "G8III",
+   "distancia_al": 121.8
+  }
+ ],
+ "lineas": [
+  [
+   71795,
+   69673
+  ],
+  [
+   69673,
+   72105
+  ],
+  [
+   72105,
+   74666
+  ],
+  [
+   74666,
+   73555
+  ],
+  [
+   73555,
+   71075
+  ],
+  [
+   71075,
+   71053
+  ],
+  [
+   71053,
+   69673
+  ],
+  [
+   69673,
+   67927
+  ],
+  [
+   67927,
+   67459
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 66257,
+   "ar": 203.69914,
+   "dec": 37.18241,
+   "mag": 4.91,
+   "color": "#f8f5ff"
+  },
+  {
+   "hip": 66458,
+   "ar": 204.36517,
+   "dec": 36.2949,
+   "mag": 4.82,
+   "color": "#dfe7ff"
+  },
+  {
+   "hip": 67275,
+   "ar": 206.81565,
+   "dec": 17.45691,
+   "mag": 4.5,
+   "color": "#fffcf6"
+  },
+  {
+   "hip": 67480,
+   "ar": 207.42846,
+   "dec": 21.26411,
+   "mag": 4.92,
+   "color": "#ffcba1"
+  },
+  {
+   "hip": 67665,
+   "ar": 207.94782,
+   "dec": 34.44424,
+   "mag": 4.76,
+   "color": "#ffc494"
+  },
+  {
+   "hip": 69226,
+   "ar": 212.59973,
+   "dec": 25.09168,
+   "mag": 4.82,
+   "color": "#fffaf3"
+  },
+  {
+   "hip": 69879,
+   "ar": 214.49925,
+   "dec": 35.5095,
+   "mag": 4.8,
+   "color": "#ffdcc0"
+  },
+  {
+   "hip": 70027,
+   "ar": 214.9385,
+   "dec": 16.30695,
+   "mag": 4.84,
+   "color": "#ffd4b1"
+  },
+  {
+   "hip": 71284,
+   "ar": 218.67,
+   "dec": 29.74513,
+   "mag": 4.47,
+   "color": "#f0f1ff"
+  },
+  {
+   "hip": 71762,
+   "ar": 220.18152,
+   "dec": 16.41832,
+   "mag": 4.49,
+   "color": "#c9d9ff"
+  },
+  {
+   "hip": 71995,
+   "ar": 220.85568,
+   "dec": 26.52785,
+   "mag": 4.8,
+   "color": "#ffc290"
+  },
+  {
+   "hip": 72125,
+   "ar": 221.31025,
+   "dec": 16.96428,
+   "mag": 4.6,
+   "color": "#ffe0c7"
+  },
+  {
+   "hip": 72659,
+   "ar": 222.8474,
+   "dec": 19.10046,
+   "mag": 4.54,
+   "color": "#ffeedf"
+  },
+  {
+   "hip": 73568,
+   "ar": 225.52711,
+   "dec": 25.00814,
+   "mag": 4.8,
+   "color": "#ffc89c"
+  },
+  {
+   "hip": 73745,
+   "ar": 226.11147,
+   "dec": 26.94765,
+   "mag": 4.52,
+   "color": "#ffd3b0"
+  },
+  {
+   "hip": 73996,
+   "ar": 226.82523,
+   "dec": 24.8692,
+   "mag": 4.93,
+   "color": "#fdf8ff"
+  },
+  {
+   "hip": 75312,
+   "ar": 230.80125,
+   "dec": 30.28781,
+   "mag": 4.99,
+   "color": "#fff7ee"
+  },
+  {
+   "hip": 75411,
+   "ar": 231.12271,
+   "dec": 37.37717,
+   "mag": 4.31,
+   "color": "#e8ecff"
+  },
+  {
+   "hip": 75695,
+   "ar": 231.95727,
+   "dec": 29.1057,
+   "mag": 3.66,
+   "color": "#e9edff"
+  },
+  {
+   "hip": 76041,
+   "ar": 232.94577,
+   "dec": 40.89933,
+   "mag": 4.98,
+   "color": "#d0deff"
+  },
+  {
+   "hip": 76127,
+   "ar": 233.23243,
+   "dec": 31.35913,
+   "mag": 4.14,
+   "color": "#bfd3ff"
+  }
+ ]
+}

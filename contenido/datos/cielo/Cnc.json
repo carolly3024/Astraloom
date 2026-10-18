@@ -1,0 +1,166 @@
+{
+ "id": "Cnc",
+ "nombre_latin": "Cancer",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 129.5732,
+  "dec": 19.4406
+ },
+ "recuadro": {
+  "ar_semiancho": 9.686,
+  "dec_min": 5.186,
+  "dec_max": 32.76
+ },
+ "estrellas": [
+  {
+   "hip": 40526,
+   "nombre": "Tarf",
+   "bayer": "Bet",
+   "flamsteed": 17,
+   "ar": 124.12884,
+   "dec": 9.18554,
+   "mag": 3.53,
+   "bv": 1.481,
+   "temperatura_k": 3820,
+   "color": "#ffc99e",
+   "espectro": "K4III",
+   "distancia_al": 303.4
+  },
+  {
+   "hip": 40843,
+   "nombre": null,
+   "bayer": "Chi",
+   "flamsteed": 18,
+   "ar": 125.01609,
+   "dec": 27.21771,
+   "mag": 5.13,
+   "bv": 0.487,
+   "temperatura_k": 6450,
+   "color": "#fffdf9",
+   "espectro": "F6V",
+   "distancia_al": 59.6
+  },
+  {
+   "hip": 42806,
+   "nombre": "Asellus Borealis",
+   "bayer": "Gam",
+   "flamsteed": 43,
+   "ar": 130.82147,
+   "dec": 21.4685,
+   "mag": 4.66,
+   "bv": 0.01,
+   "temperatura_k": 10000,
+   "color": "#cadaff",
+   "espectro": "A1IV",
+   "distancia_al": 181.2
+  },
+  {
+   "hip": 42911,
+   "nombre": "Asellus Australis",
+   "bayer": "Del",
+   "flamsteed": 47,
+   "ar": 131.17125,
+   "dec": 18.15431,
+   "mag": 3.94,
+   "bv": 1.083,
+   "temperatura_k": 4550,
+   "color": "#ffdbbd",
+   "espectro": "K0III",
+   "distancia_al": 130.6
+  },
+  {
+   "hip": 43103,
+   "nombre": null,
+   "bayer": "Iot",
+   "flamsteed": 48,
+   "ar": 131.67426,
+   "dec": 28.7599,
+   "mag": 4.03,
+   "bv": 1.007,
+   "temperatura_k": 4730,
+   "color": "#ffdec4",
+   "espectro": "G8Iab:",
+   "distancia_al": 331.1
+  },
+  {
+   "hip": 44066,
+   "nombre": "Acubens",
+   "bayer": "Alp",
+   "flamsteed": 65,
+   "ar": 134.62176,
+   "dec": 11.8577,
+   "mag": 4.26,
+   "bv": 0.141,
+   "temperatura_k": 8650,
+   "color": "#d5e1ff",
+   "espectro": "A5m",
+   "distancia_al": 188.3
+  }
+ ],
+ "lineas": [
+  [
+   43103,
+   42806
+  ],
+  [
+   42806,
+   40843
+  ],
+  [
+   42806,
+   42911
+  ],
+  [
+   42911,
+   40526
+  ],
+  [
+   42911,
+   44066
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 39424,
+   "ar": 120.87951,
+   "dec": 27.79433,
+   "mag": 4.94,
+   "color": "#ffd8b9"
+  },
+  {
+   "hip": 40167,
+   "ar": 123.05303,
+   "dec": 17.64777,
+   "mag": 4.67,
+   "color": "#fffaf4"
+  },
+  {
+   "hip": 42313,
+   "ar": 129.41403,
+   "dec": 5.70378,
+   "mag": 4.14,
+   "color": "#c9daff"
+  },
+  {
+   "hip": 43109,
+   "ar": 131.6938,
+   "dec": 6.41881,
+   "mag": 3.38,
+   "color": "#fff0e3"
+  },
+  {
+   "hip": 43234,
+   "ar": 132.10821,
+   "dec": 5.83781,
+   "mag": 4.35,
+   "color": "#c5d7ff"
+  },
+  {
+   "hip": 43813,
+   "ar": 133.84845,
+   "dec": 5.94556,
+   "mag": 3.11,
+   "color": "#ffe0c7"
+  }
+ ]
+}

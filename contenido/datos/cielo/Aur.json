@@ -1,0 +1,254 @@
+{
+ "id": "Aur",
+ "nombre_latin": "Auriga",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 81.734,
+  "dec": 38.5012
+ },
+ "recuadro": {
+  "ar_semiancho": 13.307,
+  "dec_min": 24.607,
+  "dec_max": 49.998
+ },
+ "estrellas": [
+  {
+   "hip": 23015,
+   "nombre": "Hassaleh",
+   "bayer": "Iot",
+   "flamsteed": 3,
+   "ar": 74.24841,
+   "dec": 33.16609,
+   "mag": 2.69,
+   "bv": 1.49,
+   "temperatura_k": 3810,
+   "color": "#ffc99d",
+   "espectro": "K3IIvar",
+   "distancia_al": 493.4
+  },
+  {
+   "hip": 23453,
+   "nombre": "Saclateni",
+   "bayer": "Zet",
+   "flamsteed": 8,
+   "ar": 75.61951,
+   "dec": 41.07584,
+   "mag": 3.69,
+   "bv": 1.154,
+   "temperatura_k": 4400,
+   "color": "#ffd7b7",
+   "espectro": "K4II comp",
+   "distancia_al": 785.9
+  },
+  {
+   "hip": 24608,
+   "nombre": "Capella",
+   "bayer": "Alp",
+   "flamsteed": 13,
+   "ar": 79.17225,
+   "dec": 45.99799,
+   "mag": 0.08,
+   "bv": 0.795,
+   "temperatura_k": 5300,
+   "color": "#ffead8",
+   "espectro": "M1: comp",
+   "distancia_al": 42.8
+  },
+  {
+   "hip": 25428,
+   "nombre": "Elnath",
+   "bayer": "Bet",
+   "flamsteed": 112,
+   "ar": 81.57297,
+   "dec": 28.60745,
+   "mag": 1.65,
+   "bv": -0.13,
+   "temperatura_k": 12100,
+   "color": "#bfd3ff",
+   "espectro": "B7III",
+   "distancia_al": 133.9
+  },
+  {
+   "hip": 28360,
+   "nombre": "Menkalinan",
+   "bayer": "Bet",
+   "flamsteed": 34,
+   "ar": 89.88224,
+   "dec": 44.94743,
+   "mag": 1.9,
+   "bv": 0.077,
+   "temperatura_k": 9260,
+   "color": "#cfddff",
+   "espectro": "A2V",
+   "distancia_al": 81.1
+  },
+  {
+   "hip": 28380,
+   "nombre": "Mahasim",
+   "bayer": "The",
+   "flamsteed": 37,
+   "ar": 89.93027,
+   "dec": 37.21258,
+   "mag": 2.65,
+   "bv": -0.083,
+   "temperatura_k": 11290,
+   "color": "#c2d6ff",
+   "espectro": "A0p Si",
+   "distancia_al": 165.6
+  }
+ ],
+ "lineas": [
+  [
+   28380,
+   28360
+  ],
+  [
+   28360,
+   24608
+  ],
+  [
+   24608,
+   23453
+  ],
+  [
+   23453,
+   23015
+  ],
+  [
+   25428,
+   23015
+  ],
+  [
+   25428,
+   28380
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 21476,
+   "ar": 69.17262,
+   "dec": 41.26481,
+   "mag": 4.25,
+   "color": "#ffd7b6"
+  },
+  {
+   "hip": 22453,
+   "ar": 72.47769,
+   "dec": 37.48828,
+   "mag": 4.89,
+   "color": "#ffcba0"
+  },
+  {
+   "hip": 22678,
+   "ar": 73.15827,
+   "dec": 36.70319,
+   "mag": 4.79,
+   "color": "#ffcca3"
+  },
+  {
+   "hip": 23179,
+   "ar": 74.81418,
+   "dec": 37.89025,
+   "mag": 4.93,
+   "color": "#ccdbff"
+  },
+  {
+   "hip": 23416,
+   "ar": 75.49223,
+   "dec": 43.82331,
+   "mag": 3.03,
+   "color": "#fffaf3"
+  },
+  {
+   "hip": 23767,
+   "ar": 76.6287,
+   "dec": 41.23447,
+   "mag": 3.18,
+   "color": "#bdd2ff"
+  },
+  {
+   "hip": 24340,
+   "ar": 78.35717,
+   "dec": 38.4845,
+   "mag": 4.82,
+   "color": "#dae4ff"
+  },
+  {
+   "hip": 24727,
+   "ar": 79.54402,
+   "dec": 33.37161,
+   "mag": 4.54,
+   "color": "#ffd3af"
+  },
+  {
+   "hip": 24813,
+   "ar": 79.78493,
+   "dec": 40.09905,
+   "mag": 4.69,
+   "color": "#fff4e9"
+  },
+  {
+   "hip": 25984,
+   "ar": 83.18197,
+   "dec": 32.19202,
+   "mag": 4.71,
+   "color": "#e4eaff"
+  },
+  {
+   "hip": 27483,
+   "ar": 87.2935,
+   "dec": 39.18107,
+   "mag": 4.51,
+   "color": "#ffe1c9"
+  },
+  {
+   "hip": 27639,
+   "ar": 87.76013,
+   "dec": 37.30557,
+   "mag": 4.72,
+   "color": "#ffc493"
+  },
+  {
+   "hip": 27673,
+   "ar": 87.87249,
+   "dec": 39.14848,
+   "mag": 3.97,
+   "color": "#ffd8b9"
+  },
+  {
+   "hip": 27830,
+   "ar": 88.33185,
+   "dec": 27.61226,
+   "mag": 4.56,
+   "color": "#c8d9ff"
+  },
+  {
+   "hip": 28237,
+   "ar": 89.49856,
+   "dec": 25.95391,
+   "mag": 4.81,
+   "color": "#c2d5ff"
+  },
+  {
+   "hip": 28404,
+   "ar": 89.98375,
+   "dec": 45.93674,
+   "mag": 4.3,
+   "color": "#ffc18e"
+  },
+  {
+   "hip": 29696,
+   "ar": 93.84456,
+   "dec": 29.49808,
+   "mag": 4.32,
+   "color": "#ffdec3"
+  },
+  {
+   "hip": null,
+   "ar": 79.16889,
+   "dec": 46.00084,
+   "mag": 0.96,
+   "color": null
+  }
+ ]
+}

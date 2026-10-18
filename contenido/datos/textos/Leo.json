@@ -1,0 +1,57 @@
+{
+  "id": "Leo",
+  "nombre": "Leo",
+  "orden": 12,
+  "temporada": "primavera del hemisferio norte",
+  "nombres_es": {
+    "49669": "Régulo",
+    "57632": "Denébola"
+  },
+  "aprendiz": {
+    "dato": "Cada noviembre, la lluvia de estrellas de las Leónidas parece salir de Leo: son granos de polvo que dejó el cometa Tempel-Tuttle al pasar."
+  },
+  "objeto": {
+    "id": "M65 · M66 · NGC 3628",
+    "nombre": "Triplete de Leo",
+    "tipo": "grupo de galaxias",
+    "forma": "trio_de_galaxias",
+    "ar": 169.9,
+    "dec": 13.2,
+    "distancia": "unos 35 millones de años luz",
+    "tamano": "las tres caben en un trozo de cielo como la Luna llena",
+    "texto": "Tres galaxias espirales que se atraen entre sí. Ese tirón ha deformado los brazos de M66 y ha estirado de NGC 3628 una cola de estrellas de unos 300.000 años luz. A NGC 3628 la vemos de canto, como un plato desde un lado.",
+    "por_que_color": "Los centros son amarillos por sus estrellas viejas y los brazos azulados por las jóvenes. Los puntos rosas de M66 son nubes de hidrógeno donde nacen estrellas, y la franja oscura de NGC 3628 es polvo visto de perfil.",
+    "colores": [
+      {
+        "hex": "#ffd9a0",
+        "nombre": "amarillo dorado",
+        "origen": "estrellas viejas y más frías",
+        "peso": 0.45
+      },
+      {
+        "hex": "#a9c4ff",
+        "nombre": "azul blanco",
+        "origen": "estrellas jóvenes y calientes",
+        "peso": 0.3
+      },
+      {
+        "hex": "#e0476a",
+        "nombre": "rosa rojizo",
+        "origen": "hidrógeno (línea H-alfa, 656 nm)",
+        "peso": 0.1
+      },
+      {
+        "hex": "#2a1c22",
+        "nombre": "marrón oscuro",
+        "origen": "polvo que tapa la luz de detrás",
+        "peso": 0.15
+      }
+    ],
+    "fuentes": [
+      "https://en.wikipedia.org/wiki/Leo_Triplet",
+      "https://en.wikipedia.org/wiki/Messier_66",
+      "https://en.wikipedia.org/wiki/NGC_3628"
+    ]
+  },
+  "estado": "verificado"
+}

@@ -1,0 +1,127 @@
+{
+ "id": "Sge",
+ "nombre_latin": "Sagitta",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 297.6222,
+  "dec": 18.7015
+ },
+ "recuadro": {
+  "ar_semiancho": 7.89,
+  "dec_min": 13.476,
+  "dec_max": 23.991
+ },
+ "estrellas": [
+  {
+   "hip": 96757,
+   "nombre": "Sham",
+   "bayer": "Alp",
+   "flamsteed": 5,
+   "ar": 295.02413,
+   "dec": 18.01389,
+   "mag": 4.39,
+   "bv": 0.777,
+   "temperatura_k": 5350,
+   "color": "#ffebda",
+   "espectro": "G0II",
+   "distancia_al": 425.2
+  },
+  {
+   "hip": 96837,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": 6,
+   "ar": 295.26225,
+   "dec": 17.47604,
+   "mag": 4.39,
+   "bv": 1.041,
+   "temperatura_k": 4650,
+   "color": "#ffddc1",
+   "espectro": "G8II",
+   "distancia_al": 439.6
+  },
+  {
+   "hip": 97365,
+   "nombre": null,
+   "bayer": "Del",
+   "flamsteed": 7,
+   "ar": 296.84692,
+   "dec": 18.53429,
+   "mag": 3.68,
+   "bv": 1.313,
+   "temperatura_k": 4100,
+   "color": "#ffd0ab",
+   "espectro": "M2II + B6",
+   "distancia_al": 594.1
+  },
+  {
+   "hip": 98337,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": 12,
+   "ar": 299.68928,
+   "dec": 19.49215,
+   "mag": 3.51,
+   "bv": 1.571,
+   "temperatura_k": 3690,
+   "color": "#ffc697",
+   "espectro": "K5III",
+   "distancia_al": 258.4
+  },
+  {
+   "hip": 98920,
+   "nombre": null,
+   "bayer": "Eta",
+   "flamsteed": 16,
+   "ar": 301.28955,
+   "dec": 19.99107,
+   "mag": 5.09,
+   "bv": 1.058,
+   "temperatura_k": 4610,
+   "color": "#ffdcc0",
+   "espectro": "K2III",
+   "distancia_al": 160.4
+  }
+ ],
+ "lineas": [
+  [
+   96837,
+   97365
+  ],
+  [
+   97365,
+   96757
+  ],
+  [
+   97365,
+   98337
+  ],
+  [
+   98337,
+   98920
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 96275,
+   "ar": 293.6454,
+   "dec": 19.7734,
+   "mag": 5.0,
+   "color": "#c2d5ff"
+  },
+  {
+   "hip": 97679,
+   "ar": 297.76711,
+   "dec": 22.61005,
+   "mag": 4.9,
+   "color": "#bdd2ff"
+  },
+  {
+   "hip": 99742,
+   "ar": 303.56923,
+   "dec": 15.19761,
+   "mag": 4.94,
+   "color": "#cfddff"
+  }
+ ]
+}

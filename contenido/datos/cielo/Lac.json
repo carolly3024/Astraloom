@@ -1,0 +1,177 @@
+{
+ "id": "Lac",
+ "nombre_latin": "Lacerta",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 336.4732,
+  "dec": 46.7612
+ },
+ "recuadro": {
+  "ar_semiancho": 8.32,
+  "dec_min": 33.749,
+  "dec_max": 56.229
+ },
+ "estrellas": [
+  {
+   "hip": 109937,
+   "nombre": null,
+   "bayer": null,
+   "flamsteed": 1,
+   "ar": 333.9924,
+   "dec": 37.74874,
+   "mag": 4.14,
+   "bv": 1.447,
+   "temperatura_k": 3880,
+   "color": "#ffcba0",
+   "espectro": "K3III",
+   "distancia_al": 621.2
+  },
+  {
+   "hip": 110538,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": 3,
+   "ar": 335.89013,
+   "dec": 52.22905,
+   "mag": 4.42,
+   "bv": 1.015,
+   "temperatura_k": 4710,
+   "color": "#ffdec3",
+   "espectro": "G9III",
+   "distancia_al": 170.0
+  },
+  {
+   "hip": 110609,
+   "nombre": null,
+   "bayer": null,
+   "flamsteed": 4,
+   "ar": 336.12913,
+   "dec": 49.47639,
+   "mag": 4.55,
+   "bv": 0.092,
+   "temperatura_k": 9110,
+   "color": "#d1deff",
+   "espectro": "B9Iab",
+   "distancia_al": 2249.4
+  },
+  {
+   "hip": 111022,
+   "nombre": null,
+   "bayer": null,
+   "flamsteed": 5,
+   "ar": 337.3826,
+   "dec": 47.70689,
+   "mag": 4.34,
+   "bv": 1.679,
+   "temperatura_k": 3540,
+   "color": "#ffc28f",
+   "espectro": "M0II",
+   "distancia_al": 1647.3
+  },
+  {
+   "hip": 111104,
+   "nombre": null,
+   "bayer": null,
+   "flamsteed": 6,
+   "ar": 337.62192,
+   "dec": 43.12338,
+   "mag": 4.52,
+   "bv": -0.086,
+   "temperatura_k": 11340,
+   "color": "#c2d5ff",
+   "espectro": "B2IV",
+   "distancia_al": 1716.6
+  },
+  {
+   "hip": 111169,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": 7,
+   "ar": 337.82272,
+   "dec": 50.28249,
+   "mag": 3.76,
+   "bv": 0.031,
+   "temperatura_k": 9750,
+   "color": "#cbdbff",
+   "espectro": "A1V",
+   "distancia_al": 102.6
+  }
+ ],
+ "lineas": [
+  [
+   109937,
+   111104
+  ],
+  [
+   111104,
+   111022
+  ],
+  [
+   111022,
+   110609
+  ],
+  [
+   110609,
+   110538
+  ],
+  [
+   110538,
+   111169
+  ],
+  [
+   111169,
+   111022
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 109754,
+   "ar": 333.46968,
+   "dec": 39.71493,
+   "mag": 4.5,
+   "color": "#ffcda5"
+  },
+  {
+   "hip": 110351,
+   "ar": 335.25642,
+   "dec": 46.53657,
+   "mag": 4.55,
+   "color": "#c1d5ff"
+  },
+  {
+   "hip": 111674,
+   "ar": 339.34348,
+   "dec": 51.54512,
+   "mag": 4.64,
+   "color": "#e1e8ff"
+  },
+  {
+   "hip": 111841,
+   "ar": 339.81532,
+   "dec": 39.05027,
+   "mag": 4.89,
+   "color": "#b9cfff"
+  },
+  {
+   "hip": 111944,
+   "ar": 340.12849,
+   "dec": 44.27631,
+   "mag": 4.5,
+   "color": "#ffd0aa"
+  },
+  {
+   "hip": 112917,
+   "ar": 343.00838,
+   "dec": 43.31242,
+   "mag": 4.95,
+   "color": "#ffc698"
+  },
+  {
+   "hip": 113288,
+   "ar": 344.10832,
+   "dec": 49.73354,
+   "mag": 4.99,
+   "color": "#ffbe88"
+  }
+ ]
+}

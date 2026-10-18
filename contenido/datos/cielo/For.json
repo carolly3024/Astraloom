@@ -1,0 +1,59 @@
+{
+ "id": "For",
+ "nombre_latin": "Fornax",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 45.1456,
+  "dec": -30.6968
+ },
+ "recuadro": {
+  "ar_semiancho": 7.525,
+  "dec_min": -36.406,
+  "dec_max": -24.988
+ },
+ "estrellas": [
+  {
+   "hip": 13147,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 42.27254,
+   "dec": -32.4059,
+   "mag": 4.45,
+   "bv": 0.981,
+   "temperatura_k": 4790,
+   "color": "#ffe0c6",
+   "espectro": "G8III",
+   "distancia_al": 172.7
+  },
+  {
+   "hip": 14879,
+   "nombre": "Dalim",
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 48.01873,
+   "dec": -28.98762,
+   "mag": 3.8,
+   "bv": 0.543,
+   "temperatura_k": 6200,
+   "color": "#fff9f2",
+   "espectro": "F8V",
+   "distancia_al": 46.4
+  }
+ ],
+ "lineas": [
+  [
+   13147,
+   14879
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 11918,
+   "ar": 38.46128,
+   "dec": -28.23234,
+   "mag": 4.96,
+   "color": "#c5d7ff"
+  }
+ ]
+}

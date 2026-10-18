@@ -1,0 +1,105 @@
+{
+ "id": "Cha",
+ "nombre_latin": "Chamaeleon",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 156.1672,
+  "dec": -78.2799
+ },
+ "recuadro": {
+  "ar_semiancho": 51.228,
+  "dec_min": -83.312,
+  "dec_max": -72.92
+ },
+ "estrellas": [
+  {
+   "hip": 40702,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 124.63054,
+   "dec": -76.91972,
+   "mag": 4.05,
+   "bv": 0.413,
+   "temperatura_k": 6810,
+   "color": "#f9f6ff",
+   "espectro": "F5III",
+   "distancia_al": 63.8
+  },
+  {
+   "hip": 51839,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 158.86749,
+   "dec": -78.60779,
+   "mag": 4.11,
+   "bv": 1.58,
+   "temperatura_k": 3680,
+   "color": "#ffc596",
+   "espectro": "M0III",
+   "distancia_al": 417.6
+  },
+  {
+   "hip": 60000,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 184.58718,
+   "dec": -79.31224,
+   "mag": 4.24,
+   "bv": -0.123,
+   "temperatura_k": 11970,
+   "color": "#bfd4ff",
+   "espectro": "B5Vn",
+   "distancia_al": 298.4
+  }
+ ],
+ "lineas": [
+  [
+   40702,
+   51839
+  ],
+  [
+   51839,
+   60000
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 40888,
+   "ar": 125.16173,
+   "dec": -77.48448,
+   "mag": 4.34,
+   "color": "#ffd7b7"
+  },
+  {
+   "hip": 50954,
+   "ar": 156.09888,
+   "dec": -74.03161,
+   "mag": 3.99,
+   "color": "#f1f1ff"
+  },
+  {
+   "hip": 51495,
+   "ar": 157.75863,
+   "dec": -73.22149,
+   "mag": 4.94,
+   "color": "#ffc28f"
+  },
+  {
+   "hip": 52633,
+   "ar": 161.4463,
+   "dec": -80.54019,
+   "mag": 4.45,
+   "color": "#bad0ff"
+  },
+  {
+   "hip": 58484,
+   "ar": 179.90694,
+   "dec": -78.22184,
+   "mag": 4.88,
+   "color": "#c5d7ff"
+  }
+ ]
+}

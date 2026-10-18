@@ -1,0 +1,66 @@
+{
+ "id": "Men",
+ "nombre_latin": "Mensa",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 76.8681,
+  "dec": -73.636
+ },
+ "recuadro": {
+  "ar_semiancho": 20.299,
+  "dec_min": -80.341,
+  "dec_max": -66.931
+ },
+ "estrellas": [
+  {
+   "hip": 21949,
+   "nombre": null,
+   "bayer": "Mu",
+   "flamsteed": null,
+   "ar": 70.76646,
+   "dec": -70.93103,
+   "mag": 5.53,
+   "bv": -0.114,
+   "temperatura_k": 11810,
+   "color": "#c0d4ff",
+   "espectro": "B9IV",
+   "distancia_al": 491.2
+  },
+  {
+   "hip": 25918,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 82.96977,
+   "dec": -76.34096,
+   "mag": 5.18,
+   "bv": 1.13,
+   "temperatura_k": 4450,
+   "color": "#ffd8b9",
+   "espectro": "K4III",
+   "distancia_al": 102.3
+  }
+ ],
+ "lineas": [
+  [
+   25918,
+   21949
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 17678,
+   "ar": 56.80942,
+   "dec": -74.23896,
+   "mag": 3.26,
+   "color": "#ffc596"
+  },
+  {
+   "hip": 24372,
+   "ar": 78.43932,
+   "dec": -67.18525,
+   "mag": 4.81,
+   "color": "#ffd2ae"
+  }
+ ]
+}

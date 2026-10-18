@@ -1,0 +1,53 @@
+{
+  "id": "Cas",
+  "nombre": "Casiopea",
+  "orden": 3,
+  "temporada": "todo el año desde el hemisferio norte (mejor en otoño)",
+  "nombres_es": {},
+  "aprendiz": {
+    "dato": "Desde latitudes como la de España su W nunca se pone: gira toda la noche alrededor de la Estrella Polar. En el mito, la reina Casiopea quedó atada a su trono y pasa la mitad del tiempo cabeza abajo."
+  },
+  "objeto": {
+    "id": "NGC 7635",
+    "nombre": "Nebulosa de la Burbuja",
+    "tipo": "nebulosa de emisión",
+    "forma": "burbuja",
+    "ar": 350.2,
+    "dec": 61.2,
+    "distancia": "unos 8.000 años luz (las medidas van de unos 7.000 a 11.000)",
+    "tamano": "la burbuja mide entre 7 y 10 años luz",
+    "texto": "Una sola estrella, muchas veces más masiva que el Sol, sopla un viento tan fuerte que ha inflado una burbuja en la nube de gas que la rodea. La estrella no está en el centro: la burbuja se abre más hacia donde el gas es menos denso.",
+    "por_que_color": "La estrella central ilumina el gas con luz ultravioleta. Dentro de la burbuja el oxígeno brilla en verde azulado; fuera, la nube de hidrógeno brilla en rosa rojizo.",
+    "colores": [
+      {
+        "hex": "#e0476a",
+        "nombre": "rosa rojizo",
+        "origen": "hidrógeno (línea H-alfa, 656 nm)",
+        "peso": 0.5
+      },
+      {
+        "hex": "#3fd0c0",
+        "nombre": "verde azulado",
+        "origen": "oxígeno doblemente ionizado ([O III], 501 nm)",
+        "peso": 0.35
+      },
+      {
+        "hex": "#a9c4ff",
+        "nombre": "azul blanco",
+        "origen": "estrellas jóvenes y calientes",
+        "peso": 0.1
+      },
+      {
+        "hex": "#2a1c22",
+        "nombre": "marrón oscuro",
+        "origen": "polvo que tapa la luz de detrás",
+        "peso": 0.05
+      }
+    ],
+    "fuentes": [
+      "https://en.wikipedia.org/wiki/NGC_7635",
+      "https://esahubble.org/news/heic1608/"
+    ]
+  },
+  "estado": "verificado"
+}

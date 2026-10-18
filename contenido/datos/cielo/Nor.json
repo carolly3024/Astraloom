@@ -1,0 +1,131 @@
+{
+ "id": "Nor",
+ "nombre_latin": "Norma",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 243.9825,
+  "dec": -50.3926
+ },
+ "recuadro": {
+  "ar_semiancho": 9.453,
+  "dec_min": -58.63,
+  "dec_max": -43.555
+ },
+ "estrellas": [
+  {
+   "hip": 78639,
+   "nombre": null,
+   "bayer": "Eta",
+   "flamsteed": null,
+   "ar": 240.80368,
+   "dec": -49.22969,
+   "mag": 4.65,
+   "bv": 0.902,
+   "temperatura_k": 4990,
+   "color": "#ffe4ce",
+   "espectro": "G8III",
+   "distancia_al": 219.5
+  },
+  {
+   "hip": 79509,
+   "nombre": null,
+   "bayer": "Kap",
+   "flamsteed": null,
+   "ar": 243.36972,
+   "dec": -54.63047,
+   "mag": 4.95,
+   "bv": 1.017,
+   "temperatura_k": 4700,
+   "color": "#ffdec3",
+   "espectro": "G4III",
+   "distancia_al": 428.0
+  },
+  {
+   "hip": 80000,
+   "nombre": null,
+   "bayer": "Gam-2",
+   "flamsteed": null,
+   "ar": 244.96031,
+   "dec": -50.15551,
+   "mag": 4.01,
+   "bv": 1.08,
+   "temperatura_k": 4560,
+   "color": "#ffdbbe",
+   "espectro": "G8III",
+   "distancia_al": 128.8
+  },
+  {
+   "hip": 80582,
+   "nombre": null,
+   "bayer": "Eps",
+   "flamsteed": null,
+   "ar": 246.79601,
+   "dec": -47.55479,
+   "mag": 4.46,
+   "bv": -0.07,
+   "temperatura_k": 11090,
+   "color": "#c3d6ff",
+   "espectro": "B4V",
+   "distancia_al": 530.3
+  }
+ ],
+ "lineas": [
+  [
+   79509,
+   80000
+  ],
+  [
+   80000,
+   80582
+  ],
+  [
+   80582,
+   78639
+  ],
+  [
+   78639,
+   80000
+  ],
+  [
+   78639,
+   79509
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 76829,
+   "ar": 235.29757,
+   "dec": -44.66121,
+   "mag": 4.64,
+   "color": "#f9f6ff"
+  },
+  {
+   "hip": 78662,
+   "ar": 240.88397,
+   "dec": -57.77506,
+   "mag": 4.63,
+   "color": "#e1e8ff"
+  },
+  {
+   "hip": 78914,
+   "ar": 241.62264,
+   "dec": -45.17318,
+   "mag": 4.73,
+   "color": "#dee6ff"
+  },
+  {
+   "hip": 79790,
+   "ar": 244.25389,
+   "dec": -50.06812,
+   "mag": 4.97,
+   "color": "#ffead8"
+  },
+  {
+   "hip": 81122,
+   "ar": 248.52092,
+   "dec": -44.04532,
+   "mag": 4.86,
+   "color": "#cddcff"
+  }
+ ]
+}

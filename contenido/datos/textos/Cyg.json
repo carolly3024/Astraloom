@@ -1,0 +1,52 @@
+{
+  "id": "Cyg",
+  "nombre": "Cisne",
+  "orden": 5,
+  "temporada": "verano del hemisferio norte",
+  "nombres_es": {},
+  "aprendiz": {
+    "dato": "Su forma también se llama la Cruz del Norte. Albireo, la cabeza del cisne, se ve doble con un telescopio pequeño: una estrella dorada junto a una azul."
+  },
+  "objeto": {
+    "id": "NGC 7000",
+    "nombre": "Nebulosa Norteamérica",
+    "tipo": "nebulosa de emisión",
+    "forma": "nebulosa_difusa",
+    "ar": 314.82,
+    "dec": 44.53,
+    "distancia": "unos 2.590 años luz (medida del satélite Gaia, 2020)",
+    "tamano": "unos 90 años luz de norte a sur",
+    "texto": "Cerca de Deneb hay una nube de gas que ocupa en el cielo más de diez veces lo que la Luna llena. Su forma de continente se debe a una nube de polvo oscuro que tapa parte de la luz. Detrás de ese polvo se esconde la estrella que la enciende, llamada Bajamar.",
+    "por_que_color": "Casi toda su luz es el rosa rojizo del hidrógeno, encendido por la luz ultravioleta de la estrella Bajamar. Las zonas negras no son huecos: son polvo que tapa la luz que viene de detrás.",
+    "colores": [
+      {
+        "hex": "#e0476a",
+        "nombre": "rosa rojizo",
+        "origen": "hidrógeno (línea H-alfa, 656 nm)",
+        "peso": 0.7
+      },
+      {
+        "hex": "#a3263a",
+        "nombre": "rojo oscuro",
+        "origen": "azufre ionizado ([S II], 672 nm)",
+        "peso": 0.1
+      },
+      {
+        "hex": "#3fd0c0",
+        "nombre": "verde azulado",
+        "origen": "oxígeno doblemente ionizado ([O III], 501 nm)",
+        "peso": 0.05
+      },
+      {
+        "hex": "#2a1c22",
+        "nombre": "marrón oscuro",
+        "origen": "polvo que tapa la luz de detrás",
+        "peso": 0.15
+      }
+    ],
+    "fuentes": [
+      "https://en.wikipedia.org/wiki/North_America_Nebula"
+    ]
+  },
+  "estado": "verificado"
+}

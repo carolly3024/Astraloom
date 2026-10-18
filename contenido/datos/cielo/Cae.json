@@ -1,0 +1,105 @@
+{
+ "id": "Cae",
+ "nombre_latin": "Caelum",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 69.4547,
+  "dec": -41.3206
+ },
+ "recuadro": {
+  "ar_semiancho": 7.072,
+  "dec_min": -48.954,
+  "dec_max": -33.144
+ },
+ "estrellas": [
+  {
+   "hip": 21060,
+   "nombre": null,
+   "bayer": "Del",
+   "flamsteed": null,
+   "ar": 67.70874,
+   "dec": -44.95375,
+   "mag": 5.07,
+   "bv": -0.194,
+   "temperatura_k": 13440,
+   "color": "#bad0ff",
+   "espectro": "B2IV-V",
+   "distancia_al": 704.4
+  },
+  {
+   "hip": 21770,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 70.14059,
+   "dec": -41.86375,
+   "mag": 4.44,
+   "bv": 0.342,
+   "temperatura_k": 7200,
+   "color": "#edefff",
+   "espectro": "F2V",
+   "distancia_al": 65.8
+  },
+  {
+   "hip": 21861,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 70.51448,
+   "dec": -37.1443,
+   "mag": 5.04,
+   "bv": 0.391,
+   "temperatura_k": 6930,
+   "color": "#f5f3ff",
+   "espectro": "F3V",
+   "distancia_al": 93.5
+  }
+ ],
+ "lineas": [
+  [
+   21060,
+   21770
+  ],
+  [
+   21770,
+   21861
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 19515,
+   "ar": 62.71062,
+   "dec": -41.99357,
+   "mag": 4.93,
+   "color": "#ebeeff"
+  },
+  {
+   "hip": 19747,
+   "ar": 63.50044,
+   "dec": -42.29437,
+   "mag": 3.85,
+   "color": "#ffdbbd"
+  },
+  {
+   "hip": 20042,
+   "ar": 64.47356,
+   "dec": -33.79835,
+   "mag": 3.55,
+   "color": "#c0d4ff"
+  },
+  {
+   "hip": 20535,
+   "ar": 66.0092,
+   "dec": -34.01685,
+   "mag": 3.97,
+   "color": "#ffca9f"
+  },
+  {
+   "hip": 23595,
+   "ar": 76.1016,
+   "dec": -35.48298,
+   "mag": 4.55,
+   "color": "#ffd6b6"
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "Her",
+  "nombre": "Hércules",
+  "orden": 10,
+  "temporada": "verano del hemisferio norte",
+  "nombres_es": {},
+  "aprendiz": {
+    "dato": "Cuatro de sus estrellas forman la Piedra Angular. El Sol, con todos sus planetas, viaja por la galaxia hacia un punto del cielo cercano a Hércules y a la vecina Vega."
+  },
+  "objeto": {
+    "id": "M13",
+    "nombre": "Gran Cúmulo de Hércules",
+    "tipo": "cúmulo globular",
+    "forma": "globular",
+    "ar": 250.42,
+    "dec": 36.46,
+    "distancia": "unos 24.000 años luz",
+    "tamano": "unos 145 años luz",
+    "texto": "Varios cientos de miles de estrellas, de unos 11.600 millones de años, reunidas en una bola de unos 145 años luz. En 1974 se envió hacia él un mensaje de radio desde el radiotelescopio de Arecibo; tardará unos 24.000 años en llegar.",
+    "por_que_color": "Su luz es blanca amarillenta porque casi todas sus estrellas son viejas. Destacan algunas gigantes rojas anaranjadas y unas pocas estrellas azules, las «rezagadas azules», que se rejuvenecieron al chocar o fundirse con otra.",
+    "colores": [
+      {
+        "hex": "#ffd9a0",
+        "nombre": "amarillo dorado",
+        "origen": "estrellas viejas y más frías",
+        "peso": 0.65
+      },
+      {
+        "hex": "#ff9a5c",
+        "nombre": "naranja rojizo",
+        "origen": "supergigante roja",
+        "peso": 0.2
+      },
+      {
+        "hex": "#a9c4ff",
+        "nombre": "azul blanco",
+        "origen": "estrellas jóvenes y calientes",
+        "peso": 0.15
+      }
+    ],
+    "fuentes": [
+      "https://en.wikipedia.org/wiki/Messier_13",
+      "https://en.wikipedia.org/wiki/Arecibo_message"
+    ]
+  },
+  "estado": "verificado"
+}

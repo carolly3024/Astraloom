@@ -1,0 +1,51 @@
+{
+ "id": "Sex",
+ "nombre_latin": "Sextans",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 154.7787,
+  "dec": -0.5043
+ },
+ "recuadro": {
+  "ar_semiancho": 6.794,
+  "dec_min": -4.637,
+  "dec_max": 3.628
+ },
+ "estrellas": [
+  {
+   "hip": 49641,
+   "nombre": null,
+   "bayer": "Alp",
+   "flamsteed": 15,
+   "ar": 151.9845,
+   "dec": -0.37164,
+   "mag": 4.48,
+   "bv": -0.032,
+   "temperatura_k": 10540,
+   "color": "#c6d8ff",
+   "espectro": "A0III",
+   "distancia_al": 283.4
+  },
+  {
+   "hip": 51437,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": 30,
+   "ar": 157.57282,
+   "dec": -0.63703,
+   "mag": 5.08,
+   "bv": -0.138,
+   "temperatura_k": 12250,
+   "color": "#bed3ff",
+   "espectro": "B6V",
+   "distancia_al": 404.7
+  }
+ ],
+ "lineas": [
+  [
+   51437,
+   49641
+  ]
+ ],
+ "fondo": []
+}

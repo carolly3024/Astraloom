@@ -1,0 +1,130 @@
+{
+ "id": "TrA",
+ "nombre_latin": "Triangulum Australe",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 240.2175,
+  "dec": -67.046
+ },
+ "recuadro": {
+  "ar_semiancho": 22.205,
+  "dec_min": -73.028,
+  "dec_max": -59.431
+ },
+ "estrellas": [
+  {
+   "hip": 74946,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 229.72772,
+   "dec": -68.67955,
+   "mag": 2.87,
+   "bv": 0.014,
+   "temperatura_k": 9950,
+   "color": "#cadaff",
+   "espectro": "A1V",
+   "distancia_al": 183.9
+  },
+  {
+   "hip": 77952,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 238.78625,
+   "dec": -63.43073,
+   "mag": 2.83,
+   "bv": 0.315,
+   "temperatura_k": 7370,
+   "color": "#e9ecff",
+   "espectro": "F2III",
+   "distancia_al": 40.4
+  },
+  {
+   "hip": 82273,
+   "nombre": "Atria",
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 252.16616,
+   "dec": -69.02772,
+   "mag": 1.91,
+   "bv": 1.447,
+   "temperatura_k": 3880,
+   "color": "#ffcba0",
+   "espectro": "K2IIb-IIIa",
+   "distancia_al": 390.6
+  }
+ ],
+ "lineas": [
+  [
+   82273,
+   74946
+  ],
+  [
+   74946,
+   77952
+  ],
+  [
+   77952,
+   82273
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 71681,
+   "ar": 219.90519,
+   "dec": -60.8383,
+   "mag": 1.35,
+   "color": "#ffe4ce"
+  },
+  {
+   "hip": 71683,
+   "ar": 219.91147,
+   "dec": -60.83398,
+   "mag": -0.01,
+   "color": "#ffefe0"
+  },
+  {
+   "hip": 71908,
+   "ar": 220.62738,
+   "dec": -64.97514,
+   "mag": 3.18,
+   "color": "#e1e8ff"
+  },
+  {
+   "hip": 74837,
+   "ar": 229.41204,
+   "dec": -63.61046,
+   "mag": 4.85,
+   "color": "#ffd3af"
+  },
+  {
+   "hip": 76440,
+   "ar": 234.18,
+   "dec": -66.31704,
+   "mag": 4.11,
+   "color": "#ffd7b7"
+  },
+  {
+   "hip": 79664,
+   "ar": 243.85946,
+   "dec": -63.68568,
+   "mag": 3.86,
+   "color": "#ffdabc"
+  },
+  {
+   "hip": 80686,
+   "ar": 247.11633,
+   "dec": -70.0844,
+   "mag": 4.9,
+   "color": "#fff9f1"
+  },
+  {
+   "hip": 84969,
+   "ar": 260.49796,
+   "dec": -67.77067,
+   "mag": 4.76,
+   "color": "#ffd5b4"
+  }
+ ]
+}

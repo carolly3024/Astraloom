@@ -1,0 +1,61 @@
+{
+  "id": "Tau",
+  "nombre": "Tauro",
+  "orden": 7,
+  "temporada": "invierno del hemisferio norte",
+  "nombres_es": {
+    "21421": "Aldebarán"
+  },
+  "aprendiz": {
+    "dato": "Aldebarán, el ojo rojizo del toro, parece formar parte del cúmulo de las Híades, pero está a unos 65 años luz, menos de la mitad de distancia que el cúmulo."
+  },
+  "objeto": {
+    "id": "M1",
+    "nombre": "Nebulosa del Cangrejo",
+    "tipo": "resto de supernova",
+    "forma": "filamentos",
+    "ar": 83.63,
+    "dec": 22.01,
+    "distancia": "unos 6.500 años luz",
+    "tamano": "unos 11 años luz",
+    "texto": "En el año 1054, astrónomos chinos anotaron una estrella nueva que se vio de día durante 23 días. Era una estrella que explotaba, y esta nube es lo que queda: sigue expandiéndose a unos 1.500 km por segundo. En su centro gira un púlsar, una estrella de neutrones que da unas 30 vueltas por segundo.",
+    "por_que_color": "Los filamentos rojizos y anaranjados son gas, sobre todo hidrógeno, que brilla al ser iluminado. El resplandor azul del interior es distinto: lo producen electrones que giran a casi la velocidad de la luz en el campo magnético del púlsar.",
+    "colores": [
+      {
+        "hex": "#7aa8ff",
+        "nombre": "azul pálido",
+        "origen": "radiación sincrotrón (electrones girando en un campo magnético)",
+        "peso": 0.4
+      },
+      {
+        "hex": "#e0476a",
+        "nombre": "rosa rojizo",
+        "origen": "hidrógeno (línea H-alfa, 656 nm)",
+        "peso": 0.25
+      },
+      {
+        "hex": "#a3263a",
+        "nombre": "rojo oscuro",
+        "origen": "azufre ionizado ([S II], 672 nm)",
+        "peso": 0.15
+      },
+      {
+        "hex": "#3fd0c0",
+        "nombre": "verde azulado",
+        "origen": "oxígeno doblemente ionizado ([O III], 501 nm)",
+        "peso": 0.1
+      },
+      {
+        "hex": "#ff9a5c",
+        "nombre": "naranja rojizo",
+        "origen": "supergigante roja",
+        "peso": 0.1
+      }
+    ],
+    "fuentes": [
+      "https://en.wikipedia.org/wiki/Crab_Nebula",
+      "https://en.wikipedia.org/wiki/SN_1054"
+    ]
+  },
+  "estado": "verificado"
+}

@@ -1,0 +1,127 @@
+{
+ "id": "Crv",
+ "nombre_latin": "Corvus",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 185.4445,
+  "dec": -20.1665
+ },
+ "recuadro": {
+  "ar_semiancho": 7.602,
+  "dec_min": -28.729,
+  "dec_max": -12.196
+ },
+ "estrellas": [
+  {
+   "hip": 59199,
+   "nombre": "Alchiba",
+   "bayer": "Alp",
+   "flamsteed": 1,
+   "ar": 182.10337,
+   "dec": -24.72887,
+   "mag": 4.02,
+   "bv": 0.334,
+   "temperatura_k": 7250,
+   "color": "#ebeeff",
+   "espectro": "F0IV/V",
+   "distancia_al": 48.7
+  },
+  {
+   "hip": 59316,
+   "nombre": null,
+   "bayer": "Eps",
+   "flamsteed": 2,
+   "ar": 182.53119,
+   "dec": -22.61977,
+   "mag": 3.02,
+   "bv": 1.326,
+   "temperatura_k": 4080,
+   "color": "#ffd0aa",
+   "espectro": "K2III",
+   "distancia_al": 317.9
+  },
+  {
+   "hip": 59803,
+   "nombre": "Gienah",
+   "bayer": "Gam",
+   "flamsteed": 4,
+   "ar": 183.95155,
+   "dec": -17.54193,
+   "mag": 2.58,
+   "bv": -0.107,
+   "temperatura_k": 11690,
+   "color": "#c0d4ff",
+   "espectro": "B8III",
+   "distancia_al": 153.6
+  },
+  {
+   "hip": 60965,
+   "nombre": "Algorab",
+   "bayer": "Del",
+   "flamsteed": 7,
+   "ar": 187.46608,
+   "dec": -16.51543,
+   "mag": 2.94,
+   "bv": -0.012,
+   "temperatura_k": 10280,
+   "color": "#c8d9ff",
+   "espectro": "B9.5V",
+   "distancia_al": 86.9
+  },
+  {
+   "hip": 61174,
+   "nombre": null,
+   "bayer": "Eta",
+   "flamsteed": 8,
+   "ar": 188.01765,
+   "dec": -16.19601,
+   "mag": 4.3,
+   "bv": 0.388,
+   "temperatura_k": 6940,
+   "color": "#f4f3ff",
+   "espectro": "F2V",
+   "distancia_al": 59.6
+  },
+  {
+   "hip": 61359,
+   "nombre": "Kraz",
+   "bayer": "Bet",
+   "flamsteed": 9,
+   "ar": 188.59681,
+   "dec": -23.39676,
+   "mag": 2.65,
+   "bv": 0.893,
+   "temperatura_k": 5020,
+   "color": "#ffe4ce",
+   "espectro": "G5II",
+   "distancia_al": 145.7
+  }
+ ],
+ "lineas": [
+  [
+   61174,
+   60965
+  ],
+  [
+   60965,
+   59803
+  ],
+  [
+   59803,
+   59316
+  ],
+  [
+   59316,
+   59199
+  ],
+  [
+   59316,
+   61359
+  ],
+  [
+   61359,
+   60965
+  ]
+ ],
+ "fondo": []
+}

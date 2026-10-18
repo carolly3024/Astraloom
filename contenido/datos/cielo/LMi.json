@@ -1,0 +1,134 @@
+{
+ "id": "LMi",
+ "nombre_latin": "Leo Minor",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 153.9314,
+  "dec": 35.6411
+ },
+ "recuadro": {
+  "ar_semiancho": 15.298,
+  "dec_min": 30.215,
+  "dec_max": 40.707
+ },
+ "estrellas": [
+  {
+   "hip": 46952,
+   "nombre": null,
+   "bayer": null,
+   "flamsteed": 10,
+   "ar": 143.55576,
+   "dec": 36.39756,
+   "mag": 4.54,
+   "bv": 0.914,
+   "temperatura_k": 4960,
+   "color": "#ffe3cd",
+   "espectro": "G8III",
+   "distancia_al": 185.0
+  },
+  {
+   "hip": 49593,
+   "nombre": null,
+   "bayer": null,
+   "flamsteed": 21,
+   "ar": 151.85731,
+   "dec": 35.24469,
+   "mag": 4.49,
+   "bv": 0.19,
+   "temperatura_k": 8240,
+   "color": "#dae4ff",
+   "espectro": "A7V",
+   "distancia_al": 92.1
+  },
+  {
+   "hip": 51233,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": 31,
+   "ar": 156.9709,
+   "dec": 36.70721,
+   "mag": 4.2,
+   "bv": 0.908,
+   "temperatura_k": 4980,
+   "color": "#ffe4cd",
+   "espectro": "G8III-IV",
+   "distancia_al": 153.9
+  },
+  {
+   "hip": 53229,
+   "nombre": "Praecipua",
+   "bayer": null,
+   "flamsteed": 46,
+   "ar": 163.32789,
+   "dec": 34.21487,
+   "mag": 3.79,
+   "bv": 1.04,
+   "temperatura_k": 4650,
+   "color": "#ffddc1",
+   "espectro": "K0III-IV",
+   "distancia_al": 94.9
+  }
+ ],
+ "lineas": [
+  [
+   53229,
+   51233
+  ],
+  [
+   51233,
+   49593
+  ],
+  [
+   49593,
+   46952
+  ],
+  [
+   49593,
+   53229
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 45688,
+   "ar": 139.71104,
+   "dec": 36.8026,
+   "mag": 3.82,
+   "color": "#ceddff"
+  },
+  {
+   "hip": 45860,
+   "ar": 140.26388,
+   "dec": 34.39256,
+   "mag": 3.14,
+   "color": "#ffc799"
+  },
+  {
+   "hip": 47029,
+   "ar": 143.76599,
+   "dec": 39.62149,
+   "mag": 4.81,
+   "color": "#ffdfc5"
+  },
+  {
+   "hip": 51056,
+   "ar": 156.47843,
+   "dec": 33.79612,
+   "mag": 4.72,
+   "color": "#e2e8ff"
+  },
+  {
+   "hip": 51658,
+   "ar": 158.30797,
+   "dec": 40.42556,
+   "mag": 4.72,
+   "color": "#dde6ff"
+  },
+  {
+   "hip": 52098,
+   "ar": 159.68005,
+   "dec": 31.97624,
+   "mag": 4.68,
+   "color": "#ffe8d5"
+  }
+ ]
+}

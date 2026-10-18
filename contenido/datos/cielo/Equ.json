@@ -1,0 +1,91 @@
+{
+ "id": "Equ",
+ "nombre_latin": "Equuleus",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 318.9712,
+  "dec": 8.0494
+ },
+ "recuadro": {
+  "ar_semiancho": 5.792,
+  "dec_min": 1.248,
+  "dec_max": 14.132
+ },
+ "estrellas": [
+  {
+   "hip": 104521,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": 5,
+   "ar": 317.58541,
+   "dec": 10.13158,
+   "mag": 4.7,
+   "bv": 0.262,
+   "temperatura_k": 7710,
+   "color": "#e2e9ff",
+   "espectro": "F0p",
+   "distancia_al": 118.4
+  },
+  {
+   "hip": 104858,
+   "nombre": null,
+   "bayer": "Del",
+   "flamsteed": 7,
+   "ar": 318.62006,
+   "dec": 10.00698,
+   "mag": 4.47,
+   "bv": 0.529,
+   "temperatura_k": 6260,
+   "color": "#fffaf4",
+   "espectro": "F5V+...",
+   "distancia_al": 60.3
+  },
+  {
+   "hip": 104987,
+   "nombre": "Kitalpha",
+   "bayer": "Alp",
+   "flamsteed": 8,
+   "ar": 318.95596,
+   "dec": 5.24784,
+   "mag": 3.92,
+   "bv": 0.549,
+   "temperatura_k": 6170,
+   "color": "#fff9f2",
+   "espectro": "G0III+...",
+   "distancia_al": 190.3
+  },
+  {
+   "hip": 105570,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": 10,
+   "ar": 320.72339,
+   "dec": 6.81114,
+   "mag": 5.16,
+   "bv": 0.064,
+   "temperatura_k": 9390,
+   "color": "#ceddff",
+   "espectro": "A3V",
+   "distancia_al": 330.8
+  }
+ ],
+ "lineas": [
+  [
+   104521,
+   104858
+  ],
+  [
+   104858,
+   105570
+  ],
+  [
+   105570,
+   104987
+  ],
+  [
+   104987,
+   104521
+  ]
+ ],
+ "fondo": []
+}

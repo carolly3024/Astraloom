@@ -1,0 +1,232 @@
+{
+ "id": "Phe",
+ "nombre_latin": "Phoenix",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 15.3041,
+  "dec": -46.5489
+ },
+ "recuadro": {
+  "ar_semiancho": 18.924,
+  "dec_min": -59.246,
+  "dec_max": -38.306
+ },
+ "estrellas": [
+  {
+   "hip": 765,
+   "nombre": null,
+   "bayer": "Eps",
+   "flamsteed": null,
+   "ar": 2.35254,
+   "dec": -45.74743,
+   "mag": 3.88,
+   "bv": 1.013,
+   "temperatura_k": 4710,
+   "color": "#ffdec4",
+   "espectro": "K0III",
+   "distancia_al": 144.2
+  },
+  {
+   "hip": 2072,
+   "nombre": null,
+   "bayer": "Kap",
+   "flamsteed": null,
+   "ar": 6.55074,
+   "dec": -43.67983,
+   "mag": 3.93,
+   "bv": 0.175,
+   "temperatura_k": 8360,
+   "color": "#d8e3ff",
+   "espectro": "A7V",
+   "distancia_al": 77.7
+  },
+  {
+   "hip": 2081,
+   "nombre": "Ankaa",
+   "bayer": "Alp",
+   "flamsteed": null,
+   "ar": 6.57084,
+   "dec": -42.30598,
+   "mag": 2.4,
+   "bv": 1.083,
+   "temperatura_k": 4550,
+   "color": "#ffdbbd",
+   "espectro": "K0III...",
+   "distancia_al": 84.7
+  },
+  {
+   "hip": 5165,
+   "nombre": null,
+   "bayer": "Bet",
+   "flamsteed": null,
+   "ar": 16.5211,
+   "dec": -46.71841,
+   "mag": 3.32,
+   "bv": 0.885,
+   "temperatura_k": 5040,
+   "color": "#ffe5cf",
+   "espectro": "G8IIIvar",
+   "distancia_al": null
+  },
+  {
+   "hip": 5348,
+   "nombre": "Wurren",
+   "bayer": "Zet",
+   "flamsteed": null,
+   "ar": 17.09613,
+   "dec": -55.24576,
+   "mag": 3.94,
+   "bv": -0.12,
+   "temperatura_k": 11920,
+   "color": "#bfd4ff",
+   "espectro": "B6V + B0V",
+   "distancia_al": 298.7
+  },
+  {
+   "hip": 6867,
+   "nombre": null,
+   "bayer": "Gam",
+   "flamsteed": null,
+   "ar": 22.09138,
+   "dec": -43.31823,
+   "mag": 3.41,
+   "bv": 1.542,
+   "temperatura_k": 3730,
+   "color": "#ffc799",
+   "espectro": "K5II-III",
+   "distancia_al": 233.6
+  },
+  {
+   "hip": 7083,
+   "nombre": null,
+   "bayer": "Del",
+   "flamsteed": null,
+   "ar": 22.81276,
+   "dec": -49.0727,
+   "mag": 3.93,
+   "bv": 0.972,
+   "temperatura_k": 4810,
+   "color": "#ffe0c7",
+   "espectro": "K0III-IV",
+   "distancia_al": 142.1
+  },
+  {
+   "hip": 8837,
+   "nombre": null,
+   "bayer": "Psi",
+   "flamsteed": null,
+   "ar": 28.41153,
+   "dec": -46.30267,
+   "mag": 4.39,
+   "bv": 1.597,
+   "temperatura_k": 3650,
+   "color": "#ffc595",
+   "espectro": "M4III SB",
+   "distancia_al": 341.9
+  }
+ ],
+ "lineas": [
+  [
+   5348,
+   5165
+  ],
+  [
+   5165,
+   2072
+  ],
+  [
+   2072,
+   5348
+  ],
+  [
+   5165,
+   7083
+  ],
+  [
+   7083,
+   8837
+  ],
+  [
+   8837,
+   5165
+  ],
+  [
+   5165,
+   6867
+  ],
+  [
+   6867,
+   2072
+  ],
+  [
+   2072,
+   2081
+  ],
+  [
+   2081,
+   765
+  ],
+  [
+   765,
+   2072
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 2472,
+   "ar": 7.85391,
+   "dec": -48.80351,
+   "mag": 4.76,
+   "color": "#cadaff"
+  },
+  {
+   "hip": 3245,
+   "ar": 10.33149,
+   "dec": -46.08501,
+   "mag": 4.59,
+   "color": "#ffe1c9"
+  },
+  {
+   "hip": 3405,
+   "ar": 10.8385,
+   "dec": -57.46306,
+   "mag": 4.36,
+   "color": "#cbdbff"
+  },
+  {
+   "hip": 5862,
+   "ar": 18.79565,
+   "dec": -45.53166,
+   "mag": 4.97,
+   "color": "#fff8ef"
+  },
+  {
+   "hip": 7588,
+   "ar": 24.42834,
+   "dec": -57.23676,
+   "mag": 0.45,
+   "color": "#bcd2ff"
+  },
+  {
+   "hip": 9007,
+   "ar": 28.98846,
+   "dec": -51.6089,
+   "mag": 3.69,
+   "color": "#ffe7d3"
+  },
+  {
+   "hip": 9095,
+   "ar": 29.29188,
+   "dec": -47.38528,
+   "mag": 4.82,
+   "color": "#ffe6d1"
+  },
+  {
+   "hip": 10602,
+   "ar": 34.12731,
+   "dec": -51.51217,
+   "mag": 3.56,
+   "color": "#bfd4ff"
+  }
+ ]
+}

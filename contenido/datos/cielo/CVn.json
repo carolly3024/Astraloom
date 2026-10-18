@@ -1,0 +1,59 @@
+{
+ "id": "CVn",
+ "nombre_latin": "Canes Venatici",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 191.2216,
+  "dec": 39.8379
+ },
+ "recuadro": {
+  "ar_semiancho": 7.995,
+  "dec_min": 34.318,
+  "dec_max": 45.357
+ },
+ "estrellas": [
+  {
+   "hip": 61317,
+   "nombre": "Chara",
+   "bayer": "Bet",
+   "flamsteed": 8,
+   "ar": 188.43617,
+   "dec": 41.35748,
+   "mag": 4.24,
+   "bv": 0.588,
+   "temperatura_k": 6010,
+   "color": "#fff6ed",
+   "espectro": "G0V",
+   "distancia_al": 27.5
+  },
+  {
+   "hip": 63125,
+   "nombre": "Cor Caroli",
+   "bayer": "Alp-2",
+   "flamsteed": 12,
+   "ar": 194.0071,
+   "dec": 38.31838,
+   "mag": 2.89,
+   "bv": -0.115,
+   "temperatura_k": 11830,
+   "color": "#c0d4ff",
+   "espectro": "A0spe...",
+   "distancia_al": 114.8
+  }
+ ],
+ "lineas": [
+  [
+   61317,
+   63125
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 64540,
+   "ar": 198.42896,
+   "dec": 40.15288,
+   "mag": 4.94,
+   "color": "#ffdcbf"
+  }
+ ]
+}

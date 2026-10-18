@@ -1,0 +1,52 @@
+{
+  "id": "Lyr",
+  "nombre": "Lira",
+  "orden": 4,
+  "temporada": "verano del hemisferio norte",
+  "nombres_es": {},
+  "aprendiz": {
+    "dato": "Vega fue la primera estrella fotografiada, en 1850. Por el lento bamboleo del eje de la Tierra, dentro de unos 12.000 años será la estrella polar."
+  },
+  "objeto": {
+    "id": "M57",
+    "nombre": "Nebulosa del Anillo",
+    "tipo": "nebulosa planetaria",
+    "forma": "anillo",
+    "ar": 283.4,
+    "dec": 33.03,
+    "distancia": "unos 2.570 años luz",
+    "tamano": "alrededor de 1 año luz",
+    "texto": "Es lo que queda de una estrella parecida al Sol al final de su vida: expulsó sus capas exteriores y en el centro quedó una enana blanca, el núcleo desnudo de la estrella. El anillo lleva unos 1.600 años expandiéndose. Al Sol le pasará algo parecido dentro de varios miles de millones de años.",
+    "por_que_color": "La enana blanca central está a unos 125.000 grados. Cerca de ella el oxígeno brilla en verde azulado; más lejos, donde llega menos energía, el hidrógeno y el nitrógeno forman un borde rojo.",
+    "colores": [
+      {
+        "hex": "#3fd0c0",
+        "nombre": "verde azulado",
+        "origen": "oxígeno doblemente ionizado ([O III], 501 nm)",
+        "peso": 0.45
+      },
+      {
+        "hex": "#e0476a",
+        "nombre": "rosa rojizo",
+        "origen": "hidrógeno (línea H-alfa, 656 nm)",
+        "peso": 0.25
+      },
+      {
+        "hex": "#c43a44",
+        "nombre": "rojo intenso",
+        "origen": "nitrógeno ionizado ([N II], 658 nm)",
+        "peso": 0.25
+      },
+      {
+        "hex": "#a9c4ff",
+        "nombre": "azul blanco",
+        "origen": "estrellas jóvenes y calientes",
+        "peso": 0.05
+      }
+    ],
+    "fuentes": [
+      "https://en.wikipedia.org/wiki/Ring_Nebula"
+    ]
+  },
+  "estado": "verificado"
+}

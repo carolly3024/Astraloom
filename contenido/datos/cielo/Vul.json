@@ -1,0 +1,108 @@
+{
+ "id": "Vul",
+ "nombre_latin": "Vulpecula",
+ "fuente": "HYG v3.8 + Stellarium (modern)",
+ "centro": {
+  "ar": 296.2258,
+  "dec": 26.2092
+ },
+ "recuadro": {
+  "ar_semiancho": 8.508,
+  "dec_min": 20.665,
+  "dec_max": 31.754
+ },
+ "estrellas": [
+  {
+   "hip": 95771,
+   "nombre": "Anser",
+   "bayer": "Alp",
+   "flamsteed": 6,
+   "ar": 292.1764,
+   "dec": 24.66491,
+   "mag": 4.44,
+   "bv": 1.502,
+   "temperatura_k": 3790,
+   "color": "#ffc89c",
+   "espectro": "M0 comp",
+   "distancia_al": 297.3
+  },
+  {
+   "hip": 98543,
+   "nombre": null,
+   "bayer": null,
+   "flamsteed": 15,
+   "ar": 300.27519,
+   "dec": 27.75357,
+   "mag": 4.66,
+   "bv": 0.184,
+   "temperatura_k": 8290,
+   "color": "#d9e3ff",
+   "espectro": "A4III",
+   "distancia_al": 236.3
+  }
+ ],
+ "lineas": [
+  [
+   95771,
+   98543
+  ]
+ ],
+ "fondo": [
+  {
+   "hip": 94703,
+   "ar": 289.05433,
+   "dec": 21.39043,
+   "mag": 4.76,
+   "color": "#c4d7ff"
+  },
+  {
+   "hip": 95372,
+   "ar": 291.03157,
+   "dec": 29.62134,
+   "mag": 4.99,
+   "color": "#bfd4ff"
+  },
+  {
+   "hip": 95947,
+   "ar": 292.68034,
+   "dec": 27.95968,
+   "mag": 3.05,
+   "color": "#ffdabd"
+  },
+  {
+   "hip": 96683,
+   "ar": 294.84419,
+   "dec": 30.15332,
+   "mag": 4.68,
+   "color": "#ffe0c7"
+  },
+  {
+   "hip": 97679,
+   "ar": 297.76711,
+   "dec": 22.61005,
+   "mag": 4.9,
+   "color": "#bdd2ff"
+  },
+  {
+   "hip": 97886,
+   "ar": 298.36539,
+   "dec": 24.07961,
+   "mag": 4.57,
+   "color": "#c5d7ff"
+  },
+  {
+   "hip": 99824,
+   "ar": 303.81623,
+   "dec": 25.59196,
+   "mag": 4.79,
+   "color": "#bbd1ff"
+  },
+  {
+   "hip": 99874,
+   "ar": 303.94224,
+   "dec": 27.81424,
+   "mag": 4.5,
+   "color": "#ffd3af"
+  }
+ ]
+}
