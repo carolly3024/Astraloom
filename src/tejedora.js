@@ -90,11 +90,11 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar, alDesp
         pistas.parar();
         marcar(origen, false); marcar(elegida, false);
         temporal.setAttribute('visibility', 'hidden');
-        await esperar(500);
+        await esperar(400);
         await trazarFigura(capaHilos, nivel.lineas.map(([a, b]) => [porHip.get(a), porHip.get(b)]), () => salir);
         if (salir) return;
         svg.classList.add('completa');
-        await esperar(700);
+        await esperar(600);
         llamar();
         alCompletar();
       } else {

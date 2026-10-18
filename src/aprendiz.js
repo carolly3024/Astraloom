@@ -78,13 +78,13 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
     },
   });
 
-  let arrastre = null, listo = false, salir = false;
+  let arrastre = null, listo = false, salir = false, encajadas = 0;
 
   svg.addEventListener('pointerdown', ev => {
     if (!listo) return;
     const pt = puntoSVG(svg, ev);
-    const p = piezas.filter(p => !p.colocada).sort((a, b) => distancia(a.pos, pt) - distancia(b.pos, pt))[0];
-    if (!p || distancia(p.pos, pt) > 40) return;
+    const p = piezas.filter(p => !p.colocada && !p.vuela).sort((a, b) => distancia(a.pos, pt) - distancia(b.pos, pt))[0];
+    if (!p || distancia(p.pos, pt) > 40) { tocarHueco(pt); return; }
     ev.preventDefault();
     svg.setPointerCapture(ev.pointerId);
     arrastre = { p, dx: p.pos.x - pt.x, dy: p.pos.y - pt.y };
@@ -108,35 +108,49 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
     mover(p, x, y);
   });
 
+  // Otra forma de jugar: tocar un hueco vacío hace que su estrella vuele hasta él.
+  function tocarHueco(pt) {
+    const vacios = piezas.filter(p => !p.colocada && !p.vuela && distancia(p.hueco, pt) < radioEstrella(p.hueco.mag) + 18);
+    const p = vacios.sort((a, b) => distancia(a.hueco, pt) - distancia(b.hueco, pt))[0];
+    if (!p) return;
+    p.vuela = true;
+    capaSueltas.appendChild(p.g);
+    p.g.classList.add('cogida');
+    p.hueco.anillo.classList.add('destino');
+    encajar(p, 1100, suaveDoble);
+  }
+
+  async function encajar(p, ms = 220, curva) {
+    const desde = { ...p.pos };
+    p.colocada = true;
+    colocadas.add(p.hueco.hip);
+    await animar(ms, t => mover(p, desde.x + (p.hueco.x - desde.x) * t, desde.y + (p.hueco.y - desde.y) * t), curva);
+    p.g.classList.remove('cogida');
+    p.hueco.anillo.classList.remove('destino');
+    p.g.classList.add('encaja');
+    p.hueco.anillo.classList.add('lleno');
+    encajadas++;
+    actualizarLineas();
+    alColocar?.(p.hueco);
+    if (encajadas < piezas.length) { pistas.reiniciar(); return; }
+    pistas.parar();
+    await esperar(250);
+    await trazarFigura(capaLineas, segmentos(), () => salir); // la figura se arma
+    if (salir) return;
+    svg.classList.add('completa');
+    await esperar(700);
+    alCompletar();
+  }
+
   async function soltar() {
     if (!arrastre) return;
     const { p } = arrastre;
     arrastre = null;
     p.g.classList.remove('cogida');
     p.hueco.anillo.classList.remove('atrae', 'destino');
+    if (distancia(p.pos, p.hueco) < ENCAJA) return encajar(p);
     const desde = { ...p.pos };
-    if (distancia(p.pos, p.hueco) < ENCAJA) {
-      p.colocada = true;
-      colocadas.add(p.hueco.hip);
-      await animar(220, t => mover(p, desde.x + (p.hueco.x - desde.x) * t, desde.y + (p.hueco.y - desde.y) * t));
-      p.g.classList.add('encaja');
-      p.hueco.anillo.classList.add('lleno');
-      actualizarLineas();
-      alColocar?.(p.hueco);
-      if (colocadas.size === piezas.length) {
-        pistas.parar();
-        await esperar(300);
-        await trazarFigura(capaLineas, segmentos(), () => salir); // la figura se arma
-        if (salir) return;
-        svg.classList.add('completa');
-        await esperar(900);
-        alCompletar();
-      } else {
-        pistas.reiniciar();
-      }
-    } else {
-      await animar(450, t => mover(p, desde.x + (p.inicio.x - desde.x) * t, desde.y + (p.inicio.y - desde.y) * t));
-    }
+    await animar(450, t => mover(p, desde.x + (p.inicio.x - desde.x) * t, desde.y + (p.inicio.y - desde.y) * t));
   }
   svg.addEventListener('pointerup', soltar);
   svg.addEventListener('pointercancel', soltar);
@@ -147,11 +161,11 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
     const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!quieto) {
       piezas.forEach(p => mover(p, p.hueco.x, p.hueco.y));
-      await esperar(500);
+      await esperar(400);
       const brillo = await trazarFigura(capaLineas, segmentos(), () => salir);
-      await esperar(1600);
+      await esperar(1200);
       if (salir) return;
-      await animar(1800, t => {
+      await animar(1300, t => {
         brillo.setAttribute('opacity', 1 - t);
         piezas.forEach(p => mover(p, p.hueco.x + (p.inicio.x - p.hueco.x) * t, p.hueco.y + (p.inicio.y - p.hueco.y) * t));
       }, suaveDoble);

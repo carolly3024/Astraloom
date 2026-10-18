@@ -85,7 +85,7 @@ function pantallaAprendiz(nivel) {
   let colocadas = 0;
   const total = nivel.aprendiz.estrellas.length;
   pantallaActual = montarAprendiz(app.querySelector('.cielo'), nivel, {
-    alEmpezar() { tarjeta.innerHTML = '<p class="sub">Las estrellas se han soltado. Llévalas a su sitio.</p>'; },
+    alEmpezar() { tarjeta.innerHTML = '<p class="sub">Las estrellas se han soltado. Llévalas a su sitio, o toca un hueco y su estrella irá sola.</p>'; },
     alColocar(estrella) {
       colocadas++;
       tarjeta.innerHTML = `<p class="sub">${estrella.nombre ? `${escapar(estrella.nombre)} vuelve a su sitio. ` : ''}${colocadas} de ${total}</p>`;
@@ -114,7 +114,7 @@ function pantallaTejedora(nivel) {
     tarjeta.querySelector('#despertar')?.setAttribute('disabled', '');
     const { svg, objeto, quitarLlamada } = pantallaActual;
     quitarLlamada();
-    await despertar(svg, nivel.tejedora.objeto, objeto.x, objeto.y, 85);
+    await despertar(svg, nivel.tejedora.objeto, objeto.x, objeto.y, 120);
     tarjeta.innerHTML = ficha(nivel) + `<div class="acciones"><a class="boton principal" href="#/atlas">Ver el atlas</a><a class="boton" href="#/">Volver al cielo</a></div>`;
   }
   pantallaActual = montarTejedora(app.querySelector('.cielo'), nivel, {

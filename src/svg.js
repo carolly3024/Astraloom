@@ -66,7 +66,7 @@ const sinMovimiento = () => matchMedia('(prefers-reduced-motion: reduce)').match
 // La usan la presentación de Aprendiz y el final de los dos niveles.
 export async function trazarFigura(padre, segmentos, cancelado = () => false) {
   const g = el('g', { class: 'celebra' }, padre);
-  const ms = sinMovimiento() ? 0 : Math.max(280, 3600 / segmentos.length);
+  const ms = sinMovimiento() ? 0 : Math.max(180, 2200 / segmentos.length);
   for (const [a, b] of segmentos) {
     if (cancelado()) break;
     const l = el('line', { x1: a.x, y1: a.y, x2: a.x, y2: a.y, class: 'hilo brillo' }, g);
