@@ -1,13 +1,15 @@
 // Astraloom · nivel Tejedora
 // Las estrellas están en su posición real, entre estrellas vecinas. La figura se
 // ve como guía tenue (carolly, 2026-10-18: de memoria resultaba demasiado difícil).
-// Se traza un hilo de una estrella a otra (arrastrando, o tocando una y luego otra).
+// Se traza un hilo de una estrella a otra: dibujando de un trazo por varias estrellas,
+// arrastrando entre dos, o tocando una y luego otra.
 // Si la unión existe en la figura, el hilo se queda; si no, se deshace con suavidad.
 
 import { el, crearCielo, dibujarEstrella, puntoSVG, distancia, animar } from './svg.js';
 import { crearPistas } from './pistas.js';
 
 const ALCANCE = 42; // distancia máxima para «tocar» una estrella
+const PASO = 26;    // al dibujar, pasar así de cerca de una estrella la engancha
 const clave = (a, b) => (a < b ? `${a}-${b}` : `${b}-${a}`);
 const aCielo = p => ({ ...p, x: 40 + p.x * 920, y: 40 + p.y * 920 });
 
@@ -37,10 +39,10 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
 
   const tejidas = new Set();
   const temporal = el('line', { class: 'hilo temporal', visibility: 'hidden' }, svg);
-  let origen = null, elegida = null, pistaLinea = null;
+  let origen = null, elegida = null, pistaLinea = null, dibujado = false;
 
-  const masCercana = pt => {
-    let mejor = null, d = ALCANCE;
+  const masCercana = (pt, alcance = ALCANCE) => {
+    let mejor = null, d = alcance;
     for (const e of estrellas) { const de = distancia(e, pt); if (de < d) { d = de; mejor = e; } }
     return mejor;
   };
@@ -113,6 +115,7 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
     }
     svg.setPointerCapture(ev.pointerId);
     origen = e;
+    dibujado = false;
     marcar(e, true);
     temporal.setAttribute('x1', e.x); temporal.setAttribute('y1', e.y);
     temporal.setAttribute('x2', e.x); temporal.setAttribute('y2', e.y);
@@ -122,6 +125,20 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
   svg.addEventListener('pointermove', ev => {
     if (!origen) return;
     const pt = puntoSVG(svg, ev);
+    // Dibujo de un trazo: al pasar por una estrella que sigue la figura, el hilo
+    // se teje y el trazo continúa desde ella. Las demás estrellas no lo cortan.
+    const paso = masCercana(pt, PASO);
+    if (paso && paso !== origen) {
+      const k = clave(origen.hip, paso.hip);
+      if (pendientes.has(k) || tejidas.has(k)) {
+        if (pendientes.has(k)) intentar(origen, paso);
+        marcar(origen, false);
+        origen = paso;
+        dibujado = true;
+        marcar(origen, true);
+        temporal.setAttribute('x1', origen.x); temporal.setAttribute('y1', origen.y);
+      }
+    }
     const e = masCercana(pt);
     const fin = e && e !== origen ? e : pt; // el hilo se engancha a la estrella cercana
     temporal.setAttribute('x2', fin.x); temporal.setAttribute('y2', fin.y);
@@ -130,11 +147,12 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
   function soltar(ev) {
     if (!origen) return;
     temporal.setAttribute('visibility', 'hidden');
-    const e = masCercana(puntoSVG(svg, ev));
+    // Tras dibujar un trazo, solo cuenta la estrella justo bajo el dedo al soltar.
+    const e = masCercana(puntoSVG(svg, ev), dibujado ? PASO : ALCANCE);
     const a = origen;
     origen = null;
     if (e && e !== a) { marcar(a, false); elegida = null; intentar(a, e); }
-    else if (e === a) { elegida = a; } // se ha tocado sin arrastrar: espera la segunda
+    else if (e === a && !dibujado) { elegida = a; } // se ha tocado sin arrastrar: espera la segunda
     else { marcar(a, false); elegida = null; }
   }
   svg.addEventListener('pointerup', soltar);
