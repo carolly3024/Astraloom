@@ -264,8 +264,9 @@ a.tarjeta-objeto.dormido:hover { box-shadow: none; border-color: #7fa8f066; }
 @keyframes aparece { from { opacity: 0; transform: translateY(14px); } }
 .barra, .acciones, .portada, .rejilla > li, .escena > *, .atlas-progreso { animation: aparece .8s cubic-bezier(.2, .8, .2, 1) both; }
 .rejilla > li { animation-delay: calc(120ms + var(--i, 0) * 55ms); }
-.escena > .cielo { animation-delay: 80ms; }
+.escena > .cielo { animation-name: funde; animation-delay: 80ms; } /* el cielo solo funde: sus estrellas no se mueven mientras se toca */
 .escena > .tarjeta { animation-delay: 200ms; }
+@keyframes funde { from { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .barra, .acciones, .portada, .rejilla > li, .escena > *, .atlas-progreso { animation: none; } }
 
 /* Al pasar por el espacio vacío de fuera, el botón «Cielo» se ilumina: tocar ahí lleva al inicio */
