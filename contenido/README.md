@@ -37,7 +37,7 @@ Datos y textos de las constelaciones del juego. El juego (fase 3) los carga tal 
 ### `datos/textos/<ID>.json` (a mano)
 - `nombre`, `orden`, `temporada`, `nombres_es` (nombre en español de una estrella cuando difiere del IAU, por `hip`).
 - `aprendiz.dato`: lo que aparece al completar Aprendiz.
-- `objeto`: lo que despierta Tejedora. `id`, `nombre`, `tipo`, `pista` (frase corta que se ve en el atlas mientras duerme, sin decir qué es), `forma` (pista para la animación: `nebulosa_difusa`, `burbuja`, `anillo`, `filamentos`, `espiral_de_frente`, `espiral_inclinada`, `trio_de_galaxias`, `globular`, `cumulo_abierto`), `ar`/`dec`, `distancia`, `tamano`, `texto`, `por_que_color`, `colores[]` (`hex`, `nombre`, `origen`, `peso` = proporción del color en la nube) y `fuentes[]`.
+- `objeto`: lo que despierta Tejedora. `id`, `nombre`, `tipo`, `pista` (frase corta que se ve en el atlas mientras duerme, sin decir qué es), `forma` (pista para la animación: `nebulosa_difusa`, `continente`, `laguna`, `burbuja`, `anillo`, `filamentos`, `espiral_de_frente`, `espiral_inclinada`, `trio_de_galaxias`, `globular`, `globular_disperso`, `cumulo_abierto`), `ar`/`dec`, `distancia`, `tamano`, `texto`, `por_que_color`, `colores[]` (`hex`, `nombre`, `origen`, `peso` = proporción del color en la nube) y `fuentes[]`.
 - `estado`: `borrador` o `verificado`.
 
 ## Decisiones y su porqué

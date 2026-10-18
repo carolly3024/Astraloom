@@ -62,6 +62,9 @@ function campoNebulosa(x, y, c, k) {
   const volutas = Math.pow(cresta(ruido(wx * 1.6 + 4, wy * 1.6, 5)), 3) * env * 0.35;
   const centro = Math.exp(-((x - nucleo[0]) ** 2 + (y - nucleo[1]) ** 2) / 0.05);
   let d = nubes * 1.2 + volutas + centro * 0.9 * suave(0.3, 0.7, n + 0.25);
+  // Una bahía de polvo que entra hasta cerca del centro (en Orión, la «boca del pez»).
+  const bx = x - nucleo[0] - 0.22, by = (y - nucleo[1] + 0.12) * 1.6;
+  d *= 1 - 0.8 * suave(0.2, 0.05, Math.hypot(bx, by) + 0.08 * (ruido(x * 4, y * 4, 3) - 0.5));
   // Color: el principal, con zonas del segundo y el tercero cerca del centro.
   let col = mezcla(c1, c2, suave(0.45, 0.75, ruido(x * 1.1 + 5, y * 1.1 + 5, 3)) * 0.85);
   if (c3) col = mezcla(col, c3, centro * 0.8);
@@ -91,11 +94,15 @@ function campoBurbuja(x, y, c, k) {
   const qx = ruido(x * 1.3 + 2, y * 1.3 + 4, 4), qy = ruido(x * 1.3 + 6, y * 1.3 + 1, 4);
   const n = ruido(x * 1.4 + 2 * qx, y * 1.4 + 2 * qy, 6);
   const env = Math.exp(-(x * x / 0.5 + y * y / 0.35));
-  let fondo = suave(0.35, 0.9, n) * env * 0.55 + Math.pow(cresta(ruido(x * 2 + qx, y * 2 + qy, 5)), 4) * env * 0.25;
-  const dist = Math.hypot(x - 0.15, y + 0.1);
+  // La nube roja que rodea la burbuja, con una zona más densa y brillante a un lado.
+  const grumo = Math.exp(-((x + 0.5) ** 2 + (y - 0.3) ** 2) / 0.09) * suave(0.4, 0.8, n) * 0.9;
+  let fondo = suave(0.35, 0.9, n) * env * 0.75 + Math.pow(cresta(ruido(x * 2 + qx, y * 2 + qy, 5)), 4) * env * 0.3 + grumo;
+  // La cáscara es fina y casi transparente: brilla más por el lado donde choca con la nube.
+  const dx = x - 0.15, dy = y + 0.1, dist = Math.hypot(dx, dy);
   const m = ruido(x * 7, y * 7 + 3, 4);
-  const piel = Math.exp(-(((dist - 0.3) / 0.04) ** 2)) * (0.45 + m) * 1.2;
-  const interior = suave(0.32, 0.05, dist) * 0.3 * (0.6 + 0.6 * m);
+  const lado = 0.15 + 0.85 * Math.pow(0.5 + 0.5 * Math.cos(Math.atan2(dy, dx) - 2.5), 3);
+  const piel = Math.exp(-(((dist - 0.3 - 0.02 * (m - 0.5)) / 0.022) ** 2)) * (0.4 + m) * lado * 0.9;
+  const interior = suave(0.31, 0.1, dist) * 0.12 * (0.6 + 0.6 * m);
   if (polvo) fondo *= 1 - Math.min(0.8, Math.pow(cresta(ruido(x * 1.5 + 40, y * 1.5, 4)), 4) * (0.3 + polvo * 3));
   for (let i = 0; i < 3; i++) c[i] = c1[i] * fondo + cascara[i] * (piel + interior);
 }
@@ -105,13 +112,55 @@ function campoCangrejo(x, y, c, k) {
   const ex = x / 0.75, ey = y / 0.52;
   const borde = ruido(x * 3 + 9, y * 3, 3) * 0.25;
   const e = Math.hypot(ex, ey) + borde - 0.12;
-  const dentro = suave(1, 0.7, e);
-  const azul = Math.exp(-e * e * 2.2) * 0.7 * (0.75 + 0.5 * ruido(x * 4, y * 4, 3));
+  const dentro = suave(1.2, 0.5, e);
+  // Resplandor del interior: azul blanquecino y liso (luz de sincrotrón).
+  const azul = Math.exp(-e * e * 2.6) * 0.75 * (0.8 + 0.4 * ruido(x * 4, y * 4, 3));
   const qx = ruido(x * 2 + 5, y * 2, 4), qy = ruido(x * 2, y * 2 + 5, 4);
-  const fil = Math.pow(cresta(ruido(x * 4.5 + 2 * qx, y * 4.5 + 2 * qy, 5)), 7) * dentro * 1.6;
+  // Red de filamentos finos, más densa y brillante hacia el borde.
+  const red = Math.max(Math.pow(cresta(ruido(x * 5 + 2 * qx, y * 5 + 2 * qy, 5)), 9), 0.7 * Math.pow(cresta(ruido(x * 9 + qx, y * 9 + qy, 4)), 12));
+  const fil = red * dentro * (0.35 + 1.1 * suave(0.25, 0.95, e)) * 1.7;
   const t = ruido(x * 2.2 + 30, y * 2.2 + 30, 3);
   const col = t < 0.45 ? mezcla(filas[0], filas[1], t / 0.45) : mezcla(filas[1], filas[2], (t - 0.45) / 0.55);
-  for (let i = 0; i < 3; i++) c[i] = sincrotron[i] * azul * dentro + col[i] * fil;
+  for (let i = 0; i < 3; i++) c[i] = (sincrotron[i] * 0.75 + 0.25) * azul * dentro + col[i] * fil;
+}
+
+// Nebulosa Norteamérica: gas rojo con forma de continente. Una gran nube de polvo
+// hace de «golfo de México» y, en su orilla, el gas se enciende en una pared brillante.
+function campoContinente(x, y, c, k) {
+  const { ruido, colores: [rojo, oscuro, verde] } = k;
+  const qx = ruido(x * 1.2 + 1.7, y * 1.2 + 9.2, 4), qy = ruido(x * 1.2 + 8.3, y * 1.2 + 2.8, 4);
+  const n = ruido(x * 1.5 + 1.2 * qx, y * 1.5 + 1.2 * qy, 6);
+  const env = Math.exp(-((x + 0.1) ** 2 / 0.6 + (y + 0.05) ** 2 / 0.5));
+  let d = suave(0.25, 0.85, n) * env * 1.1 + Math.pow(cresta(ruido(x * 2.5 + qx, y * 2.5 + qy, 5)), 5) * env * 0.4;
+  const dg = Math.hypot(x - 0.5, (y - 0.42) * 1.15) + 0.18 * (ruido(x * 2.5 + 40, y * 2.5, 4) - 0.5);
+  const golfo = Math.max(suave(0.62, 0.42, dg), suave(0.55, 0.95, x) * suave(-0.2, 0.3, y)); // y el polvo que lo separa del Pelícano
+  // La pared solo recorre la orilla oeste del golfo («México»), irregular y con grumos.
+  const oeste = suave(0.1, -0.6, Math.cos(Math.atan2(y - 0.42, x - 0.5)));
+  const pared = Math.exp(-(((dg - 0.68 - 0.04 * (ruido(x * 5, y * 5 + 9, 3) - 0.5)) / 0.06) ** 2)) * oeste
+    * (0.3 + 1.1 * Math.pow(ruido(x * 7 + 3, y * 7, 4), 2)) * suave(0.25, 0.6, n + 0.2);
+  d = d * (1 - 0.88 * golfo) + pared * 0.9;
+  let col = mezcla(oscuro, rojo, suave(0.15, 0.6, d));
+  col = mezcla(col, verde, pared * 0.12);
+  c[0] = col[0] * d; c[1] = col[1] * d; c[2] = col[2] * d;
+}
+
+// Nebulosa de la Laguna: alargada, cruzada por una franja de polvo (la «laguna»),
+// con un núcleo muy brillante a un lado y un cúmulo de estrellas jóvenes al otro.
+function campoLaguna(x, y, c, k) {
+  const { ruido, colores: [rojo, verde], polvo } = k;
+  const cs = Math.cos(-0.15), sn = Math.sin(-0.15), u = x * cs + y * sn, v = -x * sn + y * cs;
+  const qx = ruido(u * 1.3 + 3, v * 1.3 + 7, 4), qy = ruido(u * 1.3 + 9, v * 1.3 + 1, 4);
+  const n = ruido(u * 1.6 + 1.3 * qx, v * 1.6 + 1.3 * qy, 6);
+  const env = Math.exp(-(u * u / 0.8 + v * v / 0.24));
+  let d = suave(0.28, 0.85, n) * env * 1.2 + Math.pow(cresta(ruido(u * 2.4 + qx, v * 2.4 + qy, 5)), 4) * env * 0.35;
+  const reloj = Math.exp(-((u - 0.3) ** 2 + (v + 0.02) ** 2) / 0.006); // el «reloj de arena», junto a la estrella más caliente
+  const brillo = Math.exp(-((u - 0.3) ** 2 / 0.05 + (v + 0.02) ** 2 / 0.025)) * suave(0.3, 0.7, n) * 0.6;
+  const franja = Math.abs(u + 0.12 - 0.35 * v + 0.07 * (ruido(u * 3, v * 3 + 20, 3) - 0.5));
+  d = (d + brillo) * (1 - 0.85 * suave(0.09, 0.02, franja) * suave(0.5, 0.1, Math.abs(v)));
+  if (polvo) d *= 1 - Math.min(0.7, Math.pow(cresta(ruido(u * 1.8 + 31, v * 1.8 + 7, 4)), 5) * polvo * 3);
+  let col = mezcla(rojo, verde, suave(0.2, 0.8, brillo + reloj) * 0.35);
+  col = mezcla(col, [1, 0.92, 0.95], reloj * 0.7);
+  for (let i = 0; i < 3; i++) c[i] = col[i] * (d + reloj * 1.1);
 }
 
 // Una galaxia espiral en su sitio: bulbo, disco, brazos con regiones rosas y polvo.
@@ -122,11 +171,24 @@ function galaxia(x, y, g, k, c) {
   const v = (-(x - g.x) * sn + (y - g.y) * cs) / g.tam / g.q;
   const r = Math.hypot(u, v), th = Math.atan2(v, u);
   if (r > 2.2) return;
-  const bulbo = Math.exp(-r / 0.07) * 1.6 + Math.exp(-r / 0.18) * 0.5;
+  if (g.tipo === 'eliptica') { // galaxia elíptica pequeña: un óvalo dorado y liso, sin brazos
+    const luz = Math.exp(-Math.pow(r, 0.6) * 3) * g.brillo;
+    for (let i = 0; i < 3; i++) c[i] += amarillo[i] * luz;
+    return;
+  }
+  const nb = g.nucleo || 1;
+  const bulbo = Math.exp(-r / (0.07 * nb)) * 1.6 + Math.exp(-r / (0.18 * nb)) * 0.5 * nb;
   const disco = Math.exp(-r / 0.32) * 1.3;
-  const fase = g.brazos * (th - Math.log(r + 0.03) / Math.tan(g.paso)) + 1.2 * ruido(u * 3 + g.x * 9, v * 3, 3);
-  const brazo = Math.pow(0.5 + 0.5 * Math.cos(fase), 4) * suave(0.06, 0.25, r) * (0.6 + 0.8 * ruido(u * 6 + 1, v * 6, 3));
-  const grumos = brazo * suave(0.6, 0.85, ruido(u * 9 + 3, v * 9, 3)) * disco * 1.6;
+  const caos = (g.caos ?? 1.2) * ruido(u * 3 + g.x * 9, v * 3, 3);
+  const ramas = g.ramas || [{ n: g.brazos, paso: g.paso, desfase: 0, peso: 1 }];
+  const fases = ramas.map(b => b.n * (th - Math.log(r + 0.03) / Math.tan(b.paso)) + b.desfase + caos);
+  const fase = fases[0];
+  const nitidez = g.nitidez || 4;
+  let brazo = 0;
+  ramas.forEach((b, i) => { brazo = Math.max(brazo, b.peso * Math.pow(0.5 + 0.5 * Math.cos(fases[i]), nitidez)); });
+  brazo *= suave(0.06, 0.25, r) * (0.6 + 0.8 * ruido(u * 6 + 1, v * 6, 3));
+  // Regiones de hidrógeno encendido: nudos rosas pequeños a lo largo de los brazos.
+  const grumos = brazo * suave(0.66, 0.82, ruido(u * 13 + 3, v * 13, 3)) * disco * 1.3 * (g.grumos || 1);
   const col = mezcla(amarillo, azul, suave(0.08, 0.6, r));
   let luz = [0, 0, 0];
   for (let i = 0; i < 3; i++) luz[i] = amarillo[i] * bulbo + col[i] * disco * (0.3 + 1.1 * brazo) + rosa[i] * grumos;
@@ -171,7 +233,7 @@ function preparar(objeto, r) {
       const piel = hex('#3fd0c0') || luz[1] || luz[0];
       for (let i = 0; i < 200; i++) base.estrellas.push({ x: gauss(r) * 1.3, y: gauss(r) * 1.3, tam: 0.35 + Math.pow(r(), 3) * 0.9, hex: '#ffffff', punto: true });
       return { ...base, campo: campoBurbuja, exposicion: 2, colores: [rgb(luz[0].hex)], cascara: rgb(piel.hex),
-        estrellas: [...base.estrellas, { x: 0.08, y: -0.12, tam: 2.4, hex: '#a9c4ff', destello: true }] };
+        estrellas: [...base.estrellas, { x: 0.25, y: -0.03, tam: 2.4, hex: '#a9c4ff', destello: true }] }; // la estrella no está en el centro
     }
     case 'filamentos': {
       const s = hex('#7aa8ff') || luz[0], f = luz.filter(c => c !== s);
@@ -182,8 +244,16 @@ function preparar(objeto, r) {
     case 'espiral_inclinada':
     case 'trio_de_galaxias': {
       const g = {
-        espiral_de_frente: [{ x: 0, y: 0, tam: 0.95, q: 1, giro: 0.3, brazos: 2, paso: 0.3, polvo: 0.25 + polvo * 1.5 }],
-        espiral_inclinada: [{ x: 0, y: 0, tam: 1.05, q: 0.3, giro: -0.6, brazos: 2, paso: 0.3, polvo: 0.8 + polvo * 4, franja: false }],
+        // Molinete: muchos brazos irregulares, núcleo pequeño y muchas regiones rosas.
+        espiral_de_frente: [{ x: 0, y: 0, tam: 1, q: 1, giro: 0.3, paso: 0.3, polvo: 0.2 + polvo * 1.5, nucleo: 0.6, caos: 2, grumos: 1.6, nitidez: 3,
+          ramas: [{ n: 2, paso: 0.3, desfase: 0, peso: 1 }, { n: 3, paso: 0.42, desfase: 1.3, peso: 0.55 }] }],
+        // Andrómeda: muy inclinada, con un bulbo grande y brazos suaves cruzados por polvo,
+        // y sus dos compañeras: M32, pequeña y pegada, y M110, más grande y difusa.
+        espiral_inclinada: [
+          { x: 0, y: 0, tam: 1.05, q: 0.3, giro: -0.6, brazos: 2, paso: 0.25, polvo: 0.35 + polvo * 2, nucleo: 1.7, nitidez: 2.5, caos: 0.8, grumos: 0.3 },
+          { tipo: 'eliptica', x: 0.13, y: 0.17, tam: 0.05, q: 0.8, giro: -0.6, brillo: 1.4 },
+          { tipo: 'eliptica', x: -0.22, y: -0.4, tam: 0.16, q: 0.55, giro: 0.6, brillo: 0.5 },
+        ],
         trio_de_galaxias: [
           { x: -0.45, y: 0.35, tam: 0.5, q: 0.3, giro: 1.25, brazos: 2, paso: 0.35, polvo: 1 },
           { x: 0.45, y: 0.4, tam: 0.45, q: 0.4, giro: 1.45, brazos: 2, paso: 0.4, polvo: 1 },
@@ -193,16 +263,44 @@ function preparar(objeto, r) {
       return { ...base, campo: campoGalaxias, galaxias: g, exposicion: 1.3,
         amarillo: rgb(hex('#ffd9a0')?.hex || '#ffd9a0'), azul: rgb(hex('#a9c4ff')?.hex || '#a9c4ff'), rosa: rgb(hex('#e0476a')?.hex || '#e0476a') };
     }
-    case 'globular': {
+    case 'globular':
+    case 'globular_disperso': {
+      // Distribución de Plummer: muy densa en el centro. «disperso» (como M4) es más suelto
+      // y tiene menos estrellas; M4 además lleva su «barra» de estrellas en el centro.
+      const disperso = objeto.forma === 'globular_disperso';
+      const a = disperso ? 0.24 : 0.12, total = disperso ? 3500 : 9000;
       const est = [];
-      const a = 0.13;
-      for (let i = 0; i < 9000; i++) { // distribución de Plummer: muy densa en el centro
+      while (est.length < total) {
         const u = Math.max(1e-4, r());
-        const rad = Math.min(1.15, a / Math.sqrt(Math.pow(u, -2 / 3) - 1));
+        const rad = a / Math.sqrt(Math.pow(u, -2 / 3) - 1);
+        if (rad > 1.2) continue; // se descarta en vez de recortar: así no se forma un anillo en el borde
         const ang = r() * Math.PI * 2, b = Math.pow(r(), 3);
-        est.push({ x: Math.cos(ang) * rad, y: Math.sin(ang) * rad, tam: 0.35 + b * 1.3, hex: elegir(luz, r).hex, punto: true });
+        est.push({ x: Math.cos(ang) * rad, y: Math.sin(ang) * rad, tam: (disperso ? 0.45 : 0.35) + b * 1.3, hex: elegir(luz, r).hex, punto: true });
       }
-      return { ...base, campo: campoGlobular, a: 0.16, tono: rgb(luz[0].hex), estrellas: est };
+      if (disperso) for (let i = 0; i < 9; i++) est.push({ x: -0.16 + i * 0.04, y: 0.02 * gauss(r) - 0.01 + i * 0.012, tam: 1.3 + r() * 0.5, hex: elegir(luz, r).hex, punto: true });
+      for (let i = 0; i < 6; i++) { // algunas gigantes más brillantes
+        const ang = r() * Math.PI * 2, rad = 0.1 + r() * 0.5;
+        est.push({ x: Math.cos(ang) * rad, y: Math.sin(ang) * rad, tam: 1.6 + r(), hex: luz[1]?.hex || luz[0].hex, destello: i < 2 });
+      }
+      return { ...base, campo: campoGlobular, a: disperso ? 0.3 : 0.15, tono: rgb(luz[0].hex), estrellas: est };
+    }
+    case 'continente': {
+      const est = [];
+      for (let i = 0; i < 700; i++) est.push({ x: gauss(r) * 0.9, y: gauss(r) * 0.9, // estrellas de la Vía Láctea, sin bordes rectos
+         tam: 0.3 + Math.pow(r(), 4) * 1.1, hex: r() < 0.75 ? '#ffffff' : '#ffd9a0', punto: true });
+      return { ...base, campo: campoContinente, exposicion: 2, estrellas: est,
+        colores: [luz[0], hex('#a3263a') || luz[1] || luz[0], hex('#3fd0c0') || luz[0]].map(c => rgb(c.hex)) };
+    }
+    case 'laguna': {
+      const est = [];
+      for (let i = 0; i < 45; i++) { // NGC 6530, el cúmulo joven que hay dentro
+        const b = Math.pow(r(), 3);
+        est.push({ x: -0.45 + gauss(r) * 0.17, y: 0.06 + gauss(r) * 0.1, tam: 0.7 + b * 1.8, hex: r() < 0.8 ? '#cfe0ff' : '#ffffff', destello: b > 0.55 });
+      }
+      est.push({ x: 0.33, y: -0.03, tam: 1.8, hex: '#cfe0ff', destello: true }); // la estrella que ilumina el reloj de arena
+      for (let i = 0; i < 450; i++) est.push({ x: gauss(r) * 0.9, y: gauss(r) * 0.9, tam: 0.3 + Math.pow(r(), 4) * 1.1, hex: r() < 0.6 ? '#ffffff' : '#ffd9a0', punto: true });
+      return { ...base, campo: campoLaguna, exposicion: 2.1, estrellas: est,
+        colores: [luz[0], hex('#3fd0c0') || luz[1] || luz[0]].map(c => rgb(c.hex)) };
     }
     case 'cumulo_abierto': {
       const est = [];
@@ -215,10 +313,13 @@ function preparar(objeto, r) {
     }
     default: { // nebulosa_difusa
       const est = [];
-      for (let i = 0; i < 6; i++) est.push({ x: gauss(r) * 0.25, y: gauss(r) * 0.25, tam: 1 + r() * 1.3, hex: '#cfe0ff', destello: i === 0 });
+      const nucleo = [gauss(r) * 0.15, gauss(r) * 0.15];
+      // El Trapecio: cuatro estrellas muy juntas en el corazón de la nube.
+      for (const [dx, dy, t] of [[0, 0, 1.9], [0.035, 0.012, 1.5], [0.012, 0.04, 1.4], [0.045, 0.045, 1.2]]) est.push({ x: nucleo[0] + dx, y: nucleo[1] + dy, tam: t, hex: '#cfe0ff', destello: t > 1.8 });
+      for (let i = 0; i < 4; i++) est.push({ x: gauss(r) * 0.3, y: gauss(r) * 0.3, tam: 0.8 + r() * 1.1, hex: '#cfe0ff' });
       for (let i = 0; i < 260; i++) est.push({ x: gauss(r) * 1.3, y: gauss(r) * 1.3, tam: 0.35 + Math.pow(r(), 3) * 0.9, hex: r() < 0.7 ? '#ffffff' : '#ffd9a0', punto: true });
       return { ...base, campo: campoNebulosa, exposicion: 2.3, colores: [luz[0], luz[1] || luz[0], luz[2]].map(c => c && rgb(c.hex)),
-        nucleo: [gauss(r) * 0.15, gauss(r) * 0.15] };
+        nucleo, estrellas: est };
     }
   }
 }

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Astraloom · galería de objetos</title>
+  <style>
+    body { margin: 0; background: #020306; color: #e6e9ef; font: 13px/1.4 system-ui, sans-serif; }
+    main { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 8px; }
+    figure { margin: 0; }
+    canvas { width: 100%; height: auto; display: block; background: #000; }
+    figcaption { padding: 4px 2px; color: #e6e9ef99; }
+  </style>
+</head>
+<body>
+  <!-- Herramienta de trabajo: pinta los 12 objetos juntos para revisarlos.
+       Se abre con un servidor local en la raíz del proyecto: /pruebas/galeria.html -->
+  <main id="galeria"></main>
+  <script type="module">
+    import { cargarJuego } from '../src/datos.js';
+    import { pintarObjeto } from '../src/nebulosas.js';
+    const juego = await cargarJuego('../contenido/datos');
+    const lado = Number(new URLSearchParams(location.search).get('lado')) || 512;
+    for (const n of juego.niveles) {
+      const o = n.tejedora.objeto;
+      const fig = document.createElement('figure');
+      fig.appendChild(pintarObjeto(o, lado, 1.3));
+      fig.insertAdjacentHTML('beforeend', `<figcaption>${o.id} · ${o.nombre} · ${o.forma}</figcaption>`);
+      document.getElementById('galeria').appendChild(fig);
+      await new Promise(r => setTimeout(r, 0));
+    }
+    document.body.dataset.listo = '1';
+  </script>
+</body>
+</html>
