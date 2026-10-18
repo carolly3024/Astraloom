@@ -61,14 +61,14 @@ a { color: var(--azul); }
 /* Pantalla de juego: cielo grande arriba y tarjeta debajo (los textos nunca pisan el cielo) */
 .barra { display: flex; align-items: center; gap: 1rem; margin-bottom: .75rem; }
 .volver { text-decoration: none; white-space: nowrap; }
-.escena { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.escena { display: flex; flex-direction: column; align-items: center; gap: 14px; --ancho-escena: min(100%, 680px); }
 .cielo {
-  width: min(100%, 64vh); aspect-ratio: 1; border-radius: 18px;
+  width: var(--ancho-escena); max-width: 100%; aspect-ratio: 1; border-radius: 18px; /* mismo ancho que la tarjeta */
   background: radial-gradient(circle at 50% 40%, #16204a, #0b1027 75%);
   border: 1px solid #dce3f01a; overflow: hidden;
 }
 .cielo-svg, .mini { width: 100%; height: 100%; display: block; touch-action: none; user-select: none; }
-.tarjeta { width: min(100%, 680px); background: #1e2a5a66; border: 1px solid #dce3f01f; border-radius: 16px; padding: 16px 20px; min-height: 64px; }
+.tarjeta { width: var(--ancho-escena); background: #1e2a5a66; border: 1px solid #dce3f01f; border-radius: 16px; padding: 16px 20px; min-height: 64px; }
 
 /* Estrellas, huecos e hilos */
 .estrella { transition: opacity .3s; }

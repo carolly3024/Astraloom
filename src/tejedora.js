@@ -39,13 +39,17 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
 
   const tejidas = new Set();
   const temporal = el('line', { class: 'hilo temporal', visibility: 'hidden' }, svg);
-  let origen = null, elegida = null, pistaLinea = null, dibujado = false;
+  let origen = null, elegida = null, pistaLinea = null, dibujado = false, inicio = null;
 
-  const masCercana = (pt, alcance = ALCANCE) => {
+  const masCercana = (pt, alcance = ALCANCE, valida = () => true) => {
     let mejor = null, d = alcance;
-    for (const e of estrellas) { const de = distancia(e, pt); if (de < d) { d = de; mejor = e; } }
+    for (const e of estrellas) { const de = distancia(e, pt); if (de < d && valida(e)) { d = de; mejor = e; } }
     return mejor;
   };
+  // La estrella cercana que sigue la figura desde `desde` (sin contar `desde`).
+  // Así se pueden unir estrellas casi pegadas, como las del escudo de Orión.
+  const vecina = (pt, desde, alcance, tambienTejidas = false) => masCercana(pt, alcance, e =>
+    e !== desde && (pendientes.has(clave(desde.hip, e.hip)) || (tambienTejidas && tejidas.has(clave(desde.hip, e.hip)))));
 
   function marcar(e, si) { e?.g.classList.toggle('elegida', si); }
 
@@ -107,12 +111,14 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
     const e = masCercana(pt);
     if (!e) { marcar(elegida, false); elegida = null; return; }
     ev.preventDefault();
-    if (elegida && elegida !== e) { // modo toque: segunda estrella
+    const segunda = elegida && (vecina(pt, elegida, ALCANCE) || (e !== elegida ? e : null));
+    if (segunda) { // modo toque: segunda estrella
       const a = elegida;
       marcar(a, false); elegida = null;
-      intentar(a, e);
+      intentar(a, segunda);
       return;
     }
+    inicio = pt;
     svg.setPointerCapture(ev.pointerId);
     origen = e;
     dibujado = false;
@@ -127,17 +133,14 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
     const pt = puntoSVG(svg, ev);
     // Dibujo de un trazo: al pasar por una estrella que sigue la figura, el hilo
     // se teje y el trazo continúa desde ella. Las demás estrellas no lo cortan.
-    const paso = masCercana(pt, PASO);
-    if (paso && paso !== origen) {
-      const k = clave(origen.hip, paso.hip);
-      if (pendientes.has(k) || tejidas.has(k)) {
-        if (pendientes.has(k)) intentar(origen, paso);
-        marcar(origen, false);
-        origen = paso;
-        dibujado = true;
-        marcar(origen, true);
-        temporal.setAttribute('x1', origen.x); temporal.setAttribute('y1', origen.y);
-      }
+    const paso = vecina(pt, origen, PASO, true);
+    if (paso) {
+      if (pendientes.has(clave(origen.hip, paso.hip))) intentar(origen, paso);
+      marcar(origen, false);
+      origen = paso;
+      dibujado = true;
+      marcar(origen, true);
+      temporal.setAttribute('x1', origen.x); temporal.setAttribute('y1', origen.y);
     }
     const e = masCercana(pt);
     const fin = e && e !== origen ? e : pt; // el hilo se engancha a la estrella cercana
@@ -147,13 +150,15 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
   function soltar(ev) {
     if (!origen) return;
     temporal.setAttribute('visibility', 'hidden');
-    // Tras dibujar un trazo, solo cuenta la estrella justo bajo el dedo al soltar.
-    const e = masCercana(puntoSVG(svg, ev), dibujado ? PASO : ALCANCE);
+    const pt = puntoSVG(svg, ev);
     const a = origen;
     origen = null;
-    if (e && e !== a) { marcar(a, false); elegida = null; intentar(a, e); }
-    else if (e === a && !dibujado) { elegida = a; } // se ha tocado sin arrastrar: espera la segunda
-    else { marcar(a, false); elegida = null; }
+    if (!dibujado && distancia(pt, inicio) < 10) { elegida = a; return; } // un toque: espera la segunda
+    // Tras dibujar un trazo, solo cuenta la estrella justo bajo el dedo al soltar.
+    const alcance = dibujado ? PASO : ALCANCE;
+    const e = vecina(pt, a, alcance) || masCercana(pt, alcance, x => x !== a);
+    marcar(a, false); elegida = null;
+    if (e) intentar(a, e);
   }
   svg.addEventListener('pointerup', soltar);
   svg.addEventListener('pointercancel', soltar);

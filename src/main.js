@@ -80,11 +80,12 @@ function pantallaInicio() {
 // ---------- Aprendiz ----------
 function pantallaAprendiz(nivel) {
   app.innerHTML = cabecera(nivel.nombre, 'Aprendiz · arrastra cada estrella a su hueco') +
-    `<section class="escena"><div class="cielo"></div><div class="tarjeta" aria-live="polite"><p class="sub">Las estrellas se han soltado. Llévalas a su sitio.</p></div></section>`;
+    `<section class="escena"><div class="cielo"></div><div class="tarjeta" aria-live="polite"><p class="sub">Así es ${escapar(nivel.nombre)}. Fíjate en su forma…</p></div></section>`;
   const tarjeta = app.querySelector('.tarjeta');
   let colocadas = 0;
   const total = nivel.aprendiz.estrellas.length;
   pantallaActual = montarAprendiz(app.querySelector('.cielo'), nivel, {
+    alEmpezar() { tarjeta.innerHTML = '<p class="sub">Las estrellas se han soltado. Llévalas a su sitio.</p>'; },
     alColocar(estrella) {
       colocadas++;
       tarjeta.innerHTML = `<p class="sub">${estrella.nombre ? `${escapar(estrella.nombre)} vuelve a su sitio. ` : ''}${colocadas} de ${total}</p>`;

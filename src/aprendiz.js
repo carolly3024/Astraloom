@@ -1,6 +1,7 @@
 // Astraloom · nivel Aprendiz
 // Las estrellas están sueltas y el jugador las arrastra a sus huecos.
 // Al acercarla, su hueco la atrae; soltada lejos, vuelve con suavidad a su sitio.
+// Al entrar, la figura se dibuja hilo a hilo y después las estrellas se sueltan.
 
 import { el, crearCielo, dibujarEstrella, radioEstrella, puntoSVG, distancia, animar, LADO } from './svg.js';
 import { crearPistas } from './pistas.js';
@@ -24,7 +25,7 @@ function repartir(huecos, rand = Math.random) {
   });
 }
 
-export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar }) {
+export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEmpezar }) {
   const svg = crearCielo(contenedor);
   svg.setAttribute('aria-label', `Constelación de ${nivel.nombre}, nivel Aprendiz`);
   const capaLineas = el('g', { class: 'guias' }, svg);
@@ -76,9 +77,10 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar }) {
     },
   });
 
-  let arrastre = null;
+  let arrastre = null, listo = false, salir = false;
 
   svg.addEventListener('pointerdown', ev => {
+    if (!listo) return;
     const pt = puntoSVG(svg, ev);
     const p = piezas.filter(p => !p.colocada).sort((a, b) => distancia(a.pos, pt) - distancia(b.pos, pt))[0];
     if (!p || distancia(p.pos, pt) > 40) return;
@@ -134,6 +136,32 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar }) {
   svg.addEventListener('pointerup', soltar);
   svg.addEventListener('pointercancel', soltar);
 
-  pistas.reiniciar();
-  return { parar: () => pistas.parar() };
+  // Presentación: la figura se dibuja hilo a hilo, se queda un momento y las
+  // estrellas se sueltan hacia sus sitios de partida.
+  async function presentar() {
+    const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!quieto) {
+      piezas.forEach(p => mover(p, p.hueco.x, p.hueco.y));
+      for (const l of lineas) { l.e.setAttribute('class', 'hilo tejido'); l.e.setAttribute('opacity', 0); }
+      for (const l of lineas) {
+        if (salir) return;
+        const pa = porHip.get(l.a), pb = porHip.get(l.b);
+        l.e.setAttribute('opacity', 1);
+        await animar(Math.max(90, 900 / lineas.length), t => {
+          l.e.setAttribute('x2', pa.x + (pb.x - pa.x) * t); l.e.setAttribute('y2', pa.y + (pb.y - pa.y) * t);
+        });
+      }
+      await new Promise(r => setTimeout(r, 900));
+      if (salir) return;
+      for (const l of lineas) l.e.setAttribute('class', 'hilo guia');
+      await animar(900, t => piezas.forEach(p => mover(p, p.hueco.x + (p.inicio.x - p.hueco.x) * t, p.hueco.y + (p.inicio.y - p.hueco.y) * t)));
+    }
+    if (salir) return;
+    listo = true;
+    alEmpezar?.();
+    pistas.reiniciar();
+  }
+  presentar();
+
+  return { parar: () => { salir = true; pistas.parar(); } };
 }
