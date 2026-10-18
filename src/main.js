@@ -1,6 +1,6 @@
 // Astraloom · prototipo v0.2
-// Pantallas: inicio (constelaciones), Aprendiz, Tejedora, atlas y ficha de objeto.
-// Navegación por la dirección (#/aprendiz/Ori, #/tejedora/Ori, #/atlas…).
+// Pantallas: entrada (logo y tutorial), inicio (constelaciones), Aprendiz, Tejedora,
+// atlas y ficha de objeto. Navegación por la dirección (#/intro, #/aprendiz/Ori, #/atlas…).
 
 import { cargarJuego } from './datos.js';
 import { crearGuardado } from './guardado.js';
@@ -11,6 +11,7 @@ import { crearContador } from './contador.js';
 import { el, escapar } from './svg.js';
 import { bordeLuz, miniFigura, tonoObjeto } from './adornos.js';
 import { montarFondo } from './fondo.js';
+import { pantallaIntro } from './intro.js';
 
 const RUTA_DATOS = 'contenido/datos';
 const app = document.getElementById('app');
@@ -59,7 +60,7 @@ function pantallaInicio() {
   const atlas = guardado.atlas();
   app.innerHTML = h`
     <header class="portada">
-      <img src="assets/simbolo.svg" alt="" width="72" height="72">
+      <a href="#/intro" class="volver-intro" title="Volver a la entrada"><img src="assets/simbolo.svg" alt="Volver a la entrada" width="72" height="72"></a>
       <div><h1 class="marca">Astraloom</h1><p class="sub">Devuelve las estrellas a su sitio y teje el cielo.</p></div>
     </header>
     <nav class="acciones"><a class="boton" href="#/atlas">Atlas · ${atlas.length} de ${juego.niveles.length}</a></nav>
@@ -263,14 +264,15 @@ function ir(nueva, { reemplazar = false } = {}) {
 // Tocar el espacio vacío de fuera (el fondo, no un cuadro) lleva al inicio.
 // Se mira también dónde empezó el toque, para que soltar un arrastre fuera no cuente.
 const fuera = t => t === document.body || t === document.documentElement || t === app;
+const enInicio = () => ['#/', '', '#/intro'].includes(ruta);
 let empezoFuera = false;
 document.addEventListener('pointerdown', ev => { empezoFuera = fuera(ev.target); });
 document.addEventListener('pointermove', ev => {
-  document.body.classList.toggle('sobre-fondo', ruta !== '#/' && ruta !== '' && fuera(ev.target));
+  document.body.classList.toggle('sobre-fondo', !enInicio() && fuera(ev.target));
 }, { passive: true });
 
 document.addEventListener('click', ev => {
-  if (empezoFuera && fuera(ev.target) && ruta !== '#/' && ruta !== '') { ir('#/'); return; }
+  if (empezoFuera && fuera(ev.target) && !enInicio()) { ir('#/'); return; }
   const a = ev.target.closest('a[href^="#/"]');
   if (!a || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
   ev.preventDefault();
@@ -284,7 +286,9 @@ function navegar() {
   const [, pantalla, id] = ruta.replace(/^#?\/?/, '#/').split('/');
   const nivel = id && nivelPorId(id);
   window.scrollTo(0, 0);
-  if (pantalla === 'aprendiz' && nivel) pantallaAprendiz(nivel);
+  document.body.classList.toggle('en-intro', pantalla === 'intro');
+  if (pantalla === 'intro') pantallaIntro(app, { alEntrar: () => ir('#/') });
+  else if (pantalla === 'aprendiz' && nivel) pantallaAprendiz(nivel);
   else if (pantalla === 'tejedora' && nivel) pantallaTejedora(nivel);
   else if (pantalla === 'atlas' && nivel) pantallaObjeto(nivel);
   else if (pantalla === 'atlas') pantallaAtlas();
@@ -300,7 +304,9 @@ async function iniciar() {
     return;
   }
   window.addEventListener('popstate', () => { ruta = location.hash || '#/'; navegar(); });
-  navegar();
+  // Al abrir el juego por la puerta principal se entra por la pantalla del logo.
+  if (ruta === '#/' || ruta === '' || ruta === '#') ir('#/intro', { reemplazar: true });
+  else navegar();
 }
 
 montarFondo();
