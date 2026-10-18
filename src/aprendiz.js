@@ -25,7 +25,7 @@ function repartir(huecos, rand = Math.random) {
   });
 }
 
-export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEmpezar }) {
+export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEmpezar, alTocarMisterio }) {
   const svg = crearCielo(contenedor);
   svg.setAttribute('aria-label', `Constelación de ${nivel.nombre}, nivel Aprendiz`);
   const capaLineas = el('g', { class: 'guias' }, svg);
@@ -81,7 +81,7 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
   let arrastre = null, listo = false, salir = false, encajadas = 0;
 
   svg.addEventListener('pointerdown', ev => {
-    if (!listo) return;
+    if (!listo || encajadas === piezas.length) return;
     const pt = puntoSVG(svg, ev);
     const p = piezas.filter(p => !p.colocada && !p.vuela).sort((a, b) => distancia(a.pos, pt) - distancia(b.pos, pt))[0];
     if (!p || distancia(p.pos, pt) > 40) { tocarHueco(pt); return; }
@@ -178,5 +178,23 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
   }
   presentar();
 
-  return { parar: () => { salir = true; pistas.parar(); } };
+  // Al terminar, algo brilla escondido donde está el objeto de cielo profundo,
+  // para dar curiosidad por tejer la figura en Tejedora y despertarlo.
+  function mostrarMisterio() {
+    const o = nivel.aprendiz.objeto;
+    const lim = v => Math.min(960, Math.max(40, 150 + v * 700));
+    const defs = svg.querySelector('defs');
+    const gr = el('radialGradient', { id: 'gmisterio' }, defs);
+    el('stop', { offset: '0%', 'stop-color': '#ffffff', 'stop-opacity': 0.85 }, gr);
+    el('stop', { offset: '35%', 'stop-color': '#7fa8f0', 'stop-opacity': 0.45 }, gr);
+    el('stop', { offset: '100%', 'stop-color': '#7fa8f0', 'stop-opacity': 0 }, gr);
+    const g = el('g', { class: 'llamada misterio', transform: `translate(${lim(o.x)} ${lim(o.y)})`, role: 'button', tabindex: 0, 'aria-label': 'Algo duerme aquí: ir a Tejedora' }, svg);
+    el('circle', { r: 46, fill: 'url(#gmisterio)', class: 'llamada-halo' }, g);
+    el('circle', { r: 20, fill: 'none', stroke: '#7fa8f0', 'stroke-width': 1.5, class: 'llamada-aro' }, g);
+    el('circle', { r: 60, fill: 'transparent' }, g);
+    g.addEventListener('click', () => alTocarMisterio?.());
+    g.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') alTocarMisterio?.(); });
+  }
+
+  return { parar: () => { salir = true; pistas.parar(); }, mostrarMisterio };
 }

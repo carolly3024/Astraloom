@@ -86,17 +86,24 @@ function pantallaAprendiz(nivel) {
   let colocadas = 0;
   const contador = crearContador(app.querySelector('.tarjeta'), nivel.aprendiz.estrellas.length, ' estrellas');
   pantallaActual = montarAprendiz(app.querySelector('.cielo'), nivel, {
+    alTocarMisterio: () => ir(`#/tejedora/${nivel.id}`),
     alEmpezar() { tarjeta.innerHTML = '<p class="sub">Las estrellas se han soltado. Llévalas a su sitio, o toca un hueco y su estrella irá sola.</p>'; },
     alColocar(estrella) {
-      contador.poner(++colocadas);
-      if (estrella.nombre) tarjeta.innerHTML = `<p class="sub">${escapar(estrella.nombre)} vuelve a su sitio.</p>`;
+      contador.poner(++colocadas, estrella.nombre ? `${estrella.nombre} vuelve a su sitio` : '');
     },
     alCompletar() {
       guardado.completar(nivel.id, 'aprendiz');
+      const o = nivel.tejedora.objeto;
+      const femenino = /^(nebulosa|galaxia)/.test(o.tipo);
       tarjeta.innerHTML = h`<p class="eyebrow">Constelación completa</p>
         <h2>${escapar(nivel.nombre)}</h2>
         <p>${escapar(nivel.aprendiz.dato)}</p>
-        <div class="acciones"><a class="boton principal" href="#/tejedora/${nivel.id}">Tejer sobre el cielo</a><a class="boton" href="#/">Volver al cielo</a></div>`;
+        <div class="misterio-texto">
+          <p><strong>Algo brilla cerca de sus estrellas.</strong> Es ${femenino ? 'una' : 'un'} ${escapar(o.tipo)} que duerme en este trozo de cielo y que todavía nadie ha despertado.</p>
+          <p class="sub">Teje la figura sobre el cielo real para descubrir ${femenino ? 'cuál es' : 'qué es'}.</p>
+        </div>
+        <div class="acciones"><a class="boton principal" href="#/tejedora/${nivel.id}">Tejer y despertar</a><a class="boton" href="#/">Volver al cielo</a></div>`;
+      pantallaActual.mostrarMisterio();
     },
   });
 }

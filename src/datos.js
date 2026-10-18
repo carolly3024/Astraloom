@@ -66,6 +66,7 @@ export function construirNivel(cielo, textos) {
     aprendiz: {
       dato: textos.aprendiz.dato,
       estrellas: estrellas.map(e => ({ ...e, ...aFigura(e) })),
+      objeto: aFigura(posObjeto), // dónde está el objeto escondido (puede caer fuera de la figura)
     },
     tejedora: {
       estrellas: estrellas.map(e => ({ ...e, ...aCielo(e) })),
