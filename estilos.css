@@ -465,3 +465,9 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
   .portada-marca { gap: .75rem; }
   .portada-marca .marca { font-size: 2.2rem; }
 }
+
+/* Despertar: mientras dura, las estrellas vecinas se apagan un poco y la figura brilla más */
+.cielo-svg .vecina-fondo { transition: opacity 1.2s ease; }
+.cielo-svg.despertando .vecina-fondo { opacity: .2; }
+.cielo-svg .hilo.tejido { transition: stroke-opacity 1s ease, stroke-width 1s ease; }
+.cielo-svg.despertando .hilo.tejido { stroke: #fff; stroke-opacity: 1; stroke-width: 2.8; }
