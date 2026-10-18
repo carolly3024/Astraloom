@@ -11,6 +11,7 @@
     "id": "M8",
     "nombre": "Nebulosa de la Laguna",
     "tipo": "nebulosa de emisión",
+    "pista": "Otro vivero de estrellas, mirando hacia el centro de la Vía Láctea",
     "forma": "nebulosa_difusa",
     "ar": 270.9,
     "dec": -24.39,

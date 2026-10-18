@@ -259,8 +259,8 @@ function pantallaAtlas() {
             <p class="sub">${escapar(o.id)} · en ${escapar(n.nombre)}</p><p class="coords">${coordenadas(o)}</p></div></a></li>`
         : `<li style="--i:${i}"><a class="tarjeta-objeto dormido" href="#/${e.aprendiz ? 'tejedora' : 'aprendiz'}/${n.id}">
             <div class="portal" data-fig="${n.id}"></div>
-            <div class="pie-objeto"><p class="eyebrow">Dormido</p><h2>Algo duerme aquí</h2>
-            <p class="sub">${e.aprendiz ? `Teje ${escapar(n.nombre)} para despertarlo` : `Empieza por ${escapar(n.nombre)}`}</p></div></a></li>`;
+            <div class="pie-objeto"><p class="eyebrow">Dormido · en ${escapar(n.nombre)}</p><h2 class="pista">${escapar(o.pista || 'Algo duerme aquí')}</h2>
+            <p class="sub">${e.aprendiz ? `Teje ${escapar(n.nombre)} para despertarlo` : `Empieza por Aprendiz`}</p></div></a></li>`;
     }).join('')}</ul>`;
   app.querySelectorAll('.portal[data-id]').forEach(c => { miniObjeto(c, nivelPorId(c.dataset.id), 220); bordeLuz(c.closest('.tarjeta-objeto')); });
   app.querySelectorAll('.portal[data-fig]').forEach(c => miniFigura(c, nivelPorId(c.dataset.fig), 'pendiente'));

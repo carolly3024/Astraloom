@@ -455,3 +455,6 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
   .resumen .boton { padding-inline: .7rem; }
 }
 @media (prefers-reduced-motion: reduce) { .logo-nebulosa-viva, .barra-cielo { animation: none; } }
+
+/* Atlas: cada objeto dormido da una pista distinta, en cursiva, sin decir qué es */
+.tarjeta-objeto.dormido h2.pista { font-size: 1.02rem; font-weight: 400; font-style: italic; line-height: 1.35; opacity: .85; }

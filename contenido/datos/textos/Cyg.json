@@ -11,6 +11,7 @@
     "id": "NGC 7000",
     "nombre": "Nebulosa Norteamérica",
     "tipo": "nebulosa de emisión",
+    "pista": "Una nube de gas con forma de continente",
     "forma": "nebulosa_difusa",
     "ar": 314.82,
     "dec": 44.53,
