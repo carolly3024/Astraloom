@@ -55,7 +55,10 @@ a { color: var(--azul); }
 .marca { font-family: var(--marca); font-weight: 600; font-size: 2.6rem; letter-spacing: .02em; }
 .rejilla { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
 .tarjeta-const .estado { font-size: .9rem; min-height: 1.4em; }
-.niveles { display: flex; gap: .5rem; margin-top: .75rem; flex-wrap: wrap; }
+/* Los dos niveles, uno al lado del otro y siempre al pie de la tarjeta (todas alinean igual) */
+.niveles { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: auto; padding-top: .75rem; }
+.niveles .boton { text-align: center; white-space: nowrap; padding-inline: .5rem; }
+.tarjeta-const { display: flex; flex-direction: column; }
 .pie { margin-top: 2rem; font-size: .8rem; color: var(--bruma-suave); }
 .confirmar { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin-bottom: .75rem; font-size: .95rem; color: var(--bruma); }
 .boton:focus-visible, .enlace:focus-visible, .migas a:focus-visible, .tarjeta-objeto:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
