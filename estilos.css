@@ -136,3 +136,23 @@ a.tarjeta-objeto:hover { border-color: #7fa8f088; }
   .late, .estrella.late > circle, .encaja, .completa .celebra, .llamada-aro { animation: none; }
   .llamada-halo { animation: none; opacity: .9; }
 }
+
+/* Contador de progreso: píldora a todo el ancho con una estrellita que recorre su borde */
+.tarjeta { display: flex; flex-direction: column; }
+.contador {
+  position: relative; flex: none; height: 52px; border-radius: 26px; margin-bottom: 14px;
+  display: grid; place-items: center;
+  background: #0b102799; border: 1px solid #dce3f022;
+  transition: border-color .6s, box-shadow .6s;
+}
+.contador-relleno {
+  position: absolute; inset: 0 auto 0 0; width: 0; border-radius: inherit;
+  background: linear-gradient(90deg, #7fa8f014, #7fa8f04d); transition: width .7s ease;
+}
+.contador-texto { position: relative; font-family: var(--titulo); font-size: 1.3rem; letter-spacing: .03em; font-variant-numeric: tabular-nums; }
+.contador-borde { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.contador-camino { fill: none; stroke: none; }
+.contador-halo { fill: var(--azul); opacity: .35; filter: blur(2px); }
+.contador-punto { fill: #ffffff; }
+.contador.lleno { border-color: #7fa8f088; box-shadow: 0 0 22px #7fa8f033; }
+.contador.lleno .contador-relleno { background: linear-gradient(90deg, #7fa8f033, #7fa8f066); }

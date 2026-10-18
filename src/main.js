@@ -7,6 +7,7 @@ import { crearGuardado } from './guardado.js';
 import { montarAprendiz } from './aprendiz.js';
 import { montarTejedora } from './tejedora.js';
 import { despertar, dibujarObjeto } from './despertar.js';
+import { crearContador } from './contador.js';
 import { el, escapar } from './svg.js';
 
 const RUTA_DATOS = 'contenido/datos';
@@ -80,15 +81,15 @@ function pantallaInicio() {
 // ---------- Aprendiz ----------
 function pantallaAprendiz(nivel) {
   app.innerHTML = cabecera(nivel.nombre, 'Aprendiz · arrastra cada estrella a su hueco') +
-    `<section class="escena"><div class="cielo"></div><div class="tarjeta" aria-live="polite"><p class="sub">Así es ${escapar(nivel.nombre)}. Fíjate en su forma…</p></div></section>`;
-  const tarjeta = app.querySelector('.tarjeta');
+    `<section class="escena"><div class="cielo"></div><div class="tarjeta"><div class="contenido" aria-live="polite"><p class="sub">Así es ${escapar(nivel.nombre)}. Fíjate en su forma…</p></div></div></section>`;
+  const tarjeta = app.querySelector('.contenido');
   let colocadas = 0;
-  const total = nivel.aprendiz.estrellas.length;
+  const contador = crearContador(app.querySelector('.tarjeta'), nivel.aprendiz.estrellas.length, ' estrellas');
   pantallaActual = montarAprendiz(app.querySelector('.cielo'), nivel, {
     alEmpezar() { tarjeta.innerHTML = '<p class="sub">Las estrellas se han soltado. Llévalas a su sitio, o toca un hueco y su estrella irá sola.</p>'; },
     alColocar(estrella) {
-      colocadas++;
-      tarjeta.innerHTML = `<p class="sub">${estrella.nombre ? `${escapar(estrella.nombre)} vuelve a su sitio. ` : ''}${colocadas} de ${total}</p>`;
+      contador.poner(++colocadas);
+      if (estrella.nombre) tarjeta.innerHTML = `<p class="sub">${escapar(estrella.nombre)} vuelve a su sitio.</p>`;
     },
     alCompletar() {
       guardado.completar(nivel.id, 'aprendiz');
@@ -104,9 +105,10 @@ function pantallaAprendiz(nivel) {
 function pantallaTejedora(nivel) {
   if (!guardado.estado(nivel.id).aprendiz) { ir(`#/aprendiz/${nivel.id}`, { reemplazar: true }); return; }
   app.innerHTML = cabecera(nivel.nombre, 'Tejedora · teje la figura sobre el cielo real') +
-    `<section class="escena"><div class="cielo"></div><div class="tarjeta" aria-live="polite"></div></section>`;
-  const tarjeta = app.querySelector('.tarjeta');
+    `<section class="escena"><div class="cielo"></div><div class="tarjeta"><div class="contenido" aria-live="polite"></div></div></section>`;
+  const tarjeta = app.querySelector('.contenido');
   const ayuda = texto => { tarjeta.innerHTML = `<p class="sub">${texto}</p>`; };
+  const contador = crearContador(app.querySelector('.tarjeta'), nivel.lineas.length, ' hilos');
   let despierto = false;
   async function despertarYa() { // desde el botón o tocando el brillo del cielo
     if (despierto) return;
@@ -115,10 +117,11 @@ function pantallaTejedora(nivel) {
     const { svg, objeto, quitarLlamada } = pantallaActual;
     quitarLlamada();
     await despertar(svg, nivel.tejedora.objeto, objeto.x, objeto.y, 120);
+    contador.quitar(); // la ficha ocupa ya toda la tarjeta
     tarjeta.innerHTML = ficha(nivel) + `<div class="acciones"><a class="boton principal" href="#/atlas">Ver el atlas</a><a class="boton" href="#/">Volver al cielo</a></div>`;
   }
   pantallaActual = montarTejedora(app.querySelector('.cielo'), nivel, {
-    alTejer: (n, total) => ayuda(`${n} de ${total} hilos`),
+    alTejer: n => contador.poner(n),
     alCompletar() {
       guardado.completar(nivel.id, 'tejedora'); // se guarda ya en el atlas
       tarjeta.innerHTML = h`<p class="eyebrow">Has tejido ${escapar(nivel.nombre)}</p>
