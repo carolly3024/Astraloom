@@ -1,6 +1,9 @@
 // Astraloom · pistas sin castigo
 // Tras 20 s sin avanzar aparece la primera pista; si sigue sin avanzar,
 // otros 20 s después llega la segunda. Cualquier avance las reinicia.
+// Cada pista llega con un destello sonoro muy suave.
+
+import { sonarPista } from './sonido.js';
 
 export const ESPERA_PISTA_MS = 20000;
 
@@ -11,7 +14,7 @@ export function crearPistas({ primera, segunda, limpiar }, espera = ESPERA_PISTA
     reiniciar() {
       parar();
       limpiar();
-      t1 = setTimeout(() => { primera(); t2 = setTimeout(segunda, espera); }, espera);
+      t1 = setTimeout(() => { primera(); sonarPista(); t2 = setTimeout(() => { segunda(); sonarPista(); }, espera); }, espera);
     },
     parar() { parar(); limpiar(); },
   };

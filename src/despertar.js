@@ -5,6 +5,7 @@
 
 import { el, animar, suaveDoble } from './svg.js';
 import { pintarObjeto } from './nebulosas.js';
+import { sonarDespertar } from './sonido.js';
 
 const POLVO = '#2a1c22';
 const LADO_LIENZO = 1024;         // resolución del dibujo
@@ -111,10 +112,13 @@ export async function despertar(svg, objeto, cx, cy, R) {
   svg.insertBefore(velo, defs.nextSibling);
   svg.classList.add('despertando');
   const luz = objeto.colores.find(c => c.hex !== POLVO)?.hex || '#7fa8f0';
+  sonarDespertar('velo'); // la música se recoge para dejar sitio al despertar
   if (!tranquilo) {
     animar(900, t => velo.setAttribute('opacity', 0.4 * t));
     await new Promise(res => setTimeout(res, 500));
+    sonarDespertar('reunir');
     await reunir(svg, cx, cy, objeto.colores);
+    sonarDespertar('destello');
     destello(svg, cx, cy, R, luz);
   }
   // Detrás de hilos y estrellas, para que la constelación siga a la vista.
@@ -123,6 +127,7 @@ export async function despertar(svg, objeto, cx, cy, R) {
   const obj = dibujarObjeto(svg, capa, objeto, 0, 0, R);
   obj.setAttribute('transform', `translate(${cx} ${cy}) scale(0.2)`);
   const fin = estallido(svg, cx, cy, objeto.colores);
+  sonarDespertar('nebulosa');
   await new Promise(res => setTimeout(res, 250));
   await animar(tranquilo ? 600 : 2800, t => {
     capa.setAttribute('opacity', t);
@@ -131,6 +136,7 @@ export async function despertar(svg, objeto, cx, cy, R) {
   await fin;
   // El cielo recupera su luz poco a poco, ya con el objeto despierto.
   svg.classList.remove('despertando');
+  sonarDespertar('fin');
   const desde = Number(velo.getAttribute('opacity'));
   animar(1500, t => velo.setAttribute('opacity', desde * (1 - t))).then(() => velo.remove());
 }

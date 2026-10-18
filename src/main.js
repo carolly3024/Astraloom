@@ -14,6 +14,8 @@ import { bordeLuz, miniFigura, tonoObjeto } from './adornos.js';
 import { montarFondo } from './fondo.js';
 import { pantallaIntro, simboloVivo } from './intro.js';
 import { montarPanel, coordenadas } from './panel.js';
+import { configurarSonido, ambiente, sonarEstrella, sonarHilo, sonarFigura, sonarLogo } from './sonido.js';
+import { botonSonido, activarControlSonido } from './control-sonido.js';
 
 const RUTA_DATOS = 'contenido/datos';
 const app = document.getElementById('app');
@@ -30,7 +32,7 @@ function nivelPorId(id) { return juego.niveles.find(n => n.id === id); }
 function cabecera(titulo, sub = '', migas = []) {
   const enlaces = [['#/', 'Cielo'], ...migas].map(([href, texto]) => `<a href="${href}">${escapar(texto)}</a>`).join('<span aria-hidden="true">/</span>');
   return h`<header class="barra">
-    <nav class="migas" aria-label="Volver">${enlaces}</nav>
+    <div class="barra-fila"><nav class="migas" aria-label="Volver">${enlaces}</nav>${botonSonido()}</div>
     <div><h1>${escapar(titulo)}</h1>${sub ? `<p class="sub">${escapar(sub)}</p>` : ''}</div>
   </header>`;
 }
@@ -75,6 +77,7 @@ function pantallaInicio() {
           <div><dt>Por descubrir</dt><dd>${dos(cuenta('pendiente'))}</dd></div>
         </dl>
         <a class="boton" href="#/atlas">Atlas · ${atlas.length} de ${juego.niveles.length}</a>
+        ${botonSonido()}
       </div>
     </header>
     <div class="barra-cielo" aria-hidden="true">${juego.niveles.map((n, i) => `<span class="${estados[i]}" style="--tono:${tonoObjeto(n.tejedora.objeto)}" title="${escapar(n.nombre)}"></span>`).join('')}</div>
@@ -173,11 +176,13 @@ function pantallaAprendiz(nivel) {
       mostrarGuia('aprendiz');
     },
     alColocar(estrella) {
+      sonarEstrella(colocadas + 1, nivel.aprendiz.estrellas.length, estrella.x);
       contador.poner(++colocadas, estrella.nombre ? `${estrella.nombre} vuelve a su sitio` : '');
       panel.encender(estrella.hip);
       panel.revelar(colocadas / nivel.aprendiz.estrellas.length);
     },
     alCompletar() {
+      sonarFigura();
       guardado.completar(nivel.id, 'aprendiz');
       const o = nivel.tejedora.objeto;
       const femenino = /^(nebulosa|galaxia)/.test(o.tipo);
@@ -219,11 +224,13 @@ function pantallaTejedora(nivel) {
   }
   pantallaActual = montarTejedora(app.querySelector('.cielo'), nivel, {
     alTejer(n, total, a, b) {
+      sonarHilo(n, total, (a.x + b.x) / 2);
       contador.poner(n);
       panel.encender(a.hip); panel.encender(b.hip);
       panel.revelar(n / total);
     },
     alCompletar() {
+      sonarFigura();
       guardado.completar(nivel.id, 'tejedora'); // se guarda ya en el atlas
       tarjeta.innerHTML = h`<p class="eyebrow">Has tejido ${escapar(nivel.nombre)}</p>
         <p>Algo brilla en este trozo de cielo. Tócalo para despertarlo.</p>
@@ -344,7 +351,13 @@ function navegar() {
   const nivel = id && nivelPorId(id);
   window.scrollTo(0, 0);
   document.body.classList.toggle('en-intro', pantalla === 'intro');
-  if (pantalla === 'intro') pantallaIntro(app, { alEntrar: () => ir('#/') });
+  // Cada constelación suena en la tonalidad del color de su objeto; el resto, en el azul del logo.
+  ambiente(nivel ? tonoObjeto(nivel.tejedora.objeto) : undefined, nivel && pantalla !== 'atlas');
+  if (pantalla === 'intro') {
+    pantallaIntro(app, { alEntrar: () => ir('#/') });
+    app.querySelector('.intro').insertAdjacentHTML('afterbegin', botonSonido());
+    sonarLogo(8, 0.28, 2.94); // una nota por vuelta de hilos y un acorde al encenderse la nebulosa
+  }
   else if (pantalla === 'aprendiz' && nivel) pantallaAprendiz(nivel);
   else if (pantalla === 'tejedora' && nivel) pantallaTejedora(nivel);
   else if (pantalla === 'atlas' && nivel) pantallaObjeto(nivel);
@@ -366,5 +379,7 @@ async function iniciar() {
   else navegar();
 }
 
+configurarSonido({ leer: () => guardado.ajuste('sonido'), guardar: v => guardado.ajuste('sonido', v) });
+activarControlSonido();
 montarFondo();
 iniciar();

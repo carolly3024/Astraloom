@@ -41,6 +41,8 @@ y abrir http://localhost:8000.
 | `src/nebulosas.js` | Pinta cada objeto punto a punto con sus colores reales (`pruebas/galeria.html` los muestra juntos) |
 | `src/pistas.js` | Las pistas sin castigo (20 s) |
 | `src/main.js` | Pantallas y navegación |
+| `src/sonido.js` | Música generativa y efectos con Tone.js: cada pantalla suena en la tonalidad del color de su objeto |
+| `src/control-sonido.js` | Botón de sonido de la cabecera: silenciar y volumen de música y efectos |
 | `src/intro.js` | Pantalla de entrada: logo animado y tutorial |
 | `src/fondo.js`, `src/adornos.js` | El fondo de espacio profundo y los detalles de la interfaz (miniaturas, bordes de luz) |
 | `src/panel.js` | Ficha de la constelación en la caja de información (silueta, mapa del cielo y estrellas) |
@@ -50,6 +52,10 @@ y abrir http://localhost:8000.
 ## Añadir una constelación
 
 No hay que tocar código: se escribe su ficha en `contenido/datos/textos/` y se añade su ID a `contenido/datos/indice.json`. Los pasos están en `contenido/README.md`.
+
+## Créditos
+
+- Sonido: [Tone.js](https://tonejs.github.io/) 15.1.22 (MIT), copiado en `assets/vendor/`. Toda la música y los efectos se generan en el navegador, sin grabaciones.
 
 ## Créditos de los datos
 

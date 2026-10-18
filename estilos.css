@@ -457,9 +457,10 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
 
 /* Atlas: cada objeto dormido da una pista distinta, en cursiva, sin decir qué es */
 .tarjeta-objeto.dormido h2.pista { font-size: 1.02rem; font-weight: 400; font-style: italic; line-height: 1.35; opacity: .85; }
-/* Pantallas pequeñas: las cifras en tres columnas iguales y el botón del atlas debajo, a todo el ancho */
+/* Pantallas pequeñas: las cifras en tres columnas iguales y debajo el botón del atlas, con el del sonido al lado */
 @media (max-width: 480px) {
-  .resumen { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+  .resumen { display: grid; grid-template-columns: 1fr auto; gap: .75rem; }
+  .resumen .cifras { grid-column: 1 / -1; }
   .cifras { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
   .resumen .boton { width: 100%; text-align: center; padding-block: .6rem; }
   .portada-marca { gap: .75rem; }
@@ -471,3 +472,32 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
 .cielo-svg.despertando .vecina-fondo { opacity: .2; }
 .cielo-svg .hilo.tejido { transition: stroke-opacity 1s ease, stroke-width 1s ease; }
 .cielo-svg.despertando .hilo.tejido { stroke: #fff; stroke-opacity: 1; stroke-width: 2.8; }
+
+/* Sonido (fase 5): un botón discreto en la cabecera de cada pantalla y un panel
+   pequeño con el interruptor y los dos volúmenes. Nunca va encima del cielo. */
+.barra-fila { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
+.control-sonido { position: relative; flex: none; }
+.portada, .barra { position: relative; z-index: 5; } /* el panel queda encima de las tarjetas y del cielo */
+.boton-sonido { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border-radius: 8px; border: 1px solid #ffffff2e; background: #0a0d15b3; backdrop-filter: blur(4px); color: var(--bruma); cursor: pointer; transition: color .25s, border-color .25s; }
+.boton-sonido:hover, .boton-sonido[aria-expanded="true"] { border-color: #ffffff59; color: #fff; }
+.boton-sonido:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
+.boton-sonido svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.boton-sonido .altavoz { fill: currentColor; fill-opacity: .15; }
+.boton-sonido .cruz, .boton-sonido.callado .ondas { display: none; }
+.boton-sonido.callado .cruz { display: inline; }
+.boton-sonido.callado { color: var(--bruma-suave); }
+.panel-sonido { position: absolute; top: calc(100% + 8px); right: 0; z-index: 20; width: 240px; padding: .9rem 1rem; display: grid; gap: .75rem;
+  background: #0a0d15f2; border: 1px solid #ffffff24; border-radius: 10px; box-shadow: 0 12px 32px #0009; animation: aparece .3s ease both; }
+.panel-sonido label { display: flex; align-items: center; gap: .75rem; font: 500 .72rem/1 var(--datos); letter-spacing: .12em; text-transform: uppercase; color: var(--bruma); cursor: pointer; }
+.panel-sonido label > span { flex: 1 0 4.5rem; }
+.deslizador input { flex: 1 1 auto; width: 100%; accent-color: var(--azul); }
+.deslizador output { width: 2.2rem; text-align: right; color: var(--bruma-suave); }
+.interruptor input { position: absolute; opacity: 0; }
+.interruptor i { position: relative; width: 38px; height: 22px; border-radius: 11px; background: #ffffff1f; transition: background .25s; }
+.interruptor i::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--bruma); transition: transform .25s; }
+.interruptor input:checked + i { background: var(--azul); }
+.interruptor input:checked + i::after { transform: translateX(16px); background: var(--noche); }
+.interruptor input:focus-visible + i { outline: 2px solid var(--azul); outline-offset: 2px; }
+.intro { position: relative; }
+.intro > .control-sonido { position: absolute; top: 0; right: 0; animation: aparece 1s ease 3.3s both; }
+@media (prefers-reduced-motion: reduce) { .panel-sonido, .intro > .control-sonido { animation: none; } }
