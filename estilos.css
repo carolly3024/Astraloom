@@ -92,6 +92,15 @@ a { color: var(--azul); }
 .elegida circle:nth-child(2) { stroke: var(--azul); stroke-width: 3; }
 .completa .hilo.tejido { stroke-opacity: 1; stroke: #ffffff; }
 .completa .hilo.guia { stroke-opacity: 0; }
+.hilo.brillo { stroke: #ffffff; stroke-width: 3; stroke-opacity: .95; filter: url(#brillo); }
+.completa .celebra { animation: resplandor 2.4s ease-in-out; }
+@keyframes resplandor { 0% { opacity: 1; } 40% { opacity: .35; } 100% { opacity: 1; } }
+.llamada { cursor: pointer; outline: none; }
+.llamada-halo { animation: llamada 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.llamada-aro { animation: llamada-aro 2.6s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+.llamada:focus-visible .llamada-aro { stroke: var(--plata); stroke-width: 3; }
+@keyframes llamada { 0%, 100% { opacity: .55; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.15); } }
+@keyframes llamada-aro { 0% { opacity: .9; transform: scale(.6); } 100% { opacity: 0; transform: scale(2.2); } }
 
 .encaja { animation: encaje .6s ease-out; transform-box: fill-box; }
 @keyframes encaje { 0% { filter: brightness(2.2); } 100% { filter: none; } }
@@ -116,5 +125,6 @@ a.tarjeta-objeto:hover { border-color: #7fa8f088; }
 .hueco-mini.vacio { font-family: var(--titulo); font-size: 2rem; color: #dce3f044; }
 
 @media (prefers-reduced-motion: reduce) {
-  .late, .estrella.late > circle, .encaja { animation: none; }
+  .late, .estrella.late > circle, .encaja, .completa .celebra, .llamada-aro { animation: none; }
+  .llamada-halo { animation: none; opacity: .9; }
 }

@@ -3,7 +3,7 @@
 // Al acercarla, su hueco la atrae; soltada lejos, vuelve con suavidad a su sitio.
 // Al entrar, la figura se dibuja hilo a hilo y después las estrellas se sueltan.
 
-import { el, crearCielo, dibujarEstrella, radioEstrella, puntoSVG, distancia, animar, LADO } from './svg.js';
+import { el, crearCielo, dibujarEstrella, radioEstrella, puntoSVG, distancia, animar, suaveDoble, esperar, trazarFigura, LADO } from './svg.js';
 import { crearPistas } from './pistas.js';
 
 const ATRAE = 110;  // a esta distancia el hueco empieza a atraer
@@ -38,6 +38,7 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
   const sueltas = repartir(huecos);
   const colocadas = new Set();
 
+  const segmentos = () => nivel.lineas.map(([a, b]) => [porHip.get(a), porHip.get(b)]);
   const lineas = nivel.lineas.map(([a, b]) => {
     const pa = porHip.get(a), pb = porHip.get(b);
     return { a, b, e: el('line', { x1: pa.x, y1: pa.y, x2: pb.x, y2: pb.y, class: 'hilo guia' }, capaLineas) };
@@ -124,8 +125,12 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
       alColocar?.(p.hueco);
       if (colocadas.size === piezas.length) {
         pistas.parar();
+        await esperar(300);
+        await trazarFigura(capaLineas, segmentos(), () => salir); // la figura se arma
+        if (salir) return;
         svg.classList.add('completa');
-        setTimeout(() => alCompletar(), 700);
+        await esperar(900);
+        alCompletar();
       } else {
         pistas.reiniciar();
       }
@@ -142,19 +147,15 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
     const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!quieto) {
       piezas.forEach(p => mover(p, p.hueco.x, p.hueco.y));
-      for (const l of lineas) { l.e.setAttribute('class', 'hilo tejido'); l.e.setAttribute('opacity', 0); }
-      for (const l of lineas) {
-        if (salir) return;
-        const pa = porHip.get(l.a), pb = porHip.get(l.b);
-        l.e.setAttribute('opacity', 1);
-        await animar(Math.max(90, 900 / lineas.length), t => {
-          l.e.setAttribute('x2', pa.x + (pb.x - pa.x) * t); l.e.setAttribute('y2', pa.y + (pb.y - pa.y) * t);
-        });
-      }
-      await new Promise(r => setTimeout(r, 900));
+      await esperar(500);
+      const brillo = await trazarFigura(capaLineas, segmentos(), () => salir);
+      await esperar(1600);
       if (salir) return;
-      for (const l of lineas) l.e.setAttribute('class', 'hilo guia');
-      await animar(900, t => piezas.forEach(p => mover(p, p.hueco.x + (p.inicio.x - p.hueco.x) * t, p.hueco.y + (p.inicio.y - p.hueco.y) * t)));
+      await animar(1800, t => {
+        brillo.setAttribute('opacity', 1 - t);
+        piezas.forEach(p => mover(p, p.hueco.x + (p.inicio.x - p.hueco.x) * t, p.hueco.y + (p.inicio.y - p.hueco.y) * t));
+      }, suaveDoble);
+      brillo.remove();
     }
     if (salir) return;
     listo = true;

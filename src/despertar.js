@@ -2,7 +2,7 @@
 // Gráficos provisionales: la forma sale de `objeto.forma` y los colores de
 // `objeto.colores` (con su peso). El arte final llega en la fase 4.
 
-import { el, animar, azar } from './svg.js';
+import { el, animar, azar, suaveDoble } from './svg.js';
 
 const POLVO = '#2a1c22';
 
@@ -143,15 +143,15 @@ export function estallido(svg, cx, cy, colores) {
   const g = el('g', { class: 'estallido' }, svg);
   const r = Math.random;
   const ps = Array.from({ length: 110 }, (_, i) => {
-    const ang = r() * Math.PI * 2, v = 60 + r() * 260;
+    const ang = r() * Math.PI * 2, v = 50 + r() * 220;
     const c = i % 3 === 0 ? '#ffffff' : elegirColor(colores.filter(c => c.hex !== POLVO), r).hex;
     return { vx: Math.cos(ang) * v, vy: Math.sin(ang) * v, e: el('circle', { cx, cy, r: 1 + r() * 2.4, fill: c }, g) };
   });
-  return animar(1300, (t, lineal) => {
+  return animar(2400, (t, lineal) => {
     for (const p of ps) {
       p.e.setAttribute('cx', cx + p.vx * t);
       p.e.setAttribute('cy', cy + p.vy * t);
-      p.e.setAttribute('opacity', 1 - lineal);
+      p.e.setAttribute('opacity', 1 - lineal * lineal);
     }
   }).then(() => g.remove());
 }
@@ -164,10 +164,10 @@ export async function despertar(svg, objeto, cx, cy, R) {
   const obj = dibujarObjeto(svg, capa, objeto, 0, 0, R);
   obj.setAttribute('transform', `translate(${cx} ${cy}) scale(0.2)`);
   const fin = estallido(svg, cx, cy, objeto.colores);
-  await new Promise(res => setTimeout(res, 250));
-  await animar(1800, t => {
+  await new Promise(res => setTimeout(res, 500));
+  await animar(3400, t => {
     capa.setAttribute('opacity', t);
     obj.setAttribute('transform', `translate(${cx} ${cy}) scale(${0.2 + 0.8 * t})`);
-  });
+  }, suaveDoble);
   await fin;
 }

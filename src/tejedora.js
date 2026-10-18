@@ -5,7 +5,7 @@
 // arrastrando entre dos, o tocando una y luego otra.
 // Si la unión existe en la figura, el hilo se queda; si no, se deshace con suavidad.
 
-import { el, crearCielo, dibujarEstrella, puntoSVG, distancia, animar } from './svg.js';
+import { el, crearCielo, dibujarEstrella, puntoSVG, distancia, animar, esperar, trazarFigura } from './svg.js';
 import { crearPistas } from './pistas.js';
 
 const ALCANCE = 42; // distancia máxima para «tocar» una estrella
@@ -13,7 +13,7 @@ const PASO = 26;    // al dibujar, pasar así de cerca de una estrella la enganc
 const clave = (a, b) => (a < b ? `${a}-${b}` : `${b}-${a}`);
 const aCielo = p => ({ ...p, x: 40 + p.x * 920, y: 40 + p.y * 920 });
 
-export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
+export function montarTejedora(contenedor, nivel, { alTejer, alCompletar, alDespertar }) {
   const svg = crearCielo(contenedor);
   svg.setAttribute('aria-label', `Cielo de ${nivel.nombre}, nivel Tejedora`);
   const capaFigura = el('g', { class: 'figura' }, svg);
@@ -40,6 +40,24 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
   const tejidas = new Set();
   const temporal = el('line', { class: 'hilo temporal', visibility: 'hidden' }, svg);
   let origen = null, elegida = null, pistaLinea = null, dibujado = false, inicio = null;
+  let terminado = false, salir = false, llamada = null;
+
+  // Al terminar, el sitio del objeto brilla y late para invitar a tocarlo.
+  function llamar() {
+    const c = nivel.tejedora.objeto.colores[0]?.hex || '#7fa8f0';
+    const defs = svg.querySelector('defs');
+    const gr = el('radialGradient', { id: 'gllamada' }, defs);
+    el('stop', { offset: '0%', 'stop-color': '#ffffff', 'stop-opacity': 0.9 }, gr);
+    el('stop', { offset: '35%', 'stop-color': c, 'stop-opacity': 0.55 }, gr);
+    el('stop', { offset: '100%', 'stop-color': c, 'stop-opacity': 0 }, gr);
+    llamada = el('g', { class: 'llamada', transform: `translate(${objeto.x} ${objeto.y})`, role: 'button', tabindex: 0, 'aria-label': 'Despertar el objeto escondido' }, svg);
+    el('circle', { r: 60, fill: 'url(#gllamada)', class: 'llamada-halo' }, llamada);
+    el('circle', { r: 26, fill: 'none', stroke: c, 'stroke-width': 2, class: 'llamada-aro' }, llamada);
+    el('circle', { r: 75, fill: 'transparent' }, llamada);
+    const tocar = () => { if (llamada) alDespertar?.(); };
+    llamada.addEventListener('click', tocar);
+    llamada.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') tocar(); });
+  }
 
   const masCercana = (pt, alcance = ALCANCE, valida = () => true) => {
     let mejor = null, d = alcance;
@@ -68,9 +86,16 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
       animar(350, t => { l.setAttribute('x2', a.x + (b.x - a.x) * t); l.setAttribute('y2', a.y + (b.y - a.y) * t); });
       alTejer?.(tejidas.size, total);
       if (!pendientes.size) {
+        terminado = true;
         pistas.parar();
-        await new Promise(r => setTimeout(r, 450));
+        marcar(origen, false); marcar(elegida, false);
+        temporal.setAttribute('visibility', 'hidden');
+        await esperar(500);
+        await trazarFigura(capaHilos, nivel.lineas.map(([a, b]) => [porHip.get(a), porHip.get(b)]), () => salir);
+        if (salir) return;
         svg.classList.add('completa');
+        await esperar(700);
+        llamar();
         alCompletar();
       } else {
         pistas.reiniciar();
@@ -107,6 +132,7 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
   });
 
   svg.addEventListener('pointerdown', ev => {
+    if (terminado) return;
     const pt = puntoSVG(svg, ev);
     const e = masCercana(pt);
     if (!e) { marcar(elegida, false); elegida = null; return; }
@@ -166,7 +192,8 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
   pistas.reiniciar();
   return {
     objeto,
-    parar: () => pistas.parar(),
+    parar: () => { salir = true; pistas.parar(); },
+    quitarLlamada() { llamada?.remove(); llamada = null; },
     svg,
   };
 }

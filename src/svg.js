@@ -44,18 +44,36 @@ export function puntoSVG(svg, ev) {
 export const distancia = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
 
 const suave = t => 1 - Math.pow(1 - t, 3);
+export const suaveDoble = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
 // Anima de 0 a 1 durante `ms` milisegundos. Devuelve una promesa.
-export function animar(ms, paso) {
+export function animar(ms, paso, curva = suave) {
   return new Promise(resolve => {
     const t0 = performance.now();
     function cuadro(ahora) {
       const t = Math.min(1, (ahora - t0) / ms);
-      paso(suave(t), t);
+      paso(curva(t), t);
       if (t < 1) requestAnimationFrame(cuadro); else resolve();
     }
     requestAnimationFrame(cuadro);
   });
+}
+
+export const esperar = ms => new Promise(r => setTimeout(r, ms));
+const sinMovimiento = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// La figura se recorre hilo a hilo con un brillo, despacio y con suavidad.
+// La usan la presentación de Aprendiz y el final de los dos niveles.
+export async function trazarFigura(padre, segmentos, cancelado = () => false) {
+  const g = el('g', { class: 'celebra' }, padre);
+  const ms = sinMovimiento() ? 0 : Math.max(280, 3600 / segmentos.length);
+  for (const [a, b] of segmentos) {
+    if (cancelado()) break;
+    const l = el('line', { x1: a.x, y1: a.y, x2: a.x, y2: a.y, class: 'hilo brillo' }, g);
+    if (!ms) { l.setAttribute('x2', b.x); l.setAttribute('y2', b.y); continue; }
+    await animar(ms, t => { l.setAttribute('x2', a.x + (b.x - a.x) * t); l.setAttribute('y2', a.y + (b.y - a.y) * t); }, suaveDoble);
+  }
+  return g;
 }
 
 // Generador aleatorio con semilla, para que cada objeto se dibuje siempre igual.

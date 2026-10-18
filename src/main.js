@@ -107,20 +107,26 @@ function pantallaTejedora(nivel) {
     `<section class="escena"><div class="cielo"></div><div class="tarjeta" aria-live="polite"></div></section>`;
   const tarjeta = app.querySelector('.tarjeta');
   const ayuda = texto => { tarjeta.innerHTML = `<p class="sub">${texto}</p>`; };
+  let despierto = false;
+  async function despertarYa() { // desde el botón o tocando el brillo del cielo
+    if (despierto) return;
+    despierto = true;
+    tarjeta.querySelector('#despertar')?.setAttribute('disabled', '');
+    const { svg, objeto, quitarLlamada } = pantallaActual;
+    quitarLlamada();
+    await despertar(svg, nivel.tejedora.objeto, objeto.x, objeto.y, 85);
+    tarjeta.innerHTML = ficha(nivel) + `<div class="acciones"><a class="boton principal" href="#/atlas">Ver el atlas</a><a class="boton" href="#/">Volver al cielo</a></div>`;
+  }
   pantallaActual = montarTejedora(app.querySelector('.cielo'), nivel, {
     alTejer: (n, total) => ayuda(`${n} de ${total} hilos`),
     alCompletar() {
       guardado.completar(nivel.id, 'tejedora'); // se guarda ya en el atlas
       tarjeta.innerHTML = h`<p class="eyebrow">Has tejido ${escapar(nivel.nombre)}</p>
-        <p>Algo duerme en este trozo de cielo.</p>
+        <p>Algo brilla en este trozo de cielo. Tócalo para despertarlo.</p>
         <div class="acciones"><button class="boton principal" id="despertar">Despertar</button></div>`;
-      tarjeta.querySelector('#despertar').addEventListener('click', async ev => {
-        ev.currentTarget.disabled = true;
-        const { svg, objeto } = pantallaActual;
-        await despertar(svg, nivel.tejedora.objeto, objeto.x, objeto.y, 85);
-        tarjeta.innerHTML = ficha(nivel) + `<div class="acciones"><a class="boton principal" href="#/atlas">Ver el atlas</a><a class="boton" href="#/">Volver al cielo</a></div>`;
-      });
+      tarjeta.querySelector('#despertar').addEventListener('click', despertarYa);
     },
+    alDespertar: despertarYa,
   });
   ayuda('Repasa la figura con hilos de luz: toca una estrella y luego otra, o arrastra entre ellas.');
 }
