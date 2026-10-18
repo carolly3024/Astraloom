@@ -63,10 +63,10 @@ function pantallaInicio() {
       <div><h1 class="marca">Astraloom</h1><p class="sub">Devuelve las estrellas a su sitio y teje el cielo.</p></div>
     </header>
     <nav class="acciones"><a class="boton" href="#/atlas">Atlas · ${atlas.length} de ${juego.niveles.length}</a></nav>
-    <ul class="rejilla">${juego.niveles.map(n => {
+    <ul class="rejilla">${juego.niveles.map((n, i) => {
       const e = guardado.estado(n.id);
       const fase = e.tejedora ? 'despierta' : e.aprendiz ? 'aprendiz' : 'pendiente';
-      return h`<li class="tarjeta-const ${fase}" data-id="${n.id}" style="--tono:${tonoObjeto(n.tejedora.objeto)}">
+      return h`<li class="tarjeta-const ${fase}" data-id="${n.id}" style="--i:${i};--tono:${tonoObjeto(n.tejedora.objeto)}">
         <div class="ventana"></div>
         ${e.tejedora ? `<span class="sello">✦ Despierta</span>` : ''}
         <h2>${escapar(n.nombre)}</h2>
@@ -213,7 +213,17 @@ function ir(nueva, { reemplazar = false } = {}) {
   navegar();
 }
 
+// Tocar el espacio vacío de fuera (el fondo, no un cuadro) lleva al inicio.
+// Se mira también dónde empezó el toque, para que soltar un arrastre fuera no cuente.
+const fuera = t => t === document.body || t === document.documentElement || t === app;
+let empezoFuera = false;
+document.addEventListener('pointerdown', ev => { empezoFuera = fuera(ev.target); });
+document.addEventListener('pointermove', ev => {
+  document.body.classList.toggle('sobre-fondo', ruta !== '#/' && ruta !== '' && fuera(ev.target));
+}, { passive: true });
+
 document.addEventListener('click', ev => {
+  if (empezoFuera && fuera(ev.target) && ruta !== '#/' && ruta !== '') { ir('#/'); return; }
   const a = ev.target.closest('a[href^="#/"]');
   if (!a || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
   ev.preventDefault();
@@ -221,6 +231,7 @@ document.addEventListener('click', ev => {
 });
 
 function navegar() {
+  document.body.classList.remove('sobre-fondo');
   pantallaActual?.parar?.();
   pantallaActual = null;
   const [, pantalla, id] = ruta.replace(/^#?\/?/, '#/').split('/');

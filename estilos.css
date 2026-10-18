@@ -62,8 +62,8 @@ a { color: var(--azul); }
 
 /* Pantalla de juego: cielo grande arriba y tarjeta debajo (los textos nunca pisan el cielo) */
 .barra { display: flex; flex-direction: column; gap: .35rem; margin-bottom: .9rem; }
-.migas { display: flex; align-items: center; gap: .5rem; font: 500 .72rem/1 var(--datos); letter-spacing: .12em; text-transform: uppercase; }
-.migas a { text-decoration: none; color: var(--bruma-suave); padding: .35rem .6rem; border: 1px solid var(--linea); border-radius: 6px; transition: color .2s, border-color .2s; }
+.migas { display: flex; align-items: center; gap: .5rem; font: 500 .8rem/1 var(--datos); letter-spacing: .12em; text-transform: uppercase; }
+.migas a { text-decoration: none; color: var(--bruma); padding: .55rem .9rem; border: 1px solid #ffffff2e; border-radius: 8px; background: #0a0d15b3; backdrop-filter: blur(4px); transition: color .25s, border-color .25s, box-shadow .25s; }
 .migas a:first-child::before { content: '← '; }
 .migas a:hover { color: #fff; border-color: #ffffff40; }
 .migas span { color: #ffffff33; }
@@ -204,8 +204,6 @@ a { color: var(--azul); }
 .atlas-progreso span { width: 9px; height: 9px; border-radius: 50%; background: #dce3f022; }
 .atlas-progreso span.viva { background: var(--tono); box-shadow: 0 0 10px var(--tono); }
 .rejilla.atlas { --tono: #7fa8f0; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
-.rejilla.atlas li { animation: aparece .7s ease-out both; animation-delay: calc(var(--i) * 60ms); }
-@keyframes aparece { from { opacity: 0; transform: translateY(12px); } }
 .tarjeta-objeto {
   display: block; height: 100%; text-decoration: none; color: inherit; border-radius: 14px; padding: 14px;
   background: radial-gradient(90% 60% at 50% 25%, color-mix(in srgb, var(--tono) 7%, transparent), transparent 75%), var(--panel);
@@ -231,7 +229,7 @@ a.tarjeta-objeto:hover .portal .mini { transform: scale(1.08) rotate(4deg); }
 .tarjeta-objeto.dormido h2, .tarjeta-objeto.dormido .sub { opacity: .7; }
 a.tarjeta-objeto.dormido:hover { box-shadow: none; border-color: #7fa8f066; }
 @keyframes respira { 0%, 100% { box-shadow: inset 0 0 0 1px #ffffff0d; } 50% { box-shadow: inset 0 0 0 1px #ffffff1a, 0 0 26px -6px #7fa8f066; } }
-@media (prefers-reduced-motion: reduce) { .rejilla.atlas li, .tarjeta-objeto.dormido .portal { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .tarjeta-objeto.dormido .portal { animation: none; } }
 
 /* Fondo vivo: espacio profundo pintado (fondo.js) que se acerca muy despacio y puntitos que reaccionan al puntero */
 #app { position: relative; z-index: 1; }
@@ -261,3 +259,15 @@ a.tarjeta-objeto.dormido:hover { box-shadow: none; border-color: #7fa8f066; }
 /* Los objetos se pintan píxel a píxel: si aún no están listos, aparecen con un fundido */
 .cargando-objeto { opacity: 0; transition: opacity .9s ease; }
 .cargando-objeto.listo { opacity: 1; }
+
+/* Entrada suave: los cuadros aparecen uno tras otro al cargar cada pantalla */
+@keyframes aparece { from { opacity: 0; transform: translateY(14px); } }
+.barra, .acciones, .portada, .rejilla > li, .escena > *, .atlas-progreso { animation: aparece .8s cubic-bezier(.2, .8, .2, 1) both; }
+.rejilla > li { animation-delay: calc(120ms + var(--i, 0) * 55ms); }
+.escena > .cielo { animation-delay: 80ms; }
+.escena > .tarjeta { animation-delay: 200ms; }
+@media (prefers-reduced-motion: reduce) { .barra, .acciones, .portada, .rejilla > li, .escena > *, .atlas-progreso { animation: none; } }
+
+/* Al pasar por el espacio vacío de fuera, el botón «Cielo» se ilumina: tocar ahí lleva al inicio */
+body.sobre-fondo { cursor: pointer; }
+body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); box-shadow: 0 0 0 3px #7fa8f033, 0 0 18px #7fa8f055; }
