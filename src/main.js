@@ -94,7 +94,7 @@ function pantallaAprendiz(nivel) {
       tarjeta.innerHTML = h`<p class="eyebrow">Constelación completa</p>
         <h2>${escapar(nivel.nombre)}</h2>
         <p>${escapar(nivel.aprendiz.dato)}</p>
-        <div class="acciones"><a class="boton principal" href="#/tejedora/${nivel.id}">Tejer de memoria</a><a class="boton" href="#/">Volver al cielo</a></div>`;
+        <div class="acciones"><a class="boton principal" href="#/tejedora/${nivel.id}">Tejer sobre el cielo</a><a class="boton" href="#/">Volver al cielo</a></div>`;
     },
   });
 }
@@ -102,13 +102,10 @@ function pantallaAprendiz(nivel) {
 // ---------- Tejedora ----------
 function pantallaTejedora(nivel) {
   if (!guardado.estado(nivel.id).aprendiz) { ir(`#/aprendiz/${nivel.id}`, { reemplazar: true }); return; }
-  app.innerHTML = cabecera(nivel.nombre, 'Tejedora · une sus estrellas de memoria') +
+  app.innerHTML = cabecera(nivel.nombre, 'Tejedora · teje la figura sobre el cielo real') +
     `<section class="escena"><div class="cielo"></div><div class="tarjeta" aria-live="polite"></div></section>`;
   const tarjeta = app.querySelector('.tarjeta');
-  const ayuda = (texto) => {
-    tarjeta.innerHTML = `<p class="sub">${texto}</p><div class="acciones"><button class="boton" id="ver">Ver la figura</button></div>`;
-    tarjeta.querySelector('#ver').addEventListener('click', () => pantallaActual.verFigura());
-  };
+  const ayuda = texto => { tarjeta.innerHTML = `<p class="sub">${texto}</p>`; };
   pantallaActual = montarTejedora(app.querySelector('.cielo'), nivel, {
     alTejer: (n, total) => ayuda(`${n} de ${total} hilos`),
     alCompletar() {
@@ -124,7 +121,7 @@ function pantallaTejedora(nivel) {
       });
     },
   });
-  ayuda('Toca una estrella y luego otra, o arrastra un hilo entre ellas.');
+  ayuda('Repasa la figura con hilos de luz: toca una estrella y luego otra, o arrastra entre ellas.');
 }
 
 // ---------- Atlas ----------

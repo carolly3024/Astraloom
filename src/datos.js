@@ -51,9 +51,11 @@ export function construirNivel(cielo, textos) {
   const obj = textos.objeto;
   const posObjeto = proyectar(obj.ar, obj.dec, cielo.centro);
 
-  // Aprendiz encuadra solo la figura; Tejedora usa todo el trozo de cielo.
+  // Aprendiz encuadra solo la figura. Tejedora encuadra la figura y su objeto,
+  // y muestra las estrellas vecinas que caen dentro de ese trozo de cielo.
   const aFigura = normalizar(estrellas);
-  const aCielo = normalizar([...estrellas, ...fondo, posObjeto]);
+  const aCielo = normalizar([...estrellas, posObjeto], 0.1);
+  const dentro = p => p.x > -0.02 && p.x < 1.02 && p.y > -0.02 && p.y < 1.02;
 
   return {
     id: cielo.id,
@@ -67,7 +69,7 @@ export function construirNivel(cielo, textos) {
     },
     tejedora: {
       estrellas: estrellas.map(e => ({ ...e, ...aCielo(e) })),
-      fondo: fondo.map(e => ({ ...e, ...aCielo(e) })),
+      fondo: fondo.map(e => ({ ...e, ...aCielo(e) })).filter(dentro),
       objeto: { ...obj, ...aCielo(posObjeto) },
     },
   };

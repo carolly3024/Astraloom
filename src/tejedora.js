@@ -1,5 +1,6 @@
 // Astraloom · nivel Tejedora
-// Las estrellas están en su posición real, entre estrellas vecinas y sin guías.
+// Las estrellas están en su posición real, entre estrellas vecinas. La figura se
+// ve como guía tenue (carolly, 2026-10-18: de memoria resultaba demasiado difícil).
 // Se traza un hilo de una estrella a otra (arrastrando, o tocando una y luego otra).
 // Si la unión existe en la figura, el hilo se queda; si no, se deshace con suavidad.
 
@@ -13,7 +14,7 @@ const aCielo = p => ({ ...p, x: 40 + p.x * 920, y: 40 + p.y * 920 });
 export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
   const svg = crearCielo(contenedor);
   svg.setAttribute('aria-label', `Cielo de ${nivel.nombre}, nivel Tejedora`);
-  const capaFigura = el('g', { class: 'figura-oculta' }, svg);
+  const capaFigura = el('g', { class: 'figura' }, svg);
   const capaHilos = el('g', {}, svg);
   const capaEstrellas = el('g', {}, svg);
 
@@ -28,7 +29,7 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
   const total = pendientes.size;
   const objeto = aCielo(nivel.tejedora.objeto);
 
-  // La figura completa, escondida: se ve un momento con «Ver la figura».
+  // La figura, como guía tenue que el jugador repasa con hilos.
   for (const [a, b] of pendientes.values()) {
     const pa = porHip.get(a), pb = porHip.get(b);
     el('line', { x1: pa.x, y1: pa.y, x2: pb.x, y2: pb.y, class: 'hilo guia' }, capaFigura);
@@ -142,10 +143,6 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar }) {
   pistas.reiniciar();
   return {
     objeto,
-    verFigura() {
-      capaFigura.classList.add('visible');
-      setTimeout(() => capaFigura.classList.remove('visible'), 2500);
-    },
     parar: () => pistas.parar(),
     svg,
   };

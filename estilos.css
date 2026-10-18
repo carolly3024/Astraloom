@@ -76,16 +76,19 @@ a { color: var(--azul); }
 .suelta.cogida { cursor: grabbing; }
 .hueco { fill: none; stroke: var(--plata); stroke-opacity: .35; stroke-width: 1.5; stroke-dasharray: 3 4; transition: stroke-opacity .2s, stroke-width .2s; }
 .hueco.atrae { stroke-opacity: .9; stroke-width: 2.5; stroke: var(--azul); }
+.hueco.destino { stroke: var(--azul); stroke-opacity: .95; stroke-width: 2.5; stroke-dasharray: none; filter: url(#brillo); animation: late 1.2s ease-in-out infinite; }
 .hueco.lleno { stroke-opacity: 0; }
+.aro { fill: none; stroke: var(--azul); stroke-width: 2.5; opacity: 0; transition: opacity .2s; }
+.cogida .aro { opacity: .95; filter: url(#brillo); }
+.cogida > circle:nth-child(2) { filter: url(#brillo) brightness(1.6); }
 .hilo { stroke: var(--plata); stroke-linecap: round; }
 .hilo.guia { stroke-opacity: .14; stroke-width: 1.5; stroke-dasharray: 5 7; }
 .hilo.tejido { stroke-opacity: .85; stroke-width: 2.2; filter: url(#brillo); }
 .hilo.temporal { stroke: var(--azul); stroke-opacity: .7; stroke-width: 2; }
 .hilo.deshecho { stroke: var(--bruma); stroke-width: 1.5; }
 .hilo.insinuado { stroke: var(--azul); stroke-opacity: .55; stroke-width: 2; stroke-dasharray: 4 6; }
-.figura-oculta { opacity: 0; transition: opacity .6s; pointer-events: none; }
-.figura-oculta.visible { opacity: 1; }
-.figura-oculta .hilo.guia { stroke-opacity: .45; }
+.figura { pointer-events: none; }
+.figura .hilo.guia { stroke-opacity: .3; }
 .elegida circle:nth-child(2) { stroke: var(--azul); stroke-width: 3; }
 .completa .hilo.tejido { stroke-opacity: 1; stroke: #ffffff; }
 .completa .hilo.guia { stroke-opacity: 0; }

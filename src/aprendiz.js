@@ -49,6 +49,7 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar }) {
   const piezas = huecos.map((h, i) => {
     const inicio = sueltas[i];
     const g = dibujarEstrella(capaSueltas, { ...h, x: inicio.x, y: inicio.y }, { class: 'estrella suelta', 'data-hip': h.hip });
+    el('circle', { r: radioEstrella(h.mag) + 7, class: 'aro' }, g); // brilla junto a su hueco al tocarla
     el('circle', { r: 32, fill: 'transparent' }, g); // zona cómoda para el dedo
     return { hueco: h, g, pos: { ...inicio }, inicio, colocada: false };
   });
@@ -86,6 +87,7 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar }) {
     arrastre = { p, dx: p.pos.x - pt.x, dy: p.pos.y - pt.y };
     capaSueltas.appendChild(p.g);
     p.g.classList.add('cogida');
+    p.hueco.anillo.classList.add('destino'); // su hueco se ilumina con ella
   });
 
   svg.addEventListener('pointermove', ev => {
@@ -108,7 +110,7 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar }) {
     const { p } = arrastre;
     arrastre = null;
     p.g.classList.remove('cogida');
-    p.hueco.anillo.classList.remove('atrae');
+    p.hueco.anillo.classList.remove('atrae', 'destino');
     const desde = { ...p.pos };
     if (distancia(p.pos, p.hueco) < ENCAJA) {
       p.colocada = true;

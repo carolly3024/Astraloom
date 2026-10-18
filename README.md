@@ -5,7 +5,7 @@ Juego relajante de constelaciones para el navegador: teje estrellas reales y des
 Cada constelación tiene dos niveles:
 
 - **Aprendiz**: las estrellas se han soltado y hay que arrastrarlas a sus huecos. Al completarla aparece un dato de la constelación y se abre Tejedora.
-- **Tejedora**: las estrellas están en su posición real, entre estrellas vecinas y sin guías. Se unen de memoria con hilos de luz. Al terminar despierta un objeto de cielo profundo (una nebulosa, un cúmulo o una galaxia) que se guarda en el atlas con su ficha.
+- **Tejedora**: las estrellas están en su posición real, entre estrellas vecinas, con la figura como guía tenue. Se repasa uniendo las estrellas con hilos de luz. Al terminar despierta un objeto de cielo profundo (una nebulosa, un cúmulo o una galaxia) que se guarda en el atlas con su ficha.
 
 No hay puntuación, tiempo ni errores. Tras 20 segundos sin avanzar aparece una pista discreta, y a los 40 una segunda.
 
