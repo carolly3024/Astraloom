@@ -115,7 +115,7 @@ a { color: var(--azul); }
 .llamada { cursor: pointer; outline: none; }
 .llamada-halo { animation: llamada 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 .llamada-aro { animation: llamada-aro 2.6s ease-out infinite; transform-box: fill-box; transform-origin: center; }
-.llamada:focus-visible .llamada-aro { stroke: var(--plata); stroke-width: 3; }
+.llamada:focus-visible .llamada-zona { stroke: var(--plata); stroke-width: 2; stroke-dasharray: 4 6; }
 @keyframes llamada { 0%, 100% { opacity: .55; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.15); } }
 @keyframes llamada-aro { 0% { opacity: .9; transform: scale(.6); } 100% { opacity: 0; transform: scale(2.2); } }
 
@@ -285,11 +285,11 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
 .completa .diana { stroke-opacity: 0; }
 
 /* Guía de la primera vez, encima del cielo */
-.guia-inicial { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; background: #03050ab3; backdrop-filter: blur(3px); animation: funde .5s ease both; z-index: 2; }
+.guia-inicial { margin: 0 0 14px; padding: 14px 16px; border-radius: 10px; border: 1px solid #7fa8f040; background: #7fa8f00d; animation: aparece .6s cubic-bezier(.2, .8, .2, 1) both; }
 .guia-inicial.se-va { opacity: 0; transition: opacity .35s; }
-.guia-caja { max-width: 340px; padding: 18px 20px; border-radius: 12px; background: #0a0d15f2; border: 1px solid #ffffff1f; box-shadow: 0 20px 50px -20px #000; }
-.guia-caja ol { margin: .5rem 0 1rem; padding-left: 1.2rem; display: grid; gap: .35rem; }
-.guia-caja .boton { width: 100%; }
+.guia-inicial ol { margin: .5rem 0 .9rem; padding-left: 1.2rem; display: grid; gap: .35rem; }
+.guia-inicial .boton { width: 100%; }
+.guia-inicial .demo { max-height: 80px; }
 .demo { width: 100%; height: auto; display: block; margin: .25rem 0; }
 .demo-hueco { fill: none; stroke: var(--azul); stroke-width: 1.5; stroke-dasharray: 3 4; }
 .demo-estrella { fill: #fff; filter: drop-shadow(0 0 4px #7fa8f0); animation: demo-arrastre 2.6s cubic-bezier(.5, 0, .3, 1) infinite; }
@@ -306,9 +306,8 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
   .barra h1 { font-size: 1.35rem; }
 }
 @media (max-width: 720px) {
-  .guia-inicial { padding: 10px; overflow-y: auto; }
-  .guia-caja { padding: 14px 16px; font-size: .92rem; }
-  .guia-caja ol { margin: .35rem 0 .75rem; }
+  .guia-inicial { padding: 12px 14px; font-size: .92rem; }
+  .guia-inicial ol { margin: .35rem 0 .75rem; }
   .demo { max-height: 64px; }
 }
 

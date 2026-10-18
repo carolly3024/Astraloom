@@ -50,7 +50,7 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar, alDesp
   const tejidas = new Set();
   const temporal = el('line', { class: 'hilo temporal', visibility: 'hidden' }, svg);
   let origen = null, elegida = null, pistaLinea = null, dibujado = false, inicio = null;
-  let terminado = false, salir = false, llamada = null;
+  let terminado = false, salir = false, llamada = null, luzLlamada = null;
 
   // Al terminar, el sitio del objeto brilla y late para invitar a tocarlo.
   function llamar() {
@@ -60,10 +60,14 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar, alDesp
     el('stop', { offset: '0%', 'stop-color': '#ffffff', 'stop-opacity': 0.9 }, gr);
     el('stop', { offset: '35%', 'stop-color': c, 'stop-opacity': 0.55 }, gr);
     el('stop', { offset: '100%', 'stop-color': c, 'stop-opacity': 0 }, gr);
+    // El brillo va por debajo de la figura, para no tapar estrellas ni hilos (el objeto
+    // suele estar pegado a ellos, en su sitio real). Encima solo queda la zona táctil, invisible.
+    luzLlamada = el('g', { class: 'llamada-luz', transform: `translate(${objeto.x} ${objeto.y})`, 'aria-hidden': 'true' });
+    svg.insertBefore(luzLlamada, capaFigura);
+    el('circle', { r: 60, fill: 'url(#gllamada)', class: 'llamada-halo' }, luzLlamada);
+    el('circle', { r: 26, fill: 'none', stroke: c, 'stroke-width': 2, class: 'llamada-aro' }, luzLlamada);
     llamada = el('g', { class: 'llamada', transform: `translate(${objeto.x} ${objeto.y})`, role: 'button', tabindex: 0, 'aria-label': 'Despertar el objeto escondido' }, svg);
-    el('circle', { r: 60, fill: 'url(#gllamada)', class: 'llamada-halo' }, llamada);
-    el('circle', { r: 26, fill: 'none', stroke: c, 'stroke-width': 2, class: 'llamada-aro' }, llamada);
-    el('circle', { r: 75, fill: 'transparent' }, llamada);
+    el('circle', { r: 75, fill: 'transparent', class: 'llamada-zona' }, llamada);
     const tocar = () => { if (llamada) alDespertar?.(); };
     llamada.addEventListener('click', tocar);
     llamada.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') tocar(); });
@@ -215,7 +219,7 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar, alDesp
   return {
     objeto,
     parar: () => { salir = true; pistas.parar(); },
-    quitarLlamada() { llamada?.remove(); llamada = null; },
+    quitarLlamada() { llamada?.remove(); luzLlamada?.remove(); llamada = luzLlamada = null; },
     svg,
   };
 }

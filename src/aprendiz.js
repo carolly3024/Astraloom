@@ -191,10 +191,14 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
     el('stop', { offset: '0%', 'stop-color': '#ffffff', 'stop-opacity': 0.85 }, gr);
     el('stop', { offset: '35%', 'stop-color': '#7fa8f0', 'stop-opacity': 0.45 }, gr);
     el('stop', { offset: '100%', 'stop-color': '#7fa8f0', 'stop-opacity': 0 }, gr);
-    const g = el('g', { class: 'llamada misterio', transform: `translate(${lim(o.x)} ${lim(o.y)})`, role: 'button', tabindex: 0, 'aria-label': 'Algo duerme aquí: ir a Tejedora' }, svg);
-    el('circle', { r: 46, fill: 'url(#gmisterio)', class: 'llamada-halo' }, g);
-    el('circle', { r: 20, fill: 'none', stroke: '#7fa8f0', 'stroke-width': 1.5, class: 'llamada-aro' }, g);
-    el('circle', { r: 60, fill: 'transparent' }, g);
+    // El brillo, por debajo de la figura; encima solo la zona táctil invisible.
+    const pos = `translate(${lim(o.x)} ${lim(o.y)})`;
+    const luz = el('g', { class: 'llamada-luz', transform: pos, 'aria-hidden': 'true' });
+    svg.insertBefore(luz, capaLineas);
+    el('circle', { r: 46, fill: 'url(#gmisterio)', class: 'llamada-halo' }, luz);
+    el('circle', { r: 20, fill: 'none', stroke: '#7fa8f0', 'stroke-width': 1.5, class: 'llamada-aro' }, luz);
+    const g = el('g', { class: 'llamada misterio', transform: pos, role: 'button', tabindex: 0, 'aria-label': 'Algo duerme aquí: ir a Tejedora' }, svg);
+    el('circle', { r: 60, fill: 'transparent', class: 'llamada-zona' }, g);
     g.addEventListener('click', () => alTocarMisterio?.());
     g.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') alTocarMisterio?.(); });
   }

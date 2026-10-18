@@ -136,12 +136,13 @@ const GUIAS = {
 function mostrarGuia(nivel) {
   if (guardado.ajuste(`guia-${nivel}`)) return;
   const g = GUIAS[nivel];
-  const cielo = app.querySelector('.cielo');
-  cielo.insertAdjacentHTML('beforeend', h`<div class="guia-inicial" role="dialog" aria-label="Cómo se juega">
-    <div class="guia-caja"><p class="eyebrow">Cómo se juega · ${g.titulo}</p>${g.demo}
+  // Va en la caja de información, debajo del contador: nunca tapa el cielo.
+  const contenido = app.querySelector('.tarjeta .contenido');
+  contenido.insertAdjacentHTML('beforebegin', h`<div class="guia-inicial" role="note" aria-label="Cómo se juega">
+    <p class="eyebrow">Cómo se juega · ${g.titulo}</p>${g.demo}
     <ol>${g.pasos.map(p => `<li>${p}</li>`).join('')}</ol>
-    <button class="boton principal">Entendido</button></div></div>`);
-  const guia = cielo.querySelector('.guia-inicial');
+    <button class="boton principal">Entendido</button></div>`);
+  const guia = app.querySelector('.guia-inicial');
   const cerrar = () => { guardado.ajuste(`guia-${nivel}`, true); guia.classList.add('se-va'); setTimeout(() => guia.remove(), 400); };
   guia.querySelector('button').addEventListener('click', cerrar);
   guia.querySelector('button').focus({ preventScroll: true });
