@@ -275,3 +275,39 @@ a.tarjeta-objeto.dormido:hover { box-shadow: none; border-color: #7fa8f066; }
 /* Al pasar por el espacio vacío de fuera, el botón «Cielo» se ilumina: tocar ahí lleva al inicio */
 body.sobre-fondo { cursor: pointer; }
 body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); box-shadow: 0 0 0 3px #7fa8f033, 0 0 18px #7fa8f055; }
+
+/* Tejedora: las estrellas de la figura llevan un aro fino; las vecinas se apagan un poco.
+   Al elegir una, las que siguen la figura desde ella se iluminan. */
+.diana { fill: none; stroke: var(--plata); stroke-opacity: .32; stroke-width: 1.3; transition: stroke-opacity .25s, stroke .25s; }
+.vecina-fondo { opacity: .55; }
+.elegida .diana { stroke: #fff; stroke-opacity: .9; stroke-width: 2; }
+.candidata .diana { stroke: var(--azul); stroke-opacity: 1; stroke-width: 2.2; filter: url(#brillo); animation: late 1.2s ease-in-out infinite; }
+.completa .diana { stroke-opacity: 0; }
+
+/* Guía de la primera vez, encima del cielo */
+.guia-inicial { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; background: #03050ab3; backdrop-filter: blur(3px); animation: funde .5s ease both; z-index: 2; }
+.guia-inicial.se-va { opacity: 0; transition: opacity .35s; }
+.guia-caja { max-width: 340px; padding: 18px 20px; border-radius: 12px; background: #0a0d15f2; border: 1px solid #ffffff1f; box-shadow: 0 20px 50px -20px #000; }
+.guia-caja ol { margin: .5rem 0 1rem; padding-left: 1.2rem; display: grid; gap: .35rem; }
+.guia-caja .boton { width: 100%; }
+.demo { width: 100%; height: auto; display: block; margin: .25rem 0; }
+.demo-hueco { fill: none; stroke: var(--azul); stroke-width: 1.5; stroke-dasharray: 3 4; }
+.demo-estrella { fill: #fff; filter: drop-shadow(0 0 4px #7fa8f0); animation: demo-arrastre 2.6s cubic-bezier(.5, 0, .3, 1) infinite; }
+@keyframes demo-arrastre { 0%, 15% { transform: translateX(0); } 65%, 85% { transform: translateX(110px); } 100% { transform: translateX(110px); opacity: 0; } }
+.demo-punto { fill: #fff; stroke: var(--plata); stroke-opacity: .4; stroke-width: 6; paint-order: stroke; }
+.demo-hilo { fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-dasharray: 160; stroke-dashoffset: 160; filter: drop-shadow(0 0 3px #7fa8f0); animation: demo-trazo 2.6s ease-in-out infinite; }
+@keyframes demo-trazo { 0%, 10% { stroke-dashoffset: 160; } 70%, 90% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .demo-estrella, .demo-hilo, .candidata .diana { animation: none; } .demo-hilo { stroke-dashoffset: 0; } }
+
+/* Móvil: el cielo ocupa todo el ancho para que las estrellas sean más grandes */
+@media (max-width: 720px) {
+  #app { padding-left: max(10px, env(safe-area-inset-left, 0px)); padding-right: max(10px, env(safe-area-inset-right, 0px)); }
+  .escena > .cielo { margin-inline: -6px; width: calc(100% + 12px); }
+  .barra h1 { font-size: 1.35rem; }
+}
+@media (max-width: 720px) {
+  .guia-inicial { padding: 10px; overflow-y: auto; }
+  .guia-caja { padding: 14px 16px; font-size: .92rem; }
+  .guia-caja ol { margin: .35rem 0 .75rem; }
+  .demo { max-height: 64px; }
+}

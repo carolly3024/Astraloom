@@ -43,6 +43,13 @@ export function puntoSVG(svg, ev) {
 
 export const distancia = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
 
+// Cuánto hay que agrandar estrellas y zonas táctiles según el tamaño del cielo en
+// pantalla: 1 en un portátil, hasta algo más del doble en un móvil estrecho.
+export function aumento(svg) {
+  const ancho = svg.getBoundingClientRect().width || 600;
+  return Math.min(2.2, Math.max(1, LADO / ancho / 1.6));
+}
+
 const suave = t => 1 - Math.pow(1 - t, 3);
 export const suaveDoble = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 

@@ -5,7 +5,7 @@
 // arrastrando entre dos, o tocando una y luego otra.
 // Si la unión existe en la figura, el hilo se queda; si no, se deshace con suavidad.
 
-import { el, crearCielo, dibujarEstrella, puntoSVG, distancia, animar, esperar, trazarFigura } from './svg.js';
+import { el, crearCielo, dibujarEstrella, radioEstrella, puntoSVG, distancia, animar, esperar, trazarFigura, aumento } from './svg.js';
 import { crearPistas } from './pistas.js';
 
 const ALCANCE = 42; // distancia máxima para «tocar» una estrella
@@ -25,7 +25,17 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar, alDesp
     .filter(e => !vistas.has(e.hip) && vistas.add(e.hip))
     .map(aCielo);
   const porHip = new Map(estrellas.map(e => [e.hip, e]));
-  for (const e of estrellas) e.g = dibujarEstrella(capaEstrellas, e, { 'data-hip': e.hip });
+  // Las estrellas de la figura llevan un aro fino que las distingue de las vecinas,
+  // y en pantallas pequeñas se agrandan (las vecinas no, para no tapar la figura).
+  const deFigura = new Set(nivel.lineas.flat());
+  const f = aumento(svg);
+  for (const e of estrellas) {
+    e.g = dibujarEstrella(capaEstrellas, e, { 'data-hip': e.hip });
+    if (deFigura.has(e.hip)) {
+      el('circle', { r: radioEstrella(e.mag) + 9, class: 'diana' }, e.g);
+      e.g.setAttribute('transform', `translate(${e.x} ${e.y}) scale(${f})`);
+    } else e.g.classList.add('vecina-fondo');
+  }
 
   const pendientes = new Map(nivel.lineas.map(([a, b]) => [clave(a, b), [a, b]]));
   const total = pendientes.size;
@@ -59,17 +69,29 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar, alDesp
     llamada.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') tocar(); });
   }
 
-  const masCercana = (pt, alcance = ALCANCE, valida = () => true) => {
-    let mejor = null, d = alcance;
+  const masCercana = (pt, radio = alcance(), valida = () => true) => {
+    let mejor = null, d = radio;
     for (const e of estrellas) { const de = distancia(e, pt); if (de < d && valida(e)) { d = de; mejor = e; } }
     return mejor;
   };
   // La estrella cercana que sigue la figura desde `desde` (sin contar `desde`).
   // Así se pueden unir estrellas casi pegadas, como las del escudo de Orión.
-  const vecina = (pt, desde, alcance, tambienTejidas = false) => masCercana(pt, alcance, e =>
+  const vecina = (pt, desde, radio, tambienTejidas = false) => masCercana(pt, radio, e =>
     e !== desde && (pendientes.has(clave(desde.hip, e.hip)) || (tambienTejidas && tejidas.has(clave(desde.hip, e.hip)))));
 
-  function marcar(e, si) { e?.g.classList.toggle('elegida', si); }
+  // Al elegir una estrella, se iluminan las que siguen la figura desde ella.
+  function marcar(e, si) {
+    e?.g.classList.toggle('elegida', si);
+    for (const x of capaEstrellas.querySelectorAll('.candidata')) x.classList.remove('candidata');
+    if (si && e && !terminado) {
+      for (const [a, b] of pendientes.values()) {
+        if (a === e.hip) porHip.get(b).g.classList.add('candidata');
+        if (b === e.hip) porHip.get(a).g.classList.add('candidata');
+      }
+    }
+  }
+  const alcance = () => ALCANCE * aumento(svg);
+  const paso = () => PASO * aumento(svg);
 
   function hilo(a, b, cls) {
     return el('line', { x1: a.x, y1: a.y, x2: a.x, y2: a.y, class: `hilo ${cls}` }, capaHilos);
@@ -137,7 +159,7 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar, alDesp
     const e = masCercana(pt);
     if (!e) { marcar(elegida, false); elegida = null; return; }
     ev.preventDefault();
-    const segunda = elegida && (vecina(pt, elegida, ALCANCE) || (e !== elegida ? e : null));
+    const segunda = elegida && (vecina(pt, elegida, alcance()) || (e !== elegida ? e : null));
     if (segunda) { // modo toque: segunda estrella
       const a = elegida;
       marcar(a, false); elegida = null;
@@ -159,11 +181,11 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar, alDesp
     const pt = puntoSVG(svg, ev);
     // Dibujo de un trazo: al pasar por una estrella que sigue la figura, el hilo
     // se teje y el trazo continúa desde ella. Las demás estrellas no lo cortan.
-    const paso = vecina(pt, origen, PASO, true);
-    if (paso) {
-      if (pendientes.has(clave(origen.hip, paso.hip))) intentar(origen, paso);
+    const siguiente = vecina(pt, origen, paso(), true);
+    if (siguiente) {
+      if (pendientes.has(clave(origen.hip, siguiente.hip))) intentar(origen, siguiente);
       marcar(origen, false);
-      origen = paso;
+      origen = siguiente;
       dibujado = true;
       marcar(origen, true);
       temporal.setAttribute('x1', origen.x); temporal.setAttribute('y1', origen.y);
@@ -181,8 +203,8 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar, alDesp
     origen = null;
     if (!dibujado && distancia(pt, inicio) < 10) { elegida = a; return; } // un toque: espera la segunda
     // Tras dibujar un trazo, solo cuenta la estrella justo bajo el dedo al soltar.
-    const alcance = dibujado ? PASO : ALCANCE;
-    const e = vecina(pt, a, alcance) || masCercana(pt, alcance, x => x !== a);
+    const radio = dibujado ? paso() : alcance();
+    const e = vecina(pt, a, radio) || masCercana(pt, radio, x => x !== a);
     marcar(a, false); elegida = null;
     if (e) intentar(a, e);
   }

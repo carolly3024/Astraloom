@@ -100,6 +100,48 @@ function pantallaInicio() {
   });
 }
 
+// ---------- Guía de la primera vez ----------
+// Una tarjeta corta encima del cielo, solo la primera vez que se entra en cada nivel.
+const GUIAS = {
+  aprendiz: {
+    titulo: 'Aprendiz',
+    pasos: ['Arrastra cada estrella hasta su hueco.', 'O toca un hueco vacío y su estrella irá sola.'],
+    demo: `<svg viewBox="0 0 200 90" class="demo demo-aprendiz" aria-hidden="true">
+      <circle cx="150" cy="45" r="13" class="demo-hueco"/><circle cx="40" cy="45" r="6" class="demo-estrella"/></svg>`,
+  },
+  tejedora: {
+    titulo: 'Tejedora',
+    pasos: ['Pasa el dedo por las estrellas de la figura sin levantarlo: cada una que toques teje un hilo.', 'Las estrellas con aro son las de la figura; al elegir una, se iluminan las que siguen.'],
+    demo: `<svg viewBox="0 0 200 90" class="demo demo-tejedora" aria-hidden="true">
+      <polyline points="30,60 90,25 170,55" class="demo-hilo"/>
+      <circle cx="30" cy="60" r="5" class="demo-punto"/><circle cx="90" cy="25" r="5" class="demo-punto"/><circle cx="170" cy="55" r="5" class="demo-punto"/></svg>`,
+  },
+};
+
+function mostrarGuia(nivel) {
+  if (guardado.ajuste(`guia-${nivel}`)) return;
+  const g = GUIAS[nivel];
+  const cielo = app.querySelector('.cielo');
+  cielo.insertAdjacentHTML('beforeend', h`<div class="guia-inicial" role="dialog" aria-label="Cómo se juega">
+    <div class="guia-caja"><p class="eyebrow">Cómo se juega · ${g.titulo}</p>${g.demo}
+    <ol>${g.pasos.map(p => `<li>${p}</li>`).join('')}</ol>
+    <button class="boton principal">Entendido</button></div></div>`);
+  const guia = cielo.querySelector('.guia-inicial');
+  const cerrar = () => { guardado.ajuste(`guia-${nivel}`, true); guia.classList.add('se-va'); setTimeout(() => guia.remove(), 400); };
+  guia.querySelector('button').addEventListener('click', cerrar);
+  guia.querySelector('button').focus({ preventScroll: true });
+}
+
+// La siguiente constelación por terminar, empezando después de `id` (o el atlas si no queda ninguna).
+function siguiente(id) {
+  const i = juego.niveles.findIndex(n => n.id === id);
+  for (let k = 1; k <= juego.niveles.length; k++) {
+    const n = juego.niveles[(i + k) % juego.niveles.length], e = guardado.estado(n.id);
+    if (!e.tejedora) return { href: `#/${e.aprendiz ? 'tejedora' : 'aprendiz'}/${n.id}`, texto: `Siguiente: ${n.nombre} →` };
+  }
+  return { href: '#/atlas', texto: 'Ver el atlas completo →' };
+}
+
 // ---------- Aprendiz ----------
 function pantallaAprendiz(nivel) {
   app.innerHTML = cabecera(nivel.nombre, 'Aprendiz · arrastra cada estrella a su hueco') +
@@ -109,7 +151,10 @@ function pantallaAprendiz(nivel) {
   const contador = crearContador(app.querySelector('.tarjeta'), nivel.aprendiz.estrellas.length, ' estrellas');
   pantallaActual = montarAprendiz(app.querySelector('.cielo'), nivel, {
     alTocarMisterio: () => ir(`#/tejedora/${nivel.id}`),
-    alEmpezar() { tarjeta.innerHTML = '<p class="sub">Las estrellas se han soltado. Llévalas a su sitio, o toca un hueco y su estrella irá sola.</p>'; },
+    alEmpezar() {
+      tarjeta.innerHTML = '<p class="sub">Las estrellas se han soltado. Llévalas a su sitio, o toca un hueco y su estrella irá sola.</p>';
+      mostrarGuia('aprendiz');
+    },
     alColocar(estrella) {
       contador.poner(++colocadas, estrella.nombre ? `${estrella.nombre} vuelve a su sitio` : '');
     },
@@ -148,7 +193,8 @@ function pantallaTejedora(nivel) {
     quitarLlamada();
     await despertar(svg, nivel.tejedora.objeto, objeto.x, objeto.y, 120);
     contador.quitar(); // la ficha ocupa ya toda la tarjeta
-    tarjeta.innerHTML = ficha(nivel) + `<div class="acciones"><a class="boton principal" href="#/atlas">Ver el atlas</a><a class="boton" href="#/">Volver al cielo</a></div>`;
+    const sig = siguiente(nivel.id);
+    tarjeta.innerHTML = ficha(nivel) + `<div class="acciones"><a class="boton principal" href="${sig.href}">${escapar(sig.texto)}</a><a class="boton" href="#/atlas">Ver el atlas</a></div>`;
   }
   pantallaActual = montarTejedora(app.querySelector('.cielo'), nivel, {
     alTejer: n => contador.poner(n),
@@ -161,7 +207,8 @@ function pantallaTejedora(nivel) {
     },
     alDespertar: despertarYa,
   });
-  ayuda('Repasa la figura con hilos de luz: toca una estrella y luego otra, o arrastra entre ellas.');
+  ayuda('Repasa la figura con hilos de luz: pasa el dedo por sus estrellas sin levantarlo, o toca una y luego otra.');
+  mostrarGuia('tejedora');
 }
 
 // ---------- Atlas ----------

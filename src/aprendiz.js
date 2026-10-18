@@ -3,7 +3,7 @@
 // Al acercarla, su hueco la atrae; soltada lejos, vuelve con suavidad a su sitio.
 // Al entrar, la figura se dibuja hilo a hilo y después las estrellas se sueltan.
 
-import { el, crearCielo, dibujarEstrella, radioEstrella, puntoSVG, distancia, animar, suaveDoble, esperar, trazarFigura, LADO } from './svg.js';
+import { el, crearCielo, dibujarEstrella, radioEstrella, puntoSVG, distancia, animar, suaveDoble, esperar, trazarFigura, aumento, LADO } from './svg.js';
 import { crearPistas } from './pistas.js';
 
 const ATRAE = 110;  // a esta distancia el hueco empieza a atraer
@@ -31,6 +31,7 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
   const capaLineas = el('g', { class: 'guias' }, svg);
   const capaHuecos = el('g', {}, svg);
   const capaSueltas = el('g', {}, svg);
+  const f = aumento(svg); // en el móvil, estrellas, huecos y zonas táctiles más grandes
 
   // La figura ocupa el centro y deja sitio alrededor para las estrellas sueltas.
   const huecos = nivel.aprendiz.estrellas.map(e => ({ ...e, x: 150 + e.x * 700, y: 150 + e.y * 700 }));
@@ -45,7 +46,7 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
   });
 
   huecos.forEach(h => {
-    h.anillo = el('circle', { cx: h.x, cy: h.y, r: radioEstrella(h.mag) + 7, class: 'hueco', 'data-hip': h.hip }, capaHuecos);
+    h.anillo = el('circle', { cx: h.x, cy: h.y, r: (radioEstrella(h.mag) + 7) * f, class: 'hueco', 'data-hip': h.hip }, capaHuecos);
   });
 
   const piezas = huecos.map((h, i) => {
@@ -56,7 +57,9 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
     return { hueco: h, g, pos: { ...inicio }, inicio, colocada: false };
   });
 
-  const mover = (p, x, y) => { p.pos = { x, y }; p.g.setAttribute('transform', `translate(${x} ${y})`); };
+  const mover = (p, x, y) => { p.pos = { x, y }; p.g.setAttribute('transform', `translate(${x} ${y}) scale(${f})`); };
+
+  piezas.forEach(p => mover(p, p.pos.x, p.pos.y)); // aplica el aumento desde el principio
 
   function actualizarLineas() {
     for (const l of lineas) {
@@ -84,7 +87,7 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
     if (!listo || encajadas === piezas.length) return;
     const pt = puntoSVG(svg, ev);
     const p = piezas.filter(p => !p.colocada && !p.vuela).sort((a, b) => distancia(a.pos, pt) - distancia(b.pos, pt))[0];
-    if (!p || distancia(p.pos, pt) > 40) { tocarHueco(pt); return; }
+    if (!p || distancia(p.pos, pt) > 40 * f) { tocarHueco(pt); return; }
     ev.preventDefault();
     svg.setPointerCapture(ev.pointerId);
     arrastre = { p, dx: p.pos.x - pt.x, dy: p.pos.y - pt.y };
@@ -99,10 +102,10 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
     const { p } = arrastre;
     let x = pt.x + arrastre.dx, y = pt.y + arrastre.dy;
     const d = distancia({ x, y }, p.hueco);
-    const cerca = d < ATRAE;
+    const cerca = d < ATRAE * f;
     if (cerca) { // atracción: la estrella se inclina hacia su hueco
-      const f = (1 - d / ATRAE) * 0.45;
-      x += (p.hueco.x - x) * f; y += (p.hueco.y - y) * f;
+      const k = (1 - d / (ATRAE * f)) * 0.45;
+      x += (p.hueco.x - x) * k; y += (p.hueco.y - y) * k;
     }
     p.hueco.anillo.classList.toggle('atrae', cerca);
     mover(p, x, y);
@@ -110,7 +113,7 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
 
   // Otra forma de jugar: tocar un hueco vacío hace que su estrella vuele hasta él.
   function tocarHueco(pt) {
-    const vacios = piezas.filter(p => !p.colocada && !p.vuela && distancia(p.hueco, pt) < radioEstrella(p.hueco.mag) + 18);
+    const vacios = piezas.filter(p => !p.colocada && !p.vuela && distancia(p.hueco, pt) < (radioEstrella(p.hueco.mag) + 18) * f);
     const p = vacios.sort((a, b) => distancia(a.hueco, pt) - distancia(b.hueco, pt))[0];
     if (!p) return;
     p.vuela = true;
@@ -148,7 +151,7 @@ export function montarAprendiz(contenedor, nivel, { alColocar, alCompletar, alEm
     arrastre = null;
     p.g.classList.remove('cogida');
     p.hueco.anillo.classList.remove('atrae', 'destino');
-    if (distancia(p.pos, p.hueco) < ENCAJA) return encajar(p);
+    if (distancia(p.pos, p.hueco) < ENCAJA * f) return encajar(p);
     const desde = { ...p.pos };
     await animar(450, t => mover(p, desde.x + (p.inicio.x - desde.x) * t, desde.y + (p.inicio.y - desde.y) * t));
   }
