@@ -1,45 +1,49 @@
 /* Astraloom · estilos del prototipo v0.2 (provisionales hasta la fase 4).
-   Colores tomados de las variables de Figma (Tema/Oscuro). */
+   Estilo de observatorio: fondo casi negro, paneles sobrios, letra sin serifa
+   para los títulos y monoespaciada para los datos. Cormorant solo en la marca. */
 :root {
-  --noche: #0e1430;
-  --indigo: #1e2a5a;
+  --noche: #05070c;
+  --panel: #0a0d15cc;
+  --linea: #ffffff14;
   --plata: #dce3f0;
-  --bruma: #e8e6f4;
-  --bruma-suave: #e8e6f4b3;
+  --bruma: #e6e9ef;
+  --bruma-suave: #e6e9ef99;
   --azul: #7fa8f0;
-  --titulo: 'Cormorant Garamond', Georgia, serif;
-  --texto: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --marca: 'Cormorant Garamond', Georgia, serif;
+  --titulo: 'Inter', system-ui, sans-serif;
+  --texto: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --datos: 'IBM Plex Mono', ui-monospace, monospace;
   color-scheme: dark; /* el juego es siempre nocturno */
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; }
 body {
-  background: radial-gradient(ellipse at top, #18214a 0%, var(--noche) 60%) fixed, var(--noche);
+  background: radial-gradient(ellipse at top, #0c111c 0%, var(--noche) 55%) fixed, var(--noche);
   color: var(--bruma);
-  font: 16px/1.55 var(--texto);
+  font: 15px/1.6 var(--texto);
   min-height: 100vh;
 }
 #app { max-width: 1040px; margin: 0 auto; padding-block: 16px 40px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-h1, h2, h3 { font-family: var(--titulo); font-weight: 600; line-height: 1.15; margin: 0; }
-h1 { font-size: 1.9rem; }
+h1, h2, h3 { font-family: var(--titulo); font-weight: 500; letter-spacing: -.015em; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.6rem; }
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.15rem; margin-top: 1rem; }
 p { margin: .5rem 0; }
 a { color: var(--azul); }
 .sub { color: var(--bruma-suave); margin: .15rem 0; }
-.eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; color: var(--azul); margin: 0 0 .25rem; }
+.eyebrow { font-family: var(--datos); text-transform: uppercase; letter-spacing: .14em; font-size: .7rem; color: var(--azul); margin: 0 0 .25rem; }
 .cargando, .error { text-align: center; margin-top: 30vh; color: var(--bruma-suave); }
 
 /* Botones */
 .boton {
-  display: inline-block; padding: .55rem 1rem; border-radius: 999px;
-  border: 1px solid #dce3f055; background: transparent; color: var(--bruma);
+  display: inline-block; padding: .5rem .95rem; border-radius: 8px;
+  border: 1px solid #ffffff2e; background: transparent; color: var(--bruma);
   font: inherit; text-decoration: none; cursor: pointer; transition: background .2s, border-color .2s;
 }
-.boton:hover { background: #dce3f014; border-color: var(--plata); }
+.boton:hover { background: #ffffff0d; border-color: var(--plata); }
 .boton.principal { background: var(--azul); border-color: var(--azul); color: var(--noche); font-weight: 600; }
-.boton.principal:hover { background: #9dbcf5; }
+.boton.principal:hover { background: #a3c0f5; }
 .boton.hecho { border-color: #7fa8f088; color: var(--azul); }
 .boton.bloqueado { opacity: .35; cursor: not-allowed; }
 .boton:disabled { opacity: .5; cursor: default; }
@@ -48,7 +52,7 @@ a { color: var(--azul); }
 
 /* Inicio */
 .portada { display: flex; align-items: center; gap: 1rem; margin: 1rem 0 .5rem; }
-.marca { font-size: 2.6rem; letter-spacing: .02em; }
+.marca { font-family: var(--marca); font-weight: 600; font-size: 2.6rem; letter-spacing: .02em; }
 .rejilla { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
 .tarjeta-const .estado { font-size: .9rem; min-height: 1.4em; }
 .niveles { display: flex; gap: .5rem; margin-top: .75rem; flex-wrap: wrap; }
@@ -63,12 +67,12 @@ a { color: var(--azul); }
    todo cabe en la pantalla y la tarjeta hace scroll por dentro si la ficha es larga. */
 .escena { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 14px; height: max(420px, calc(100svh - 136px)); }
 .cielo {
-  min-width: 0; height: 100%; border-radius: 18px;
-  background: radial-gradient(circle at 50% 40%, #16204a, #0b1027 75%);
-  border: 1px solid #dce3f01a; overflow: hidden;
+  min-width: 0; height: 100%; border-radius: 12px;
+  background: radial-gradient(circle at 50% 40%, #0b111e, #03050a 75%);
+  border: 1px solid var(--linea); overflow: hidden;
 }
 .cielo-svg, .mini { width: 100%; height: 100%; display: block; touch-action: none; user-select: none; }
-.tarjeta { min-width: 0; height: 100%; overflow-y: auto; background: #1e2a5a66; border: 1px solid #dce3f01f; border-radius: 16px; padding: 16px 20px; }
+.tarjeta { min-width: 0; height: 100%; overflow-y: auto; background: var(--panel); border: 1px solid var(--linea); border-radius: 12px; padding: 16px 20px; }
 /* En el móvil no caben de lado: cielo cuadrado arriba y tarjeta debajo. */
 @media (max-width: 720px) {
   .escena { display: flex; flex-direction: column; height: auto; }
@@ -134,21 +138,21 @@ a { color: var(--azul); }
 .contador {
   position: relative; isolation: isolate; flex: none; min-height: 52px; border-radius: 999px; margin-bottom: 14px;
   display: grid; place-items: center; padding: 8px 26px;
-  background: #0b102799; transition: box-shadow .6s;
+  background: #03050a; transition: box-shadow .6s;
 }
 .contador-relleno {
   position: absolute; inset: 0 auto 0 0; width: 0; border-radius: inherit;
-  background: linear-gradient(90deg, #7fa8f014, #7fa8f04d); transition: width .7s ease;
+  background: linear-gradient(90deg, #7fa8f00d, #7fa8f033); transition: width .7s ease;
 }
 .contador-textos { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .contador-detalle { font-size: .85rem; color: var(--bruma-suave); }
 .contador-detalle:empty { display: none; }
-.contador-texto { font-family: var(--titulo); font-size: 1.3rem; letter-spacing: .03em; font-variant-numeric: tabular-nums; }
-.contador.lleno { box-shadow: 0 0 22px #7fa8f033; }
+.contador-texto { font-family: var(--datos); font-size: 1.05rem; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.contador.lleno { box-shadow: 0 0 18px #7fa8f022; }
 .contador.lleno .contador-relleno { background: linear-gradient(90deg, #7fa8f033, #7fa8f066); }
 
 /* Invitación a Tejedora al terminar Aprendiz */
-.misterio-texto { margin: 1rem 0 .25rem; padding: 12px 16px; border-radius: 14px; border: 1px solid #7fa8f04d; background: #7fa8f014; }
+.misterio-texto { margin: 1rem 0 .25rem; padding: 12px 16px; border-radius: 10px; border: 1px solid #7fa8f033; background: #7fa8f00a; }
 .misterio-texto p { margin: .25rem 0; }
 
 /* Borde de luz: un degradado frío que gira por el borde, con un halo suave detrás
@@ -159,22 +163,22 @@ a { color: var(--azul); }
 .borde-luz { position: absolute; inset: -1px; border-radius: inherit; pointer-events: none; animation: giro var(--vuelta, 6s) linear infinite; }
 .aro-luz {
   position: absolute; inset: 0; border-radius: inherit; padding: var(--grosor, 1.5px);
-  background: conic-gradient(from var(--giro), transparent 0deg 150deg, #5b7cfa55 200deg, #9b8cff 260deg, #7fd6ff 310deg, #ffffff 345deg, transparent 360deg);
+  background: conic-gradient(from var(--giro), transparent 0deg 170deg, #7fa8f033 220deg, #8fb4ff99 290deg, #dce8ff 335deg, #ffffff 350deg, transparent 360deg);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
 }
-.halo-luz { position: absolute; inset: 0; border-radius: inherit; filter: blur(7px); opacity: .75; }
+.halo-luz { position: absolute; inset: 0; border-radius: inherit; filter: blur(6px); opacity: .5; }
 .halo-luz .aro-luz { --grosor: 3px; }
 @media (prefers-reduced-motion: reduce) { .borde-luz { animation: none; --giro: 120deg; } }
 
 /* Inicio: cada tarjeta muestra su figura. Las terminadas se tiñen del color de su
    objeto, que brilla detrás de la figura, y llevan el borde de luz. */
 .tarjeta-const {
-  --tono: #7fa8f0; position: relative; border-radius: 20px; padding: 14px 16px 16px;
-  background: linear-gradient(160deg, #1e2a5a80, #121a3d80); border: 1px solid #dce3f01f;
+  --tono: #7fa8f0; position: relative; border-radius: 14px; padding: 12px 14px 16px;
+  background: var(--panel); border: 1px solid var(--linea);
 }
-.ventana { aspect-ratio: 16 / 10; margin: -2px -4px 10px; border-radius: 14px; overflow: hidden;
-  background: radial-gradient(circle at 50% 45%, #16204a, #0b1027 80%); }
+.ventana { position: relative; aspect-ratio: 16 / 10; margin: -2px -4px 10px; border-radius: 8px; overflow: hidden; border: 1px solid #ffffff0d;
+  background: radial-gradient(circle at 50% 45%, #0b111e, #03050a 80%); }
 .mini-figura { width: 100%; height: 100%; display: block; }
 .mini-hilos line { stroke: var(--plata); stroke-width: .5; stroke-linecap: round; stroke-opacity: .55; }
 .mini-estrellas circle { opacity: .9; }
@@ -182,14 +186,13 @@ a { color: var(--azul); }
 .despierta .mini-hilos line { stroke: #fff; stroke-opacity: .95; stroke-width: .6; filter: drop-shadow(0 0 1px var(--tono)); }
 .tarjeta-const.despierta {
   --vuelta: 9s; border-color: transparent;
-  background: radial-gradient(120% 80% at 50% 0%, color-mix(in srgb, var(--tono) 22%, transparent), transparent 70%), linear-gradient(160deg, #1e2a5acc, #121a3dcc);
-  box-shadow: 0 10px 40px -12px color-mix(in srgb, var(--tono) 45%, transparent);
+  background: radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--tono) 9%, transparent), transparent 70%), var(--panel);
+  box-shadow: 0 10px 36px -18px color-mix(in srgb, var(--tono) 40%, transparent);
 }
-.tarjeta-const.despierta .estado { color: color-mix(in srgb, var(--tono) 55%, white); }
+.tarjeta-const.despierta .estado { color: color-mix(in srgb, var(--tono) 35%, white); }
 .sello {
-  position: absolute; top: 22px; right: 24px; padding: .15rem .6rem; border-radius: 999px; font-size: .75rem; letter-spacing: .06em;
-  background: #0b1027b3; border: 1px solid color-mix(in srgb, var(--tono) 60%, transparent); color: #fff;
-  box-shadow: 0 0 14px color-mix(in srgb, var(--tono) 50%, transparent); backdrop-filter: blur(4px);
+  position: absolute; top: 20px; right: 22px; padding: .15rem .5rem; border-radius: 4px; font: 500 .65rem/1.6 var(--datos); letter-spacing: .12em; text-transform: uppercase;
+  background: #03050acc; border: 1px solid #ffffff26; color: #fff; backdrop-filter: blur(4px);
 }
 
 /* Atlas: tarjetas de cristal con un portal redondo donde flota cada objeto. */
@@ -200,9 +203,9 @@ a { color: var(--azul); }
 .rejilla.atlas li { animation: aparece .7s ease-out both; animation-delay: calc(var(--i) * 60ms); }
 @keyframes aparece { from { opacity: 0; transform: translateY(12px); } }
 .tarjeta-objeto {
-  display: block; height: 100%; text-decoration: none; color: inherit; border-radius: 22px; padding: 14px;
-  background: radial-gradient(90% 60% at 50% 25%, color-mix(in srgb, var(--tono) 18%, transparent), transparent 75%), linear-gradient(170deg, #ffffff0d, #ffffff03);
-  border: 1px solid #ffffff14; backdrop-filter: blur(6px);
+  display: block; height: 100%; text-decoration: none; color: inherit; border-radius: 14px; padding: 14px;
+  background: radial-gradient(90% 60% at 50% 25%, color-mix(in srgb, var(--tono) 7%, transparent), transparent 75%), var(--panel);
+  border: 1px solid var(--linea); backdrop-filter: blur(6px);
   transition: transform .5s cubic-bezier(.2, .8, .2, 1), box-shadow .5s;
 }
 .tarjeta-objeto .borde-luz { opacity: .35; transition: opacity .5s; --vuelta: 10s; }
@@ -210,30 +213,43 @@ a.tarjeta-objeto:hover { transform: translateY(-4px); box-shadow: 0 18px 44px -1
 a.tarjeta-objeto:hover .borde-luz { opacity: 1; }
 .portal {
   aspect-ratio: 1; border-radius: 50%; overflow: hidden; margin: 4px auto 12px; width: 86%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--tono) 14%, #0b1027) 0%, #070b1f 70%);
-  box-shadow: inset 0 0 0 1px #ffffff12, 0 0 30px -6px color-mix(in srgb, var(--tono) 55%, transparent);
+  background: radial-gradient(circle, color-mix(in srgb, var(--tono) 6%, #070a12) 0%, #020308 70%);
+  box-shadow: inset 0 0 0 1px #ffffff12, 0 0 28px -10px color-mix(in srgb, var(--tono) 45%, transparent);
 }
 .portal .mini { transition: transform 1.2s cubic-bezier(.2, .8, .2, 1); }
 a.tarjeta-objeto:hover .portal .mini { transform: scale(1.08) rotate(4deg); }
 .pie-objeto { text-align: center; }
 .pie-objeto h2 { font-size: 1.25rem; }
-.pie-objeto .eyebrow { color: color-mix(in srgb, var(--tono) 60%, white); }
+.pie-objeto .eyebrow { color: color-mix(in srgb, var(--tono) 40%, white); }
 .tarjeta-objeto.dormido { background: #ffffff05; border-style: dashed; border-color: #dce3f022; }
-.tarjeta-objeto.dormido .portal { background: radial-gradient(circle, #10173a, #070b1f 70%); animation: respira 4s ease-in-out infinite; }
+.tarjeta-objeto.dormido .portal { background: radial-gradient(circle, #080c16, #020308 70%); animation: respira 4s ease-in-out infinite; }
 .tarjeta-objeto.dormido .eyebrow { color: var(--bruma-suave); }
 .tarjeta-objeto.dormido h2, .tarjeta-objeto.dormido .sub { opacity: .7; }
 a.tarjeta-objeto.dormido:hover { box-shadow: none; border-color: #7fa8f066; }
 @keyframes respira { 0%, 100% { box-shadow: inset 0 0 0 1px #ffffff0d; } 50% { box-shadow: inset 0 0 0 1px #ffffff1a, 0 0 26px -6px #7fa8f066; } }
 @media (prefers-reduced-motion: reduce) { .rejilla.atlas li, .tarjeta-objeto.dormido .portal { animation: none; } }
 
-/* Fondo vivo: nebulosa fría que se mueve despacio y puntitos que reaccionan al puntero */
+/* Fondo vivo: espacio profundo pintado (fondo.js) que se acerca muy despacio y puntitos que reaccionan al puntero */
 #app { position: relative; z-index: 1; }
 .fondo { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .fondo canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.fondo-nebulosa { position: absolute; inset: -10%; filter: blur(70px); opacity: .55; }
-.fondo-nebulosa span { position: absolute; border-radius: 50%; animation: deriva 46s ease-in-out infinite alternate; }
-.fondo-nebulosa span:nth-child(1) { width: 55vw; height: 45vw; left: 52%; top: -8%; background: radial-gradient(closest-side, #4b5fd6aa, transparent); }
-.fondo-nebulosa span:nth-child(2) { width: 45vw; height: 40vw; left: -6%; top: 35%; background: radial-gradient(closest-side, #7a5cd099, transparent); animation-duration: 58s; animation-direction: alternate-reverse; }
-.fondo-nebulosa span:nth-child(3) { width: 40vw; height: 32vw; left: 40%; top: 60%; background: radial-gradient(closest-side, #3fa3d677, transparent); animation-duration: 52s; }
-@keyframes deriva { from { transform: translate(0, 0) scale(1); } to { transform: translate(-6vw, 4vw) scale(1.15); } }
-@media (prefers-reduced-motion: reduce) { .fondo-nebulosa span { animation: none; } }
+.fondo-espacio { animation: deriva 90s ease-in-out infinite alternate; transform-origin: 40% 40%; }
+@keyframes deriva { from { transform: scale(1); } to { transform: scale(1.08) translate(-1.5vw, 1vw); } }
+@media (prefers-reduced-motion: reduce) { .fondo-espacio { animation: none; } }
+
+/* Detalles de observatorio: datos en letra monoespaciada y retícula fina */
+.sub, .estado, .ficha .cat { font-size: .88rem; }
+.tarjeta-const .sub, .pie-objeto .sub, .coords, .datos dt, .datos dd, .ficha .cat { font-family: var(--datos); }
+.tarjeta-const .sub { font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; }
+.coords { font-size: .7rem; letter-spacing: .06em; color: var(--bruma-suave); margin: .3rem 0 0; }
+.datos dd { font-size: .9rem; }
+.ventana::after, .portal::after, .cielo::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background:
+    linear-gradient(#ffffff0a 1px, transparent 1px) 0 0 / 25% 25%,
+    linear-gradient(90deg, #ffffff0a 1px, transparent 1px) 0 0 / 25% 25%;
+}
+.cielo { position: relative; }
+.cielo::after { background-size: 10% 10%; opacity: .6; }
+.portal { position: relative; }
+.portal::after { background: linear-gradient(#ffffff12, #ffffff12) 50% 50% / 1px 100% no-repeat, linear-gradient(#ffffff12, #ffffff12) 50% 50% / 100% 1px no-repeat; }

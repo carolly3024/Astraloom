@@ -29,11 +29,20 @@ function cabecera(titulo, sub = '') {
   </header>`;
 }
 
+// Coordenadas del objeto en el cielo, como en un catálogo: AR 05h 35m · DEC −05° 23′
+function coordenadas(o) {
+  const h = ((o.ar / 15) % 24 + 24) % 24, hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+  const d = Math.abs(o.dec), dd = Math.floor(d), dm = Math.round((d - dd) * 60);
+  const dos = n => String(n).padStart(2, '0');
+  return `AR ${dos(hh)}h ${dos(mm)}m · DEC ${o.dec < 0 ? '−' : '+'}${dos(dd)}° ${dos(dm)}′`;
+}
+
 function ficha(nivel) {
   const o = nivel.tejedora.objeto;
   return h`<article class="ficha">
     <p class="eyebrow">${escapar(o.tipo)} · en ${escapar(nivel.nombre)}</p>
     <h2>${escapar(o.nombre)} <span class="cat">${escapar(o.id)}</span></h2>
+    <p class="coords">${coordenadas(o)}</p>
     <dl class="datos"><div><dt>Distancia</dt><dd>${escapar(o.distancia)}</dd></div><div><dt>Tamaño</dt><dd>${escapar(o.tamano)}</dd></div></dl>
     <p>${escapar(o.texto)}</p>
     <h3>Por qué tiene ese color</h3>
@@ -172,7 +181,7 @@ function pantallaAtlas() {
         ? `<li style="--i:${i};--tono:${tono}"><a class="tarjeta-objeto" href="#/atlas/${n.id}">
             <div class="portal" data-id="${n.id}"></div>
             <div class="pie-objeto"><p class="eyebrow">${escapar(o.tipo)}</p><h2>${escapar(o.nombre)}</h2>
-            <p class="sub">${escapar(o.id)} · en ${escapar(n.nombre)}</p></div></a></li>`
+            <p class="sub">${escapar(o.id)} · en ${escapar(n.nombre)}</p><p class="coords">${coordenadas(o)}</p></div></a></li>`
         : `<li style="--i:${i}"><a class="tarjeta-objeto dormido" href="#/${e.aprendiz ? 'tejedora' : 'aprendiz'}/${n.id}">
             <div class="portal" data-fig="${n.id}"></div>
             <div class="pie-objeto"><p class="eyebrow">Dormido</p><h2>Algo duerme aquí</h2>
