@@ -6,7 +6,7 @@ import { cargarJuego } from './datos.js';
 import { crearGuardado } from './guardado.js';
 import { montarAprendiz } from './aprendiz.js';
 import { montarTejedora } from './tejedora.js';
-import { despertar, dibujarObjeto } from './despertar.js';
+import { despertar, dibujarObjeto, prepararObjeto } from './despertar.js';
 import { crearContador } from './contador.js';
 import { el, escapar } from './svg.js';
 import { bordeLuz, miniFigura, tonoObjeto } from './adornos.js';
@@ -22,9 +22,12 @@ const h = (strings, ...vals) => strings.reduce((s, str, i) => s + str + (i < val
 
 function nivelPorId(id) { return juego.niveles.find(n => n.id === id); }
 
-function cabecera(titulo, sub = '') {
+// Cabecera con migas de pan: «Cielo» siempre vuelve al inicio, donde están todas
+// las constelaciones; dentro del atlas, «Atlas» vuelve a la colección.
+function cabecera(titulo, sub = '', migas = []) {
+  const enlaces = [['#/', 'Cielo'], ...migas].map(([href, texto]) => `<a href="${href}">${escapar(texto)}</a>`).join('<span aria-hidden="true">/</span>');
   return h`<header class="barra">
-    <a class="volver" href="#/">← Cielo</a>
+    <nav class="migas" aria-label="Volver">${enlaces}</nav>
     <div><h1>${escapar(titulo)}</h1>${sub ? `<p class="sub">${escapar(sub)}</p>` : ''}</div>
   </header>`;
 }
@@ -129,6 +132,7 @@ function pantallaAprendiz(nivel) {
 
 // ---------- Tejedora ----------
 function pantallaTejedora(nivel) {
+  prepararObjeto(nivel.tejedora.objeto); // se pinta mientras se teje, para que esté listo al despertar
   if (!guardado.estado(nivel.id).aprendiz) { ir(`#/aprendiz/${nivel.id}`, { reemplazar: true }); return; }
   app.innerHTML = cabecera(nivel.nombre, 'Tejedora · teje la figura sobre el cielo real') +
     `<section class="escena"><div class="cielo"></div><div class="tarjeta"><div class="contenido" aria-live="polite"></div></div></section>`;
@@ -193,7 +197,7 @@ function pantallaAtlas() {
 
 function pantallaObjeto(nivel) {
   if (!guardado.atlas().includes(nivel.id)) { ir('#/atlas', { reemplazar: true }); return; }
-  app.innerHTML = cabecera(nivel.tejedora.objeto.nombre, `Atlas · ${nivel.nombre}`) +
+  app.innerHTML = cabecera(nivel.tejedora.objeto.nombre, `Atlas · ${nivel.nombre}`, [['#/atlas', 'Atlas']]) +
     `<section class="escena"><div class="cielo objeto-grande"></div><div class="tarjeta">${ficha(nivel)}<div class="acciones"><a class="boton" href="#/atlas">Volver al atlas</a></div></div></section>`;
   miniObjeto(app.querySelector('.cielo'), nivel, 300);
 }

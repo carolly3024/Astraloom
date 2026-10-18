@@ -58,14 +58,18 @@ a { color: var(--azul); }
 .niveles { display: flex; gap: .5rem; margin-top: .75rem; flex-wrap: wrap; }
 .pie { margin-top: 2rem; font-size: .8rem; color: var(--bruma-suave); }
 .confirmar { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin-bottom: .75rem; font-size: .95rem; color: var(--bruma); }
-.boton:focus-visible, .enlace:focus-visible, .volver:focus-visible, .tarjeta-objeto:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
+.boton:focus-visible, .enlace:focus-visible, .migas a:focus-visible, .tarjeta-objeto:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
 
 /* Pantalla de juego: cielo grande arriba y tarjeta debajo (los textos nunca pisan el cielo) */
-.barra { display: flex; align-items: center; gap: 1rem; margin-bottom: .75rem; }
-.volver { text-decoration: none; white-space: nowrap; }
+.barra { display: flex; flex-direction: column; gap: .35rem; margin-bottom: .9rem; }
+.migas { display: flex; align-items: center; gap: .5rem; font: 500 .72rem/1 var(--datos); letter-spacing: .12em; text-transform: uppercase; }
+.migas a { text-decoration: none; color: var(--bruma-suave); padding: .35rem .6rem; border: 1px solid var(--linea); border-radius: 6px; transition: color .2s, border-color .2s; }
+.migas a:first-child::before { content: '← '; }
+.migas a:hover { color: #fff; border-color: #ffffff40; }
+.migas span { color: #ffffff33; }
 /* Cielo (60 %) e información (40 %) uno al lado del otro, con el mismo alto fijo:
    todo cabe en la pantalla y la tarjeta hace scroll por dentro si la ficha es larga. */
-.escena { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 14px; height: max(420px, calc(100svh - 136px)); }
+.escena { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 14px; height: max(420px, calc(100svh - 168px)); }
 .cielo {
   min-width: 0; height: 100%; border-radius: 12px;
   background: radial-gradient(circle at 50% 40%, #0b111e, #03050a 75%);
@@ -253,3 +257,7 @@ a.tarjeta-objeto.dormido:hover { box-shadow: none; border-color: #7fa8f066; }
 .cielo::after { background-size: 10% 10%; opacity: .6; }
 .portal { position: relative; }
 .portal::after { background: linear-gradient(#ffffff12, #ffffff12) 50% 50% / 1px 100% no-repeat, linear-gradient(#ffffff12, #ffffff12) 50% 50% / 100% 1px no-repeat; }
+
+/* Los objetos se pintan píxel a píxel: si aún no están listos, aparecen con un fundido */
+.cargando-objeto { opacity: 0; transition: opacity .9s ease; }
+.cargando-objeto.listo { opacity: 1; }
