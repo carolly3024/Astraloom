@@ -401,3 +401,23 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
 .lista-estrellas .medidas { display: flex; gap: .7rem; font-family: var(--datos); font-size: .68rem; color: var(--bruma-suave); font-variant-numeric: tabular-nums; white-space: nowrap; }
 @media (max-width: 1000px) { .lista-estrellas .medidas span:nth-child(3) { display: none; } }
 @media (prefers-reduced-motion: reduce) { .silueta svg, .mapa-aro { animation: none; } }
+
+/* Pantalla del objeto: la imagen llena toda la caja, como una foto de telescopio,
+   sobre su campo de estrellas, y se acerca muy despacio. */
+.cielo.foto { background: #020306; }
+.cielo.foto::after { display: none; } /* sin retícula: es una foto */
+.foto-movil { position: absolute; inset: 0; animation: acercar 48s ease-in-out infinite alternate; }
+.foto-campo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }
+.foto-objeto { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+@keyframes acercar { from { transform: scale(1) rotate(0deg); } to { transform: scale(1.12) rotate(1.5deg); } }
+/* Viñeta suave en los bordes, para que la foto se funda con la caja */
+.cielo.foto::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; border-radius: inherit;
+  background: radial-gradient(ellipse at center, transparent 55%, #02030699 100%); }
+/* Esquinas de visor */
+.visor { position: absolute; inset: 14px; z-index: 2; pointer-events: none; }
+.visor i { position: absolute; width: 18px; height: 18px; border: 0 solid #ffffff4d; }
+.visor i:nth-child(1) { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.visor i:nth-child(2) { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.visor i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.visor i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+@media (prefers-reduced-motion: reduce) { .foto-movil { animation: none; } }

@@ -7,6 +7,7 @@ import { crearGuardado } from './guardado.js';
 import { montarAprendiz } from './aprendiz.js';
 import { montarTejedora } from './tejedora.js';
 import { despertar, dibujarObjeto, prepararObjeto } from './despertar.js';
+import { semilla } from './nebulosas.js';
 import { crearContador } from './contador.js';
 import { el, escapar } from './svg.js';
 import { bordeLuz, miniFigura, tonoObjeto } from './adornos.js';
@@ -245,11 +246,44 @@ function pantallaAtlas() {
   app.querySelectorAll('.portal[data-fig]').forEach(c => miniFigura(c, nivelPorId(c.dataset.fig), 'pendiente'));
 }
 
+// Campo de estrellas de fondo, como en una foto de telescopio: muchas tenues,
+// pocas brillantes, de azuladas a anaranjadas. Siempre el mismo para cada objeto.
+const TONOS_ESTRELLA = ['#c9daff', '#dde6ff', '#f0f0ff', '#fffefa', '#fff2e0', '#ffe6d2', '#ffd2a8'];
+function campoEstelar(lienzo, id) {
+  const r = semilla(`${id}-campo`), lado = lienzo.width, ctx = lienzo.getContext('2d');
+  for (let i = 0; i < 520; i++) {
+    const x = r() * lado, y = r() * lado, brillo = Math.pow(r(), 6); // casi todas tenues
+    const tam = 0.5 + brillo * 2.6, tono = TONOS_ESTRELLA[(r() * TONOS_ESTRELLA.length) | 0];
+    if (brillo > 0.25) {
+      const h = ctx.createRadialGradient(x, y, 0, x, y, tam * 4);
+      h.addColorStop(0, tono + '66'); h.addColorStop(1, tono + '00');
+      ctx.fillStyle = h; ctx.beginPath(); ctx.arc(x, y, tam * 4, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 0.35 + 0.65 * Math.min(1, brillo * 3 + r() * 0.3);
+    ctx.fillStyle = tono; ctx.beginPath(); ctx.arc(x, y, tam, 0, Math.PI * 2); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
+
+// Pantalla del objeto: la imagen llena toda su caja, sobre un campo de estrellas,
+// y se acerca muy despacio. Encima solo hay esquinas de visor, sin textos.
+function fotoObjeto(contenedor, nivel) {
+  contenedor.classList.add('foto');
+  contenedor.innerHTML = `<div class="foto-movil"><canvas class="foto-campo" width="1200" height="1200"></canvas></div>
+    <span class="visor" aria-hidden="true"><i></i><i></i><i></i><i></i></span>`;
+  campoEstelar(contenedor.querySelector('canvas'), nivel.tejedora.objeto.id);
+  const lado = 300;
+  const svg = el('svg', { viewBox: `${-lado / 2} ${-lado / 2} ${lado} ${lado}`, preserveAspectRatio: 'xMidYMid slice', class: 'foto-objeto',
+    role: 'img', 'aria-label': nivel.tejedora.objeto.nombre });
+  contenedor.querySelector('.foto-movil').appendChild(svg);
+  dibujarObjeto(svg, svg, nivel.tejedora.objeto, 0, 0, lado * 0.5);
+}
+
 function pantallaObjeto(nivel) {
   if (!guardado.atlas().includes(nivel.id)) { ir('#/atlas', { reemplazar: true }); return; }
   app.innerHTML = cabecera(nivel.tejedora.objeto.nombre, `Atlas · ${nivel.nombre}`, [['#/atlas', 'Atlas']]) +
     `<section class="escena"><div class="cielo objeto-grande"></div><div class="tarjeta">${ficha(nivel)}<div class="acciones"><a class="boton" href="#/atlas">Volver al atlas</a></div></div></section>`;
-  miniObjeto(app.querySelector('.cielo'), nivel, 300);
+  fotoObjeto(app.querySelector('.cielo'), nivel);
 }
 
 // ---------- Navegación ----------
