@@ -38,6 +38,8 @@ y abrir http://localhost:8000.
 | `src/despertar.js` | El estallido de estrellitas y el dibujo provisional de cada objeto |
 | `src/pistas.js` | Las pistas sin castigo (20 s) |
 | `src/main.js` | Pantallas y navegación |
+| `src/intro.js` | Pantalla de entrada: logo animado y tutorial |
+| `src/panel.js` | Ficha de la constelación en la caja de información (silueta, mapa del cielo y estrellas) |
 | `contenido/` | Datos reales de las 88 constelaciones y fichas de las 12 del juego (ver `contenido/README.md`) |
 | `pruebas/probar.mjs` | Comprueba que todas las constelaciones cargan y que el guardado funciona: `node pruebas/probar.mjs` |
 

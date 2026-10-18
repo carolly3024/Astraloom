@@ -106,7 +106,7 @@ export function montarTejedora(contenedor, nivel, { alTejer, alCompletar, alDesp
       tejidas.add(k);
       const l = hilo(a, b, 'tejido');
       animar(350, t => { l.setAttribute('x2', a.x + (b.x - a.x) * t); l.setAttribute('y2', a.y + (b.y - a.y) * t); });
-      alTejer?.(tejidas.size, total);
+      alTejer?.(tejidas.size, total, a, b);
       if (!pendientes.size) {
         terminado = true;
         pistas.parar();
