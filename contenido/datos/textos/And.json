@@ -11,6 +11,7 @@
     "id": "M31",
     "nombre": "Galaxia de Andrómeda",
     "tipo": "galaxia espiral",
+    "pista": "La galaxia grande más cercana a la nuestra",
     "forma": "espiral_inclinada",
     "ar": 10.68,
     "dec": 41.27,

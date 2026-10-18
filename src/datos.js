@@ -45,6 +45,11 @@ export function construirNivel(cielo, textos) {
       nombre: nombresEs[e.hip] || e.nombre || null,
       mag: e.mag,
       color: e.color,
+      // Datos para la ficha de la constelación (designación, temperatura y distancia)
+      bayer: e.bayer || null,
+      flamsteed: e.flamsteed || null,
+      temperatura: e.temperatura_k || null,
+      distancia: e.distancia_al || null,
       ...proyectar(e.ar, e.dec, cielo.centro),
     }));
   const fondo = cielo.fondo.map(e => ({ hip: e.hip, mag: e.mag, color: e.color, ...proyectar(e.ar, e.dec, cielo.centro) }));
@@ -60,6 +65,8 @@ export function construirNivel(cielo, textos) {
   return {
     id: cielo.id,
     nombre: textos.nombre,
+    latin: cielo.nombre_latin || textos.nombre,
+    centro: cielo.centro,
     orden: textos.orden,
     temporada: textos.temporada,
     lineas: cielo.lineas.map(([a, b]) => [a, b]),

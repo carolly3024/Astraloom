@@ -1,16 +1,19 @@
 // Astraloom · prototipo v0.2
-// Pantallas: inicio (constelaciones), Aprendiz, Tejedora, atlas y ficha de objeto.
-// Navegación por la dirección (#/aprendiz/Ori, #/tejedora/Ori, #/atlas…).
+// Pantallas: entrada (logo y tutorial), inicio (constelaciones), Aprendiz, Tejedora,
+// atlas y ficha de objeto. Navegación por la dirección (#/intro, #/aprendiz/Ori, #/atlas…).
 
 import { cargarJuego } from './datos.js';
 import { crearGuardado } from './guardado.js';
 import { montarAprendiz } from './aprendiz.js';
 import { montarTejedora } from './tejedora.js';
 import { despertar, dibujarObjeto, prepararObjeto } from './despertar.js';
+import { semilla } from './nebulosas.js';
 import { crearContador } from './contador.js';
 import { el, escapar } from './svg.js';
 import { bordeLuz, miniFigura, tonoObjeto } from './adornos.js';
 import { montarFondo } from './fondo.js';
+import { pantallaIntro, simboloVivo } from './intro.js';
+import { montarPanel, coordenadas } from './panel.js';
 
 const RUTA_DATOS = 'contenido/datos';
 const app = document.getElementById('app');
@@ -32,14 +35,6 @@ function cabecera(titulo, sub = '', migas = []) {
   </header>`;
 }
 
-// Coordenadas del objeto en el cielo, como en un catálogo: AR 05h 35m · DEC −05° 23′
-function coordenadas(o) {
-  const h = ((o.ar / 15) % 24 + 24) % 24, hh = Math.floor(h), mm = Math.round((h - hh) * 60);
-  const d = Math.abs(o.dec), dd = Math.floor(d), dm = Math.round((d - dd) * 60);
-  const dos = n => String(n).padStart(2, '0');
-  return `AR ${dos(hh)}h ${dos(mm)}m · DEC ${o.dec < 0 ? '−' : '+'}${dos(dd)}° ${dos(dm)}′`;
-}
-
 function ficha(nivel) {
   const o = nivel.tejedora.objeto;
   return h`<article class="ficha">
@@ -55,22 +50,42 @@ function ficha(nivel) {
 }
 
 // ---------- Inicio ----------
+// Temporada en corto para la tarjeta: «invierno del hemisferio norte» → «Invierno · Norte».
+function temporadaCorta(t) {
+  const estacion = /todo el año/.test(t) ? 'Todo el año' : (t.match(/primavera|verano|otoño|invierno/) || [''])[0];
+  const hemisferio = /hemisferio sur/.test(t) ? 'Sur' : 'Norte';
+  return `${estacion.charAt(0).toUpperCase()}${estacion.slice(1)} · ${hemisferio}`;
+}
+const dos = n => String(n).padStart(2, '0');
+
 function pantallaInicio() {
   const atlas = guardado.atlas();
+  const estados = juego.niveles.map(n => { const e = guardado.estado(n.id); return e.tejedora ? 'despierta' : e.aprendiz ? 'aprendiz' : 'pendiente'; });
+  const cuenta = f => estados.filter(e => e === f).length;
   app.innerHTML = h`
     <header class="portada">
-      <img src="assets/simbolo.svg" alt="" width="72" height="72">
-      <div><h1 class="marca">Astraloom</h1><p class="sub">Devuelve las estrellas a su sitio y teje el cielo.</p></div>
+      <div class="portada-marca">
+        <a href="#/intro" class="volver-intro" title="Volver a la entrada">${simboloVivo(64)}</a>
+        <div><h1 class="marca">Astraloom</h1><p class="sub">Devuelve las estrellas a su sitio y teje el cielo.</p></div>
+      </div>
+      <div class="resumen">
+        <dl class="cifras">
+          <div class="viva"><dt>Despiertos</dt><dd>${dos(cuenta('despierta'))}</dd></div>
+          <div><dt>En camino</dt><dd>${dos(cuenta('aprendiz'))}</dd></div>
+          <div><dt>Por descubrir</dt><dd>${dos(cuenta('pendiente'))}</dd></div>
+        </dl>
+        <a class="boton" href="#/atlas">Atlas · ${atlas.length} de ${juego.niveles.length}</a>
+      </div>
     </header>
-    <nav class="acciones"><a class="boton" href="#/atlas">Atlas · ${atlas.length} de ${juego.niveles.length}</a></nav>
+    <div class="barra-cielo" aria-hidden="true">${juego.niveles.map((n, i) => `<span class="${estados[i]}" style="--tono:${tonoObjeto(n.tejedora.objeto)}" title="${escapar(n.nombre)}"></span>`).join('')}</div>
     <ul class="rejilla">${juego.niveles.map((n, i) => {
       const e = guardado.estado(n.id);
-      const fase = e.tejedora ? 'despierta' : e.aprendiz ? 'aprendiz' : 'pendiente';
+      const fase = estados[i];
       return h`<li class="tarjeta-const ${fase}" data-id="${n.id}" style="--i:${i};--tono:${tonoObjeto(n.tejedora.objeto)}">
         <div class="ventana"></div>
         ${e.tejedora ? `<span class="sello">✦ Despierta</span>` : ''}
+        <p class="etiqueta"><span>${dos(i + 1)}</span>${escapar(temporadaCorta(n.temporada))}</p>
         <h2>${escapar(n.nombre)}</h2>
-        <p class="sub">${escapar(n.temporada)}</p>
         <p class="estado">${e.tejedora ? `${escapar(n.tejedora.objeto.nombre)} brilla en tu atlas` : e.aprendiz ? 'Algo duerme entre sus estrellas' : 'Por descubrir'}</p>
         <div class="niveles">
           <a class="boton ${e.aprendiz ? 'hecho' : ''}" href="#/aprendiz/${n.id}">Aprendiz${e.aprendiz ? ' ✓' : ''}</a>
@@ -82,7 +97,7 @@ function pantallaInicio() {
     }).join('')}</ul>
     <footer class="pie">
       <button class="enlace" id="borrar">Borrar el progreso</button>
-      <p>Datos de estrellas: HYG Database v3.8 (CC BY-SA 4.0). Figuras: Stellarium (cultura «modern»). Prototipo v0.2, gráficos provisionales.</p>
+      <p>Datos de estrellas: HYG Database v3.8 (CC BY-SA 4.0). Figuras: Stellarium (cultura «modern»).</p>
     </footer>`;
   app.querySelectorAll('.tarjeta-const').forEach(t => {
     const fase = ['despierta', 'aprendiz', 'pendiente'].find(c => t.classList.contains(c));
@@ -121,12 +136,13 @@ const GUIAS = {
 function mostrarGuia(nivel) {
   if (guardado.ajuste(`guia-${nivel}`)) return;
   const g = GUIAS[nivel];
-  const cielo = app.querySelector('.cielo');
-  cielo.insertAdjacentHTML('beforeend', h`<div class="guia-inicial" role="dialog" aria-label="Cómo se juega">
-    <div class="guia-caja"><p class="eyebrow">Cómo se juega · ${g.titulo}</p>${g.demo}
+  // Va en la caja de información, debajo del contador: nunca tapa el cielo.
+  const contenido = app.querySelector('.tarjeta .contenido');
+  contenido.insertAdjacentHTML('beforebegin', h`<div class="guia-inicial" role="note" aria-label="Cómo se juega">
+    <p class="eyebrow">Cómo se juega · ${g.titulo}</p>${g.demo}
     <ol>${g.pasos.map(p => `<li>${p}</li>`).join('')}</ol>
-    <button class="boton principal">Entendido</button></div></div>`);
-  const guia = cielo.querySelector('.guia-inicial');
+    <button class="boton principal">Entendido</button></div>`);
+  const guia = app.querySelector('.guia-inicial');
   const cerrar = () => { guardado.ajuste(`guia-${nivel}`, true); guia.classList.add('se-va'); setTimeout(() => guia.remove(), 400); };
   guia.querySelector('button').addEventListener('click', cerrar);
   guia.querySelector('button').focus({ preventScroll: true });
@@ -149,6 +165,7 @@ function pantallaAprendiz(nivel) {
   const tarjeta = app.querySelector('.contenido');
   let colocadas = 0;
   const contador = crearContador(app.querySelector('.tarjeta'), nivel.aprendiz.estrellas.length, ' estrellas');
+  const panel = montarPanel(app.querySelector('.tarjeta'), nivel, juego.niveles, 'aprendiz');
   pantallaActual = montarAprendiz(app.querySelector('.cielo'), nivel, {
     alTocarMisterio: () => ir(`#/tejedora/${nivel.id}`),
     alEmpezar() {
@@ -157,6 +174,8 @@ function pantallaAprendiz(nivel) {
     },
     alColocar(estrella) {
       contador.poner(++colocadas, estrella.nombre ? `${estrella.nombre} vuelve a su sitio` : '');
+      panel.encender(estrella.hip);
+      panel.revelar(colocadas / nivel.aprendiz.estrellas.length);
     },
     alCompletar() {
       guardado.completar(nivel.id, 'aprendiz');
@@ -184,6 +203,7 @@ function pantallaTejedora(nivel) {
   const tarjeta = app.querySelector('.contenido');
   const ayuda = texto => { tarjeta.innerHTML = `<p class="sub">${texto}</p>`; };
   const contador = crearContador(app.querySelector('.tarjeta'), nivel.lineas.length, ' hilos');
+  const panel = montarPanel(app.querySelector('.tarjeta'), nivel, juego.niveles, 'tejedora');
   let despierto = false;
   async function despertarYa() { // desde el botón o tocando el brillo del cielo
     if (despierto) return;
@@ -192,12 +212,17 @@ function pantallaTejedora(nivel) {
     const { svg, objeto, quitarLlamada } = pantallaActual;
     quitarLlamada();
     await despertar(svg, nivel.tejedora.objeto, objeto.x, objeto.y, 120);
-    contador.quitar(); // la ficha ocupa ya toda la tarjeta
+    contador.quitar(); // la ficha del objeto ocupa ya toda la tarjeta
+    panel.quitar();
     const sig = siguiente(nivel.id);
     tarjeta.innerHTML = ficha(nivel) + `<div class="acciones"><a class="boton principal" href="${sig.href}">${escapar(sig.texto)}</a><a class="boton" href="#/atlas">Ver el atlas</a></div>`;
   }
   pantallaActual = montarTejedora(app.querySelector('.cielo'), nivel, {
-    alTejer: n => contador.poner(n),
+    alTejer(n, total, a, b) {
+      contador.poner(n);
+      panel.encender(a.hip); panel.encender(b.hip);
+      panel.revelar(n / total);
+    },
     alCompletar() {
       guardado.completar(nivel.id, 'tejedora'); // se guarda ya en el atlas
       tarjeta.innerHTML = h`<p class="eyebrow">Has tejido ${escapar(nivel.nombre)}</p>
@@ -235,18 +260,51 @@ function pantallaAtlas() {
             <p class="sub">${escapar(o.id)} · en ${escapar(n.nombre)}</p><p class="coords">${coordenadas(o)}</p></div></a></li>`
         : `<li style="--i:${i}"><a class="tarjeta-objeto dormido" href="#/${e.aprendiz ? 'tejedora' : 'aprendiz'}/${n.id}">
             <div class="portal" data-fig="${n.id}"></div>
-            <div class="pie-objeto"><p class="eyebrow">Dormido</p><h2>Algo duerme aquí</h2>
-            <p class="sub">${e.aprendiz ? `Teje ${escapar(n.nombre)} para despertarlo` : `Empieza por ${escapar(n.nombre)}`}</p></div></a></li>`;
+            <div class="pie-objeto"><p class="eyebrow">Dormido · en ${escapar(n.nombre)}</p><h2 class="pista">${escapar(o.pista || 'Algo duerme aquí')}</h2>
+            <p class="sub">${e.aprendiz ? `Teje ${escapar(n.nombre)} para despertarlo` : `Empieza por Aprendiz`}</p></div></a></li>`;
     }).join('')}</ul>`;
   app.querySelectorAll('.portal[data-id]').forEach(c => { miniObjeto(c, nivelPorId(c.dataset.id), 220); bordeLuz(c.closest('.tarjeta-objeto')); });
   app.querySelectorAll('.portal[data-fig]').forEach(c => miniFigura(c, nivelPorId(c.dataset.fig), 'pendiente'));
+}
+
+// Campo de estrellas de fondo, como en una foto de telescopio: muchas tenues,
+// pocas brillantes, de azuladas a anaranjadas. Siempre el mismo para cada objeto.
+const TONOS_ESTRELLA = ['#c9daff', '#dde6ff', '#f0f0ff', '#fffefa', '#fff2e0', '#ffe6d2', '#ffd2a8'];
+function campoEstelar(lienzo, id) {
+  const r = semilla(`${id}-campo`), lado = lienzo.width, ctx = lienzo.getContext('2d');
+  for (let i = 0; i < 520; i++) {
+    const x = r() * lado, y = r() * lado, brillo = Math.pow(r(), 6); // casi todas tenues
+    const tam = 0.5 + brillo * 2.6, tono = TONOS_ESTRELLA[(r() * TONOS_ESTRELLA.length) | 0];
+    if (brillo > 0.25) {
+      const h = ctx.createRadialGradient(x, y, 0, x, y, tam * 4);
+      h.addColorStop(0, tono + '66'); h.addColorStop(1, tono + '00');
+      ctx.fillStyle = h; ctx.beginPath(); ctx.arc(x, y, tam * 4, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 0.35 + 0.65 * Math.min(1, brillo * 3 + r() * 0.3);
+    ctx.fillStyle = tono; ctx.beginPath(); ctx.arc(x, y, tam, 0, Math.PI * 2); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
+
+// Pantalla del objeto: la imagen llena toda su caja, sobre un campo de estrellas,
+// y se acerca muy despacio. Encima solo hay esquinas de visor, sin textos.
+function fotoObjeto(contenedor, nivel) {
+  contenedor.classList.add('foto');
+  contenedor.innerHTML = `<div class="foto-movil"><canvas class="foto-campo" width="1200" height="1200"></canvas></div>
+    <span class="visor" aria-hidden="true"><i></i><i></i><i></i><i></i></span>`;
+  campoEstelar(contenedor.querySelector('canvas'), nivel.tejedora.objeto.id);
+  const lado = 300;
+  const svg = el('svg', { viewBox: `${-lado / 2} ${-lado / 2} ${lado} ${lado}`, preserveAspectRatio: 'xMidYMid slice', class: 'foto-objeto',
+    role: 'img', 'aria-label': nivel.tejedora.objeto.nombre });
+  contenedor.querySelector('.foto-movil').appendChild(svg);
+  dibujarObjeto(svg, svg, nivel.tejedora.objeto, 0, 0, lado * 0.5);
 }
 
 function pantallaObjeto(nivel) {
   if (!guardado.atlas().includes(nivel.id)) { ir('#/atlas', { reemplazar: true }); return; }
   app.innerHTML = cabecera(nivel.tejedora.objeto.nombre, `Atlas · ${nivel.nombre}`, [['#/atlas', 'Atlas']]) +
     `<section class="escena"><div class="cielo objeto-grande"></div><div class="tarjeta">${ficha(nivel)}<div class="acciones"><a class="boton" href="#/atlas">Volver al atlas</a></div></div></section>`;
-  miniObjeto(app.querySelector('.cielo'), nivel, 300);
+  fotoObjeto(app.querySelector('.cielo'), nivel);
 }
 
 // ---------- Navegación ----------
@@ -263,14 +321,15 @@ function ir(nueva, { reemplazar = false } = {}) {
 // Tocar el espacio vacío de fuera (el fondo, no un cuadro) lleva al inicio.
 // Se mira también dónde empezó el toque, para que soltar un arrastre fuera no cuente.
 const fuera = t => t === document.body || t === document.documentElement || t === app;
+const enInicio = () => ['#/', '', '#/intro'].includes(ruta);
 let empezoFuera = false;
 document.addEventListener('pointerdown', ev => { empezoFuera = fuera(ev.target); });
 document.addEventListener('pointermove', ev => {
-  document.body.classList.toggle('sobre-fondo', ruta !== '#/' && ruta !== '' && fuera(ev.target));
+  document.body.classList.toggle('sobre-fondo', !enInicio() && fuera(ev.target));
 }, { passive: true });
 
 document.addEventListener('click', ev => {
-  if (empezoFuera && fuera(ev.target) && ruta !== '#/' && ruta !== '') { ir('#/'); return; }
+  if (empezoFuera && fuera(ev.target) && !enInicio()) { ir('#/'); return; }
   const a = ev.target.closest('a[href^="#/"]');
   if (!a || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
   ev.preventDefault();
@@ -284,7 +343,9 @@ function navegar() {
   const [, pantalla, id] = ruta.replace(/^#?\/?/, '#/').split('/');
   const nivel = id && nivelPorId(id);
   window.scrollTo(0, 0);
-  if (pantalla === 'aprendiz' && nivel) pantallaAprendiz(nivel);
+  document.body.classList.toggle('en-intro', pantalla === 'intro');
+  if (pantalla === 'intro') pantallaIntro(app, { alEntrar: () => ir('#/') });
+  else if (pantalla === 'aprendiz' && nivel) pantallaAprendiz(nivel);
   else if (pantalla === 'tejedora' && nivel) pantallaTejedora(nivel);
   else if (pantalla === 'atlas' && nivel) pantallaObjeto(nivel);
   else if (pantalla === 'atlas') pantallaAtlas();
@@ -300,7 +361,9 @@ async function iniciar() {
     return;
   }
   window.addEventListener('popstate', () => { ruta = location.hash || '#/'; navegar(); });
-  navegar();
+  // Al abrir el juego por la puerta principal se entra por la pantalla del logo.
+  if (ruta === '#/' || ruta === '' || ruta === '#') ir('#/intro', { reemplazar: true });
+  else navegar();
 }
 
 montarFondo();

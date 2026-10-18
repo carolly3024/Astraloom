@@ -11,6 +11,7 @@
     "id": "M42",
     "nombre": "Nebulosa de Orión",
     "tipo": "nebulosa de emisión",
+    "pista": "Una nube enorme donde están naciendo estrellas",
     "forma": "nebulosa_difusa",
     "ar": 83.82,
     "dec": -5.39,

@@ -11,6 +11,7 @@
     "id": "M57",
     "nombre": "Nebulosa del Anillo",
     "tipo": "nebulosa planetaria",
+    "pista": "Lo que queda de una estrella parecida al Sol",
     "forma": "anillo",
     "ar": 283.4,
     "dec": 33.03,

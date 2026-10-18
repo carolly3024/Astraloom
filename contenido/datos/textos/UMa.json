@@ -11,6 +11,7 @@
     "id": "M101",
     "nombre": "Galaxia del Molinete",
     "tipo": "galaxia espiral",
+    "pista": "Una galaxia entera que vemos completamente de frente",
     "forma": "espiral_de_frente",
     "ar": 210.8,
     "dec": 54.35,
