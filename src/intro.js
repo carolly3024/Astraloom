@@ -29,6 +29,17 @@ function logoAnimado() {
   </svg>`;
 }
 
+// El símbolo ya tejido, con la luz del centro respirando despacio (cabecera del inicio).
+export function simboloVivo(tam = 64) {
+  return `<svg class="simbolo-vivo" viewBox="0 0 100 100" width="${tam}" height="${tam}" role="img" aria-label="Astraloom">
+    <circle class="logo-nebulosa-viva" cx="50" cy="50" r="26" fill="url(#neb-intro)"/>
+    <defs><radialGradient id="neb-intro"><stop offset="0" stop-color="#7FA8F0"/><stop offset=".45" stop-color="#7FA8F0" stop-opacity=".35"/><stop offset="1" stop-color="#7FA8F0" stop-opacity="0"/></radialGradient></defs>
+    <g class="logo-hilos-quietos">${hilosDelSimbolo().map(([x1, y1, x2, y2]) =>
+      `<line x1="${x1}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2}"/>`).join('')}</g>
+    <circle cx="50" cy="50" r="2" fill="#DCE3F0"/>
+  </svg>`;
+}
+
 // Pasos del tutorial, con un dibujito animado en cada uno.
 const PASOS = [
   {

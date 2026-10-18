@@ -421,3 +421,37 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
 .visor i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
 .visor i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
 @media (prefers-reduced-motion: reduce) { .foto-movil { animation: none; } }
+
+/* Inicio: cabecera con el símbolo vivo y un resumen del progreso; barra con un
+   segmento por constelación; tarjetas con número y temporada en corto. */
+.portada { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; margin: .75rem 0 1rem; }
+.portada-marca { display: flex; align-items: center; gap: 1rem; }
+.simbolo-vivo { display: block; overflow: visible; filter: drop-shadow(0 0 10px #7fa8f033); }
+.logo-hilos-quietos line { stroke: var(--plata); stroke-width: .6; stroke-linecap: round; }
+.logo-nebulosa-viva { transform-box: fill-box; transform-origin: center; animation: respira-luz 7s ease-in-out infinite; }
+.resumen { display: flex; align-items: center; gap: 1.5rem; }
+.resumen .boton { white-space: nowrap; }
+.cifras { display: flex; gap: 1.4rem; margin: 0; }
+.cifras div { display: flex; flex-direction: column-reverse; }
+.cifras dt { white-space: nowrap; font: 500 .62rem/1.2 var(--datos); letter-spacing: .14em; text-transform: uppercase; color: var(--bruma-suave); }
+.cifras dd { margin: 0; font: 400 1.6rem/1.1 var(--datos); font-variant-numeric: tabular-nums; color: var(--bruma); }
+.cifras .viva dd { color: #fff; text-shadow: 0 0 14px #7fa8f088; }
+.barra-cielo { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; margin: 0 0 1.1rem; animation: aparece .8s cubic-bezier(.2, .8, .2, 1) .1s both; }
+.barra-cielo span { height: 3px; border-radius: 2px; background: #ffffff14; }
+.barra-cielo .aprendiz { background: #dce3f066; }
+.barra-cielo .despierta { background: var(--tono); box-shadow: 0 0 8px var(--tono); }
+.tarjeta-const .etiqueta { display: flex; gap: .6rem; margin: 0 0 .2rem; font: 500 .66rem/1.4 var(--datos); letter-spacing: .14em; text-transform: uppercase; color: var(--bruma-suave); }
+.tarjeta-const .etiqueta span { color: var(--azul); }
+.tarjeta-const.despierta .etiqueta span { color: var(--tono); }
+.tarjeta-const .estado { margin-top: .35rem; }
+.tarjeta-const.pendiente .estado { color: var(--bruma-suave); }
+.pendiente .mini-estrellas circle { opacity: .6; }
+.tarjeta-const.pendiente .ventana { background: radial-gradient(circle at 50% 45%, #0d1422, #03050a 80%); }
+@media (max-width: 720px) {
+  .resumen { width: 100%; justify-content: space-between; gap: 1rem; }
+  .cifras { gap: .9rem; }
+  .cifras dd { font-size: 1.3rem; }
+  .cifras dt { font-size: .55rem; letter-spacing: .1em; }
+  .resumen .boton { padding-inline: .7rem; }
+}
+@media (prefers-reduced-motion: reduce) { .logo-nebulosa-viva, .barra-cielo { animation: none; } }

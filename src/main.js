@@ -12,7 +12,7 @@ import { crearContador } from './contador.js';
 import { el, escapar } from './svg.js';
 import { bordeLuz, miniFigura, tonoObjeto } from './adornos.js';
 import { montarFondo } from './fondo.js';
-import { pantallaIntro } from './intro.js';
+import { pantallaIntro, simboloVivo } from './intro.js';
 import { montarPanel, coordenadas } from './panel.js';
 
 const RUTA_DATOS = 'contenido/datos';
@@ -50,22 +50,42 @@ function ficha(nivel) {
 }
 
 // ---------- Inicio ----------
+// Temporada en corto para la tarjeta: «invierno del hemisferio norte» → «Invierno · Norte».
+function temporadaCorta(t) {
+  const estacion = /todo el año/.test(t) ? 'Todo el año' : (t.match(/primavera|verano|otoño|invierno/) || [''])[0];
+  const hemisferio = /hemisferio sur/.test(t) ? 'Sur' : 'Norte';
+  return `${estacion.charAt(0).toUpperCase()}${estacion.slice(1)} · ${hemisferio}`;
+}
+const dos = n => String(n).padStart(2, '0');
+
 function pantallaInicio() {
   const atlas = guardado.atlas();
+  const estados = juego.niveles.map(n => { const e = guardado.estado(n.id); return e.tejedora ? 'despierta' : e.aprendiz ? 'aprendiz' : 'pendiente'; });
+  const cuenta = f => estados.filter(e => e === f).length;
   app.innerHTML = h`
     <header class="portada">
-      <a href="#/intro" class="volver-intro" title="Volver a la entrada"><img src="assets/simbolo.svg" alt="Volver a la entrada" width="72" height="72"></a>
-      <div><h1 class="marca">Astraloom</h1><p class="sub">Devuelve las estrellas a su sitio y teje el cielo.</p></div>
+      <div class="portada-marca">
+        <a href="#/intro" class="volver-intro" title="Volver a la entrada">${simboloVivo(64)}</a>
+        <div><h1 class="marca">Astraloom</h1><p class="sub">Devuelve las estrellas a su sitio y teje el cielo.</p></div>
+      </div>
+      <div class="resumen">
+        <dl class="cifras">
+          <div class="viva"><dt>Despiertos</dt><dd>${dos(cuenta('despierta'))}</dd></div>
+          <div><dt>En camino</dt><dd>${dos(cuenta('aprendiz'))}</dd></div>
+          <div><dt>Por descubrir</dt><dd>${dos(cuenta('pendiente'))}</dd></div>
+        </dl>
+        <a class="boton" href="#/atlas">Atlas · ${atlas.length} de ${juego.niveles.length}</a>
+      </div>
     </header>
-    <nav class="acciones"><a class="boton" href="#/atlas">Atlas · ${atlas.length} de ${juego.niveles.length}</a></nav>
+    <div class="barra-cielo" aria-hidden="true">${juego.niveles.map((n, i) => `<span class="${estados[i]}" style="--tono:${tonoObjeto(n.tejedora.objeto)}" title="${escapar(n.nombre)}"></span>`).join('')}</div>
     <ul class="rejilla">${juego.niveles.map((n, i) => {
       const e = guardado.estado(n.id);
-      const fase = e.tejedora ? 'despierta' : e.aprendiz ? 'aprendiz' : 'pendiente';
+      const fase = estados[i];
       return h`<li class="tarjeta-const ${fase}" data-id="${n.id}" style="--i:${i};--tono:${tonoObjeto(n.tejedora.objeto)}">
         <div class="ventana"></div>
         ${e.tejedora ? `<span class="sello">✦ Despierta</span>` : ''}
+        <p class="etiqueta"><span>${dos(i + 1)}</span>${escapar(temporadaCorta(n.temporada))}</p>
         <h2>${escapar(n.nombre)}</h2>
-        <p class="sub">${escapar(n.temporada)}</p>
         <p class="estado">${e.tejedora ? `${escapar(n.tejedora.objeto.nombre)} brilla en tu atlas` : e.aprendiz ? 'Algo duerme entre sus estrellas' : 'Por descubrir'}</p>
         <div class="niveles">
           <a class="boton ${e.aprendiz ? 'hecho' : ''}" href="#/aprendiz/${n.id}">Aprendiz${e.aprendiz ? ' ✓' : ''}</a>
@@ -77,7 +97,7 @@ function pantallaInicio() {
     }).join('')}</ul>
     <footer class="pie">
       <button class="enlace" id="borrar">Borrar el progreso</button>
-      <p>Datos de estrellas: HYG Database v3.8 (CC BY-SA 4.0). Figuras: Stellarium (cultura «modern»). Prototipo v0.2, gráficos provisionales.</p>
+      <p>Datos de estrellas: HYG Database v3.8 (CC BY-SA 4.0). Figuras: Stellarium (cultura «modern»).</p>
     </footer>`;
   app.querySelectorAll('.tarjeta-const').forEach(t => {
     const fase = ['despierta', 'aprendiz', 'pendiente'].find(c => t.classList.contains(c));
