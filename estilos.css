@@ -458,3 +458,11 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
 
 /* Atlas: cada objeto dormido da una pista distinta, en cursiva, sin decir qué es */
 .tarjeta-objeto.dormido h2.pista { font-size: 1.02rem; font-weight: 400; font-style: italic; line-height: 1.35; opacity: .85; }
+/* Pantallas pequeñas: las cifras en tres columnas iguales y el botón del atlas debajo, a todo el ancho */
+@media (max-width: 480px) {
+  .resumen { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+  .cifras { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+  .resumen .boton { width: 100%; text-align: center; padding-block: .6rem; }
+  .portada-marca { gap: .75rem; }
+  .portada-marca .marca { font-size: 2.2rem; }
+}
