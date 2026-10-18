@@ -17,8 +17,8 @@ const PENTATONICA = [0, 2, 4, 7, 9];
 const AZUL_LOGO = '#7fa8f0';
 // Acordes del fondo, en semitonos sobre la raíz (todas las notas son de la pentatónica).
 const ACORDES = [[0, 7, 14, 16], [-3, 4, 9, 16], [-5, 2, 9, 14], [2, 9, 16, 19]];
-const AJUSTES_INICIALES = { silencio: false, musica: 0.7, efectos: 0.8 };
-const NIVEL = 2.5; // ganancia general (unos +8 dB), con el limitador detrás para que nada sature
+const AJUSTES_INICIALES = { silencio: false, musica: 0.3, efectos: 0.3 }; // empieza bajo, para no asustar
+const NIVEL = 4; // ganancia general (unos +12 dB), con el limitador detrás para que nada sature
 
 let ajustes = { ...AJUSTES_INICIALES };
 let guardar = () => {};
@@ -120,9 +120,9 @@ function crearNodos() {
 function aplicarVolumen(rampa = 0.6) {
   if (!n) return;
   n.general.gain.rampTo(ajustes.silencio ? 0 : NIVEL, rampa);
-  // Curva al cuadrado: el control responde como el oído.
-  n.musica.gain.rampTo(ajustes.musica ** 2, rampa);
-  n.efectos.gain.rampTo(ajustes.efectos ** 2, rampa);
+  // Curva suave (potencia 1,5): a 30 se oye bajito pero claro, y a 100 hay margen para subir.
+  n.musica.gain.rampTo(ajustes.musica ** 1.5, rampa);
+  n.efectos.gain.rampTo(ajustes.efectos ** 1.5, rampa);
 }
 
 const callado = () => !listo || ajustes.silencio || document.hidden;
