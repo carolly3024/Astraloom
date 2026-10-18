@@ -11,11 +11,13 @@ No hay puntuación, tiempo ni errores. Tras 20 segundos sin avanzar aparece una 
 
 Proyecto de portfolio de carolly, llevado de principio a fin por fases (diseño, contenido, lógica, arte, sonido, pruebas y publicación).
 
-## Estado: prototipo v0.2 (fase 3, lógica)
+## Estado: v0.3 (fase 4, arte y UI)
 
 - Las 12 constelaciones del juego base se cargan desde los datos de `contenido/`.
 - El progreso y el atlas se guardan en el navegador (`localStorage`).
-- Los gráficos son provisionales: el arte final llega en la fase 4.
+- Arte final: pantalla de entrada con tutorial, ficha de la constelación mientras se juega, nebulosas pintadas punto a punto con sus colores reales y un despertar más pausado.
+- Diseño en Figma: [guía visual y pantallas](https://www.figma.com/design/NYjhHgJy4RmuHcy7lxV6NA/Astraloom) (páginas «03 Guía visual» y «04 Pantallas», en escritorio y móvil).
+- Pendiente: música y sonido (fase 5) y pruebas (fase 6).
 
 ## Cómo jugarlo en local
 
@@ -35,10 +37,12 @@ y abrir http://localhost:8000.
 | `src/datos.js` | Lee el índice y las constelaciones y las convierte en niveles |
 | `src/guardado.js` | Guarda el progreso y el atlas; si el navegador no deja guardar, sigue en memoria |
 | `src/aprendiz.js`, `src/tejedora.js` | Los dos niveles |
-| `src/despertar.js` | El estallido de estrellitas y el dibujo provisional de cada objeto |
+| `src/despertar.js` | El momento de despertar: el cielo se apaga, las chispas se reúnen y se abre el objeto |
+| `src/nebulosas.js` | Pinta cada objeto punto a punto con sus colores reales (`pruebas/galeria.html` los muestra juntos) |
 | `src/pistas.js` | Las pistas sin castigo (20 s) |
 | `src/main.js` | Pantallas y navegación |
 | `src/intro.js` | Pantalla de entrada: logo animado y tutorial |
+| `src/fondo.js`, `src/adornos.js` | El fondo de espacio profundo y los detalles de la interfaz (miniaturas, bordes de luz) |
 | `src/panel.js` | Ficha de la constelación en la caja de información (silueta, mapa del cielo y estrellas) |
 | `contenido/` | Datos reales de las 88 constelaciones y fichas de las 12 del juego (ver `contenido/README.md`) |
 | `pruebas/probar.mjs` | Comprueba que todas las constelaciones cargan y que el guardado funciona: `node pruebas/probar.mjs` |
