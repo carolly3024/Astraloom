@@ -1,5 +1,5 @@
-// Astraloom · pantalla de entrada: el logo se teje hilo a hilo, su nebulosa se
-// apaga y se enciende, y debajo salen «Tutorial» y «Entrar al cielo».
+// Astraloom · pantalla de entrada: el logo se teje hilo a hilo, su nebulosa
+// se enciende despacio y respira, y debajo salen «Tutorial» y «Entrar al cielo».
 
 // Mismo dibujo que assets/simbolo.svg: cuatro cuartos de 8 hilos que van del eje
 // vertical al horizontal, con la nebulosa azul y el núcleo plateado en el centro.
@@ -25,7 +25,7 @@ function logoAnimado() {
     <circle class="logo-nebulosa" cx="50" cy="50" r="26" fill="url(#neb-intro)"/>
     <g class="logo-hilos">${hilos.map(([x1, y1, x2, y2], i) =>
       `<line x1="${x1}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2}" pathLength="1" style="--d:${(i * RETRASO).toFixed(2)}s"/>`).join('')}</g>
-    <circle class="logo-nucleo" cx="50" cy="50" r="2.2"/>
+    <circle class="logo-nucleo" cx="50" cy="50" r="1.8"/>
   </svg>`;
 }
 
@@ -33,7 +33,7 @@ function logoAnimado() {
 const PASOS = [
   {
     titulo: 'Aprendiz',
-    texto: 'Las estrellas de una constelación se han soltado. Arrastra cada una hasta su hueco y aprende su forma.',
+    texto: 'Las estrellas de una constelación se han soltado. Arrastra cada una hasta su hueco, o toca un hueco vacío y su estrella irá sola. Así aprendes su forma.',
     demo: `<svg viewBox="0 0 200 90" class="demo demo-aprendiz"><circle cx="150" cy="45" r="13" class="demo-hueco"/><circle cx="40" cy="45" r="6" class="demo-estrella"/></svg>`,
   },
   {

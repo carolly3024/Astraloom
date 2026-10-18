@@ -312,19 +312,19 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
   .demo { max-height: 64px; }
 }
 
-/* Entrada: el logo se teje hilo a hilo, su nebulosa se apaga y se enciende,
+/* Entrada: el logo se teje hilo a hilo, su nebulosa se enciende despacio,
    y debajo salen el nombre y los dos botones. */
 .intro { min-height: calc(100svh - 56px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: .4rem; padding: 24px 0; }
 .logo-intro { width: min(240px, 56vw); height: auto; overflow: visible; margin-bottom: .6rem; }
-.logo-hilos line { stroke: var(--plata); stroke-width: .9; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: teje-hilo .5s cubic-bezier(.4, 0, .2, 1) var(--d) forwards; }
+.logo-hilos line { stroke: var(--plata); stroke-width: .5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: teje-hilo .5s cubic-bezier(.4, 0, .2, 1) var(--d) forwards; }
 @keyframes teje-hilo { to { stroke-dashoffset: 0; } }
 .logo-nucleo { fill: var(--plata); opacity: 0; animation: aparece-nucleo .6s ease calc(var(--fin) - .1s) forwards; transform-box: fill-box; transform-origin: center; }
 @keyframes aparece-nucleo { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: scale(1); } }
-/* La luz del centro se enciende, parpadea como una estrella que despierta y luego respira despacio */
+/* La luz del centro se enciende despacio y luego respira con un ritmo lento y constante */
 .logo-nebulosa { opacity: 0; transform-box: fill-box; transform-origin: center;
-  animation: enciende 2.4s ease-in-out calc(var(--fin) + .2s) forwards, respira-luz 4.5s ease-in-out calc(var(--fin) + 2.6s) infinite; }
-@keyframes enciende { 0% { opacity: 0; transform: scale(.5); } 25% { opacity: 1; transform: scale(1.05); } 42% { opacity: .15; } 60% { opacity: .9; } 75% { opacity: .3; } 100% { opacity: 1; transform: scale(1); } }
-@keyframes respira-luz { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.88); } }
+  animation: enciende 3.5s ease-in-out calc(var(--fin) + .2s) forwards, respira-luz 7s ease-in-out calc(var(--fin) + 3.7s) infinite; }
+@keyframes enciende { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: scale(1); } }
+@keyframes respira-luz { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .55; transform: scale(.94); } }
 .logo-intro { filter: drop-shadow(0 0 18px #7fa8f033); }
 .intro-marca { font-size: clamp(2.6rem, 9vw, 3.6rem); animation: aparece 1s cubic-bezier(.2, .8, .2, 1) 2.6s both; }
 .intro-lema { animation: aparece 1s cubic-bezier(.2, .8, .2, 1) 2.9s both; }
