@@ -315,7 +315,7 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
    y debajo salen el nombre y los dos botones. */
 .intro { min-height: calc(100svh - 56px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: .4rem; padding: 24px 0; }
 .logo-intro { width: min(240px, 56vw); height: auto; overflow: visible; margin-bottom: .6rem; }
-.logo-hilos line { stroke: var(--plata); stroke-width: .5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: teje-hilo .5s cubic-bezier(.4, 0, .2, 1) var(--d) forwards; }
+.logo-hilos line { stroke: var(--plata); stroke-width: .5; stroke-linecap: round; stroke-dasharray: var(--l); stroke-dashoffset: var(--l); animation: teje-hilo .5s cubic-bezier(.4, 0, .2, 1) var(--d) forwards; }
 @keyframes teje-hilo { to { stroke-dashoffset: 0; } }
 .logo-nucleo { fill: var(--plata); opacity: 0; animation: aparece-nucleo .6s ease calc(var(--fin) - .1s) forwards; transform-box: fill-box; transform-origin: center; }
 @keyframes aparece-nucleo { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: scale(1); } }
@@ -331,11 +331,15 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
 .intro-botones .boton { min-width: 150px; padding: .75rem 1.2rem; font-size: 1rem; }
 .volver-intro { display: block; line-height: 0; border-radius: 50%; }
 .volver-intro:focus-visible { outline: 2px solid var(--azul); outline-offset: 4px; }
+/* Con «reducir movimiento» el logo no se queda quieto: los hilos aparecen uno a uno
+   con un fundido (sin trazo que avance) y la nebulosa se enciende sin crecer ni respirar. */
 @media (prefers-reduced-motion: reduce) {
-  .logo-hilos line { animation: none; stroke-dashoffset: 0; }
-  .logo-nucleo, .logo-nebulosa { animation: none; opacity: 1; }
-  .intro-marca, .intro-lema, .intro-botones { animation: none; }
+  .logo-hilos line { stroke-dashoffset: 0; opacity: 0; animation: funde-hilo .6s ease var(--d) forwards; }
+  .logo-nucleo { animation: funde-hilo .6s ease calc(var(--fin) - .1s) forwards; }
+  .logo-nebulosa { animation: funde-hilo 2.5s ease calc(var(--fin) + .2s) forwards; }
+  .intro-marca, .intro-lema, .intro-botones { animation: funde-hilo .8s ease 2.6s both; }
 }
+@keyframes funde-hilo { from { opacity: 0; } to { opacity: 1; } }
 
 /* Tutorial: tarjetas de paso, encima de la entrada */
 .tutorial { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 16px; background: #03050ac7; backdrop-filter: blur(4px); animation: funde .4s ease both; }

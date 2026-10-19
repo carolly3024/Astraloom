@@ -24,7 +24,8 @@ function logoAnimado() {
     <defs><radialGradient id="neb-intro"><stop offset="0" stop-color="#7FA8F0"/><stop offset=".45" stop-color="#7FA8F0" stop-opacity=".35"/><stop offset="1" stop-color="#7FA8F0" stop-opacity="0"/></radialGradient></defs>
     <circle class="logo-nebulosa" cx="50" cy="50" r="26" fill="url(#neb-intro)"/>
     <g class="logo-hilos">${hilos.map(([x1, y1, x2, y2], i) =>
-      `<line x1="${x1}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2}" pathLength="1" style="--d:${(i * RETRASO).toFixed(2)}s"/>`).join('')}</g>
+      // Largo real de cada hilo (en vez de pathLength, que Safari no aplica a <line>).
+      `<line x1="${x1}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2}" style="--d:${(i * RETRASO).toFixed(2)}s;--l:${Math.hypot(x2 - x1, y2 - y1).toFixed(2)}"/>`).join('')}</g>
     <circle class="logo-nucleo" cx="50" cy="50" r="1.8"/>
   </svg>`;
 }
