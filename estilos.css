@@ -42,6 +42,11 @@ a { color: var(--azul); }
   font: inherit; text-decoration: none; cursor: pointer; transition: background .2s, border-color .2s;
 }
 .boton:hover { background: #ffffff0d; border-color: var(--plata); }
+/* Botones del atlas: con icono, fondo y borde azulados para que se lean como botón */
+.boton-atlas { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; background: #7fa8f01f; border-color: #7fa8f080; color: #fff; font-weight: 500; }
+.boton-atlas:hover { background: #7fa8f033; border-color: var(--azul); }
+.boton-atlas .icono { width: 18px; height: 18px; flex: none; fill: none; stroke: var(--azul); stroke-width: 1.5; stroke-linejoin: round; }
+.boton-atlas .icono .brillo { fill: var(--azul); stroke: none; }
 .boton.principal { background: var(--azul); border-color: var(--azul); color: var(--noche); font-weight: 600; }
 .boton.principal:hover { background: #a3c0f5; }
 .boton.hecho { border-color: #7fa8f088; color: var(--azul); }

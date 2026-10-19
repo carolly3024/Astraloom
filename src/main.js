@@ -23,6 +23,8 @@ const guardado = crearGuardado();
 let juego = null;
 let pantallaActual = null; // para parar pistas al salir
 
+// Icono del atlas (un libro abierto con una estrella), para que sus botones se reconozcan.
+const ICONO_ATLAS = '<svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5c3-1 6-1 9 1 3-2 6-2 9-1v13c-3-1-6-1-9 1-3-2-6-2-9-1z"/><path d="M12 6.5v13"/><path class="brillo" d="M7.5 9.2l.5 1.1 1.1.5-1.1.5-.5 1.1-.5-1.1-1.1-.5 1.1-.5z"/></svg>';
 const h = (strings, ...vals) => strings.reduce((s, str, i) => s + str + (i < vals.length ? vals[i] : ''), '');
 
 function nivelPorId(id) { return juego.niveles.find(n => n.id === id); }
@@ -76,7 +78,7 @@ function pantallaInicio() {
           <div><dt>En camino</dt><dd>${dos(cuenta('aprendiz'))}</dd></div>
           <div><dt>Por descubrir</dt><dd>${dos(cuenta('pendiente'))}</dd></div>
         </dl>
-        <a class="boton" href="#/atlas">Atlas · ${atlas.length} de ${juego.niveles.length}</a>
+        <a class="boton boton-atlas" href="#/atlas">${ICONO_ATLAS}Atlas · ${atlas.length} de ${juego.niveles.length}</a>
         ${botonSonido()}
       </div>
     </header>
@@ -220,7 +222,7 @@ function pantallaTejedora(nivel) {
     contador.quitar(); // la ficha del objeto ocupa ya toda la tarjeta
     panel.quitar();
     const sig = siguiente(nivel.id);
-    tarjeta.innerHTML = ficha(nivel) + `<div class="acciones"><a class="boton principal" href="${sig.href}">${escapar(sig.texto)}</a><a class="boton" href="#/atlas">Ver el atlas</a></div>`;
+    tarjeta.innerHTML = ficha(nivel) + `<div class="acciones"><a class="boton principal" href="${sig.href}">${escapar(sig.texto)}</a><a class="boton boton-atlas" href="#/atlas">${ICONO_ATLAS}Ver el atlas</a></div>`;
   }
   pantallaActual = montarTejedora(app.querySelector('.cielo'), nivel, {
     alTejer(n, total, a, b) {
@@ -310,7 +312,7 @@ function fotoObjeto(contenedor, nivel) {
 function pantallaObjeto(nivel) {
   if (!guardado.atlas().includes(nivel.id)) { ir('#/atlas', { reemplazar: true }); return; }
   app.innerHTML = cabecera(nivel.tejedora.objeto.nombre, `Atlas · ${nivel.nombre}`, [['#/atlas', 'Atlas']]) +
-    `<section class="escena"><div class="cielo objeto-grande"></div><div class="tarjeta">${ficha(nivel)}<div class="acciones"><a class="boton" href="#/atlas">Volver al atlas</a></div></div></section>`;
+    `<section class="escena"><div class="cielo objeto-grande"></div><div class="tarjeta">${ficha(nivel)}<div class="acciones"><a class="boton boton-atlas" href="#/atlas">${ICONO_ATLAS}Volver al atlas</a></div></div></section>`;
   fotoObjeto(app.querySelector('.cielo'), nivel);
 }
 
