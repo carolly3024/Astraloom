@@ -6,7 +6,7 @@ Datos y textos de las constelaciones del juego. El juego (fase 3) los carga tal 
 
 | Ruta | Qué es | ¿Se edita a mano? |
 |---|---|---|
-| `datos/indice.json` | Qué constelaciones forman el juego base, en qué orden, y la paleta de colores de referencia del atlas | Sí |
+| `datos/indice.json` | Qué constelaciones forman el juego base y la paleta de colores de referencia del atlas | Sí |
 | `datos/cielo/<ID>.json` | Estrellas reales, líneas de la figura y estrellas de fondo. **Están las 88 constelaciones.** | No, se genera |
 | `datos/textos/<ID>.json` | Dato de Aprendiz y ficha del objeto que despierta (texto, por qué tiene ese color, colores, fuentes) | Sí |
 | `fichas.md` | Las fichas en formato de lectura, para revisar | No, se genera |
@@ -35,7 +35,7 @@ Datos y textos de las constelaciones del juego. El juego (fase 3) los carga tal 
 - `fondo[]`: estrellas reales cercanas hasta magnitud 5, que en Tejedora hacen de distracción.
 
 ### `datos/textos/<ID>.json` (a mano)
-- `nombre`, `orden`, `temporada`, `nombres_es` (nombre en español de una estrella cuando difiere del IAU, por `hip`).
+- `nombre`, `orden` (solo desempata: el juego ordena de más fácil a más difícil por estrellas + hilos), `temporada`, `nombres_es` (nombre en español de una estrella cuando difiere del IAU, por `hip`).
 - `aprendiz.dato`: lo que aparece al completar Aprendiz.
 - `objeto`: lo que despierta Tejedora. `id`, `nombre`, `tipo`, `pista` (frase corta que se ve en el atlas mientras duerme, sin decir qué es), `forma` (pista para la animación: `nebulosa_difusa`, `continente`, `laguna`, `burbuja`, `anillo`, `filamentos`, `espiral_de_frente`, `espiral_inclinada`, `trio_de_galaxias`, `globular`, `globular_disperso`, `cumulo_abierto`), `ar`/`dec`, `distancia`, `tamano`, `texto`, `por_que_color`, `colores[]` (`hex`, `nombre`, `origen`, `peso` = proporción del color en la nube) y `fuentes[]`.
 - `estado`: `borrador` o `verificado`.

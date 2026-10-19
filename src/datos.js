@@ -95,6 +95,9 @@ export async function cargarJuego(base = 'datos', { lista = 'juego_base', fetchF
     ]);
     return construirNivel(cielo, textos);
   }));
-  niveles.sort((a, b) => (a.orden ?? 99) - (b.orden ?? 99));
+  // De más fácil a más difícil: cuantas más estrellas e hilos, más difícil. Así una
+  // constelación nueva se coloca sola en su sitio. A igual dificultad manda «orden».
+  for (const n of niveles) n.dificultad = n.aprendiz.estrellas.length + n.lineas.length;
+  niveles.sort((a, b) => a.dificultad - b.dificultad || (a.orden ?? 99) - (b.orden ?? 99));
   return { version: indice.version, colores: indice.colores_de_referencia, niveles };
 }

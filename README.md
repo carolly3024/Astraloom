@@ -51,7 +51,7 @@ y abrir http://localhost:8000.
 
 ## Añadir una constelación
 
-No hay que tocar código: se escribe su ficha en `contenido/datos/textos/` y se añade su ID a `contenido/datos/indice.json`. Los pasos están en `contenido/README.md`.
+No hay que tocar código: se escribe su ficha en `contenido/datos/textos/` y se añade su ID a `contenido/datos/indice.json`. El juego la coloca solo en su sitio, de más fácil a más difícil según sus estrellas e hilos. Los pasos están en `contenido/README.md`.
 
 ## Créditos
 
