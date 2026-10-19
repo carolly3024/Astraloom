@@ -62,7 +62,7 @@ function crearNodos() {
   const filtroFondo = new Tone.Filter({ frequency: 700, type: 'lowpass', rolloff: -24 }).connect(agachar);
   new Tone.LFO({ frequency: 1 / 90, min: 380, max: 1100 }).connect(filtroFondo.frequency).start();
   const fondo = new Tone.PolySynth(Tone.Synth, {
-    oscillator: { type: 'fattriangle', count: 3, spread: 14 },
+    oscillator: { type: 'fattriangle', count: 2, spread: 14 }, // 2 voces por nota: menos carga, mismo color
     envelope: { attack: 6, decay: 2, sustain: 0.8, release: 10 },
     volume: -22,
   }).connect(filtroFondo);
@@ -135,12 +135,17 @@ function cada(fn, min, max) {
   temporizadores.push(t);
 }
 
+// El fondo nunca se queda en blanco: cada acorde se programa a sí mismo el siguiente,
+// que empieza a entrar (ataque de 6 s) antes de que el anterior empiece a apagarse.
+let siguienteAcorde = 0;
 function tocarAcorde() {
+  clearTimeout(siguienteAcorde);
+  const dur = al(16, 22);
+  siguienteAcorde = setTimeout(tocarAcorde, (dur - 2) * 1000);
   if (callado() || ajustes.musica === 0) return;
   // Casi siempre se mueve a un acorde vecino; nunca repite el mismo.
   acorde = (acorde + (Math.random() < 0.7 ? 1 : 2)) % ACORDES.length;
-  const dur = al(16, 24);
-  n.fondo.triggerAttackRelease(ACORDES[acorde].map(s => midi(raiz + 12 + s)), dur);
+  n.fondo.triggerAttackRelease(ACORDES[acorde].map(s => midi(raiz + 12 + s)), dur, T().now() + 0.05);
 }
 
 function tocarCampanillas() {
@@ -152,7 +157,7 @@ function tocarCampanillas() {
     // Paseo por la escala: pasos cortos, con un salto de vez en cuando.
     campana += Math.random() < 0.8 ? (Math.random() < 0.5 ? -1 : 1) : (Math.random() < 0.5 ? -3 : 3);
     campana = Math.max(9, Math.min(19, campana));
-    n.panCampana.pan.setValueAtTime(al(-0.6, 0.6), t);
+    n.panCampana.pan.rampTo(al(-0.6, 0.6), 0.6, t); // sin saltos: las notas que aún suenan se mueven suave
     n.campanillas.triggerAttackRelease(midi(nota(campana, raiz + 12)), 2.5, t, al(0.4, 0.8));
     t += al(0.35, 0.9);
   }
@@ -160,15 +165,18 @@ function tocarCampanillas() {
 
 function arrancarMusica() {
   n.aire.start();
-  cada(tocarAcorde, 18, 26);
   cada(tocarCampanillas, 2.5, 7);
-  setTimeout(tocarAcorde, 300);
+  tocarAcorde();
 }
 
 // ---------- Arranque ----------
 // Hay que llamar a Tone.start() dentro del propio toque (iOS no deja hacerlo después).
 function despertarAudio() {
   if (listo || !T()) return;
+  // Búfer de audio grande («playback»): el sonido no se corta aunque el equipo vaya
+  // cargado (pintar una nebulosa, animaciones). A cambio, los efectos llegan unas
+  // centésimas más tarde, algo que en un juego tranquilo no se nota.
+  try { T().setContext(new (T().Context)({ latencyHint: 'playback', lookAhead: 0.15 })); } catch { /* seguimos con el contexto por defecto */ }
   T().start().then(() => {
     if (listo) return;
     listo = true;
@@ -210,8 +218,9 @@ export function ambiente(color = AZUL_LOGO, juego = false) {
   if (nueva === raiz) return;
   raiz = nueva;
   if (!listo) return;
-  n.fondo.releaseAll(T().now() + 0.1); // el acorde viejo se apaga despacio (release de 10 s)
-  setTimeout(tocarAcorde, 1200);
+  // El acorde viejo se apaga despacio (release de 10 s) mientras entra el nuevo: sin hueco.
+  n.fondo.releaseAll(T().now() + 0.1);
+  tocarAcorde();
 }
 
 // ---------- Efectos ----------
@@ -223,7 +232,7 @@ const gradoDe = (k, total) => 10 + Math.round(((k - 1) / Math.max(1, total - 1))
 export function sonarEstrella(k, total, x) {
   if (callado()) return;
   const t = T().now() + 0.02, m = nota(gradoDe(k, total), raiz + 12);
-  n.panEfecto.pan.setValueAtTime(pan(x), t);
+  n.panEfecto.pan.rampTo(pan(x), 0.05, T().now());
   n.cristal.triggerAttackRelease(midi(m), 1.4, t, 0.7);
   n.brillo.triggerAttackRelease(midi(m + 24), 0.5, t + 0.01, 0.4);
 }
@@ -232,7 +241,7 @@ export function sonarEstrella(k, total, x) {
 export function sonarHilo(k, total, x) {
   if (callado()) return;
   const t = T().now() + 0.02, m = nota(gradoDe(k, total), raiz + 12);
-  n.panEfecto.pan.setValueAtTime(pan(x), t);
+  n.panEfecto.pan.rampTo(pan(x), 0.05, T().now());
   n.hilo.triggerAttackRelease(midi(m), 1.8, t, 0.7);
   n.brillo.triggerAttackRelease(midi(m + 12), 0.6, t + 0.06, 0.3);
 }
@@ -241,7 +250,7 @@ export function sonarHilo(k, total, x) {
 export function sonarFigura() {
   if (callado()) return;
   const t = T().now() + 0.05;
-  n.panEfecto.pan.setValueAtTime(0, t);
+  n.panEfecto.pan.rampTo(0, 0.05, T().now());
   [10, 11, 12, 13, 15].forEach((g, i) => n.cristal.triggerAttackRelease(midi(nota(g, raiz + 12)), 2, t + i * 0.16, 0.55));
   n.coro.triggerAttackRelease([0, 7, 16].map(s => midi(raiz + 24 + s)), 2.5, t + 0.5, 0.5);
 }
