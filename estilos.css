@@ -270,7 +270,9 @@ a.tarjeta-objeto.dormido:hover { box-shadow: none; border-color: #7fa8f066; }
 .escena > .cielo { animation-name: funde; animation-delay: 80ms; } /* el cielo solo funde: sus estrellas no se mueven mientras se toca */
 .escena > .tarjeta { animation-delay: 200ms; }
 @keyframes funde { from { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .barra, .acciones, .portada, .rejilla > li, .escena > *, .atlas-progreso { animation: none; } }
+/* Con «reducir movimiento» siguen apareciendo uno tras otro, pero casi sin subir (4 px) */
+@keyframes aparece-quieto { from { opacity: 0; transform: translateY(4px); } }
+@media (prefers-reduced-motion: reduce) { .barra, .acciones, .portada, .rejilla > li, .escena > .tarjeta, .atlas-progreso { animation-name: aparece-quieto; } }
 
 /* Al pasar por el espacio vacío de fuera, el botón «Cielo» se ilumina: tocar ahí lleva al inicio */
 body.sobre-fondo { cursor: pointer; }
