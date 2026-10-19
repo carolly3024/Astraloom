@@ -210,7 +210,7 @@ function campoGlobular(x, y, c, k) {
 }
 
 function campoCumulo(x, y, c, k) {
-  const luz = Math.exp(-(x * x + y * y) / 0.35) * 0.07 * (0.6 + 0.8 * k.ruido(x * 2, y * 2, 3));
+  const luz = Math.exp(-(x * x + y * y) / 0.5) * 0.15 * (0.6 + 0.8 * k.ruido(x * 2, y * 2, 3)); // halo azul de las estrellas jóvenes
   for (let i = 0; i < 3; i++) c[i] = k.tono[i] * luz;
 }
 
@@ -304,10 +304,13 @@ function preparar(objeto, r) {
     }
     case 'cumulo_abierto': {
       const est = [];
+      // Estrellas grandes y abiertas, para que se lea bien también en el móvil.
       for (let i = 0; i < 70; i++) {
-        const b = Math.pow(r(), 3);
-        est.push({ x: gauss(r) * 0.7, y: gauss(r) * 0.7, tam: 0.7 + b * 2.6, hex: elegir(luz, r).hex, destello: b > 0.45 });
+        const b = Math.pow(r(), 2.5);
+        est.push({ x: gauss(r) * 0.9, y: gauss(r) * 0.9, tam: 1.2 + b * 3.6, hex: elegir(luz, r).hex, destello: b > 0.35 });
       }
+      const roja = luz.find(c => c.hex === '#ff9a5c'); // DU Crucis, la supergigante roja que destaca entre las azules
+      if (roja) est.push({ x: 0.06, y: -0.12, tam: 4.2, hex: roja.hex, destello: true });
       for (let i = 0; i < 260; i++) est.push({ x: gauss(r) * 1.1, y: gauss(r) * 1.1, tam: 0.3 + r() * 0.5, hex: elegir(luz, r).hex, punto: true });
       return { ...base, campo: campoCumulo, tono: rgb('#6f8fe8'), estrellas: est };
     }
