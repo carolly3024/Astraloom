@@ -1,3 +1,5 @@
+import { bordeLuz } from './adornos.js';
+
 // Astraloom · pantalla de entrada: el logo se teje hilo a hilo, su nebulosa
 // se enciende despacio y respira, y debajo salen «Tutorial» y «Entrar al cielo».
 
@@ -108,6 +110,7 @@ export function pantallaIntro(app, { alEntrar, alVerTutorial = () => {} }) {
       <button class="boton principal" id="entrar">Entrar al cielo</button>
     </div>
   </section>`;
+  bordeLuz(app.querySelector('#tutorial')); // el borde de luz que gira, para que el tutorial se vea
   app.querySelector('#entrar').addEventListener('click', alEntrar);
   app.querySelector('#tutorial').addEventListener('click', () => { alVerTutorial(); abrirTutorial(app, alEntrar); });
 }
