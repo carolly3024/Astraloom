@@ -339,12 +339,12 @@ body.sobre-fondo .migas a:first-child { color: #fff; border-color: var(--azul); 
 .volver-intro { display: block; line-height: 0; border-radius: 50%; }
 .volver-intro:focus-visible { outline: 2px solid var(--azul); outline-offset: 4px; }
 /* Con «reducir movimiento» el logo no se queda quieto: los hilos aparecen uno a uno
-   con un fundido (sin trazo que avance) y la nebulosa se enciende sin crecer ni respirar. */
+   con un fundido (sin trazo que avance) y la nebulosa se enciende sin crecer ni respirar.
+   El título, el lema y los botones suben igual que siempre (lo pidió carolly). */
 @media (prefers-reduced-motion: reduce) {
   .logo-hilos line { stroke-dashoffset: 0; opacity: 0; animation: funde-hilo .6s ease var(--d) forwards; }
   .logo-nucleo { animation: funde-hilo .6s ease calc(var(--fin) - .1s) forwards; }
   .logo-nebulosa { animation: funde-hilo 2.5s ease calc(var(--fin) + .2s) forwards; }
-  .intro-marca, .intro-lema, .intro-botones { animation: funde-hilo .8s ease 2.6s both; }
 }
 @keyframes funde-hilo { from { opacity: 0; } to { opacity: 1; } }
 
