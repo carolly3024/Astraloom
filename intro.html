@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Astraloom · Intro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* Astraloom · intro animado: las estrellas forman palabras jugando como en el juego.
+     ORDENA (Aprendiz: las estrellas vuelan a sus huecos), TEJE (Tejedora: hilos de luz),
+     DESPIERTA (las estrellas se reúnen y nace una nebulosa) y, al final, el logo. */
+  :root { --noche: #05070c; --bruma: #e6e9ef; --bruma-suave: #e6e9ef99; --azul: #7fa8f0; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--noche); color: var(--bruma); overflow: hidden; font: 15px/1.5 'Inter', system-ui, sans-serif; }
+  canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+  .rotulo { position: fixed; left: 0; right: 0; bottom: max(14vh, 96px); text-align: center; padding: 0 16px; pointer-events: none; }
+  .rotulo p { margin: 0; opacity: 0; transform: translateY(12px); transition: opacity .9s ease, transform .9s cubic-bezier(.2, .8, .2, 1); }
+  .rotulo.visible p { opacity: 1; transform: none; }
+  .rotulo.visible p + p { transition-delay: .25s; }
+  .paso { font: 500 .72rem/1 'IBM Plex Mono', monospace; letter-spacing: .22em; text-transform: uppercase; color: var(--azul); margin-bottom: .7rem !important; }
+  .frase { font-size: clamp(1rem, 3.6vw, 1.35rem); font-weight: 300; color: var(--bruma); }
+  .final { position: fixed; left: 0; right: 0; top: 58%; text-align: center; padding: 0 16px; pointer-events: none; }
+  .final > * { opacity: 0; transform: translateY(16px); transition: opacity 1s ease, transform 1s cubic-bezier(.2, .8, .2, 1); }
+  .final.visible > * { opacity: 1; transform: none; }
+  .final.visible > :nth-child(2) { transition-delay: .35s; }
+  .final.visible > :nth-child(3) { transition-delay: .8s; }
+  .marca { font: 600 clamp(2.6rem, 10vw, 4.2rem)/1.1 'Cormorant Garamond', Georgia, serif; margin: 0; letter-spacing: .01em; }
+  .lema { color: var(--bruma-suave); margin: .3rem 0 1.6rem; font-size: clamp(.95rem, 3.4vw, 1.1rem); }
+  .botones { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; pointer-events: auto; }
+  .boton { font: inherit; font-size: 1rem; padding: .75rem 1.2rem; min-width: 150px; border-radius: 8px; border: 1px solid #ffffff2e; background: #0a0d15b3; color: var(--bruma); cursor: pointer; text-decoration: none; }
+  .boton:hover { border-color: #dce3f0; }
+  .boton.principal { background: var(--azul); border-color: var(--azul); color: var(--noche); font-weight: 600; }
+  .saltar { position: fixed; top: max(16px, env(safe-area-inset-top)); right: 16px; font: 500 .72rem/1 'IBM Plex Mono', monospace; letter-spacing: .16em; text-transform: uppercase; padding: .6rem .9rem; border-radius: 8px; border: 1px solid #ffffff2e; background: #0a0d15b3; color: var(--bruma-suave); cursor: pointer; transition: opacity .6s; }
+  .saltar:hover { color: #fff; border-color: #ffffff59; }
+  .saltar.oculto { opacity: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<canvas id="cielo" aria-hidden="true"></canvas>
+<button class="saltar" id="saltar">Saltar intro</button>
+<div class="rotulo" id="rotulo" aria-live="polite"><p class="paso"></p><p class="frase"></p></div>
+<div class="final" id="final">
+  <h1 class="marca">Astraloom</h1>
+  <p class="lema">Devuelve las estrellas a su sitio y teje el cielo.</p>
+  <div class="botones">
+    <button class="boton" id="repetir">Ver otra vez</button>
+    <a class="boton principal" href="https://claude.ai/artifact/EiVPPhq5S6vF5J548GAdyu" target="_top">Entrar al cielo</a>
+  </div>
+</div>
+<script type="module">
+// La nebulosa del final es la de Orión (M42), pintada con el mismo código que el juego.
+import { pintarObjeto } from './src/nebulosas.js';
+
+const M42 = { id: 'M42', forma: 'nebulosa_difusa', colores: [
+  { hex: '#e0476a', peso: 0.55 }, { hex: '#3fd0c0', peso: 0.25 }, { hex: '#6f8fe8', peso: 0.15 }, { hex: '#2a1c22', peso: 0.05 }] };
+
+{
+  const lienzo = document.getElementById('cielo');
+  const ctx = lienzo.getContext('2d');
+  const rotulo = document.getElementById('rotulo');
+  const final = document.getElementById('final');
+  const saltar = document.getElementById('saltar');
+
+  // ---------- utilidades ----------
+  const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+  const tramo = (t, a, b) => clamp((t - a) / (b - a));           // 0→1 entre a y b
+  const suave = x => x * x * (3 - 2 * x);
+  const suave3 = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  const entra = x => x * x * x;                                  // acelera (se reúnen)
+  const sale = x => 1 - Math.pow(1 - x, 3);
+  function azar(semilla) { let s = semilla >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
+  const r = azar(7);
+  const gauss = () => { let u = 0; for (let i = 0; i < 6; i++) u += r(); return u - 3; };
+
+  let W = 0, H = 0, dpr = 1;
+  let fondo = null, nebulosa = null, brillos = {};
+  let palabras = {}, estrellas = [], particulas = [];
+  const POOL = 140;
+  const TONOS = ['#e8efff', '#e8efff', '#dce8ff', '#a9c4ff', '#ffe6c8', '#ffd9a0'];
+
+  // ---------- sprites de brillo (uno por color) ----------
+  function sprite(hex) {
+    if (brillos[hex]) return brillos[hex];
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const g = c.getContext('2d'), grd = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grd.addColorStop(0, hex); grd.addColorStop(.12, hex + 'cc'); grd.addColorStop(.35, hex + '33'); grd.addColorStop(1, hex + '00');
+    g.fillStyle = grd; g.fillRect(0, 0, 64, 64);
+    return (brillos[hex] = c);
+  }
+
+  // ---------- fondo: espacio profundo con estrellas tenues ----------
+  function pintarFondo() {
+    fondo = document.createElement('canvas'); fondo.width = W * dpr; fondo.height = H * dpr;
+    const g = fondo.getContext('2d'); g.scale(dpr, dpr);
+    g.fillStyle = '#05070c'; g.fillRect(0, 0, W, H);
+    const rr = azar(11);
+    for (const [x, y, rad, col] of [[.2, .25, .55, '#2a3f8a'], [.85, .7, .5, '#5a2a6e'], [.6, .1, .35, '#1f5d6b'], [.1, .85, .4, '#3a2560']]) {
+      const grd = g.createRadialGradient(x * W, y * H, 0, x * W, y * H, rad * Math.max(W, H));
+      grd.addColorStop(0, col + '40'); grd.addColorStop(1, col + '00');
+      g.fillStyle = grd; g.fillRect(0, 0, W, H);
+    }
+    const n = Math.round(W * H / 1800);
+    for (let i = 0; i < n; i++) {
+      const b = Math.pow(rr(), 5), x = rr() * W, y = rr() * H;
+      g.globalAlpha = .25 + b * .75; g.fillStyle = TONOS[(rr() * TONOS.length) | 0];
+      g.beginPath(); g.arc(x, y, .4 + b * 1.4, 0, Math.PI * 2); g.fill();
+    }
+    g.globalAlpha = 1;
+  }
+
+  // ---------- nebulosa: M42 pintada punto a punto, como al despertarla en el juego ----------
+  function pintarNebulosa() { nebulosa = pintarObjeto(M42, 900, 1.3); }
+
+  function gaussR(rr) { let u = 0; for (let i = 0; i < 6; i++) u += rr(); return (u - 3) / 1.4; }
+  function hexA(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; }
+
+  // ---------- palabras hechas de estrellas ----------
+  // Se escribe la palabra con letra fina en un lienzo oculto, se toman puntos repartidos
+  // por sus trazos (muestreo del punto más lejano) y cada letra se une como una
+  // constelación (árbol de distancias mínimas).
+  function muestrear(texto, porLetra) {
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
+    const g = c.getContext('2d');
+    let fs = Math.min(H * .26, 200);
+    g.font = `200 ${fs}px Inter, system-ui, sans-serif`;
+    const ancho = g.measureText(texto).width;
+    if (ancho > W * .92) fs *= W * .92 / ancho;
+    g.font = `200 ${fs}px Inter, system-ui, sans-serif`;
+    // En pantallas estrechas las letras salen pequeñas: menos estrellas por letra, para que se lean.
+    porLetra = Math.min(porLetra, Math.max(8, Math.round(fs / 6.5)));
+    const total = g.measureText(texto).width, x0 = (W - total) / 2, y0 = H * .42;
+    g.textBaseline = 'middle'; g.fillStyle = '#fff';
+    // límites de cada letra
+    const limites = []; let acum = x0;
+    for (const ch of texto) { const w = g.measureText(ch).width; limites.push([acum, acum + w]); acum += w; }
+    g.fillText(texto, x0, y0);
+    const datos = g.getImageData(0, 0, W, H).data, paso = Math.max(1, Math.round(fs / 90));
+    const cand = [];
+    for (let y = 0; y < H; y += paso) for (let x = 0; x < W; x += paso) if (datos[(y * W + x) * 4 + 3] > 140) cand.push([x, y]);
+    const puntos = [];
+    limites.forEach(([a, b], li) => {
+      const mios = cand.filter(([x]) => x >= a && x < b);
+      if (!mios.length) return;
+      // punto más lejano: empieza por el de más arriba a la izquierda
+      const elegidos = [mios.reduce((m, p) => (p[0] + p[1] < m[0] + m[1] ? p : m))];
+      const dist = mios.map(p => Math.hypot(p[0] - elegidos[0][0], p[1] - elegidos[0][1]));
+      while (elegidos.length < porLetra) {
+        let k = 0; for (let i = 1; i < mios.length; i++) if (dist[i] > dist[k]) k = i;
+        if (dist[k] < fs * .04) break;
+        elegidos.push(mios[k]);
+        for (let i = 0; i < mios.length; i++) dist[i] = Math.min(dist[i], Math.hypot(mios[i][0] - mios[k][0], mios[i][1] - mios[k][1]));
+      }
+      const base = puntos.length;
+      elegidos.forEach(p => puntos.push({ x: p[0], y: p[1], letra: li }));
+      // árbol de distancias mínimas (Prim) dentro de la letra: sus aristas son los hilos
+      const locales = [];
+      const n = elegidos.length, dentro = [0], fuera = new Set(Array.from({ length: n - 1 }, (_, i) => i + 1));
+      while (fuera.size) {
+        let mejor = null;
+        for (const i of dentro) for (const j of fuera) {
+          const d = Math.hypot(elegidos[i][0] - elegidos[j][0], elegidos[i][1] - elegidos[j][1]);
+          if (!mejor || d < mejor[2]) mejor = [i, j, d];
+        }
+        dentro.push(mejor[1]); fuera.delete(mejor[1]);
+        locales.push([mejor[0], mejor[1], mejor[2]]);
+      }
+      // Cierra las letras redondas (O, D…): une sus dos puntas sueltas.
+      const grado = new Array(n).fill(0); locales.forEach(([a, b]) => { grado[a]++; grado[b]++; });
+      const medio = locales.map(l => l[2]).sort((a, b) => a - b)[locales.length >> 1] || 0;
+      const puntas = grado.map((g, i) => (g === 1 ? i : -1)).filter(i => i >= 0);
+      if ('ODQB'.includes(texto[li])) for (let a = 0; a < puntas.length; a++) for (let b = a + 1; b < puntas.length; b++) {
+        const A = elegidos[puntas[a]], B = elegidos[puntas[b]], d = Math.hypot(A[0] - B[0], A[1] - B[1]);
+        if (d < medio * 5 && grado[puntas[a]] === 1 && grado[puntas[b]] === 1) { locales.push([puntas[a], puntas[b], d]); grado[puntas[a]]++; grado[puntas[b]]++; }
+      }
+      locales.forEach(([a, b]) => palabraAristas.push([base + a, base + b]));
+    });
+    const res = { puntos, aristas: palabraAristas, fs };
+    palabraAristas = [];
+    return res;
+  }
+  let palabraAristas = [];
+
+  function preparar() {
+    dpr = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight;
+    lienzo.width = W * dpr; lienzo.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    pintarFondo(); if (!nebulosa) pintarNebulosa();
+    palabras = { ORDENA: muestrear('ORDENA', 13), TEJE: muestrear('TEJE', 15), DESPIERTA: muestrear('DESPIERTA', 13) };
+    for (const p of Object.values(palabras)) p.orden = p.puntos.map((_, i) => i).sort((a, b) => p.puntos[a].x - p.puntos[b].x || p.puntos[a].y - p.puntos[b].y);
+    // las estrellas del juego: empiezan sueltas por el cielo
+    const rr = azar(3);
+    estrellas = Array.from({ length: POOL }, (_, i) => ({
+      x0: rr() * W, y0: rr() * H, deriva: [(rr() - .5) * 14, (rr() - .5) * 14],
+      tono: TONOS[(rr() * TONOS.length) | 0], tam: .8 + rr() * .5, retraso: rr(), fase: rr() * 6.28,
+    }));
+    // partículas del estallido
+    particulas = Array.from({ length: 130 }, () => {
+      const ang = rr() * Math.PI * 2, v = 60 + rr() * Math.min(W, H) * .55;
+      return { vx: Math.cos(ang) * v, vy: Math.sin(ang) * v, tam: .8 + rr() * 2, tono: ['#e0476a', '#3fd0c0', '#a9c4ff', '#ffffff'][(rr() * 4) | 0] };
+    });
+  }
+
+  // Posición de cada estrella en la palabra: la i-ésima estrella va al i-ésimo punto de izquierda a derecha.
+  function destino(palabra, i) {
+    const p = palabras[palabra]; if (!p || i >= p.orden.length) return null;
+    return p.puntos[p.orden[i]];
+  }
+  // A qué estrella le toca el punto k de una palabra (inverso de destino).
+  function estrellaDe(palabra, k) { return palabras[palabra].orden.indexOf(k); }
+
+  // ---------- guion (segundos) ----------
+  const G = {
+    ordena: [1.4, 6.6], teje: [6.6, 12.4], despierta: [12.4, 16.2], reunir: [16.2, 17.4],
+    destello: 17.4, logo: [19.6, 22.6], fin: 23.2,
+  };
+  const ESCENAS = [
+    [1.8, 6.3, '01 · Aprendiz', 'Devuelve cada estrella a su hueco'],
+    [7.2, 12.0, '02 · Tejedora', 'Une sus estrellas con hilos de luz'],
+    [13.0, 16.6, '03 · Despertar', 'y despierta lo que duerme en el cielo'],
+  ];
+
+  function posicion(e, i, t) {
+    const dx = Math.sin(t * .2 + e.fase) * 6, dy = Math.cos(t * .17 + e.fase) * 6;
+    const suelta = { x: e.x0 + e.deriva[0] * t + dx, y: e.y0 + e.deriva[1] * t + dy };
+    // tramos: suelta → ORDENA → TEJE → DESPIERTA → centro
+    const a = destino('ORDENA', i), b = destino('TEJE', i), c = destino('DESPIERTA', i);
+    const cx = W / 2, cy = H * .42;
+    let p = suelta, alfa = clamp(t / 1.2) * .9;
+    const viaje = (desde, hasta, t0, dur) => {
+      const u = suave3(tramo(t, t0 + e.retraso * .9, t0 + e.retraso * .9 + dur));
+      if (!hasta) return { p: desde, u };
+      // curva suave: se arquea un poco al viajar
+      const mx = (desde.x + hasta.x) / 2 + (desde.y - hasta.y) * .18, my = (desde.y + hasta.y) / 2 + (hasta.x - desde.x) * .18;
+      const x = (1 - u) * (1 - u) * desde.x + 2 * (1 - u) * u * mx + u * u * hasta.x;
+      const y = (1 - u) * (1 - u) * desde.y + 2 * (1 - u) * u * my + u * u * hasta.y;
+      return { p: { x, y }, u };
+    };
+    // 1) a los huecos de ORDENA
+    let v = viaje(suelta, a, 2.0, 1.3); p = v.p;
+    if (!a) alfa *= 1 - .75 * suave(tramo(t, 2, 3.5));
+    // 2) a TEJE
+    if (t > 6.6) { v = viaje(a || p, b, 6.6, 1.1); p = v.p; if (!b) alfa = .9 * (1 - suave(tramo(t, 6.6, 7.6))) + (a ? 0 : .22); }
+    // 3) a DESPIERTA
+    if (t > 12.4) { v = viaje(b || p, c, 12.4, 1.0); p = v.p; if (c) alfa = Math.max(alfa, suave(tramo(t, 12.4, 13.2)) * .9); }
+    // 4) todas se reúnen en el centro y se apagan en el destello
+    if (t > G.reunir[0]) {
+      const u = entra(tramo(t, G.reunir[0] + e.retraso * .3, G.reunir[1]));
+      p = { x: p.x + (cx - p.x) * u, y: p.y + (cy - p.y) * u };
+      alfa *= c || a || b ? 1 : 0;
+      if (t > G.destello) alfa = 0;
+    }
+    return { x: p.x, y: p.y, alfa: clamp(alfa) };
+  }
+
+  // ---------- dibujo de cada fotograma ----------
+  function estrella(x, y, tam, tono, alfa, destello = 0) {
+    if (alfa <= .01) return;
+    const s = sprite(tono), R = tam * 9 * (1 + destello * .7);
+    ctx.globalAlpha = alfa; ctx.drawImage(s, x - R, y - R, R * 2, R * 2);
+    ctx.fillStyle = '#ffffff'; ctx.beginPath(); ctx.arc(x, y, tam * 1.15, 0, Math.PI * 2); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  function hilos(t, nombre, t0, dur, desvanece, pos) {
+    const p = palabras[nombre];
+    const E = p.aristas.length, cada = dur / E;
+    const fuera = desvanece ? 1 - suave(tramo(t, desvanece, desvanece + .8)) : 1;
+    if (fuera <= 0) return;
+    ctx.lineCap = 'round';
+    p.aristas.forEach(([ka, kb], j) => {
+      const u = sale(tramo(t, t0 + j * cada, t0 + j * cada + .35));
+      if (u <= 0) return;
+      const A = pos[estrellaDe(nombre, ka)], B = pos[estrellaDe(nombre, kb)];
+      if (!A || !B) return;
+      const x = A.x + (B.x - A.x) * u, y = A.y + (B.y - A.y) * u;
+      ctx.strokeStyle = `rgba(220,232,255,${.75 * fuera})`; ctx.lineWidth = Math.max(1, p.fs * .012);
+      ctx.shadowColor = 'rgba(143,180,255,.9)'; ctx.shadowBlur = 8;
+      ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(x, y); ctx.stroke();
+      ctx.shadowBlur = 0;
+      if (u < 1) estrella(x, y, 1.6, '#8fb4ff', .9 * fuera, .4); // la punta del hilo que se teje
+    });
+  }
+
+  function huecos(t) { // los aros de Aprendiz, donde caerá cada estrella
+    const p = palabras.ORDENA, a = suave(tramo(t, 1.2, 2.2)) * (1 - suave(tramo(t, 6.4, 7.2)));
+    if (a <= 0) return;
+    const rad = Math.max(3.5, p.fs * .035);
+    p.puntos.forEach((q, k) => {
+      const i = estrellaDe('ORDENA', k), e = estrellas[i];
+      const llega = 2.0 + e.retraso * .9 + 1.3, lleno = tramo(t, llega - .05, llega + .5);
+      ctx.strokeStyle = `rgba(127,168,240,${a * (.45 + .4 * lleno)})`; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(q.x, q.y, rad * (1 + .6 * lleno * (1 - lleno) * 4 * .25), 0, Math.PI * 2); ctx.stroke();
+      if (lleno > 0 && lleno < 1) { // pequeño destello al encajar
+        ctx.strokeStyle = `rgba(220,232,255,${(1 - lleno) * .8 * a})`;
+        ctx.beginPath(); ctx.arc(q.x, q.y, rad * (1 + lleno * 2.4), 0, Math.PI * 2); ctx.stroke();
+      }
+    });
+  }
+
+  function despertar(t) {
+    const cx = W / 2, cy = H * .42, M = Math.min(W, H);
+    // destello y onda
+    const f = tramo(t, G.destello, G.destello + 1.6);
+    if (f > 0 && f < 1) {
+      const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, M * .25 * (.3 + f));
+      grd.addColorStop(0, `rgba(255,255,255,${(1 - f) * .95})`); grd.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = grd; ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = `rgba(160,190,255,${(1 - f) * .7})`; ctx.lineWidth = 2.5 * (1 - f) + .3;
+      ctx.beginPath(); ctx.arc(cx, cy, 12 + M * .7 * sale(f), 0, Math.PI * 2); ctx.stroke();
+    }
+    // estallido de estrellitas con los colores del gas
+    const pe = tramo(t, G.destello + .1, G.destello + 2.2);
+    if (pe > 0 && pe < 1) for (const q of particulas) {
+      const u = sale(pe);
+      estrella(cx + q.vx * u, cy + q.vy * u * .8, q.tam * .6, q.tono, (1 - pe * pe) * .9);
+    }
+    // la nebulosa crece; al final se recoge en el corazón del logo
+    const n = suave3(tramo(t, G.destello + .2, G.destello + 2.8));
+    const recoge = suave3(tramo(t, G.logo[0] - .2, G.logo[0] + 1.6));
+    if (n > 0) {
+      const lado = M * .95 * (.25 + .75 * n) * (1 - .62 * recoge);
+      ctx.globalAlpha = n * (1 - .45 * recoge);
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.save(); ctx.translate(cx, cy - recoge * H * .1); ctx.rotate(t * .03);
+      ctx.drawImage(nebulosa, -lado / 2, -lado / 2, lado, lado);
+      ctx.restore();
+      ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+    }
+  }
+
+  // El símbolo del logo: cuatro cuartos de 8 hilos, tejidos uno a uno (como en el juego).
+  function logo(t) {
+    const u0 = G.logo[0] + .6; if (t < u0) return;
+    const M = Math.min(W, H), lado = Math.min(M * .42, 260), cx = W / 2, cy = H * .42 - H * .1, k = lado / 100;
+    const hilosLogo = [];
+    for (let j = 0; j < 8; j++) {
+      const v = 4.6667 * (8 - j), hz = 4.6667 * (j + 1);
+      for (const [sx, sy] of [[1, 1], [1, -1], [-1, -1], [-1, 1]]) hilosLogo.push([0, sy * v, sx * hz, 0]);
+    }
+    ctx.lineCap = 'round'; ctx.lineWidth = Math.max(.7, .5 * k);
+    hilosLogo.forEach(([x1, y1, x2, y2], i) => {
+      const u = sale(tramo(t, u0 + i * .055, u0 + i * .055 + .45)); if (u <= 0) return;
+      ctx.strokeStyle = 'rgba(220,227,240,.95)';
+      ctx.beginPath(); ctx.moveTo(cx + x1 * k, cy + y1 * k); ctx.lineTo(cx + (x1 + (x2 - x1) * u) * k, cy + (y1 + (y2 - y1) * u) * k); ctx.stroke();
+    });
+    const nucleo = tramo(t, u0 + 32 * .055, u0 + 32 * .055 + .6);
+    estrella(cx, cy, 2.2, '#dce3f0', nucleo);
+    // la luz azul del centro respira despacio
+    if (nucleo > 0) {
+      const resp = .8 + .2 * Math.sin((t - u0) * .9);
+      const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 26 * k);
+      grd.addColorStop(0, `rgba(127,168,240,${.55 * nucleo * resp})`); grd.addColorStop(.45, `rgba(127,168,240,${.2 * nucleo * resp})`); grd.addColorStop(1, 'rgba(127,168,240,0)');
+      ctx.fillStyle = grd; ctx.beginPath(); ctx.arc(cx, cy, 26 * k, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+
+  function fotograma(t) {
+    ctx.globalAlpha = 1; ctx.drawImage(fondo, 0, 0, W, H);
+    // el cielo se apaga un poco durante la reunión, como en el juego
+    const velo = suave(tramo(t, G.reunir[0] - .4, G.reunir[1])) * (1 - suave(tramo(t, G.destello + .5, G.destello + 2.5)));
+    if (velo > 0) { ctx.fillStyle = `rgba(0,0,0,${velo * .45})`; ctx.fillRect(0, 0, W, H); }
+    huecos(t);
+    const pos = estrellas.map((e, i) => posicion(e, i, t));
+    if (t > 7.2 && t < 13) hilos(t, 'TEJE', 7.9, 3.2, 12.2, pos);
+    if (t > 13 && t < G.reunir[1]) hilos(t, 'DESPIERTA', 13.5, 1.7, G.reunir[0], pos);
+    const fsOrd = palabras.ORDENA.fs;
+    estrellas.forEach((e, i) => {
+      const p = pos[i];
+      const llega = 2.0 + e.retraso * .9 + 1.3, chispa = destino('ORDENA', i) ? clamp(1 - Math.abs(t - llega) / .35) : 0;
+      const tw = .85 + .15 * Math.sin(t * 2.2 + e.fase);
+      estrella(p.x, p.y, Math.max(1.3, fsOrd * .014) * e.tam, e.tono, p.alfa * tw, chispa);
+    });
+    despertar(t);
+    logo(t);
+  }
+
+  // ---------- reloj, rótulos y controles ----------
+  let inicio = performance.now(), saltoA = null, rotuloActual = -1, finalVisible = false;
+  function rotular(t) {
+    const i = ESCENAS.findIndex(([a, b]) => t >= a && t < b);
+    if (i !== rotuloActual) {
+      rotuloActual = i;
+      rotulo.classList.remove('visible');
+      if (i >= 0) setTimeout(() => {
+        rotulo.querySelector('.paso').textContent = ESCENAS[i][2];
+        rotulo.querySelector('.frase').textContent = ESCENAS[i][3];
+        rotulo.classList.add('visible');
+      }, 450);
+    }
+    const f = t >= G.fin;
+    if (f !== finalVisible) { finalVisible = f; final.classList.toggle('visible', f); saltar.classList.toggle('oculto', f); }
+  }
+  function bucle(ahora) {
+    const t = (ahora - inicio) / 1000;
+    fotograma(t); rotular(t);
+    requestAnimationFrame(bucle);
+  }
+  saltar.addEventListener('click', () => { inicio = performance.now() - G.logo[0] * 1000; });
+  document.getElementById('repetir').addEventListener('click', () => { inicio = performance.now(); });
+  let espera = 0;
+  addEventListener('resize', () => { clearTimeout(espera); espera = setTimeout(preparar, 200); });
+
+  (document.fonts?.ready || Promise.resolve()).then(() => document.fonts?.load?.('200 100px Inter')).catch(() => {}).then(() => {
+    preparar(); inicio = performance.now(); requestAnimationFrame(bucle);
+  });
+}
+</script>
+</body>
+</html>
