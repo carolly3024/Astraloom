@@ -35,6 +35,7 @@
 
   .final { position: fixed; left: 0; right: 0; text-align: center; padding: 0 16px; pointer-events: none; }
   .final > * { opacity: 0; transform: translateY(16px); transition: opacity 1s ease, transform 1.1s cubic-bezier(.2, .8, .2, 1); }
+  .final > .marca { transform: translateY(-28px); } /* el nombre baja desde el logo */
   .final.visible > * { opacity: 1; transform: none; }
   .final.visible > :nth-child(2) { transition-delay: .35s; }
   .final.visible > :nth-child(3) { transition-delay: .8s; }
@@ -116,7 +117,8 @@ const G = {
   vuelven: 3.7,           // y vuelven una a una (0,15 s entre una y otra)
   hilos: 8.0,             // hilos de luz (0,17 s entre uno y otro)
   llamada: 13.2, reunir: [14.2, 15.6], destello: 15.6, nebulosa: [15.8, 18.6],
-  apagar: [19.4, 20.6], logo: 20.4, fin: 23.4,
+  apagar: [19.4, 20.6], logo: 20.4, // el logo se teje en el centro
+  sube: [23.4, 24.8], fin: 24.2,  // luego sube y el nombre baja a su sitio debajo
 };
 const ESCENA = [[2.4, 7.6], [7.6, 13.0], [13.0, 19.4]];
 
@@ -286,7 +288,10 @@ function despertar(t, velo, apaga) {
 // El símbolo del logo: cuatro cuartos de 8 hilos, tejidos uno a uno, como en la entrada del juego.
 function logo(t) {
   const u0 = G.logo; if (t < u0) return;
-  const lado = Math.min(Math.min(W, H) * .36, 230), cx = W / 2, cy = (vertical ? H * .5 : H * .56) - lado * .72, k = lado / 100;
+  const lado = Math.min(Math.min(W, H) * .36, 230), cx = W / 2, k = lado / 100;
+  // se teje en el centro de la pantalla y después sube para dejar sitio al nombre
+  const arriba = (vertical ? H * .5 : H * .56) - lado * .72;
+  const cy = H / 2 + (arriba - H / 2) * suave(tramo(t, G.sube[0], G.sube[1]));
   ctx.lineCap = 'round'; ctx.lineWidth = Math.max(.7, .5 * k); ctx.strokeStyle = 'rgba(220,227,240,.95)';
   let i = 0;
   for (let j = 0; j < 8; j++) {
